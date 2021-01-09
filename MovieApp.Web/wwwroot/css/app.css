@@ -1,3 +1,5 @@
-﻿nav #icon-wrapper {
-    padding: 0.7rem;
+﻿nav #search-icon {
+    padding: 0.7rem 1.8rem 0.7rem 1.8rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
