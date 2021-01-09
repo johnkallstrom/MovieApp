@@ -1,0 +1,11 @@
+﻿<div id="movie-list">
+    @if (Movies == null)
+    {
+        <div>Loading...</div>
+    }
+
+    @foreach (var movie in Movies)
+    {
+        <MovieDisplay Movie="@movie" />
+    }
+</div>
