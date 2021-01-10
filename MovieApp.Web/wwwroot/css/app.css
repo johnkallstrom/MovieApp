@@ -1,4 +1,8 @@
-﻿#search button {
+﻿#home {
+    margin-bottom: 2rem;
+}
+
+#search button {
     padding: 0.7rem 1.8rem 0.7rem 1.8rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;

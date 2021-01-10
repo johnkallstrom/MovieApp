@@ -6,6 +6,8 @@ namespace MovieApp.Web.Services
 {
     public interface IMovieService
     {
+        Task<IEnumerable<Movie>> GetPopularMoviesAsync();
         Task<IEnumerable<Movie>> GetTopRatedMoviesAsync();
+        Task<IEnumerable<Movie>> GetUpcomingMoviesAsync();
     }
 }

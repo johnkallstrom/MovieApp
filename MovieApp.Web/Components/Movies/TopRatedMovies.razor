@@ -1,0 +1,16 @@
+﻿<div id="movies-top-rated">
+    <h3>Top Rated</h3>
+    @if (Movies == null)
+    {
+        <div>Loading...</div>
+    }
+
+    <div class="row">
+        @foreach (var movie in Movies)
+        {
+            <div class="col-sm-3">
+                <DisplayMovie Movie="@movie" />
+            </div>
+        }
+    </div>
+</div>
