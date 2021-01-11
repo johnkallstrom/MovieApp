@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Movies
@@ -15,12 +17,19 @@ namespace MovieApp.Web.Components.Movies
 
         public MovieDetails Movie { get; set; } = new MovieDetails();
 
+        public IEnumerable<Person> Cast { get; set; } = new List<Person>();
+
         protected override async Task OnInitializedAsync()
         {
-            if (int.TryParse(Id, out int result))
+            var actors = Enumerable.Empty<Person>();
+
+            if (int.TryParse(Id, out int movieId))
             {
-                Movie = await MovieService.GetMovieDetailsAsync(result);
+                Movie = await MovieService.GetMovieDetailsAsync(movieId);
+                actors = await MovieService.GetMovieCastAsync(movieId);
             }
+
+            Cast = actors.Where(x => x.Known_For_Department == "Acting").Take(10);
         }
     }
 }

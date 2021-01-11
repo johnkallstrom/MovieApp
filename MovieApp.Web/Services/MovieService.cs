@@ -26,6 +26,31 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
+        public async Task<IEnumerable<Person>> GetMovieCastAsync(int movieId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}/credits?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<MovieCredits>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var cast = data.Cast;
+
+            var imageConfig = await GetImageConfiguration();
+
+            foreach (var person in cast)
+            {
+                person.ImageUrl = GetImageUrl(person.Profile_Path, PosterSizeType.W342, imageConfig);
+            }
+
+            return cast.ToList();
+        }
+
         public async Task<IEnumerable<Movie>> GetMoviesBySearchAsync(string query)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"search/movie?api_key={_config["API_KEY"]}&query={query}");

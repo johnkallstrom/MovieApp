@@ -2,6 +2,15 @@
     margin-top: 1rem;
 }
 
+#movie-details a {
+    color: #212529; 
+    text-decoration: none;
+}
+
+#movie-details p {
+    margin-bottom: 0;
+}
+
 #movies-popular {
     margin-top: 1rem;
     margin-bottom: 2rem;
