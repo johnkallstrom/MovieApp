@@ -25,6 +25,51 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
+        public async Task<IEnumerable<Movie>> GetMoviesBySearchAsync(string query)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"search/movie?api_key={_config["API_KEY"]}&query={query}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var movies = data.Results;
+
+            var imageConfig = await GetImageConfiguration();
+
+            foreach (var movie in movies)
+            {
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+            }
+
+            return movies;
+        }
+
+        public async Task<MovieDetails> GetMovieDetailsAsync(int movieId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var movie = JsonSerializer.Deserialize<MovieDetails>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var imageConfig = await GetImageConfiguration();
+
+            movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+
+            return movie;
+        }
+
         public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"movie/upcoming?api_key={_config["API_KEY"]}");

@@ -1,10 +1,15 @@
 ﻿<div id="search">
-    <form class="form-inline">
-        <div class="input-group">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-            <div class="input-group-prepend">
-                <button class="input-group-text" id="search-button"><i class="fas fa-search"></i></button>
-            </div>
+    <div class="input-group">
+        <input @bind="@SearchQuery"
+               @bind:event="oninput"
+               @onkeyup="() => Console.WriteLine(SearchQuery)"
+               type="search"
+               class="form-control"
+               placeholder="Search...">
+        <div class="input-group-prepend">
+            <button class="input-group-text" @onclick="() => Console.WriteLine(SearchQuery)">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-    </form>
+    </div>
 </div>
