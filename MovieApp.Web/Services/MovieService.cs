@@ -26,6 +26,31 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
+        public async Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId)
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}/similar?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var movies = data.Results;
+
+            var imageConfig = await GetImageConfiguration();
+
+            foreach (var movie in movies)
+            {
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
+            }
+
+            return movies;
+        }
+
         public async Task<IEnumerable<Person>> GetMovieCastAsync(int movieId)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}/credits?api_key={_config["API_KEY"]}");
@@ -91,7 +116,7 @@ namespace MovieApp.Web.Services
 
             var imageConfig = await GetImageConfiguration();
 
-            movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W780, imageConfig);
+            movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
 
             return movie;
         }

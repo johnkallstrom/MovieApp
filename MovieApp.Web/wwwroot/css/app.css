@@ -2,12 +2,21 @@
     margin-top: 1rem;
 }
 
-#movie-details a {
+#movie-details #cast a {
     color: #212529; 
     text-decoration: none;
 }
 
-#movie-details p {
+#movie-details #cast p {
+    margin-bottom: 0;
+}
+
+#movie-details #movies-similar a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#movie-details #movies-similar p {
     margin-bottom: 0;
 }
 

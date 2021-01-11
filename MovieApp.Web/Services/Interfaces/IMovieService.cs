@@ -6,6 +6,7 @@ namespace MovieApp.Web.Services
 {
     public interface IMovieService
     {
+        Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId);
         Task<IEnumerable<Person>> GetMovieCastAsync(int movieId);
         Task<IEnumerable<Movie>> GetMoviesBySearchAsync(string query);
         Task<MovieDetails> GetMovieDetailsAsync(int movieId);
