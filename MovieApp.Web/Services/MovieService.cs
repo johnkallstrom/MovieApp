@@ -90,7 +90,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
@@ -115,7 +115,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
@@ -140,7 +140,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
