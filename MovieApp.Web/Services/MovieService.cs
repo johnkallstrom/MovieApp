@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
             }
 
             return movies;
@@ -65,34 +66,9 @@ namespace MovieApp.Web.Services
 
             var imageConfig = await GetImageConfiguration();
 
-            movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+            movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W780, imageConfig);
 
             return movie;
-        }
-
-        public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/upcoming?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var movies = data.Results;
-
-            var imageConfig = await GetImageConfiguration();
-
-            foreach (var movie in movies)
-            {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
-            }
-
-            return movies;
         }
 
         public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
@@ -114,7 +90,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
             }
 
             return movies;
@@ -139,7 +115,32 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, imageConfig);
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
+            }
+
+            return movies;
+        }
+
+        public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"movie/upcoming?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var movies = data.Results;
+
+            var imageConfig = await GetImageConfiguration();
+
+            foreach (var movie in movies)
+            {
+                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W342, imageConfig);
             }
 
             return movies;
@@ -154,13 +155,13 @@ namespace MovieApp.Web.Services
             return configuration.Images;
         }
 
-        private string GetImageUrl(string filePath, Image imageConfig)
+        private string GetImageUrl(string filePath, string sizeType, Image imageConfig)
         {
             string url = string.Empty;
 
             if (!string.IsNullOrEmpty(filePath))
             {
-                url = $"{imageConfig.Secure_Base_Url}{imageConfig.Poster_Sizes.FirstOrDefault(s => s.StartsWith("original"))}/{filePath}";
+                url = $"{imageConfig.Secure_Base_Url}{imageConfig.Poster_Sizes.FirstOrDefault(s => s.StartsWith(sizeType))}/{filePath}";
             }
 
             return url;
