@@ -40,12 +40,12 @@
                 @foreach (var person in Cast)
                 {
                     <div class="col-sm-2 mb-3 d-flex">
-                        <a href="@($"/cast/{person.Id}")">
+                        <a href="@($"/person/{person.Id}")">
                             <div class="card card-block h-100">
                                 <img class="card-img-top img-fluid" src="@person.ImageUrl" />
                                 <div class="card-body">
-                                    <p class="card-text"><strong>@person.Name</strong></p>
-                                    <p>@person.Character</p>
+                                    <p class="card-text text-center"><strong>@person.Name</strong></p>
+                                    <p class="text-center">@person.Character</p>
                                 </div>
                             </div>
                         </a>
@@ -71,7 +71,7 @@
                             <div class="card card-block h-100">
                                 <img class="card-img-top img-fluid" src="@movie.ImageUrl" />
                                 <div class="card-body">
-                                    <p class="card-text"><strong>@movie.Title</strong></p>
+                                    <p class="card-text text-center"><strong>@movie.Title</strong></p>
                                 </div>
                             </div>
                         </a>

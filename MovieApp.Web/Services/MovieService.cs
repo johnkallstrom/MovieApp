@@ -45,7 +45,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
             }
 
             return movies;
@@ -70,7 +70,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in cast)
             {
-                person.ImageUrl = GetImageUrl(person.Profile_Path, PosterSizeType.W342, imageConfig);
+                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W342, imageConfig);
             }
 
             return cast.ToList();
@@ -95,7 +95,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
             }
 
             return movies;
@@ -116,7 +116,7 @@ namespace MovieApp.Web.Services
 
             var imageConfig = await GetImageConfiguration();
 
-            movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+            movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
 
             return movie;
         }
@@ -140,7 +140,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
@@ -165,7 +165,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
@@ -190,7 +190,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in movies)
             {
-                movie.ImageUrl = GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
             }
 
             return movies;
@@ -203,18 +203,6 @@ namespace MovieApp.Web.Services
             var configuration = await _configService.GetApiConfigurationAsync();
 
             return configuration.Images;
-        }
-
-        private string GetImageUrl(string filePath, string sizeType, Image imageConfig)
-        {
-            string url = string.Empty;
-
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                url = $"{imageConfig.Secure_Base_Url}{imageConfig.Poster_Sizes.FirstOrDefault(s => s.StartsWith(sizeType))}/{filePath}";
-            }
-
-            return url;
         }
         #endregion
     }
