@@ -1,7 +1,12 @@
-﻿namespace MovieApp.Web.Shared
+﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Services;
+using System.Threading.Tasks;
+
+namespace MovieApp.Web.Shared
 {
     public partial class Search
     {
-        public string SearchQuery { get; set; }
+        [Inject]
+        public SearchService SearchService { get; set; }
     }
 }

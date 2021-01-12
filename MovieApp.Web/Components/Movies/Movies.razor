@@ -3,7 +3,14 @@
 <div id="movies">
     <h1>Movies</h1>
     <hr />
-    <PopularMovies />
-    <TopRatedMovies />
-    <UpcomingMovies />
+    @if (!string.IsNullOrWhiteSpace(SearchService.Query))
+    {
+        <h1>Query: @SearchService.Query</h1>
+    }
+    else
+    {
+        <PopularMovies />
+        <TopRatedMovies />
+        <UpcomingMovies />
+    }
 </div>

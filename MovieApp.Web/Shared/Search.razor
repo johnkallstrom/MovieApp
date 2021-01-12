@@ -1,13 +1,12 @@
 ﻿<div id="search">
     <div class="input-group">
-        <input @bind="@SearchQuery"
+        <input @bind="@SearchService.Query"
                @bind:event="oninput"
-               @onkeyup="() => Console.WriteLine(SearchQuery)"
-               type="search"
+               type="text"
                class="form-control"
                placeholder="Search...">
         <div class="input-group-prepend">
-            <button class="input-group-text" @onclick="() => Console.WriteLine(SearchQuery)">
+            <button class="input-group-text">
                 <i class="fas fa-search"></i>
             </button>
         </div>
