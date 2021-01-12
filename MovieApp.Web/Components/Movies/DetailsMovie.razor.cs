@@ -10,6 +10,9 @@ namespace MovieApp.Web.Components.Movies
     public partial class DetailsMovie
     {
         [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         public IMovieService MovieService { get; set; }
 
         [Parameter]
@@ -20,6 +23,11 @@ namespace MovieApp.Web.Components.Movies
         public IEnumerable<Person> Cast { get; set; } = new List<Person>();
 
         public IEnumerable<Movie> SimilarMovies { get; set; } = new List<Movie>();
+
+        protected void HandleMovieChanged(int movieId)
+        {
+            NavigationManager.NavigateTo($"/movie/{movieId}", true);
+        }
 
         protected override async Task OnInitializedAsync()
         {

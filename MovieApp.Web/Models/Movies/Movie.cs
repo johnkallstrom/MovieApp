@@ -16,5 +16,6 @@ namespace MovieApp.Web.Models
         public decimal Vote_Average { get; set; }
         public int Vote_Count { get; set; }
         public string ImageUrl { get; set; }
+        public int Order { get; set; }
     }
 }
