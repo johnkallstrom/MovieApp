@@ -1,0 +1,13 @@
+﻿<div class="col-sm-2 mb-3">
+    <a href="@($"/movie/{Movie.Id}")">
+        <div class="card card-block h-100">
+            <img class="card-img-top img-fluid" src="@Movie.ImageUrl" />
+            @if (ShowTitle)
+            {
+                <div class="card-body">
+                    <p class="card-text text-center"><strong>@Movie.Title</strong></p>
+                </div>
+            }
+        </div>
+    </a>
+</div>

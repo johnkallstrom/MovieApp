@@ -5,7 +5,20 @@
     <hr />
     @if (!string.IsNullOrWhiteSpace(SearchService.Query))
     {
-        <h1>Query: @SearchService.Query</h1>
+        <div id="movies-search">
+            <h3 class="mb-3">Results</h3>
+            @if (SearchMovies == null)
+            {
+                <div>Loading...</div>
+            }
+
+            <div class="row">
+                @foreach (var movie in SearchMovies)
+                {
+                    <DisplayMovie Movie="@movie" ShowTitle="false" />
+                }
+            </div>
+        </div>
     }
     else
     {

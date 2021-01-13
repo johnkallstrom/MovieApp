@@ -2,6 +2,25 @@
     margin-top: 1rem;
 }
 
+#movie-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#person-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#movie-details #cast {
+    margin-top: 2rem;
+}
+
+#movie-details #similar {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 #movie-details #cast a {
     color: #212529; 
     text-decoration: none;
@@ -11,12 +30,12 @@
     margin-bottom: 0;
 }
 
-#movie-details #movies-similar a {
+#movie-details #similar a {
     color: #212529;
     text-decoration: none;
 }
 
-#movie-details #movies-similar p {
+#movie-details #similar p {
     margin-bottom: 0;
 }
 
@@ -31,6 +50,11 @@
 
 #movies-upcoming {
     margin-bottom: 2rem;
+}
+
+#person-details #person-movies {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 #person-movies a {

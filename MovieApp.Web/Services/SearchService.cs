@@ -2,9 +2,10 @@
 
 namespace MovieApp.Web.Services
 {
-    public class SearchService : ISearchService
+    public class SearchService
     {
         private string _query;
+
         public string Query
         {
             get
@@ -18,7 +19,7 @@ namespace MovieApp.Web.Services
             }
         }
 
-        public event Action OnChange;
-        private void NotifyDataChanged() => OnChange?.Invoke();
+        public event Action OnQueryChange;
+        private void NotifyDataChanged() => OnQueryChange?.Invoke();
     }
 }
