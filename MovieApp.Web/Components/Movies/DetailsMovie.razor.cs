@@ -37,5 +37,13 @@ namespace MovieApp.Web.Components.Movies
             Cast = actors.Where(x => x.Known_For_Department == "Acting").Take(10);
             SimilarMovies = similarMovies.Take(10);
         }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            if (int.TryParse(Id, out int movieId))
+            {
+                Movie = await MovieService.GetMovieDetailsAsync(movieId);
+            }
+        }
     }
 }
