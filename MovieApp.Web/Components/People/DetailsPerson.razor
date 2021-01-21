@@ -15,8 +15,16 @@
                     <h5 class="card-title mb-3">Known for</h5>
                     <p class="card-text">@Person.Known_For_Department</p>
                     <h5 class="card-title">Biography</h5>
-                    <p class="card-text">@Person.Biography</p>
-                    <h5 class="card-title">Birthday</h5>
+                    @if (DisplayShortBiography)
+                    {
+                        <p class="card-text">@Person.ShortBiography</p>
+                        <button @onclick="HandleReadMore" class="btn btn-primary">Read more</button>
+                    }
+                    else
+                    {
+                        <p class="card-text">@Person.Biography</p>
+                    }
+                    <h5 class="card-title mt-3">Birthday</h5>
                     <p class="card-text">@Person.Birthday</p>
                     <h5 class="card-title">Born</h5>
                     <p class="card-text">@Person.Place_Of_Birth</p>

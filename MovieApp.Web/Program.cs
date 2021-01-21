@@ -20,8 +20,6 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IConfigurationService, ConfigurationService>();
             builder.Services.AddTransient<IPeopleService, PeopleService>();
 
-            builder.Services.AddSingleton<SearchService>();
-
             await builder.Build().RunAsync();
         }
     }

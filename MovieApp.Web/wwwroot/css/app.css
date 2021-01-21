@@ -62,6 +62,16 @@
     text-decoration: none;
 }
 
+#person-details .read-more-btn {
+    text-decoration: none;
+    margin-bottom: 3rem;
+}
+
+#person-details .read-more-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 #search button {
     padding: 0.7rem 1.8rem 0.7rem 1.8rem;
     border-top-left-radius: 0;
