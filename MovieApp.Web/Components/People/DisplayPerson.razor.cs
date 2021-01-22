@@ -7,5 +7,8 @@ namespace MovieApp.Web.Components.People
     {
         [Parameter]
         public Person Person { get; set; }
+
+        [Parameter]
+        public bool ShowCharacter { get; set; }
     }
 }

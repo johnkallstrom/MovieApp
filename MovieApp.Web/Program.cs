@@ -18,8 +18,9 @@ namespace MovieApp.Web
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://api.themoviedb.org/3/") });
 
             builder.Services.AddTransient<IMovieService, MovieService>();
-            builder.Services.AddTransient<IConfigurationService, ConfigurationService>();
             builder.Services.AddTransient<IPeopleService, PeopleService>();
+            builder.Services.AddTransient<ITVService, TVService>();
+            builder.Services.AddTransient<IConfigurationService, ConfigurationService>();
             builder.Services.AddTransient<ISearchService, SearchService>();
 
             builder.Services.AddSingleton<SearchState>();

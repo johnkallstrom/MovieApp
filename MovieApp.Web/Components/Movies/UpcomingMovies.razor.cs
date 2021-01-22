@@ -11,6 +11,9 @@ namespace MovieApp.Web.Components.Movies
         [Inject]
         public IMovieService MovieService { get; set; }
 
+        [Parameter]
+        public string HeaderText { get; set; } = "Upcoming";
+
         public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
 
         protected override async Task OnInitializedAsync()

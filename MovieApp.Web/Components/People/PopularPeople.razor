@@ -1,0 +1,14 @@
+﻿<div id="people-popular">
+    <h3 class="mb-3">Popular People</h3>
+    @if (People == null)
+    {
+        <div>Loading...</div>
+    }
+
+    <div class="row flex-row flex-nowrap overflow-auto">
+        @foreach (var person in People)
+        {
+            <DisplayPerson Person="person" />
+        }
+    </div>
+</div>

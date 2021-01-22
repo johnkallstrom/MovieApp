@@ -24,6 +24,29 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<IEnumerable<Person>> GetPopularPeopleAsync()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"person/popular?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<PeopleResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var config = await _configService.GetApiConfigurationAsync();
+
+            foreach (var person in data.Results)
+            {
+                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W342, config.Images);
+            }
+
+            return data.Results;
+        }
+
         public async Task<PersonDetails> GetPersonAsync(int personId)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"person/{personId}?api_key={_config["API_KEY"]}");

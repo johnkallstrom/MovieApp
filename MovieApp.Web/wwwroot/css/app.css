@@ -44,6 +44,25 @@
     margin-bottom: 2rem;
 }
 
+#people-popular {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#people-popular a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#tv-top-rated {
+    margin-bottom: 2rem;
+}
+
+#tv-top-rated a {
+    color: #212529;
+    text-decoration: none;
+}
+
 #movies-top-rated {
     margin-bottom: 2rem;
 }

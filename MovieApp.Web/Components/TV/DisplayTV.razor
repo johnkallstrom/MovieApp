@@ -1,0 +1,13 @@
+﻿<div class="col-sm-2 mb-3">
+    <a href="@($"/tv-shows/{TVShow.Id}")">
+        <div class="card card-block h-100">
+            <img class="card-img-top img-fluid" src="@TVShow.Poster_Path" />
+            @if (ShowName)
+            {
+                <div class="card-body">
+                    <p class="card-text text-center"><strong>@TVShow.Name</strong></p>
+                </div>
+            }
+        </div>
+    </a>
+</div>
