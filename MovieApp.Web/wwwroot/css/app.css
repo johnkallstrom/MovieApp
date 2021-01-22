@@ -62,11 +62,6 @@
     text-decoration: none;
 }
 
-#person-details .read-more-btn {
-    text-decoration: none;
-    margin-bottom: 3rem;
-}
-
 #person-details .read-more-btn:hover {
     cursor: pointer;
     text-decoration: underline;

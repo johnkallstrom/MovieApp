@@ -1,10 +1,13 @@
 ﻿<div id="search">
     <div class="input-group">
-        <input type="text"
+        <input @bind-value="SearchState.Query"
+               @bind-value:event="oninput"
+               @onkeyup="() => SearchState.SetSearchTerm(SearchState.Query)"
+               type="text"
                class="form-control"
                placeholder="Search...">
         <div class="input-group-prepend">
-            <button class="input-group-text">
+            <button class="input-group-text" @onclick="() => SearchState.SetSearchTerm(SearchState.Query)">
                 <i class="fas fa-search"></i>
             </button>
         </div>

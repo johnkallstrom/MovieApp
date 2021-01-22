@@ -34,5 +34,21 @@ namespace MovieApp.Web.Services
 
             return data;
         }
+
+        public Configuration GetApiConfiguration()
+        {
+            HttpResponseMessage response = _httpClient.GetAsync($"configuration?api_key={_config["API_KEY"]}").Result;
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = response.Content.ReadAsStringAsync().Result;
+            }
+
+            var data = JsonSerializer.Deserialize<Configuration>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return data;
+        }
     }
 }

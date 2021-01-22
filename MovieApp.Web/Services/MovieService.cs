@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
+using MovieApp.Web.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -76,9 +78,16 @@ namespace MovieApp.Web.Services
             return cast.ToList();
         }
 
-        public async Task<IEnumerable<Movie>> GetMoviesBySearchAsync(string query)
+        public async Task<IEnumerable<Movie>> GetMoviesBySearchAsync(MovieParameters parameters)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"search/movie?api_key={_config["API_KEY"]}&query={query}");
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+
+            if (string.IsNullOrWhiteSpace(parameters.Query))
+            {
+                return null;
+            }
+
+            HttpResponseMessage response = await _httpClient.GetAsync($"search/movie?api_key={_config["API_KEY"]}&query={parameters.Query}");
 
             string content = string.Empty;
 
@@ -96,6 +105,38 @@ namespace MovieApp.Web.Services
             foreach (var movie in movies)
             {
                 movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
+            }
+
+            return movies;
+        }
+
+        public IEnumerable<Movie> GetMoviesBySearch(MovieParameters parameters)
+        {
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+
+            if (string.IsNullOrWhiteSpace(parameters.Query))
+            {
+                return null;
+            }
+
+            HttpResponseMessage response = _httpClient.GetAsync($"search/movie?api_key={_config["API_KEY"]}&query={parameters.Query}").Result;
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = response.Content.ReadAsStringAsync().Result;
+            }
+
+            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var movies = data.Results;
+
+            var configuration = _configService.GetApiConfiguration();
+
+            foreach (var movie in movies)
+            {
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, configuration.Images);
             }
 
             return movies;
