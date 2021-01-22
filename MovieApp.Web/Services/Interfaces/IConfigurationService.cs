@@ -6,6 +6,5 @@ namespace MovieApp.Web.Services
     public interface IConfigurationService
     {
         Task<Configuration> GetApiConfigurationAsync();
-        Configuration GetApiConfiguration();
     }
 }

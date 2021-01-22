@@ -1,23 +1,9 @@
-﻿@page "/"
+﻿@page "/movies"
 
 <div id="movies">
     <h1>Movies</h1>
     <hr />
-    @if (!string.IsNullOrWhiteSpace(SearchState.Query))
-    {
-        <div id="search-results">
-            <div class="row">
-                @foreach (var movie in SearchMovies)
-                {
-                    <DisplayMovie Movie="movie" ShowTitle="false" />
-                }
-            </div>
-        </div>
-    }
-    else
-    {
-        <PopularMovies />
-        <TopRatedMovies />
-        <UpcomingMovies />
-    }
+    <PopularMovies />
+    <TopRatedMovies />
+    <UpcomingMovies />
 </div>

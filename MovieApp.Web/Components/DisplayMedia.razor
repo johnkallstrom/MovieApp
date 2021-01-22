@@ -1,0 +1,19 @@
+﻿<div class="col-sm-2 mb-3">
+    <a href="@GetMediaUrl()">
+        <div class="card card-block h-100">
+            <img class="card-img-top img-fluid" src="@GetImagePath()" />
+            @if (ShowTitle)
+            {
+                <div class="card-body">
+                    <p class="card-text text-center"><strong>@Media.Title</strong></p>
+                </div>
+            }
+            @if (ShowName)
+            {
+                <div class="card-body">
+                    <p class="card-text text-center"><strong>@Media.Name</strong></p>
+                </div>
+            }
+        </div>
+    </a>
+</div>

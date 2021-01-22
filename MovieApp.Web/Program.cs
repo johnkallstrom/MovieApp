@@ -20,6 +20,7 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IMovieService, MovieService>();
             builder.Services.AddTransient<IConfigurationService, ConfigurationService>();
             builder.Services.AddTransient<IPeopleService, PeopleService>();
+            builder.Services.AddTransient<ISearchService, SearchService>();
 
             builder.Services.AddSingleton<SearchState>();
 

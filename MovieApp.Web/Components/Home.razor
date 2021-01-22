@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<div id="home">
+    <h1>Home</h1>
+    <hr />
+    @if (!string.IsNullOrWhiteSpace(SearchState.Query))
+    {
+        <div id="search-results">
+            <div class="row">
+                @foreach (var media in SearchResults)
+                {
+                    <DisplayMedia Media="media" Type="@media.Media_Type" />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <PopularMovies />
+        <TopRatedMovies />
+        <UpcomingMovies />
+    }
+</div>
