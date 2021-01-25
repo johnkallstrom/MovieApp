@@ -81,9 +81,9 @@
     text-decoration: none;
 }
 
-#person-details .read-more-btn:hover {
-    cursor: pointer;
-    text-decoration: underline;
+#tv-on-the-air {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
 #search button {
@@ -91,4 +91,12 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
+}
+
+#search-results h3 {
+    margin-bottom: 1rem;
+}
+
+#search-results .pagination a {
+    cursor: pointer;
 }

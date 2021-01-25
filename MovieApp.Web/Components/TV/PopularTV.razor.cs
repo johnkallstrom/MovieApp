@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.TV
 {
-    public partial class TopRatedTV
+    public partial class PopularTV
     {
         [Inject]
         public ITVService TVService { get; set; }
 
         [Parameter]
-        public string HeaderText { get; set; } = "Top Rated";
+        public string HeaderText { get; set; } = "Popular";
 
         public IEnumerable<TVShow> TVShows { get; set; } = new List<TVShow>();
 
         protected override async Task OnInitializedAsync()
         {
-            TVShows = await TVService.GetTopRatedTVAsync();
+            TVShows = await TVService.GetPopularTVAsync();
         }
     }
 }

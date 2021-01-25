@@ -11,6 +11,9 @@ namespace MovieApp.Web.Components.People
         [Inject]
         public IPeopleService PeopleService { get; set; }
 
+        [Parameter]
+        public string HeaderText { get; set; } = "Popular";
+
         public IEnumerable<Person> People { get; set; } = new List<Person>();
 
         protected override async Task OnInitializedAsync()

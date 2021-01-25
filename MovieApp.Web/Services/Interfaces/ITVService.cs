@@ -6,6 +6,8 @@ namespace MovieApp.Web.Services
 {
     public interface ITVService
     {
-        Task<IEnumerable<TVShow>> GetTopRatedTVShowsAsync();
+        Task<IEnumerable<TVShow>> GetOnTheAirTVAsync();
+        Task<IEnumerable<TVShow>> GetPopularTVAsync();
+        Task<IEnumerable<TVShow>> GetTopRatedTVAsync();
     }
 }

@@ -9,20 +9,11 @@ namespace MovieApp.Web.Components
         [Parameter]
         public Media Media { get; set; }
 
-        [Parameter]
-        public string Type { get; set; }
-
-        [Parameter]
-        public bool ShowTitle { get; set; }
-
-        [Parameter]
-        public bool ShowName { get; set; }
-
         protected string GetMediaUrl()
         {
             string url = string.Empty;
 
-            switch (Type)
+            switch (Media.Media_Type)
             {
                 case MediaType.Movie:
                     url = $"/movie/{Media.Id}";
@@ -41,7 +32,7 @@ namespace MovieApp.Web.Components
         {
             string path = string.Empty;
 
-            switch (Type)
+            switch (Media.Media_Type)
             {
                 case MediaType.Movie:
                     path = $"{Media.Poster_Path}";

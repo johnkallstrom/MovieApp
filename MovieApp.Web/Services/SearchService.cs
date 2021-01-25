@@ -25,7 +25,7 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<Media>> GetMultiSearchAsync(SearchParameters parameters)
+        public async Task<SearchResults> GetMultiSearchAsync(SearchParameters parameters)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"search/multi?api_key={_config["API_KEY"]}&query={parameters.Query}&page={parameters.Page}");
 
@@ -46,7 +46,7 @@ namespace MovieApp.Web.Services
                 item.Profile_Path = ImageHelper.GetImageUrl(item.Profile_Path, PosterSizeType.W342, imageConfig);
             }
 
-            return data.Results;
+            return data;
         }
 
         #region Private Methods

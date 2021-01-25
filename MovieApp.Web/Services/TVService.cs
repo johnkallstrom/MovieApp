@@ -24,9 +24,59 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<TVShow>> GetTopRatedTVShowsAsync()
+        public async Task<IEnumerable<TVShow>> GetPopularTVAsync()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"tv/popular?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<TVResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var tvShows = data.Results;
+
+            var configuration = await _configService.GetApiConfigurationAsync();
+
+            foreach (var tvShow in tvShows)
+            {
+                tvShow.Poster_Path = ImageHelper.GetImageUrl(tvShow.Poster_Path, PosterSizeType.Original, configuration.Images);
+            }
+
+            return tvShows;
+        }
+
+        public async Task<IEnumerable<TVShow>> GetTopRatedTVAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"tv/top_rated?api_key={_config["API_KEY"]}");
+
+            string content = string.Empty;
+
+            if (response.IsSuccessStatusCode)
+            {
+                content = await response.Content.ReadAsStringAsync();
+            }
+
+            var data = JsonSerializer.Deserialize<TVResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            var tvShows = data.Results;
+
+            var configuration = await _configService.GetApiConfigurationAsync();
+
+            foreach (var tvShow in tvShows)
+            {
+                tvShow.Poster_Path = ImageHelper.GetImageUrl(tvShow.Poster_Path, PosterSizeType.Original, configuration.Images);
+            }
+
+            return tvShows;
+        }
+
+        public async Task<IEnumerable<TVShow>> GetOnTheAirTVAsync()
+        {
+            HttpResponseMessage response = await _httpClient.GetAsync($"tv/on_the_air?api_key={_config["API_KEY"]}");
 
             string content = string.Empty;
 
