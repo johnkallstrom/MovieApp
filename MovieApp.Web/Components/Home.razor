@@ -7,53 +7,54 @@
     {
         <div id="search-results">
             <p class="my-3">Your search on '@SearchState.Query' resulted in @TotalResults hit(s).</p>
-            <div class="list-group">
-                @if (Results != null || !Results.Any())
-                {
-                    @foreach (var media in Results)
-                    {
-                        <DisplayMedia Media="@media" />
-                    }
-                }
+            <div class="container">
+                <div class="row">
+                    <ul class="list-group">
+                        @foreach (var media in Results)
+                        {
+                            <DisplayMedia Media="@media" />
+                        }
+                    </ul>
+                </div>
             </div>
-            <p class="mt-3">Page @CurrentPage of @TotalPages</p>
-            <nav aria-label="..." class="my-3">
-                <ul class="pagination">
-                    @if (CurrentPage > 1)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" @onclick="HandlePrevButton">Previous</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" @onclick="HandlePrevButton">Previous</a>
-                        </li>
-                    }
-                    @for (int i = 1; i <= TotalPages; i++)
-                    {
-                        int pageNum = i;
+        <p class="mt-3">Page @CurrentPage of @TotalPages</p>
+        <nav aria-label="..." class="my-3">
+            <ul class="pagination">
+                @if (CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" @onclick="HandlePrevButton">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" @onclick="HandlePrevButton">Previous</a>
+                    </li>
+                }
+                @for (int i = 1; i <= TotalPages; i++)
+                {
+                    int pageNum = i;
 
-                        <li class="page-item">
-                            <a class="page-link" @onclick="@(e => HandlePageButton(pageNum))">@pageNum</a>
-                        </li>
-                    }
-                    @if (CurrentPage < TotalPages)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" @onclick="HandleNextButton">Next</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" @onclick="HandleNextButton">Next</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
-        </div>
+                    <li class="page-item">
+                        <a class="page-link" @onclick="@(e => HandlePageButton(pageNum))">@pageNum</a>
+                    </li>
+                }
+                @if (CurrentPage < TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" @onclick="HandleNextButton">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" @onclick="HandleNextButton">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+</div>
     }
     else
     {

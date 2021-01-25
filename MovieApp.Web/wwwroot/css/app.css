@@ -100,3 +100,21 @@
 #search-results .pagination a {
     cursor: pointer;
 }
+
+#search-results .list-group a {
+    color: #212529;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+#search-results .list-group a:last-child {
+    margin-bottom: 0rem;
+}
+
+
+#search-results .list-group-item {
+    border-radius: 8px;
+}
+.image-parent {
+    max-width: 80px;
+}
