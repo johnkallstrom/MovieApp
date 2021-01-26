@@ -22,5 +22,26 @@ namespace MovieApp.Web.Models
         public int Vote_Count { get; set; }
         public decimal Vote_Average { get; set; }
         public IEnumerable<int> Genre_Ids { get; set; }
+
+        public string DisplayNameOrTitle()
+        {
+            string output = "";
+
+            if (!string.IsNullOrWhiteSpace(Title))
+            {
+                output = Title;
+
+                return output;
+            }
+
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                output = Name;
+
+                return output;
+            }
+
+            return output;
+        }
     }
 }

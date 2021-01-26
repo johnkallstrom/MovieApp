@@ -5,21 +5,7 @@
             <ul class="list-group">
                 @foreach (var media in Results)
                 {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @if (!string.IsNullOrEmpty(media.Poster_Path))
-                        {
-                            <div class="image-parent">
-                                <img src="@media.Poster_Path" class="img-fluid">
-                            </div>
-                        }
-
-                        @if (!string.IsNullOrEmpty(media.Profile_Path))
-                        {
-                            <div class="image-parent">
-                                <img src="@media.Profile_Path" class="img-fluid">
-                            </div>
-                        }
-                </li>
+                    <DisplayMedia Media="media" />
                 }
             </ul>
         </div>

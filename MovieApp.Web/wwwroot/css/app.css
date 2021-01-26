@@ -27,3 +27,26 @@
     border-radius: 8px;
     margin-bottom: 1.5rem;
 }
+
+#search-results {
+    margin-bottom: 1rem;
+}
+
+#search-results a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#search-results .image-parent {
+    max-width: 100px;
+}
+
+#search-results li {
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+#search-results li:hover {
+    border: 1px solid #b5b5b5;
+}
