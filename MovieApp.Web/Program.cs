@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MovieApp.Web.Services;
+using MovieApp.Web.State;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IPeopleService, PeopleService>();
             builder.Services.AddTransient<ITVService, TVService>();
             builder.Services.AddTransient<ISearchService, SearchService>();
+
+            builder.Services.AddSingleton<SearchState>();
 
             await builder.Build().RunAsync();
         }

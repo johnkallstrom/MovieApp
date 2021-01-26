@@ -1,7 +1,10 @@
 ﻿<div id="search">
     <div class="form-group has-search">
         <span class="fa fa-search form-control-feedback"></span>
-        <input type="text"
+        <input @bind-value="SearchState.Query"
+               @bind-value:event="oninput"
+               @onkeyup="@(e => SearchState.SetSearchQuery(SearchState.Query))"
+               type="text"
                class="form-control"
                placeholder="Search...">
     </div>
