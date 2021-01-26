@@ -1,2 +1,24 @@
-﻿body {
+﻿#person-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#people-popular {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#people-popular a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#person-details #person-movies {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#person-movies a {
+    color: #212529;
+    text-decoration: none;
 }

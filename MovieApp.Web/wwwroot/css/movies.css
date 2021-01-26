@@ -1,2 +1,44 @@
-﻿body {
+﻿#movie-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#movie-details #cast {
+    margin-top: 2rem;
+}
+
+#movie-details #similar {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#movie-details #cast a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#movie-details #cast p {
+    margin-bottom: 0;
+}
+
+#movie-details #similar a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#movie-details #similar p {
+    margin-bottom: 0;
+}
+
+#movies-popular {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#movies-top-rated {
+    margin-bottom: 2rem;
+}
+
+#movies-upcoming {
+    margin-bottom: 2rem;
 }

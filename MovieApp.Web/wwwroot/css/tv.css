@@ -1,2 +1,39 @@
-﻿body {
+﻿#tv-top-rated {
+    margin-bottom: 2rem;
 }
+
+#tv-top-rated a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#tv-on-the-air {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+
+#tv-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#tv-details #cast a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#tv-details #cast p {
+    margin-bottom: 0;
+}
+
+#tv-details #seasons a {
+    color: #212529;
+    text-decoration: none;
+}
+
+
+#season-details #episodes a {
+    color: #212529;
+    text-decoration: none;
+}   

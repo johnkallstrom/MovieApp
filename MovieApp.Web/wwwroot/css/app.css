@@ -2,131 +2,6 @@
     margin-top: 1rem;
 }
 
-#movie-details {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#person-details {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#tv-details {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#movie-details #cast {
-    margin-top: 2rem;
-}
-
-#movie-details #similar {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#movie-details #cast a {
-    color: #212529; 
-    text-decoration: none;
-}
-
-#movie-details #cast p {
-    margin-bottom: 0;
-}
-
-#tv-details #cast a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#tv-details #cast p {
-    margin-bottom: 0;
-}
-
-#movie-details #similar a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#movie-details #similar p {
-    margin-bottom: 0;
-}
-
-#movies-popular {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-}
-
-#people-popular {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-}
-
-#people-popular a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#tv-top-rated {
-    margin-bottom: 2rem;
-}
-
-#tv-top-rated a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#movies-top-rated {
-    margin-bottom: 2rem;
-}
-
-#movies-upcoming {
-    margin-bottom: 2rem;
-}
-
-#person-details #person-movies {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#person-movies a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#tv-on-the-air {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-}
-
-#search-results h3 {
-    margin-bottom: 1rem;
-}
-
-#search-results .pagination a {
-    cursor: pointer;
-}
-
-#search-results .list-group a {
-    color: #212529;
-    text-decoration: none;
-    margin-bottom: 1rem;
-}
-
-#search-results .list-group a:last-child {
-    margin-bottom: 0rem;
-}
-
-
-#search-results .list-group-item {
-    border-radius: 8px;
-}
-
-.image-parent {
-    max-width: 80px;
-}
-
 .has-search .form-control {
     padding-left: 2.375rem;
 }
@@ -141,4 +16,14 @@
     text-align: center;
     pointer-events: none;
     color: #aaa;
+}
+
+.image-parent {
+    max-width: 150px;
+}
+
+#season-details li {
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
 }
