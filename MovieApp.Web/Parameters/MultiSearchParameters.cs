@@ -1,6 +1,6 @@
 ﻿namespace MovieApp.Web.Parameters
 {
-    public class SearchParameters
+    public class MultiSearchParameters
     {
         public string Query { get; set; }
 

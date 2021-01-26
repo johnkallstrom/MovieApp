@@ -12,6 +12,11 @@
     margin-bottom: 1rem;
 }
 
+#tv-details {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 #movie-details #cast {
     margin-top: 2rem;
 }
@@ -27,6 +32,15 @@
 }
 
 #movie-details #cast p {
+    margin-bottom: 0;
+}
+
+#tv-details #cast a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#tv-details #cast p {
     margin-bottom: 0;
 }
 
@@ -86,13 +100,6 @@
     margin-bottom: 2rem;
 }
 
-#search button {
-    padding: 0.7rem 1.8rem 0.7rem 1.8rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    outline: none;
-}
-
 #search-results h3 {
     margin-bottom: 1rem;
 }
@@ -115,6 +122,23 @@
 #search-results .list-group-item {
     border-radius: 8px;
 }
+
 .image-parent {
     max-width: 80px;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
 }

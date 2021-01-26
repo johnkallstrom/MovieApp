@@ -2,5 +2,74 @@
 
 <div id="tv-details">
     <div class="row">
+        <div class="col-md-6">
+            <div class="card card-block h-100">
+                <img class="card-img-top img-fluid" src="@TVShow.Poster_Path">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-block h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Name</h5>
+                    <p class="card-text">@TVShow.Name</p>
+                    <h5 class="card-title">Tagline</h5>
+                    <p class="card-text">@TVShow.Tagline</p>
+                    <h5 class="card-title">Overview</h5>
+                    <p class="card-text">@TVShow.Overview</p>
+                    <h5 class="card-title">Type</h5>
+                    <p class="card-text">@TVShow.Type min</p>
+                    <h5 class="card-title">Rating</h5>
+                    <p class="card-text">@TVShow.Vote_Average</p>
+                    <h5 class="card-title">First Air Date</h5>
+                    <p class="card-text">@TVShow.First_Air_Date</p>
+                    <h5 class="card-title">Created By</h5>
+                    @foreach (var person in TVShow.Created_By)
+                    {
+                        <p class="card-text">@person.Name</p>
+                    }
+                    <h5 class="card-title">Genres</h5>
+                    @foreach (var genre in TVShow.Genres)
+                    {
+                        <p class="card-text">@genre.Name</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cast">
+        <h3 class="mt-3">Cast</h3>
+        <hr />
+        @if (Cast == null || !Cast.Any())
+        {
+            <p>Sorry, we could not find any cast.</p>
+        }
+        else
+        {
+            <div class="row flex-row flex-nowrap overflow-auto">
+                @foreach (var person in Cast)
+                {
+                    <DisplayPerson Person="@person" ShowCharacter="true" />
+                }
+            </div>
+        }
+    </div>
+    <div id="seasons">
+        <h3 class="mt-3">Seasons</h3>
+        <hr />
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var season in TVShow.Seasons)
+            {
+                <div class="col-sm-2 mb-3">
+                    <a href="@($"/tv-shows/{TVShow.Id}/season/{season.Season_Number}")">
+                        <div class="card card-block h-100">
+                            <img class="card-img-top img-fluid" src="@season.Poster_Path" />
+                            <div class="card-body">
+                                <p class="card-text text-center"><strong>@season.Name</strong></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
     </div>
 </div>

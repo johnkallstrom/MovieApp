@@ -3,7 +3,7 @@ using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
@@ -11,37 +11,26 @@ namespace MovieApp.Web.Services
     public class PeopleService : IPeopleService
     {
         private readonly IConfiguration _config;
-        private readonly IConfigurationService _configService;
         private readonly HttpClient _httpClient;
 
         public PeopleService(
-            IConfigurationService configService,
             IConfiguration config,
             HttpClient httpClient)
         {
-            _configService = configService;
             _config = config;
             _httpClient = httpClient;
         }
 
+        #region Public Methods
         public async Task<IEnumerable<Person>> GetPopularPeopleAsync()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"person/popular?api_key={_config["API_KEY"]}");
+            var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"person/popular?api_key={_config["API_KEY"]}");
 
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<PeopleResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var config = await _configService.GetApiConfigurationAsync();
+            var imageConfig = await GetImageConfiguration();
 
             foreach (var person in data.Results)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W342, config.Images);
+                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, FileSizeType.W342, imageConfig);
             }
 
             return data.Results;
@@ -49,45 +38,37 @@ namespace MovieApp.Web.Services
 
         public async Task<PersonDetails> GetPersonAsync(int personId)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"person/{personId}?api_key={_config["API_KEY"]}");
+            var data = await _httpClient.GetFromJsonAsync<PersonDetails>($"person/{personId}?api_key={_config["API_KEY"]}");
 
-            string content = string.Empty;
+            var imageConfig = await GetImageConfiguration();
 
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
+            data.ImageUrl = ImageHelper.GetImageUrl(data.Profile_Path, FileSizeType.W780, imageConfig);
 
-            var person = JsonSerializer.Deserialize<PersonDetails>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var config = await _configService.GetApiConfigurationAsync();
-
-            person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W780, config.Images);
-
-            return person;
+            return data;
         }
 
         public async Task<IEnumerable<Movie>> GetPersonMoviesAsync(int personId)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"person/{personId}/movie_credits?api_key={_config["API_KEY"]}");
+            var data = await _httpClient.GetFromJsonAsync<PersonCredits>($"person/{personId}/movie_credits?api_key={_config["API_KEY"]}");
 
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<PersonCredits>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var config = await _configService.GetApiConfigurationAsync();
+            var imageConfig = await GetImageConfiguration();
 
             foreach (var movie in data.Cast)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W342, config.Images);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.W342, imageConfig);
             }
 
             return data.Cast;
         }
+        #endregion
+
+        #region Private Methods
+        private async Task<Image> GetImageConfiguration()
+        {
+            var configuration = await _httpClient.GetFromJsonAsync<Configuration>($"configuration?api_key={_config["API_KEY"]}");
+
+            return configuration.Images;
+        }
+        #endregion
     }
 }

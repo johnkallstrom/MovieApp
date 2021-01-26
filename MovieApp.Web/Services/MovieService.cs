@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -14,170 +15,103 @@ namespace MovieApp.Web.Services
     public class MovieService : IMovieService
     {
         private readonly IConfiguration _config;
-        private readonly IConfigurationService _configService;
         private readonly HttpClient _httpClient;
 
         public MovieService(
             IConfiguration config,
-            IConfigurationService configService,
             HttpClient httpClient)
         {
             _config = config;
-            _configService = configService;
             _httpClient = httpClient;
         }
 
         #region Public Methods
         public async Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}/similar?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var movies = data.Results;
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/{movieId}/similar?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            foreach (var movie in movies)
+            foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.W500, imageConfig);
             }
 
-            return movies;
+            return data.Results;
         }
 
         public async Task<IEnumerable<Person>> GetMovieCastAsync(int movieId)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}/credits?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieCredits>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var cast = data.Cast;
+            var data = await _httpClient.GetFromJsonAsync<MovieCredits>($"movie/{movieId}/credits?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            foreach (var person in cast)
+            foreach (var person in data.Cast)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W342, imageConfig);
+                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, FileSizeType.W342, imageConfig);
             }
 
-            return cast.ToList();
+            return data.Cast;
         }
 
         public async Task<MovieDetails> GetMovieDetailsAsync(int movieId)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/{movieId}?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var movie = JsonSerializer.Deserialize<MovieDetails>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var data = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+            data.ImageUrl = ImageHelper.GetImageUrl(data.Poster_Path, FileSizeType.Original, imageConfig);
 
-            return movie;
+            return data;
         }
 
         public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/popular?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var movies = data.Results;
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            foreach (var movie in movies)
+            foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.Original, imageConfig);
             }
 
-            return movies;
+            return data.Results;
         }
 
         public async Task<IEnumerable<Movie>> GetTopRatedMoviesAsync()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/top_rated?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var movies = data.Results;
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            foreach (var movie in movies)
+            foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.Original, imageConfig);
             }
 
-            return movies;
+            return data.Results;
         }
 
         public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"movie/upcoming?api_key={_config["API_KEY"]}");
-
-            string content = string.Empty;
-
-            if (response.IsSuccessStatusCode)
-            {
-                content = await response.Content.ReadAsStringAsync();
-            }
-
-            var data = JsonSerializer.Deserialize<MovieResults>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var movies = data.Results;
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config["API_KEY"]}");
 
             var imageConfig = await GetImageConfiguration();
 
-            foreach (var movie in movies)
+            foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.Original, imageConfig);
             }
 
-            return movies;
+            return data.Results;
         }
         #endregion
 
         #region Private Methods
         private async Task<Image> GetImageConfiguration()
         {
-            var configuration = await _configService.GetApiConfigurationAsync();
+            var configuration = await _httpClient.GetFromJsonAsync<Configuration>($"configuration?api_key={_config["API_KEY"]}");
 
             return configuration.Images;
         }

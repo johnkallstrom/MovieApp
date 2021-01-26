@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.TV
 {
-    public partial class DetailsTV
+    public partial class DetailsSeason
     {
         [Inject]
         public ITVService TVService { get; set; }
@@ -14,16 +13,16 @@ namespace MovieApp.Web.Components.TV
         [Parameter]
         public string Id { get; set; }
 
-        public TVShowDetails TVShow { get; set; } = new TVShowDetails();
+        [Parameter]
+        public string Number { get; set; }
 
-        public IEnumerable<Person> Cast { get; set; }
+        public SeasonDetails SeasonDetails { get; set; } = new SeasonDetails();
 
         protected override async Task OnInitializedAsync()
         {
-            if (int.TryParse(Id, out int tvShowId))
+            if (int.TryParse(Id, out int tvShowId) && int.TryParse(Number, out int seasonNumber))
             {
-                TVShow = await TVService.GetTVDetailsAsync(tvShowId);
-                Cast = await TVService.GetTVCastAsync(tvShowId);
+                SeasonDetails = await TVService.GetTVSeasonDetailsAsync(tvShowId, seasonNumber);
             }
         }
     }

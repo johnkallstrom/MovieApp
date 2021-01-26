@@ -9,6 +9,7 @@
         public string ImageUrl { get; set; }
         public string Character { get; set; }
         public int Order { get; set; }
+        public string Department { get; set; }
     }
 }
 
