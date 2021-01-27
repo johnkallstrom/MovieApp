@@ -1,5 +1,4 @@
 ﻿using MovieApp.Web.Models;
-using MovieApp.Web.Parameters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

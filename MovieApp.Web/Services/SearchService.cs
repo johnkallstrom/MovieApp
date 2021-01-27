@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
-using MovieApp.Web.Parameters;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -22,9 +21,9 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
-        public async Task<SearchResults> GetMultiSearchAsync(MultiSearchParameters parameters)
+        public async Task<MultiSearchResults> GetMultiSearchAsync(string query)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/multi?api_key={_config["API_KEY"]}&query={parameters.Query}&page={parameters.Page}");
+            var data = await _httpClient.GetFromJsonAsync<MultiSearchResults>($"search/multi?api_key={_config["API_KEY"]}&query={query}");
 
             var imageConfig = await GetImageConfiguration();
 

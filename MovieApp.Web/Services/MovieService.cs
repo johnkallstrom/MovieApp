@@ -1,13 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
-using MovieApp.Web.Parameters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services

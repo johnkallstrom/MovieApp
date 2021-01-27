@@ -1,4 +1,8 @@
-﻿#home h1 {
+﻿.fill {
+    filter: invert(69%) sepia(13%) saturate(10%) hue-rotate(5deg) brightness(88%) contrast(95%);
+}
+
+#home h1 {
     margin-top: 1rem;
 }
 
@@ -28,25 +32,25 @@
     margin-bottom: 1.5rem;
 }
 
-#search-results {
+#media-list {
     margin-bottom: 1rem;
 }
 
-#search-results a {
+#media-list a {
     color: #212529;
     text-decoration: none;
 }
 
-#search-results .image-parent {
+#media-list .image-parent {
     max-width: 100px;
 }
 
-#search-results li {
+#media-list li {
     border: 1px solid #dedede;
     border-radius: 8px;
     margin-bottom: 1.5rem;
 }
 
-#search-results li:hover {
+#media-list li:hover {
     border: 1px solid #b5b5b5;
 }

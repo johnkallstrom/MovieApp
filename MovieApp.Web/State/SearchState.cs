@@ -7,18 +7,30 @@ namespace MovieApp.Web.State
     {
         private Timer _timer;
 
-        public string Query { get; set; }
+        public string SearchQuery { get; set; }
 
         public event Action OnChange;
 
+        public event Action OnClear;
+
         public void SetSearchQuery(string value)
+        {
+            SearchQuery = value;
+            NotifyStateChanged(500);
+        }
+
+        public void ClearSearchQuery()
+        {
+            SearchQuery = string.Empty;
+            NotifyStateChanged(0);
+        }
+
+        private void NotifyStateChanged(int dueTime)
         {
             if (_timer != null)
                 _timer.Dispose();
 
-            Query = value;
-
-            _timer = new Timer(OnTimerElapsed, null, 500, 0);
+            _timer = new Timer(OnTimerElapsed, null, dueTime, 0);
         }
 
         private void OnTimerElapsed(object state)

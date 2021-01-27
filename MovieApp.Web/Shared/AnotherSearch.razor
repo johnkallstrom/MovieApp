@@ -1,9 +1,9 @@
 ﻿<div id="search">
     <div class="form-group has-search">
         <span class="fa fa-search form-control-feedback"></span>
-        <input @bind-value="SearchState.SearchQuery"
+        <input @bind-value="SearchQuery"
                @bind-value:event="oninput"
-               @onkeyup="() => SearchState.SetSearchQuery(SearchState.SearchQuery)"
+               @onkeyup="SearchChanged"
                type="text"
                class="form-control"
                placeholder="Search...">

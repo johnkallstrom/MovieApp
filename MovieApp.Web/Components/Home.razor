@@ -3,14 +3,18 @@
 <div id="home">
     <h1>Home</h1>
     <hr />
-    @if (!string.IsNullOrWhiteSpace(SearchState.Query))
-    {
-        <SearchResults Results="@SearchResults" Query="@SearchState.Query" TotalResults="@TotalResults" />
-    }
-    else
-    {
-        <UpcomingMovies HeaderText="Upcoming Movies" />
-        <OnTheAirTV HeaderText="On The Air TV Shows" />
-        <PopularPeople HeaderText="Popular People" />
-    }
-</div> 
+    <div class="row">
+        <div class="col">
+            @if (!string.IsNullOrEmpty(SearchState.SearchQuery))
+            {
+                <MediaList Results="@Results" SearchQuery="@SearchQuery" TotalResults="@TotalResults" />
+            }
+            else
+            {
+                <UpcomingMovies HeaderText="Upcoming Movies" />
+                <OnTheAirTV HeaderText="On The Air TV Shows" />
+                <PopularPeople HeaderText="Popular People" />
+            }
+        </div>
+    </div>
+</div>

@@ -1,12 +1,16 @@
-﻿@if (!string.IsNullOrWhiteSpace(GetImageUrl()))
-{
-    <a href="@GetMediaUrl()">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <p>@Media.DisplayNameOrTitle()</p>
+﻿<a href="@GetMediaUrl()">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <p>@Media.DisplayNameOrTitle()</p>
 
+        @if (!string.IsNullOrWhiteSpace(GetImageUrl()))
+        {
             <div class="image-parent">
                 <img src="@GetImageUrl()" class="img-fluid">
             </div>
-        </li>
-    </a>
-}
+        }
+        else
+        {
+            <i class="fas fa-images fa-7x fill"></i>
+        }
+    </li>
+</a>

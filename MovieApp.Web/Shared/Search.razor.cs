@@ -7,5 +7,10 @@ namespace MovieApp.Web.Shared
     {
         [Inject]
         public SearchState SearchState { get; set; }
+
+        protected override void OnInitialized()
+        {
+            SearchState.OnChange += StateHasChanged;
+        }
     }
 }
