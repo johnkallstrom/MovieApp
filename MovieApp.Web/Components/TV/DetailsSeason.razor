@@ -1,22 +1,22 @@
 ﻿ @page "/tv-shows/{id}/season/{number}"
 
-<div id="season-details">
+<div id="season-details-table">
     <h1>@SeasonDetails.Name</h1>
     <hr />
-    <div class="row">
-        <div class="col-12">
-            <ul class="list-group">
-                @foreach (var episode in SeasonDetails.Episodes)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <small class="text-muted"><strong>#@episode.Episode_Number</strong></small>
-                        @episode.Name
-                        <div class="image-parent">
-                            <img src="@episode.Still_Path" class="img-fluid">
-                        </div>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Episode Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Air Date</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var episode in SeasonDetails.Episodes)
+            {
+                <DisplayEpisode Episode="episode" />
+            }
+        </tbody>
+    </table>
 </div>

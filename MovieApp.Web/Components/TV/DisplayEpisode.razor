@@ -1,0 +1,6 @@
+﻿<tr>
+    <td>@Episode.Episode_Number</td>
+    <td>@Episode.Name</td>
+    <td>@(Episode.Air_Date = string.IsNullOrEmpty(Episode.Air_Date) ? DateTime.MinValue.ToShortDateString() : Episode.Air_Date)</td>
+    <td>@Episode.Vote_Average</td>
+</tr>
