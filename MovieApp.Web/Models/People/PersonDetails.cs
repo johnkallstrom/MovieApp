@@ -8,7 +8,6 @@
         public string Birthday { get; set; }
         public string Deathday { get; set; }
         public string Biography { get; set; }
-        public string ShortBiography { get; set; }
         public string Imdb_Id { get; set; }
         public string Known_For_Department { get; set; }
         public string Homepage { get; set; }

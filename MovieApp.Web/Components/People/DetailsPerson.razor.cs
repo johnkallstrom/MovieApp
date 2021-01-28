@@ -30,35 +30,10 @@ namespace MovieApp.Web.Components.People
             if (int.TryParse(Id, out int personId))
             {
                 Person = await PeopleService.GetPersonAsync(personId);
-                Person.ShortBiography = GetShortBiography();
                 movies = await PeopleService.GetPersonMoviesAsync(personId);
             }
 
             Movies = movies.Take(10);
-        }
-
-        protected void HandleReadMore()
-        {
-            if (DisplayShortBiography)
-            {
-                DisplayShortBiography = false;
-            }
-            else
-            {
-                DisplayShortBiography = true;
-            }
-        }
-
-        protected string GetShortBiography()
-        {
-            string output = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(Person.Biography))
-            {
-                output = Person.Biography.Substring(0, BIO_COUNT).TrimEnd();
-            }
-
-            return $"{output}...";
         }
     }
 }
