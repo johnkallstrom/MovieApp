@@ -28,25 +28,5 @@ namespace MovieApp.Web.Components
 
             return url;
         }
-
-        protected string GetImageUrl()
-        {
-            string url = string.Empty;
-
-            switch (Media.Media_Type)
-            {
-                case MediaType.Movie:
-                    url = $"{Media.Poster_Path}";
-                    break;
-                case MediaType.TV:
-                    url = $"{Media.Poster_Path}";
-                    break;
-                case MediaType.Person:
-                    url = $"{Media.Profile_Path}";
-                    break;
-            }
-
-            return url;
-        }
     }
 }

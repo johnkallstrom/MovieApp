@@ -36,4 +36,10 @@
 #season-details #episodes a {
     color: #212529;
     text-decoration: none;
-}   
+}
+
+#season-details li {
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}

@@ -11,8 +11,6 @@ namespace MovieApp.Web.State
 
         public event Action OnChange;
 
-        public event Action OnClear;
-
         public void SetSearchQuery(string value)
         {
             SearchQuery = value;

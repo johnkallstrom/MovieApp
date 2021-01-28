@@ -4,8 +4,10 @@
         <input @bind-value="SearchState.SearchQuery"
                @bind-value:event="oninput"
                @onkeyup="() => SearchState.SetSearchQuery(SearchState.SearchQuery)"
+               @onfocus="() => Placeholder = string.Empty"
+               @onblur="@(e => Placeholder = "Search...")"
                type="text"
                class="form-control"
-               placeholder="Search...">
+               placeholder="@Placeholder">
     </div>
 </div>

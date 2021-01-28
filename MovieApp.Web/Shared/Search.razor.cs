@@ -8,6 +8,8 @@ namespace MovieApp.Web.Shared
         [Inject]
         public SearchState SearchState { get; set; }
 
+        public string Placeholder { get; set; } = "Search...";
+
         protected override void OnInitialized()
         {
             SearchState.OnChange += StateHasChanged;

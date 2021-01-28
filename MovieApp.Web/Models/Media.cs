@@ -21,6 +21,7 @@ namespace MovieApp.Web.Models
         public decimal Popularity { get; set; }
         public int Vote_Count { get; set; }
         public decimal Vote_Average { get; set; }
+        public string Url { get; set; }
         public IEnumerable<int> Genre_Ids { get; set; }
 
         public string DisplayNameOrTitle()

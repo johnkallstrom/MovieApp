@@ -7,7 +7,12 @@
         <div class="col">
             @if (!string.IsNullOrEmpty(SearchState.SearchQuery))
             {
-                <MediaList Results="@Results" SearchQuery="@SearchQuery" TotalResults="@TotalResults" />
+                <MediaTable Results="@Results"
+                            SearchQuery="@SearchState.SearchQuery"
+                            CurrentPage="@CurrentPage"
+                            TotalPages="@TotalPages"
+                            TotalResults="@TotalResults" 
+                            OnCurrentPageChanged="CurrentPageChanged" />
             }
             else
             {
