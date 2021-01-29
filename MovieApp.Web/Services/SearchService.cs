@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using MovieApp.Web.Extensions;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using System.Net.Http;
@@ -10,16 +9,16 @@ namespace MovieApp.Web.Services
 {
     public class SearchService : ISearchService
     {
-        private readonly IApiConfigurationService _apiConfigService;
+        private const string API_KEY = "API_KEY";
+        private const string IMAGE_BASE_URL = "IMAGE_BASE_URL";
+
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
         public SearchService(
-            IApiConfigurationService apiConfigService,
             IConfiguration config,
             HttpClient httpClient)
         {
-            _apiConfigService = apiConfigService;
             _config = config;
             _httpClient = httpClient;
         }
@@ -27,15 +26,13 @@ namespace MovieApp.Web.Services
         #region Public Methods
         public async Task<MultiSearchResults> GetMultiSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MultiSearchResults>($"search/multi?api_key={_config["API_KEY"]}&query={query}&page={page}&include_adult=false");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MultiSearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}&include_adult=false");
 
             foreach (var item in data.Results)
             {
                 item.Url = GetMediaUrl(item.Media_Type, item.Id);
-                item.Poster_Path = ImageHelper.GetImageUrl(item.Poster_Path, PosterSizeType.W342, config);
-                item.Profile_Path = ImageHelper.GetImageUrl(item.Profile_Path, ProfileSizeType.Original, config);
+                item.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, item.Poster_Path);
+                item.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, item.Profile_Path);
             }
 
             return data;

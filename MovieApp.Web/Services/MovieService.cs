@@ -10,16 +10,16 @@ namespace MovieApp.Web.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly IApiConfigurationService _apiConfigService;
+        private const string API_KEY = "API_KEY";
+        private const string IMAGE_BASE_URL = "IMAGE_BASE_URL";
+
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
         public MovieService(
-            IApiConfigurationService apiConfigService,
             IConfiguration config,
             HttpClient httpClient)
         {
-            _apiConfigService = apiConfigService;
             _config = config;
             _httpClient = httpClient;
         }
@@ -27,13 +27,11 @@ namespace MovieApp.Web.Services
         #region Public Methods
         public async Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/{movieId}/similar?api_key={_config["API_KEY"]}");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/{movieId}/similar?api_key={_config[API_KEY]}");
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W500, config);
+                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W500, movie.Poster_Path);
             }
 
             return data.Results;
@@ -41,13 +39,11 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Person>> GetMovieCastAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieCredits>($"movie/{movieId}/credits?api_key={_config["API_KEY"]}");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MovieCredits>($"movie/{movieId}/credits?api_key={_config[API_KEY]}");
 
             foreach (var person in data.Cast)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, PosterSizeType.W342, config);
+                person.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
             }
 
             return data.Cast;
@@ -55,24 +51,20 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieDetails> GetMovieDetailsAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config["API_KEY"]}");
+            var data = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
 
-            var config = await _apiConfigService.GetApiConfigurationAsync();
-
-            data.ImageUrl = ImageHelper.GetImageUrl(data.Poster_Path, PosterSizeType.Original, config);
+            data.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
 
             return data;
         }
 
         public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config["API_KEY"]}");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}");
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, config);
+                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;
@@ -80,13 +72,11 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Movie>> GetTopRatedMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config["API_KEY"]}");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}");
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, config);
+                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;
@@ -94,13 +84,11 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config["API_KEY"]}");
-
-            var config = await _apiConfigService.GetApiConfigurationAsync();
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}");
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.Original, config);
+                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;
