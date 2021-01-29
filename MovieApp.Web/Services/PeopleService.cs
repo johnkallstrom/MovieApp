@@ -10,13 +10,16 @@ namespace MovieApp.Web.Services
 {
     public class PeopleService : IPeopleService
     {
+        private readonly IApiConfigurationService _apiConfigService;
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
         public PeopleService(
+            IApiConfigurationService apiConfigService,
             IConfiguration config,
             HttpClient httpClient)
         {
+            _apiConfigService = apiConfigService;
             _config = config;
             _httpClient = httpClient;
         }
@@ -26,11 +29,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"person/popular?api_key={_config["API_KEY"]}");
 
-            var imageConfig = await GetImageConfiguration();
+            var config = await _apiConfigService.GetApiConfigurationAsync();
 
             foreach (var person in data.Results)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, FileSizeType.W342, imageConfig);
+                person.ImageUrl = ImageHelper.GetImageUrl(person.Profile_Path, ProfileSizeType.Original, config);
             }
 
             return data.Results;
@@ -40,9 +43,9 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PersonDetails>($"person/{personId}?api_key={_config["API_KEY"]}");
 
-            var imageConfig = await GetImageConfiguration();
+            var config = await _apiConfigService.GetApiConfigurationAsync();
 
-            data.ImageUrl = ImageHelper.GetImageUrl(data.Profile_Path, FileSizeType.W780, imageConfig);
+            data.ImageUrl = ImageHelper.GetImageUrl(data.Profile_Path, ProfileSizeType.Original, config);
 
             return data;
         }
@@ -51,23 +54,14 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PersonCredits>($"person/{personId}/movie_credits?api_key={_config["API_KEY"]}");
 
-            var imageConfig = await GetImageConfiguration();
+            var config = await _apiConfigService.GetApiConfigurationAsync();
 
             foreach (var movie in data.Cast)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, FileSizeType.W342, imageConfig);
+                movie.ImageUrl = ImageHelper.GetImageUrl(movie.Poster_Path, PosterSizeType.W342, config);
             }
 
             return data.Cast;
-        }
-        #endregion
-
-        #region Private Methods
-        private async Task<Image> GetImageConfiguration()
-        {
-            var configuration = await _httpClient.GetFromJsonAsync<Configuration>($"configuration?api_key={_config["API_KEY"]}");
-
-            return configuration.Images;
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿namespace MovieApp.Web.Helpers
 {
-    public static class FileSizeType
+    public static class PosterSizeType
     {
         public const string W92 = "w92";
         public const string W154 = "w154";
