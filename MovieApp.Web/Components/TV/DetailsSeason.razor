@@ -8,20 +8,14 @@
             <p>@SeasonDetails.Overview</p>
         </div>
     </div>
-    <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Episode Number</th>
-                <th scope="col">Name</th>
-                <th scope="col">Air Date</th>
-                <th scope="col">Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var episode in SeasonDetails.Episodes)
-            {
-                <DisplayEpisode Episode="episode" />
-            }
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                @foreach (var episode in SeasonDetails.Episodes)
+                {
+                    <DisplayEpisode Episode="episode" /> 
+                }
+            </ul>
+        </div>
+    </div>
 </div>

@@ -32,14 +32,20 @@
     text-decoration: none;
 }
 
-
 #season-details #episodes a {
     color: #212529;
     text-decoration: none;
 }
 
-#season-details li {
-    border: 1px solid #dedede;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
+#season-details-table .list-group a {
+    color: #212529;
+    text-decoration: none;
+}
+
+#season-details-table a:hover {
+    cursor: pointer;
+}
+
+#season-details-tables .image-wrapper {
+    max-width: 100px;
 }

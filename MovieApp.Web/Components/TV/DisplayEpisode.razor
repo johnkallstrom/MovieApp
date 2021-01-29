@@ -1,6 +1,8 @@
-﻿<tr>
-    <td>@Episode.Episode_Number</td>
-    <td>@Episode.Name</td>
-    <td>@(Episode.Air_Date = string.IsNullOrEmpty(Episode.Air_Date) ? DateTime.MinValue.ToShortDateString() : Episode.Air_Date)</td>
-    <td>@Episode.Vote_Average</td>
-</tr>
+﻿<a href="#">
+    <li class="list-group-item d-flex justify-content-between align-items-center mb-3 rounded">
+        #@Episode.Episode_Number @Episode.Name
+        <div class="image-wrapper">
+            <img src="@Episode.Still_Path" class="img-fluid rounded" />
+        </div>
+    </li>
+</a>
