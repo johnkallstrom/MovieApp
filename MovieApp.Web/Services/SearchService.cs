@@ -31,8 +31,8 @@ namespace MovieApp.Web.Services
             foreach (var item in data.Results)
             {
                 item.Url = GetMediaUrl(item.Media_Type, item.Id);
-                item.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, item.Poster_Path);
-                item.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, item.Profile_Path);
+                item.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, item.Poster_Path);
+                item.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.W185, item.Profile_Path);
             }
 
             return data;

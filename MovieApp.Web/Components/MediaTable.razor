@@ -1,21 +1,14 @@
 ﻿<div id="media-table">
     <p>Your search on '@SearchQuery' resulted in @TotalResults hit(s)</p>
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Title/Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Release</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var media in Results)
-            {
-                <DisplayMedia Media="media" />
-            }
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-8">
+            <ul class="list-group">
+                @foreach (var media in Results)
+                {
+                    <DisplayMedia Media="media" />
+                }
+            </ul>
+        </div>
+    </div>
     <Pagination TotalPages="TotalPages" />
 </div>

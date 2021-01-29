@@ -1,7 +1,8 @@
-﻿<tr>
-    <td>@Media.DisplayNameOrTitle()</td>
-    <td>@Media.Media_Type</td>
-    <td>@(Media.Release_Date = string.IsNullOrEmpty(Media.Release_Date) ? DateTime.MinValue.ToShortDateString() : Media.Release_Date)</td>
-    <td>@Media.Vote_Average</td>
-    <td><a href="@Media.Url">Details</a></td>
-</tr>
+﻿<a href="@Media.Url">
+    <li class="list-group-item d-flex justify-content-between align-items-center mb-3 rounded">
+        @Media.DisplayNameOrTitle()
+        <div class="image-wrapper">
+            <img src="@GetImagePath()" class="img-fluid rounded" />
+        </div>
+    </li>
+</a>
