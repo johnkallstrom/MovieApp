@@ -1,7 +1,7 @@
 ﻿<div class="col-sm-2 mb-3">
     <a href="@($"/person/{Person.Id}")">
         <div class="card card-block h-100">
-            <img class="card-img-top img-fluid" src="@Person.ImageUrl" />
+            <img class="card-img-top img-fluid" src="@Person.Profile_Path" />
             <div class="card-body">
                 <p class="card-text text-center"><strong>@Person.Name</strong></p>
                 @if (ShowCharacter)

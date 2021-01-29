@@ -31,7 +31,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W500, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W500, movie.Poster_Path);
             }
 
             return data.Results;
@@ -43,7 +43,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in data.Cast)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
+                person.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
             }
 
             return data.Cast;
@@ -53,7 +53,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
 
-            data.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
+            data.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
 
             return data;
         }
@@ -64,7 +64,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;
@@ -76,7 +76,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;
@@ -88,7 +88,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
             }
 
             return data.Results;

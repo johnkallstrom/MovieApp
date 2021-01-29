@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-block h-100">
-                    <img class="card-img-top img-fluid" src="@Person.ImageUrl">
+                    <img class="card-img-top img-fluid" src="@Person.Profile_Path">
                 </div>
             </div>
             <div class="col-md-6">
@@ -45,7 +45,7 @@
                         <div class="col-sm-2 mb-3 d-flex">
                             <a href="@($"/movie/{movie.Id}")">
                                 <div class="card card-block h-100">
-                                    <img class="card-img-top img-fluid" src="@movie.ImageUrl" />
+                                    <img class="card-img-top img-fluid" src="@movie.Poster_Path" />
                                     <div class="card-body">
                                         <p class="card-text text-center"><strong>@movie.Title</strong></p>
                                     </div>

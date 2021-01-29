@@ -12,7 +12,6 @@
         public string Known_For_Department { get; set; }
         public string Homepage { get; set; }
         public string Profile_Path { get; set; }
-        public string ImageUrl { get; set; }
         public decimal Popularity { get; set; }
         public string Place_Of_Birth { get; set; }
     }

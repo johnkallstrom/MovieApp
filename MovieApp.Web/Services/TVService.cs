@@ -81,7 +81,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in data.Cast)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
+                person.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
             }
 
             return data.Cast;

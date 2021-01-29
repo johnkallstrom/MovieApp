@@ -31,7 +31,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in data.Results)
             {
-                person.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, person.Profile_Path);
+                person.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, person.Profile_Path);
             }
 
             return data.Results;
@@ -41,7 +41,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PersonDetails>($"person/{personId}?api_key={_config[API_KEY]}");
 
-            data.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, data.Profile_Path);
+            data.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.Original, data.Profile_Path);
 
             return data;
         }
@@ -52,7 +52,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Cast)
             {
-                movie.ImageUrl = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, movie.Poster_Path);
             }
 
             return data.Cast;
