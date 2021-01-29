@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.Services;
 using MovieApp.Web.State;
+using System;
 
 namespace MovieApp.Web.Shared
 {
-    public partial class Search
+    public partial class Search : IDisposable
     {
         [Inject]
         public SearchState SearchState { get; set; }
@@ -32,6 +33,12 @@ namespace MovieApp.Web.Shared
                     SearchState.SetSearchResults(data);
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            SearchState.OnSearchQueryChange -= GetSearchResults;
+            SearchState.OnCurrentPageChange -= GetSearchResults;
         }
     }
 }

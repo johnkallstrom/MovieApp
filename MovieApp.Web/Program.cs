@@ -25,8 +25,6 @@ namespace MovieApp.Web
 
             builder.Services.AddSingleton<SearchState>();
 
-            builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
-
             await builder.Build().RunAsync();
         }
     }

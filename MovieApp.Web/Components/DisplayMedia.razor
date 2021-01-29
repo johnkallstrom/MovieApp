@@ -3,6 +3,5 @@
     <td>@Media.Media_Type</td>
     <td>@(Media.Release_Date = string.IsNullOrEmpty(Media.Release_Date) ? DateTime.MinValue.ToShortDateString() : Media.Release_Date)</td>
     <td>@Media.Vote_Average</td>
-    <td>@Media.Vote_Count</td>
     <td><a href="@Media.Url">Details</a></td>
 </tr>

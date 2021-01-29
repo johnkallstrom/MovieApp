@@ -4,7 +4,7 @@ using System;
 
 namespace MovieApp.Web.Components
 {
-    public partial class Home
+    public partial class Home : IDisposable
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -35,6 +35,12 @@ namespace MovieApp.Web.Components
             }
 
             StateHasChanged();
+        }
+
+        public void Dispose()
+        {
+            SearchState.OnSearchQueryChange -= RefreshComponent;
+            SearchState.OnSearchQueryClear -= StateHasChanged;
         }
     }
 }
