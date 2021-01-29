@@ -37,11 +37,6 @@ namespace MovieApp.Web.Components
         [Parameter]
         public EventCallback<int> OnCurrentPageChanged { get; set; }
 
-        protected override void OnInitialized()
-        {
-            SearchState.OnChange += StateHasChanged;
-        }
-
         protected async Task HandlePrevBtn()
         {
             CurrentPage--;

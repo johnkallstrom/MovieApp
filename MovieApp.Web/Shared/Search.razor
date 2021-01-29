@@ -6,6 +6,7 @@
                @onkeyup="() => SearchState.SetSearchQuery(SearchState.SearchQuery)"
                @onfocus="() => Placeholder = string.Empty"
                @onblur="@(e => Placeholder = "Search...")"
+               required
                type="text"
                class="form-control"
                placeholder="@Placeholder">

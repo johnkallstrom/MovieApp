@@ -2,7 +2,7 @@
 
 namespace MovieApp.Web.Models
 {
-    public class MultiSearchResults
+    public class SearchResults
     {
         public IEnumerable<Media> Results { get; set; }
         public int Page { get; set; }

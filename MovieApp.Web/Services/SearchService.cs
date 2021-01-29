@@ -24,9 +24,9 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
-        public async Task<MultiSearchResults> GetMultiSearchAsync(string query, int page)
+        public async Task<SearchResults> GetMultiSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MultiSearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}&include_adult=false");
+            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}&include_adult=false");
 
             foreach (var item in data.Results)
             {
@@ -50,7 +50,7 @@ namespace MovieApp.Web.Services
                     url = $"/movie/{id}";
                     break;
                 case MediaType.TV:
-                    url = $"/tv/{id}";
+                    url = $"/tv-shows/{id}";
                     break;
                 case MediaType.Person:
                     url = $"/person/{id}";

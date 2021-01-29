@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieApp.Web.Models;
+using System;
 using System.Threading;
 
 namespace MovieApp.Web.State
@@ -7,34 +8,44 @@ namespace MovieApp.Web.State
     {
         private Timer _timer;
 
+        public SearchResults SearchResults { get; set; } = new SearchResults();
+
         public string SearchQuery { get; set; }
 
-        public event Action OnChange;
+        public event Action OnSearchResultsChange;
+        public event Action OnSearchQueryChange;
+        public event Action OnSearchQueryClear;
+
+        #region Public Methods
+        public void SetSearchResults(SearchResults results)
+        {
+            SearchResults = results;
+            OnSearchResultsChange?.Invoke();
+        }
 
         public void SetSearchQuery(string value)
         {
+            if (_timer != null)
+                _timer.Dispose();
+
             SearchQuery = value;
-            NotifyStateChanged(500);
+
+            _timer = new Timer(InvokeSearchQueryEvent, null, 500, 0);
         }
 
         public void ClearSearchQuery()
         {
             SearchQuery = string.Empty;
-            NotifyStateChanged(0);
+            OnSearchQueryClear?.Invoke();
         }
+        #endregion
 
-        private void NotifyStateChanged(int dueTime)
+        #region Private Methods
+        private void InvokeSearchQueryEvent(object state)
         {
-            if (_timer != null)
-                _timer.Dispose();
-
-            _timer = new Timer(OnTimerElapsed, null, dueTime, 0);
-        }
-
-        private void OnTimerElapsed(object state)
-        {
-            OnChange?.Invoke();
+            OnSearchQueryChange?.Invoke();
             _timer.Dispose();
         }
+        #endregion
     }
 }
