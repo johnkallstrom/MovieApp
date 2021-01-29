@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Models;
 using MovieApp.Web.Services;
 using MovieApp.Web.State;
-using System;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace MovieApp.Web.Shared
 {
@@ -22,13 +18,14 @@ namespace MovieApp.Web.Shared
         {
             SearchState.OnSearchQueryClear += StateHasChanged;
             SearchState.OnSearchQueryChange += GetSearchResults;
+            SearchState.OnCurrentPageChange += GetSearchResults;
         }
 
         protected async void GetSearchResults()
         {
             if (!string.IsNullOrWhiteSpace(SearchState.SearchQuery))
             {
-                var data = await SearchService.GetMultiSearchAsync(SearchState.SearchQuery, 1);
+                var data = await SearchService.GetMultiSearchAsync(SearchState.SearchQuery, SearchState.CurrentPage);
 
                 if (data != null)
                 {

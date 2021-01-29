@@ -9,14 +9,21 @@ namespace MovieApp.Web.State
         private Timer _timer;
 
         public SearchResults SearchResults { get; set; } = new SearchResults();
-
         public string SearchQuery { get; set; }
+        public int CurrentPage { get; set; } = 1;
 
+        public event Action OnCurrentPageChange;
         public event Action OnSearchResultsChange;
         public event Action OnSearchQueryChange;
         public event Action OnSearchQueryClear;
 
         #region Public Methods
+        public void SetCurrentPage(int page)
+        {
+            CurrentPage = page;
+            OnCurrentPageChange?.Invoke();
+        }
+
         public void SetSearchResults(SearchResults results)
         {
             SearchResults = results;

@@ -18,13 +18,13 @@
             }
         </tbody>
     </table>
-    <p>Page @CurrentPage of @TotalPages</p>
+    <p>Page @SearchState.CurrentPage of @TotalPages</p>
     <nav>
         <ul class="pagination">
-            @if (CurrentPage > 1)
+            @if (SearchState.CurrentPage > 1)
             {
                 <li class="page-item">
-                    <a class="page-link" @onclick="HandlePrevBtn">Previous</a>
+                    <a class="page-link" @onclick="() => SearchState.SetCurrentPage((SearchState.CurrentPage - 1))">Previous</a>
                 </li>
             }
             else
@@ -34,10 +34,10 @@
                 </li>
             }
 
-            @if (CurrentPage < TotalPages)
+            @if (SearchState.CurrentPage < TotalPages)
             {
                 <li class="page-item">
-                    <a class="page-link" @onclick="HandleNextBtn">Next</a>
+                    <a class="page-link" @onclick="() => SearchState.SetCurrentPage((SearchState.CurrentPage + 1))">Next</a>
                 </li>
             }
             else
