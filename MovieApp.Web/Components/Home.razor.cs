@@ -24,8 +24,11 @@ namespace MovieApp.Web.Components
 
         protected override void OnInitialized()
         {
+            SearchState.OnChange += ResetCurrentPage;
             SearchState.OnChange += GetSearchResults;
         }
+
+        protected void ResetCurrentPage() => CurrentPage = 1;
 
         protected void CurrentPageChanged(int currentPage)
         {
