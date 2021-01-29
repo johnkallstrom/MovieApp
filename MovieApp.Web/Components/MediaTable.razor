@@ -18,34 +18,5 @@
             }
         </tbody>
     </table>
-    <p>Page @SearchState.CurrentPage of @TotalPages</p>
-    <nav>
-        <ul class="pagination">
-            @if (SearchState.CurrentPage > 1)
-            {
-                <li class="page-item">
-                    <a class="page-link" @onclick="() => SearchState.SetCurrentPage((SearchState.CurrentPage - 1))">Previous</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-            }
-
-            @if (SearchState.CurrentPage < TotalPages)
-            {
-                <li class="page-item">
-                    <a class="page-link" @onclick="() => SearchState.SetCurrentPage((SearchState.CurrentPage + 1))">Next</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <a class="page-link">Next</a>
-                </li>
-            }
-        </ul>
-    </nav>
+    <Pagination TotalPages="TotalPages" />
 </div>
