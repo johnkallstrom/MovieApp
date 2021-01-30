@@ -14,20 +14,20 @@ namespace MovieApp.Web.Components
 
         protected override void OnInitialized()
         {
-            SearchState.OnSearchQueryChange += RefreshComponent;
-            SearchState.OnSearchQueryClear += StateHasChanged;
-            SearchState.OnSearchResultsChange += CheckLocationUri;
+            SearchState.OnQueryChange += RefreshComponent;
+            SearchState.OnDataChange += CheckCurrentLocation;
+            SearchState.OnQueryClear += StateHasChanged;
         }
 
         private void RefreshComponent()
         {
-            if (string.IsNullOrWhiteSpace(SearchState.SearchQuery))
+            if (string.IsNullOrWhiteSpace(SearchState.Query))
             {
                 StateHasChanged();
             }
         }
 
-        private void CheckLocationUri()
+        private void CheckCurrentLocation()
         {
             if (NavigationManager.Uri != NavigationManager.BaseUri)
             {
@@ -39,8 +39,8 @@ namespace MovieApp.Web.Components
 
         public void Dispose()
         {
-            SearchState.OnSearchQueryChange -= RefreshComponent;
-            SearchState.OnSearchQueryClear -= StateHasChanged;
+            SearchState.OnQueryChange -= RefreshComponent;
+            SearchState.OnQueryClear -= StateHasChanged;
         }
     }
 }

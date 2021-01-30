@@ -9,22 +9,19 @@ namespace MovieApp.Web.Components
         [Inject]
         public SearchState SearchState { get; set; }
 
-        [Parameter]
-        public int TotalPages { get; set; }
+        protected override void OnInitialized()
+        {
+            SearchState.OnQueryChange += ResetCurrentPage;
+        }
 
         public void Dispose()
         {
-            SearchState.OnSearchQueryChange -= ResetCurrentPage;
-        }
-
-        protected override void OnInitialized()
-        {
-            SearchState.OnSearchQueryChange += ResetCurrentPage;
+            SearchState.OnQueryChange -= ResetCurrentPage;
         }
 
         private void ResetCurrentPage()
         {
-            SearchState.SetCurrentPage(SearchState.CurrentPage = 1);
+            SearchState.SetPage(SearchState.Page = 1);
         }
     }
 }

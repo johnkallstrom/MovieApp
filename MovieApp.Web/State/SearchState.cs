@@ -8,49 +8,49 @@ namespace MovieApp.Web.State
     {
         private Timer _timer;
 
-        public SearchResults SearchResults { get; set; } = new SearchResults();
-        public string SearchQuery { get; set; }
-        public int CurrentPage { get; set; } = 1;
+        public SearchResults Data { get; set; } = new SearchResults();
+        public string Query { get; set; }
+        public int Page { get; set; } = 1;
 
-        public event Action OnCurrentPageChange;
-        public event Action OnSearchResultsChange;
-        public event Action OnSearchQueryChange;
-        public event Action OnSearchQueryClear;
+        public event Action OnPageChange;
+        public event Action OnDataChange;
+        public event Action OnQueryChange;
+        public event Action OnQueryClear;
 
         #region Public Methods
-        public void SetCurrentPage(int page)
+        public void SetPage(int page)
         {
-            CurrentPage = page;
-            OnCurrentPageChange?.Invoke();
+            Page = page;
+            OnPageChange?.Invoke();
         }
 
-        public void SetSearchResults(SearchResults results)
+        public void SetData(SearchResults data)
         {
-            SearchResults = results;
-            OnSearchResultsChange?.Invoke();
+            Data = data;
+            OnDataChange?.Invoke();
         }
 
-        public void SetSearchQuery(string value)
+        public void SetQuery(string value)
         {
             if (_timer != null)
                 _timer.Dispose();
 
-            SearchQuery = value;
+            Query = value;
 
-            _timer = new Timer(InvokeSearchQueryEvent, null, 500, 0);
+            _timer = new Timer(OnElapsedTimer, null, 500, 0);
         }
 
-        public void ClearSearchQuery()
+        public void ClearQuery()
         {
-            SearchQuery = string.Empty;
-            OnSearchQueryClear?.Invoke();
+            Query = string.Empty;
+            OnQueryClear?.Invoke();
         }
         #endregion
 
         #region Private Methods
-        private void InvokeSearchQueryEvent(object state)
+        private void OnElapsedTimer(object state)
         {
-            OnSearchQueryChange?.Invoke();
+            OnQueryChange?.Invoke();
             _timer.Dispose();
         }
         #endregion

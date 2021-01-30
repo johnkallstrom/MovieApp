@@ -1,28 +1,17 @@
 ﻿<div id="media-table">
-    <p>Your search on '@SearchQuery' resulted in @TotalResults hit(s)</p>
+    <p>Your search on '@SearchState.Query' resulted in @SearchState.Data.Total_Results hit(s)</p>
     <div class="row">
         <div class="col-md-8">
             <ul class="list-group">
-                @foreach (var media in Results)
+                @foreach (var media in SearchState.Data.Results)
                 {
                     <DisplayMedia Media="media" />
                 }
             </ul>
         </div>
         <div class="col-md-4">
-            <div class="media-table-filter">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Show results for</strong>
-                        <hr />
-                        <p><a href="#">All</a></p>
-                        <p><a href="#">Movies</a></p>
-                        <p><a href="#">TV Shows</a></p>
-                        <p><a href="#">People</a></p>
-                    </li>
-                </ul>
-            </div>
+            <MediaFilter />
         </div>
     </div>
-    <Pagination TotalPages="TotalPages" />
+    <Pagination />
 </div>

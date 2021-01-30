@@ -17,28 +17,28 @@ namespace MovieApp.Web.Shared
 
         protected override void OnInitialized()
         {
-            SearchState.OnSearchQueryClear += StateHasChanged;
-            SearchState.OnSearchQueryChange += GetSearchResults;
-            SearchState.OnCurrentPageChange += GetSearchResults;
+            SearchState.OnQueryClear += StateHasChanged;
+            SearchState.OnQueryChange += GetSearchResults;
+            SearchState.OnPageChange += GetSearchResults;
         }
 
         protected async void GetSearchResults()
         {
-            if (!string.IsNullOrWhiteSpace(SearchState.SearchQuery))
+            if (!string.IsNullOrWhiteSpace(SearchState.Query))
             {
-                var data = await SearchService.GetMultiSearchAsync(SearchState.SearchQuery, SearchState.CurrentPage);
+                var data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
 
                 if (data != null)
                 {
-                    SearchState.SetSearchResults(data);
+                    SearchState.SetData(data);
                 }
             }
         }
 
         public void Dispose()
         {
-            SearchState.OnSearchQueryChange -= GetSearchResults;
-            SearchState.OnCurrentPageChange -= GetSearchResults;
+            SearchState.OnQueryChange -= GetSearchResults;
+            SearchState.OnPageChange -= GetSearchResults;
         }
     }
 }

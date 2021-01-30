@@ -5,12 +5,9 @@
     <hr />
     <div class="row">
         <div class="col">
-            @if (!string.IsNullOrEmpty(SearchState.SearchQuery))
+            @if (!string.IsNullOrEmpty(SearchState.Query))
             {
-                <MediaTable Results="@SearchState.SearchResults.Results"
-                            SearchQuery="@SearchState.SearchQuery"
-                            TotalPages="@SearchState.SearchResults.Total_Pages"
-                            TotalResults="@SearchState.SearchResults.Total_Results" />
+                <MediaTable />
             }
             else
             {
