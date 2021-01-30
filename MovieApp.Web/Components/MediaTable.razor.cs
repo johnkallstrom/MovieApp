@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.State;
+using System.Linq;
 
 namespace MovieApp.Web.Components
 {

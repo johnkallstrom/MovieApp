@@ -11,6 +11,7 @@ namespace MovieApp.Web.Components
 
         protected override void OnInitialized()
         {
+            SearchState.OnDataChange += StateHasChanged;
             SearchState.OnQueryChange += ResetCurrentPage;
         }
 

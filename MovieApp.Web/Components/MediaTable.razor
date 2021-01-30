@@ -1,17 +1,20 @@
 ﻿<div id="media-table">
     <p>Your search on '@SearchState.Query' resulted in @SearchState.Data.Total_Results hit(s)</p>
-    <div class="row">
-        <div class="col-md-8">
-            <ul class="list-group">
-                @foreach (var media in SearchState.Data.Results)
-                {
-                    <DisplayMedia Media="media" />
-                }
-            </ul>
+    @if (SearchState.Data.Results.Count() is not 0)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-group">
+                    @foreach (var media in SearchState.Data.Results)
+                    {
+                        <DisplayMedia Media="media" />
+                    }
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <MediaFilter />
+            </div>
         </div>
-        <div class="col-md-4">
-            <MediaFilter />
-        </div>
-    </div>
-    <Pagination />
+        <Pagination />
+    }
 </div>
