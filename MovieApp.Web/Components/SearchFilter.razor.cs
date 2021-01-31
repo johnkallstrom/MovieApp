@@ -1,6 +1,6 @@
 ﻿namespace MovieApp.Web.Components
 {
-    public partial class MediaFilter
+    public partial class SearchFilter
     {
     }
 }

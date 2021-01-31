@@ -1,0 +1,33 @@
+﻿@page "/search"
+
+<div id="search-list">
+    <h1>Search</h1>
+    <hr />
+    @if (!string.IsNullOrEmpty(SearchState.Query))
+    {
+        <p>Your search on '@SearchState.Query' resulted in @SearchState.Data.Total_Results hit(s)</p>
+        @if (SearchState.Data.Results.Count() is not 0)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-group">
+                        @foreach (var media in SearchState.Data.Results)
+                        {
+                            <DisplayMedia Media="media" />
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <SearchFilter />
+                </div>
+            </div>
+            <Pagination />
+        }
+    }
+    else
+    {
+        <div class="my-4 mx-auto">
+            <h4>Browse our library of movies, tv-shows and actors...</h4>
+        </div>
+    }
+</div>

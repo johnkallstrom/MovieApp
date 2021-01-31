@@ -18,15 +18,14 @@
     color: #aaa;
 }
 
-#media-table .list-group a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#media-table a:hover {
-    cursor: pointer;
-}
-
-#media-table .image-wrapper {
+#search-list .image-wrapper {
     max-width: 100px;
+}
+
+#search-list .list-group a {
+    color: #212529;
+}
+
+#search-list a:hover {
+    cursor: pointer;
 }

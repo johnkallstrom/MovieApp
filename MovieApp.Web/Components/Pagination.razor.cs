@@ -15,14 +15,14 @@ namespace MovieApp.Web.Components
             SearchState.OnQueryChange += ResetCurrentPage;
         }
 
-        public void Dispose()
-        {
-            SearchState.OnQueryChange -= ResetCurrentPage;
-        }
-
         private void ResetCurrentPage()
         {
             SearchState.SetPage(SearchState.Page = 1);
+        }
+
+        public void Dispose()
+        {
+            SearchState.OnQueryChange -= ResetCurrentPage;
         }
     }
 }

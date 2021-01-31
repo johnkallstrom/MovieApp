@@ -8,6 +8,9 @@ namespace MovieApp.Web.Shared
     public partial class Search : IDisposable
     {
         [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         public SearchState SearchState { get; set; }
 
         [Inject]

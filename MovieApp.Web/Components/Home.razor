@@ -3,18 +3,7 @@
 <div id="home">
     <h1>Home</h1>
     <hr />
-    <div class="row">
-        <div class="col">
-            @if (!string.IsNullOrEmpty(SearchState.Query))
-            {
-                <MediaTable />
-            }
-            else
-            {
-                <UpcomingMovies HeaderText="Upcoming Movies" />
-                <OnTheAirTV HeaderText="On The Air TV Shows" />
-                <PopularPeople HeaderText="Popular People" />
-            }
-        </div>
-    </div>
+    <UpcomingMovies HeaderText="Upcoming Movies" />
+    <OnTheAirTV HeaderText="On The Air TV Shows" />
+    <PopularPeople HeaderText="Popular People" />
 </div>

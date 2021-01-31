@@ -4,8 +4,8 @@
         <input @bind-value="SearchState.Query"
                @bind-value:event="oninput"
                @onkeyup="() => SearchState.SetQuery(SearchState.Query)"
-               @onfocus="() => Placeholder = string.Empty"
-               @onblur="@(e => Placeholder = "Search...")"
+               @onfocus="@(() => NavigationManager.NavigateTo("/search"))"
+               @onblur="@(() => Placeholder = "Search...")"
                required
                type="text"
                class="form-control"
