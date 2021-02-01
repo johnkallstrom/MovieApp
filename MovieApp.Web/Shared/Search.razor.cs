@@ -25,6 +25,14 @@ namespace MovieApp.Web.Shared
             SearchState.OnPageChange += GetSearchResults;
         }
 
+        protected void NavigateToSearch()
+        {
+            if (NavigationManager.Uri != $"{NavigationManager.BaseUri}search")
+            {
+                NavigationManager.NavigateTo("/search");
+            }
+        }
+
         protected async void GetSearchResults()
         {
             if (!string.IsNullOrWhiteSpace(SearchState.Query))
@@ -35,6 +43,8 @@ namespace MovieApp.Web.Shared
                 {
                     SearchState.SetData(data);
                 }
+
+                NavigateToSearch();
             }
         }
 

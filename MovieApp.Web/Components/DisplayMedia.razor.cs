@@ -11,42 +11,42 @@ namespace MovieApp.Web.Components
 
         protected string DisplayMediaType()
         {
-            string output = "";
+            string type = "";
 
             switch (Media.Media_Type)
             {
                 case MediaType.Movie:
-                    output = "Movie";
+                    type = "Movie";
                     break;
                 case MediaType.TV:
-                    output = "TV Show";
+                    type = "TV Show";
                     break;
                 case MediaType.Person:
-                    output = "Person";
+                    type = "Person";
                     break;
             }
 
-            return output;
+            return type;
         }
 
         protected string GetImagePath()
         {
-            string output = "";
+            string path = "";
 
             switch (Media.Media_Type)
             {
                 case MediaType.Movie:
-                    output = Media.Poster_Path;
+                    path = Media.Poster_Path;
                     break;
                 case MediaType.TV:
-                    output = Media.Poster_Path;
+                    path = Media.Poster_Path;
                     break;
                 case MediaType.Person:
-                    output = Media.Profile_Path;
+                    path = Media.Profile_Path;
                     break;
             }
 
-            return output;
+            return path;
         }
     }
 }

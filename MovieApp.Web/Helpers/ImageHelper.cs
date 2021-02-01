@@ -10,6 +10,10 @@
             {
                 url = $"{imageBaseUrl}{sizeType}/{filePath}";
             }
+            else
+            {
+                url = @"img\no-image.jpg";
+            }
 
             return url;
         }

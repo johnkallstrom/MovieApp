@@ -1,4 +1,32 @@
-﻿ #home h1 {
+﻿:root {
+    --orange: rgb(255, 108, 55);
+    --dark: rgb(28, 39, 43);
+    --white: rgb(255, 255, 255);
+}
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+    color: var(--dark) !important;
+}
+
+#nav {
+    background-color: var(--dark) !important;
+}
+
+#nav a {
+    color: var(--white);
+}
+
+#nav .nav-link:hover {
+    color: var(--orange) !important;
+}
+
+#footer {
+    background-color: var(--dark) !important;
+    color: var(--white);
+}
+
+#home h1 {
     margin-top: 1rem;
 }
 
@@ -24,6 +52,7 @@
 
 #search-list .list-group a {
     color: #212529;
+    text-decoration: none;
 }
 
 #search-list a:hover {
