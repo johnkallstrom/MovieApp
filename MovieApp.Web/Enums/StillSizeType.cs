@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MovieApp.Web.Helpers
+namespace MovieApp.Web.Enums
 {
     public static class StillSizeType
     {

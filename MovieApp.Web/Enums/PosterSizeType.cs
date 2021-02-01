@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Web.Helpers
+﻿namespace MovieApp.Web.Enums
 {
     public static class PosterSizeType
     {

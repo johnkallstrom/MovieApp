@@ -21,12 +21,12 @@ namespace MovieApp.Web.Shared
         protected override void OnInitialized()
         {
             SearchState.OnQueryClear += StateHasChanged;
-            SearchState.OnQueryChange += ResetCurrentPage;
+            SearchState.OnQueryChange += ResetPage;
             SearchState.OnQueryChange += GetSearchResults;
             SearchState.OnPageChange += GetSearchResults;
         }
 
-        private void ResetCurrentPage()
+        private void ResetPage()
         {
             SearchState.SetPage(SearchState.Page = 1);
         }
@@ -47,7 +47,9 @@ namespace MovieApp.Web.Shared
 
                 if (data != null)
                 {
-                    SearchState.SetData(data);
+                    SearchState.SetResults(data.Results);
+                    SearchState.SetTotalPages(data.Total_Pages);
+                    SearchState.SetTotalResults(data.Total_Results);
                 }
 
                 NavigateToSearch();
@@ -56,7 +58,7 @@ namespace MovieApp.Web.Shared
 
         public void Dispose()
         {
-            SearchState.OnQueryChange -= ResetCurrentPage;
+            SearchState.OnQueryChange -= ResetPage;
             SearchState.OnQueryChange -= GetSearchResults;
             SearchState.OnPageChange -= GetSearchResults;
         }

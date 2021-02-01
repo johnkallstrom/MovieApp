@@ -31,14 +31,16 @@
 }
 
 #movies-popular {
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 #movies-top-rated {
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 #movies-upcoming {
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }

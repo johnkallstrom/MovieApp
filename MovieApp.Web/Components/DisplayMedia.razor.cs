@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Helpers;
+using MovieApp.Web.Enums;
 using MovieApp.Web.Models;
 
 namespace MovieApp.Web.Components

@@ -4,7 +4,7 @@ using System;
 
 namespace MovieApp.Web.Components
 {
-    public partial class SearchList
+    public partial class SearchList : IDisposable
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -12,10 +12,16 @@ namespace MovieApp.Web.Components
         [Inject]
         public SearchState SearchState { get; set; }
 
+        public void Dispose()
+        {
+            SearchState.OnQueryChange -= RedirectToHome;
+            SearchState.OnResultsChange -= StateHasChanged;
+        }
+
         protected override void OnInitialized()
         {
             SearchState.OnQueryChange += RedirectToHome;
-            SearchState.OnDataChange += StateHasChanged;
+            SearchState.OnResultsChange += StateHasChanged;
         }
 
         private void RedirectToHome()

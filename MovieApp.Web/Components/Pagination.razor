@@ -1,4 +1,4 @@
-﻿<p>Page @SearchState.Page of @SearchState.Data.Total_Pages</p>
+﻿<p>Page @SearchState.Page of @SearchState.TotalPages</p>
 <nav>
     <ul class="pagination">
         @if (SearchState.Page > 1)
@@ -14,7 +14,7 @@
             </li>
         }
 
-        @if (SearchState.Page < SearchState.Data.Total_Pages)
+        @if (SearchState.Page < SearchState.TotalPages)
         {
             <li class="page-item">
                 <a class="page-link" @onclick="() => SearchState.SetPage((SearchState.Page + 1))">Next</a>

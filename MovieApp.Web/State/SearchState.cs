@@ -1,5 +1,6 @@
 ﻿using MovieApp.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace MovieApp.Web.State
@@ -8,14 +9,20 @@ namespace MovieApp.Web.State
     {
         private Timer _timer;
 
-        public SearchResults Data { get; set; } = new SearchResults();
-        public string Query { get; set; }
         public int Page { get; set; } = 1;
+        public int TotalPages { get; set; }
+        public int TotalResults { get; set; }
+        public string Query { get; set; }
+        public IEnumerable<Media> Results { get; set; } = new List<Media>();
 
+        #region Events
         public event Action OnPageChange;
-        public event Action OnDataChange;
+        public event Action OnTotalPagesChange;
+        public event Action OnTotalResultsChange;
+        public event Action OnResultsChange;
         public event Action OnQueryChange;
         public event Action OnQueryClear;
+        #endregion
 
         #region Public Methods
         public void SetPage(int page)
@@ -24,10 +31,28 @@ namespace MovieApp.Web.State
             OnPageChange?.Invoke();
         }
 
-        public void SetData(SearchResults data)
+        public void SetTotalPages(int totalPages)
         {
-            Data = data;
-            OnDataChange?.Invoke();
+            TotalPages = totalPages;
+            OnTotalPagesChange?.Invoke();
+        }
+
+        public void SetTotalResults(int totalResults)
+        {
+            TotalResults = totalResults;
+            OnTotalResultsChange?.Invoke();
+        }
+
+        public void SetResults(IEnumerable<Media> results)
+        {
+            Results = results;
+            OnResultsChange?.Invoke();
+        }
+
+        public void ClearQuery()
+        {
+            Query = string.Empty;
+            OnQueryClear?.Invoke();
         }
 
         public void SetQuery(string value)
@@ -38,12 +63,6 @@ namespace MovieApp.Web.State
             Query = value;
 
             _timer = new Timer(OnElapsedTimer, null, 500, 0);
-        }
-
-        public void ClearQuery()
-        {
-            Query = string.Empty;
-            OnQueryClear?.Invoke();
         }
         #endregion
 

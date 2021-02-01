@@ -1,4 +1,10 @@
 ﻿#tv-top-rated {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#tv-popular {
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -8,10 +14,9 @@
 }
 
 #tv-on-the-air {
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
-
 
 #tv-details {
     margin-top: 2rem;

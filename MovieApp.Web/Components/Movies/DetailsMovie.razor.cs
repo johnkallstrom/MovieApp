@@ -40,10 +40,18 @@ namespace MovieApp.Web.Components.Movies
 
         protected override async Task OnParametersSetAsync()
         {
+            var similarMovies = Enumerable.Empty<Movie>();
+            var actors = Enumerable.Empty<Person>();
+
             if (int.TryParse(Id, out int movieId))
             {
                 Movie = await MovieService.GetMovieDetailsAsync(movieId);
+                actors = await MovieService.GetMovieCastAsync(movieId);
+                similarMovies = await MovieService.GetSimilarMoviesAsync(movieId);
             }
+
+            Cast = actors.Where(x => x.Known_For_Department == "Acting").Take(10);
+            SimilarMovies = similarMovies.Take(10);
         }
     }
 }

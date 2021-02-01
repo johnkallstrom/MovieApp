@@ -1,12 +1,14 @@
-﻿<div class="search-filter">
+﻿@using MovieApp.Web.Enums
+
+<div class="search-filter">
     <ul class="list-group">
         <li class="list-group-item">
             <strong>Show results for</strong>
             <hr style="margin-top: 0.3rem;" />
-            <p><a href="#">All</a></p>
-            <p><a href="#">Movies</a></p>
-            <p><a href="#">TV Shows</a></p>
-            <p><a href="#">People</a></p>
+            <p><a @onclick="@(() => HandleFilterChange(SearchFilterType.All))">All</a></p>
+            <p><a @onclick="@(() => HandleFilterChange(SearchFilterType.Movies))">Movies</a></p>
+            <p><a @onclick="@(() => HandleFilterChange(SearchFilterType.TV))">TV Shows</a></p>
+            <p><a @onclick="@(() => HandleFilterChange(SearchFilterType.People))">People</a></p>
         </li>
     </ul>
 </div>
