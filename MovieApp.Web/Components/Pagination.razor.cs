@@ -4,7 +4,7 @@ using System;
 
 namespace MovieApp.Web.Components
 {
-    public partial class Pagination : IDisposable
+    public partial class Pagination
     {
         [Inject]
         public SearchState SearchState { get; set; }
@@ -12,17 +12,6 @@ namespace MovieApp.Web.Components
         protected override void OnInitialized()
         {
             SearchState.OnDataChange += StateHasChanged;
-            SearchState.OnQueryChange += ResetCurrentPage;
-        }
-
-        private void ResetCurrentPage()
-        {
-            SearchState.SetPage(SearchState.Page = 1);
-        }
-
-        public void Dispose()
-        {
-            SearchState.OnQueryChange -= ResetCurrentPage;
         }
     }
 }

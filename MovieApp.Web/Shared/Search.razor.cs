@@ -21,8 +21,14 @@ namespace MovieApp.Web.Shared
         protected override void OnInitialized()
         {
             SearchState.OnQueryClear += StateHasChanged;
+            SearchState.OnQueryChange += ResetCurrentPage;
             SearchState.OnQueryChange += GetSearchResults;
             SearchState.OnPageChange += GetSearchResults;
+        }
+
+        private void ResetCurrentPage()
+        {
+            SearchState.SetPage(SearchState.Page = 1);
         }
 
         protected void NavigateToSearch()
@@ -50,6 +56,7 @@ namespace MovieApp.Web.Shared
 
         public void Dispose()
         {
+            SearchState.OnQueryChange -= ResetCurrentPage;
             SearchState.OnQueryChange -= GetSearchResults;
             SearchState.OnPageChange -= GetSearchResults;
         }

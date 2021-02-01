@@ -43,7 +43,7 @@ body {
     line-height: 2.375rem;
     text-align: center;
     pointer-events: none;
-    color: #aaa;
+    color: var(--dark);
 }
 
 #search-list .image-wrapper {
