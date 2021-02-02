@@ -9,6 +9,7 @@
     <link href="css/movies.css" rel="stylesheet" />
     <link href="css/people.css" rel="stylesheet" />
     <link href="css/tv.css" rel="stylesheet" />
+    <link href="css/spinner.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="css/scrollbar.css" rel="stylesheet" />
@@ -29,7 +30,11 @@
             defer></script>
 </head>
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div style="position:absolute; top:40vh; width:100%; text-align:center">
+            <i class="fas fa-spin fa-spinner fa-4x"></i>
+        </div>
+    </div>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 </html>
