@@ -9,26 +9,6 @@ namespace MovieApp.Web.Components
         [Parameter]
         public Media Media { get; set; }
 
-        protected string DisplayMediaType()
-        {
-            string type = "";
-
-            switch (Media.Media_Type)
-            {
-                case MediaType.Movie:
-                    type = "Movie";
-                    break;
-                case MediaType.TV:
-                    type = "TV Show";
-                    break;
-                case MediaType.Person:
-                    type = "Person";
-                    break;
-            }
-
-            return type;
-        }
-
         protected string GetImagePath()
         {
             string path = "";

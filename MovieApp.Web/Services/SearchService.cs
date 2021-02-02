@@ -25,15 +25,57 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
+        public async Task<SearchResults> GetPeopleSearchAsync(string query, int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
+
+            foreach (var media in data.Results)
+            {
+                media.Media_Type = MediaType.Person;
+                media.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, media.Profile_Path);
+                media.Url = GetMediaUrl(media.Media_Type, media.Id);
+            }
+
+            return data;
+        }
+
+        public async Task<SearchResults> GetTVSearchAsync(string query, int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
+
+            foreach (var media in data.Results)
+            {
+                media.Media_Type = MediaType.TV;
+                media.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, media.Poster_Path);
+                media.Url = GetMediaUrl(media.Media_Type, media.Id);
+            }
+
+            return data;
+        }
+
+        public async Task<SearchResults> GetMovieSearchAsync(string query, int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
+
+            foreach (var media in data.Results)
+            {
+                media.Media_Type = MediaType.Movie;
+                media.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, media.Poster_Path);
+                media.Url = GetMediaUrl(media.Media_Type, media.Id);
+            }
+
+            return data;
+        }
+
         public async Task<SearchResults> GetMultiSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}&include_adult=false");
+            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
 
-            foreach (var item in data.Results)
+            foreach (var media in data.Results)
             {
-                item.Url = GetMediaUrl(item.Media_Type, item.Id);
-                item.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, item.Poster_Path);
-                item.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.W185, item.Profile_Path);
+                media.Url = GetMediaUrl(media.Media_Type, media.Id);
+                media.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W154, media.Poster_Path);
+                media.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], ProfileSizeType.W185, media.Profile_Path);
             }
 
             return data;

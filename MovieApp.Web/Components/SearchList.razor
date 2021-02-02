@@ -5,23 +5,23 @@
     <hr />
     @if (!string.IsNullOrEmpty(SearchState.Query))
     {
-        <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults hit(s)</p>
-        @if (SearchState.Results.Count() is not 0)
-        {
-            <div class="row">
-                <div class="col-md-8">
+        <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults @DisplayFilter() match(es)</p>
+        <div class="row">
+            <div class="col-md-2">
+                <SearchFilter />
+            </div>
+            @if (SearchState.Results.Count() is not 0)
+            {
+                <div class="col-md-10">
                     <ul class="list-group">
                         @foreach (var media in SearchState.Results)
                         {
                             <DisplayMedia Media="media" />
                         }
                     </ul>
+                    <Pagination />
                 </div>
-                <div class="col-md-4">
-                    @*<SearchFilter />*@
-                </div>
-            </div>
-            <Pagination />
-        }
+            }
+        </div>
     }
 </div>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Enums;
 using MovieApp.Web.State;
 using System;
 
@@ -22,6 +23,7 @@ namespace MovieApp.Web.Components
         {
             SearchState.OnQueryChange += RedirectToHome;
             SearchState.OnResultsChange += StateHasChanged;
+            SearchState.OnFilterChange += StateHasChanged;
         }
 
         private void RedirectToHome()
@@ -30,6 +32,29 @@ namespace MovieApp.Web.Components
             {
                 NavigationManager.NavigateTo("/");
             }
+        }
+
+        private string DisplayFilter()
+        {
+            string output = "";
+
+            switch (SearchState.Filter)
+            {
+                case SearchFilterType.All:
+                    output = string.Empty;
+                    break;
+                case SearchFilterType.Movies:
+                    output = "movie";
+                    break;
+                case SearchFilterType.TV:
+                    output = "TV";
+                    break;
+                case SearchFilterType.People:
+                    output = "people";
+                    break;
+            }
+
+            return output;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MovieApp.Web.Models;
+﻿using MovieApp.Web.Enums;
+using MovieApp.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,6 +11,7 @@ namespace MovieApp.Web.State
         private Timer _timer;
 
         public int Page { get; set; } = 1;
+        public SearchFilterType Filter { get; set; }
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
         public string Query { get; set; }
@@ -17,6 +19,7 @@ namespace MovieApp.Web.State
 
         #region Events
         public event Action OnPageChange;
+        public event Action OnFilterChange;
         public event Action OnTotalPagesChange;
         public event Action OnTotalResultsChange;
         public event Action OnResultsChange;
@@ -29,6 +32,12 @@ namespace MovieApp.Web.State
         {
             Page = page;
             OnPageChange?.Invoke();
+        }
+
+        public void SetFilter(SearchFilterType filterType)
+        {
+            Filter = filterType;
+            OnFilterChange?.Invoke();
         }
 
         public void SetTotalPages(int totalPages)

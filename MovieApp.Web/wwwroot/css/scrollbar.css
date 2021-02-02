@@ -1,4 +1,10 @@
-﻿div::-webkit-scrollbar {
+﻿:root {
+    --orange: rgb(255, 108, 55);
+    --dark: rgb(28, 39, 43);
+    --white: rgb(255, 255, 255);
+}
+
+div::-webkit-scrollbar {
     width: 10px;
 }
 
@@ -8,10 +14,10 @@ div::-webkit-scrollbar-track {
 }
 
 div::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--dark);
     border-radius: 10px;
 }
 
 div::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--orange);
 }

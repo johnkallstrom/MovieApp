@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Enums;
+using MovieApp.Web.Models;
 using MovieApp.Web.Services;
 using MovieApp.Web.State;
 using System;
@@ -18,12 +20,27 @@ namespace MovieApp.Web.Shared
 
         public string Placeholder { get; set; } = "Search...";
 
+        public void Dispose()
+        {
+            SearchState.OnQueryChange -= ResetPage;
+            SearchState.OnQueryChange -= GetSearchResults;
+            SearchState.OnPageChange -= GetSearchResults;
+        }
+
         protected override void OnInitialized()
         {
             SearchState.OnQueryClear += StateHasChanged;
             SearchState.OnQueryChange += ResetPage;
+            SearchState.OnFilterChange += ResetPage;
+            SearchState.OnQueryChange += ResetFilter;
             SearchState.OnQueryChange += GetSearchResults;
             SearchState.OnPageChange += GetSearchResults;
+            SearchState.OnFilterChange += GetSearchResults;
+        }
+
+        private void ResetFilter()
+        {
+            SearchState.SetFilter(SearchFilterType.All);
         }
 
         private void ResetPage()
@@ -31,7 +48,7 @@ namespace MovieApp.Web.Shared
             SearchState.SetPage(SearchState.Page = 1);
         }
 
-        protected void NavigateToSearch()
+        private void NavigateToSearch()
         {
             if (NavigationManager.Uri != $"{NavigationManager.BaseUri}search")
             {
@@ -39,11 +56,30 @@ namespace MovieApp.Web.Shared
             }
         }
 
-        protected async void GetSearchResults()
+        private async void GetSearchResults()
         {
             if (!string.IsNullOrWhiteSpace(SearchState.Query))
             {
-                var data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
+                SearchResults data;
+
+                switch (SearchState.Filter)
+                {
+                    case SearchFilterType.All:
+                        data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
+                        break;
+                    case SearchFilterType.Movies:
+                        data = await SearchService.GetMovieSearchAsync(SearchState.Query, SearchState.Page);
+                        break;
+                    case SearchFilterType.TV:
+                        data = await SearchService.GetTVSearchAsync(SearchState.Query, SearchState.Page);
+                        break;
+                    case SearchFilterType.People:
+                        data = await SearchService.GetPeopleSearchAsync(SearchState.Query, SearchState.Page);
+                        break;
+                    default:
+                        data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
+                        break;
+                }
 
                 if (data != null)
                 {
@@ -54,13 +90,6 @@ namespace MovieApp.Web.Shared
 
                 NavigateToSearch();
             }
-        }
-
-        public void Dispose()
-        {
-            SearchState.OnQueryChange -= ResetPage;
-            SearchState.OnQueryChange -= GetSearchResults;
-            SearchState.OnPageChange -= GetSearchResults;
         }
     }
 }

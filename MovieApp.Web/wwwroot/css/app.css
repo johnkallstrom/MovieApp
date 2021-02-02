@@ -13,6 +13,10 @@ body {
     background-color: var(--dark) !important;
 }
 
+#nav .brand {
+    color: var(--orange) !important;
+}
+
 #nav a {
     color: var(--white);
 }
@@ -43,7 +47,11 @@ body {
     line-height: 2.375rem;
     text-align: center;
     pointer-events: none;
-    color: var(--dark);
+    color: #aaa;
+}
+
+#search-list {
+    margin-bottom: 1rem;
 }
 
 #search-list .image-wrapper {
@@ -55,6 +63,14 @@ body {
     text-decoration: none;
 }
 
+#search-list #search-list-item:hover {
+    border: 1px solid var(--orange);
+}
+
 #search-list a:hover {
     cursor: pointer;
+}
+
+#search-filter a:hover {
+    color: var(--orange);
 }
