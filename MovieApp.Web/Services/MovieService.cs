@@ -31,9 +31,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/{movieId}/similar?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path));
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
             return data.Results;
@@ -43,9 +45,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieCredits>($"movie/{movieId}/credits?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var person in data.Cast)
             {
-                person.Profile_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path));
+                person.Profile_Path = !string.IsNullOrEmpty(person.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path)) : placeholderUrl;
             }
 
             return data.Cast;
@@ -55,7 +59,9 @@ namespace MovieApp.Web.Services
         {
             var movie = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
 
-            movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 1000, 1500));
+
+            movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path)) : placeholderUrl;
 
             return movie;
         }
@@ -64,9 +70,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
             return data.Results;
@@ -76,9 +84,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
             return data.Results;
@@ -88,9 +98,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
             return data.Results;

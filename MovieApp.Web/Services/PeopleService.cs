@@ -13,6 +13,7 @@ namespace MovieApp.Web.Services
     {
         private const string API_KEY = "ApiKey";
         private const string IMAGE_URL = "ImageBaseUrl";
+        private const string PLACEHOLDER_IMAGE_URL = "PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
@@ -30,9 +31,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"person/popular?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var person in data.Results)
             {
-                person.Profile_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.Original, person.Profile_Path));
+                person.Profile_Path = !string.IsNullOrEmpty(person.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path)) : placeholderUrl;
             }
 
             return data.Results;
@@ -42,7 +45,9 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PersonDetails>($"person/{personId}?api_key={_config[API_KEY]}");
 
-            data.Profile_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.Original, data.Profile_Path));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            data.Profile_Path = !string.IsNullOrEmpty(data.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, data.Profile_Path)) : placeholderUrl;
 
             return data;
         }
@@ -51,9 +56,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<PersonCredits>($"person/{personId}/movie_credits?api_key={_config[API_KEY]}");
 
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
             foreach (var movie in data.Cast)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
             return data.Cast;
