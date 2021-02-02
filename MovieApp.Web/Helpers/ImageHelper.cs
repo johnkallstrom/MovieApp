@@ -2,18 +2,23 @@
 {
     public static class ImageHelper
     {
-        public static string GetImageUrl(string imageBaseUrl, string sizeType, string filePath)
-        {
-            string url = string.Empty;
+        private const string PlaceholderBackgroundColor = "adadad";
+        private const string PlaceholderTextColor = "ffffff";
 
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                url = $"{imageBaseUrl}{sizeType}/{filePath}";
-            }
-            else
-            {
-                url = @"img\no-image.jpg";
-            }
+        public static string GetImageUrl(ImageSettings settings)
+        {
+            string url;
+
+            url = $"{settings.BaseUrl}{settings.SizeType}/{settings.FilePath}";
+
+            return url;
+        }
+
+        public static string GetPlaceholderImageUrl(ImageSettings settings)
+        {
+            string url;
+
+            url = $"{settings.BaseUrl}{settings.Width}x{settings.Height}/{PlaceholderBackgroundColor}/{PlaceholderTextColor}?text=No+Image";
 
             return url;
         }

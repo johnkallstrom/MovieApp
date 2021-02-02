@@ -11,8 +11,8 @@ namespace MovieApp.Web.Services
 {
     public class TVService : ITVService
     {
-        private const string API_KEY = "API_KEY";
-        private const string IMAGE_BASE_URL = "IMAGE_BASE_URL";
+        private const string API_KEY = "ApiKey";
+        private const string IMAGE_URL = "ImageBaseUrl";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
@@ -30,11 +30,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<TVShowDetails>($"tv/{tvShowId}?api_key={_config[API_KEY]}");
 
-            data.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
+            data.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, data.Poster_Path));
 
             foreach (var season in data.Seasons)
             {
-                season.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W500, season.Poster_Path);
+                season.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, season.Poster_Path));
             }
 
             return data;
@@ -46,7 +46,7 @@ namespace MovieApp.Web.Services
 
             foreach (var tvShow in data.Results)
             {
-                tvShow.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, tvShow.Poster_Path);
+                tvShow.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, tvShow.Poster_Path));
             }
 
             return data.Results;
@@ -58,7 +58,7 @@ namespace MovieApp.Web.Services
 
             foreach (var tvShow in data.Results)
             {
-                tvShow.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, tvShow.Poster_Path);
+                tvShow.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, tvShow.Poster_Path));
             }
 
             return data.Results;
@@ -70,7 +70,7 @@ namespace MovieApp.Web.Services
 
             foreach (var tvShow in data.Results)
             {
-                tvShow.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, tvShow.Poster_Path);
+                tvShow.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, tvShow.Poster_Path));
             }
 
             return data.Results;
@@ -82,7 +82,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in data.Cast)
             {
-                person.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
+                person.Profile_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path));
             }
 
             return data.Cast;
@@ -92,11 +92,11 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<SeasonDetails>($"tv/{tvShowId}/season/{seasonNumber}?api_key={_config[API_KEY]}");
 
-            data.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
+            data.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, data.Poster_Path));
 
             foreach (var episode in data.Episodes)
             {
-                episode.Still_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], StillSizeType.W300, episode.Still_Path);
+                episode.Still_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], StillSizeType.W300, episode.Still_Path));
             }
 
             return data;

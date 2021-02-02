@@ -11,8 +11,9 @@ namespace MovieApp.Web.Services
 {
     public class MovieService : IMovieService
     {
-        private const string API_KEY = "API_KEY";
-        private const string IMAGE_BASE_URL = "IMAGE_BASE_URL";
+        private const string API_KEY = "ApiKey";
+        private const string IMAGE_URL = "ImageBaseUrl";
+        private const string PLACEHOLDER_IMAGE_URL = "PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
@@ -32,7 +33,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W500, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path));
             }
 
             return data.Results;
@@ -44,7 +45,7 @@ namespace MovieApp.Web.Services
 
             foreach (var person in data.Cast)
             {
-                person.Profile_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.W342, person.Profile_Path);
+                person.Profile_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path));
             }
 
             return data.Cast;
@@ -52,11 +53,11 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieDetails> GetMovieDetailsAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
+            var movie = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
 
-            data.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, data.Poster_Path);
+            movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
 
-            return data;
+            return movie;
         }
 
         public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
@@ -65,7 +66,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
             }
 
             return data.Results;
@@ -77,7 +78,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
             }
 
             return data.Results;
@@ -89,7 +90,7 @@ namespace MovieApp.Web.Services
 
             foreach (var movie in data.Results)
             {
-                movie.Poster_Path = ImageHelper.GetImageUrl(_config[IMAGE_BASE_URL], PosterSizeType.Original, movie.Poster_Path);
+                movie.Poster_Path = ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.Original, movie.Poster_Path));
             }
 
             return data.Results;
