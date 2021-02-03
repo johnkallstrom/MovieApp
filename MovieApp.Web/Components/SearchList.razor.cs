@@ -23,6 +23,7 @@ namespace MovieApp.Web.Components
         {
             SearchState.OnQueryChange += RedirectToHome;
             SearchState.OnResultsChange += StateHasChanged;
+            SearchState.OnTotalResultsChange += StateHasChanged;
             SearchState.OnFilterChange += StateHasChanged;
         }
 

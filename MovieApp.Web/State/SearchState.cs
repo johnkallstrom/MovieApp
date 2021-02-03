@@ -19,10 +19,15 @@ namespace MovieApp.Web.State
 
         #region Events
         public event Action OnPageChange;
+        public event Action OnPageReset;
+
         public event Action OnFilterChange;
+        public event Action OnFilterReset;
+
         public event Action OnTotalPagesChange;
         public event Action OnTotalResultsChange;
         public event Action OnResultsChange;
+
         public event Action OnQueryChange;
         public event Action OnQueryClear;
         #endregion
@@ -34,10 +39,22 @@ namespace MovieApp.Web.State
             OnPageChange?.Invoke();
         }
 
+        public void ResetPage()
+        {
+            Page = 1;
+            OnPageReset?.Invoke();
+        }
+
         public void SetFilter(SearchFilterType filterType)
         {
             Filter = filterType;
             OnFilterChange?.Invoke();
+        }
+
+        public void ResetFilter()
+        {
+            Filter = SearchFilterType.All;
+            OnFilterReset?.Invoke();
         }
 
         public void SetTotalPages(int totalPages)

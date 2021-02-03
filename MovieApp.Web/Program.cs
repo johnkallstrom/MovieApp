@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MovieApp.Web.Services;
@@ -25,6 +26,8 @@ namespace MovieApp.Web
             builder.Services.AddTransient<ISearchService, SearchService>();
 
             builder.Services.AddSingleton<SearchState>();
+
+            builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
             await builder.Build().RunAsync();
         }

@@ -10,8 +10,7 @@ namespace MovieApp.Web.Components
 
         protected override void OnInitialized()
         {
-            SearchState.OnFilterChange += StateHasChanged;
-            SearchState.OnResultsChange += StateHasChanged;
+            SearchState.OnTotalPagesChange += StateHasChanged;
         }
     }
 }

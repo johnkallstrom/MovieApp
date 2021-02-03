@@ -4,6 +4,7 @@ using MovieApp.Web.Models;
 using MovieApp.Web.Services;
 using MovieApp.Web.State;
 using System;
+using System.Threading.Tasks;
 
 namespace MovieApp.Web.Shared
 {
@@ -20,13 +21,6 @@ namespace MovieApp.Web.Shared
 
         public string Placeholder { get; set; } = "Search...";
 
-        public void Dispose()
-        {
-            SearchState.OnQueryChange -= ResetPage;
-            SearchState.OnQueryChange -= GetSearchResults;
-            SearchState.OnPageChange -= GetSearchResults;
-        }
-
         protected override void OnInitialized()
         {
             SearchState.OnQueryClear += StateHasChanged;
@@ -38,14 +32,13 @@ namespace MovieApp.Web.Shared
             SearchState.OnFilterChange += GetSearchResults;
         }
 
-        private void ResetFilter()
+        public void Dispose()
         {
-            SearchState.SetFilter(SearchFilterType.All);
-        }
-
-        private void ResetPage()
-        {
-            SearchState.SetPage(SearchState.Page = 1);
+            SearchState.OnQueryChange -= ResetFilter;
+            SearchState.OnQueryChange -= ResetPage;
+            SearchState.OnFilterChange -= GetSearchResults;
+            SearchState.OnQueryChange -= GetSearchResults;
+            SearchState.OnPageChange -= GetSearchResults;
         }
 
         private void NavigateToSearch()
@@ -56,40 +49,47 @@ namespace MovieApp.Web.Shared
             }
         }
 
-        private async void GetSearchResults()
+        private void GetSearchResults()
         {
-            if (!string.IsNullOrWhiteSpace(SearchState.Query))
+            Task.Run(async () =>
             {
-                SearchResults data;
-
-                switch (SearchState.Filter)
+                if (!string.IsNullOrWhiteSpace(SearchState.Query))
                 {
-                    case SearchFilterType.All:
-                        data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
-                        break;
-                    case SearchFilterType.Movies:
-                        data = await SearchService.GetMovieSearchAsync(SearchState.Query, SearchState.Page);
-                        break;
-                    case SearchFilterType.TV:
-                        data = await SearchService.GetTVSearchAsync(SearchState.Query, SearchState.Page);
-                        break;
-                    case SearchFilterType.People:
-                        data = await SearchService.GetPeopleSearchAsync(SearchState.Query, SearchState.Page);
-                        break;
-                    default:
-                        data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
-                        break;
-                }
+                    SearchResults data;
 
-                if (data != null)
-                {
-                    SearchState.SetResults(data.Results);
-                    SearchState.SetTotalPages(data.Total_Pages);
-                    SearchState.SetTotalResults(data.Total_Results);
-                }
+                    switch (SearchState.Filter)
+                    {
+                        case SearchFilterType.All:
+                            data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
+                            break;
+                        case SearchFilterType.Movies:
+                            data = await SearchService.GetMovieSearchAsync(SearchState.Query, SearchState.Page);
+                            break;
+                        case SearchFilterType.TV:
+                            data = await SearchService.GetTVSearchAsync(SearchState.Query, SearchState.Page);
+                            break;
+                        case SearchFilterType.People:
+                            data = await SearchService.GetPeopleSearchAsync(SearchState.Query, SearchState.Page);
+                            break;
+                        default:
+                            data = await SearchService.GetMultiSearchAsync(SearchState.Query, SearchState.Page);
+                            break;
+                    }
 
-                NavigateToSearch();
-            }
+                    if (data != null)
+                    {
+                        SearchState.SetResults(data.Results);
+                        SearchState.SetTotalPages(data.Total_Pages);
+                        SearchState.SetTotalResults(data.Total_Results);
+                    }
+
+                    NavigateToSearch();
+                }
+            }).Wait(new TimeSpan(4000000));
         }
+
+        private void ResetFilter() => SearchState.ResetFilter();
+
+        private void ResetPage() => SearchState.ResetPage();
     }
 }

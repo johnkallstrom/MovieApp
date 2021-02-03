@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Services;
 using MovieApp.Web.State;
-using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components
 {
