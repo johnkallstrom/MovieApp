@@ -79,11 +79,3 @@ body {
 #search-filter a:hover {
     color: var(--orange);
 }
-
-#search input[type="text"] {
-    background-color: var(--light-dark);
-}
-
-#search input[type="text"]:focus {
-    background-color: var(--white);
-}
