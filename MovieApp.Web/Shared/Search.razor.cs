@@ -55,7 +55,7 @@ namespace MovieApp.Web.Shared
             {
                 if (!string.IsNullOrWhiteSpace(SearchState.Query))
                 {
-                    SearchResults data;
+                    MediaResults data;
 
                     switch (SearchState.Filter)
                     {
@@ -76,7 +76,7 @@ namespace MovieApp.Web.Shared
                             break;
                     }
 
-                    if (data != null)
+                    if (data is not null)
                     {
                         SearchState.SetResults(data.Results);
                         SearchState.SetTotalPages(data.Total_Pages);

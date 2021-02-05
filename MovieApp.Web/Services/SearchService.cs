@@ -26,9 +26,9 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
-        public async Task<SearchResults> GetPeopleSearchAsync(string query, int page)
+        public async Task<MediaResults> GetPeopleSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
 
@@ -42,9 +42,9 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<SearchResults> GetTVSearchAsync(string query, int page)
+        public async Task<MediaResults> GetTVSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
 
@@ -58,9 +58,9 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<SearchResults> GetMovieSearchAsync(string query, int page)
+        public async Task<MediaResults> GetMovieSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
 
@@ -74,9 +74,9 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<SearchResults> GetMultiSearchAsync(string query, int page)
+        public async Task<MediaResults> GetMultiSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<SearchResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
 

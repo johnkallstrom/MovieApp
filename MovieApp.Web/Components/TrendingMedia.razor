@@ -1,0 +1,17 @@
+﻿@using MovieApp.Web.Helpers 
+
+<div id="trending">
+    <h3 class="mb-3">Trending</h3>
+    <div class="row flex-row flex-nowrap overflow-auto">
+        @foreach (var media in Items)
+        {
+            <div class="col-sm-2 mb-3">
+                <a href="@media.Url">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@ImageHelper.GetMediaImagePath(media)" />
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div> 

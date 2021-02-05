@@ -13,9 +13,11 @@
             <ul class="list-group">
                 @foreach (var episode in SeasonDetails.Episodes)
                 {
-                    <DisplayEpisode Episode="episode" /> 
+                    <DisplayEpisode Episode="episode" />
+
                 }
             </ul>
         </div>
     </div>
+    <a href="@($"/tv-shows/{TVShowDetails.Id}")" class="btn btn-primary">Back</a>
 </div>

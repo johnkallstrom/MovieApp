@@ -27,9 +27,9 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
-        public async Task<IEnumerable<Person>> GetPopularPeopleAsync()
+        public async Task<PeopleResults> GetPopularPeopleAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"person/popular?api_key={_config[API_KEY]}");
+            var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"person/popular?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -38,7 +38,7 @@ namespace MovieApp.Web.Services
                 person.Profile_Path = !string.IsNullOrEmpty(person.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, person.Profile_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
         }
 
         public async Task<PersonDetails> GetPersonAsync(int personId)

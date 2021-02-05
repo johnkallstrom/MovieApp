@@ -68,10 +68,6 @@ body {
     text-decoration: none;
 }
 
-#search-list #search-list-item:hover {
-    border: 1px solid var(--orange);
-}
-
 #search-list a:hover {
     cursor: pointer;
 }

@@ -7,19 +7,19 @@
     {
         <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults @DisplayFilter() match(es)</p>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <SearchFilter />
             </div>
             @if (SearchState.Results.Count() is not 0)
             {
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <ul class="list-group">
                         @foreach (var media in SearchState.Results)
                         {
                             <DisplayMedia Media="media" />
                         }
                     </ul>
-                    <Pagination />
+                    <SearchPagination />
                 </div>
             }
         </div>

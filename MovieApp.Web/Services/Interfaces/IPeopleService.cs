@@ -8,6 +8,6 @@ namespace MovieApp.Web.Services
     {
         Task<IEnumerable<Movie>> GetPersonMoviesAsync(int personId);
         Task<PersonDetails> GetPersonAsync(int personId);
-        Task<IEnumerable<Person>> GetPopularPeopleAsync();
+        Task<PeopleResults> GetPopularPeopleAsync(int page);
     }
 }

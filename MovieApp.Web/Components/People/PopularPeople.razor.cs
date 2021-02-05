@@ -14,11 +14,35 @@ namespace MovieApp.Web.Components.People
         [Parameter]
         public string HeaderText { get; set; } = "Popular";
 
-        public IEnumerable<Person> People { get; set; } = new List<Person>();
+        public int Page { get; set; } = 1;
+        public int TotalResults { get; set; }
+        public int TotalPages { get; set; }
+        public IEnumerable<Person> Results { get; set; } = new List<Person>();
 
         protected override async Task OnInitializedAsync()
         {
-            People = await PeopleService.GetPopularPeopleAsync();
+            var data = await PeopleService.GetPopularPeopleAsync(Page);
+
+            SetPeopleData(data);
+        }
+
+        protected async Task SetPage(int page)
+        {
+            Page = page;
+
+            var data = await PeopleService.GetPopularPeopleAsync(Page);
+
+            SetPeopleData(data);
+        }
+
+        private void SetPeopleData(PeopleResults data)
+        {
+            if (data is not null)
+            {
+                Results = data.Results;
+                TotalResults = data.Total_Results;
+                TotalPages = data.Total_Pages;
+            }
         }
     }
 }

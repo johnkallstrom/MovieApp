@@ -3,7 +3,7 @@ using MovieApp.Web.State;
 
 namespace MovieApp.Web.Components
 {
-    public partial class Pagination
+    public partial class SearchPagination
     {
         [Inject]
         public SearchState SearchState { get; set; }

@@ -1,10 +1,5 @@
 ﻿<div id="tv-top-rated">
     <h3 class="mb-3">@HeaderText</h3>
-    @if (TVShows == null)
-    {
-        <div>Loading...</div>
-    }
-
     <div class="row flex-row flex-nowrap overflow-auto">
         @foreach (var tvShow in TVShows)
         {
