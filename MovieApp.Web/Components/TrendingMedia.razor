@@ -1,7 +1,30 @@
-﻿@using MovieApp.Web.Helpers 
-
-<div id="trending">
+﻿<div id="trending">
     <h3 class="mb-3">Trending</h3>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <select class="form-select" @onchange="@HandleMediaTypeSelection">
+                @foreach (var option in MediaTypeOptions)
+                {
+                    @if (option is MovieApp.Web.Enums.MediaType.TV)
+                    {
+                        <option value="@option">@option.ToUpper()</option>
+                    }
+                    else
+                    {
+                        <option value="@option">@option.FirstCharToUpper()</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-select" @onchange="@HandleTimeWindowSelection">
+                @foreach (var option in TimeWindowOptions)
+                {
+                    <option value="@option">@option</option>
+                }
+            </select>
+        </div>
+    </div>
     <div class="row flex-row flex-nowrap overflow-auto">
         @foreach (var media in Items)
         {

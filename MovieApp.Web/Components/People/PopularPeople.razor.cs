@@ -42,7 +42,7 @@ namespace MovieApp.Web.Components.People
                 Results = data.Results;
                 TotalResults = data.Total_Results;
                 TotalPages = data.Total_Pages;
-            }
+            }       
         }
     }
 }

@@ -7,6 +7,6 @@ namespace MovieApp.Web.Services
 {
     public interface ITrendingService
     {
-        Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, TimeWindowType timeWindowType);
+        Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, string timeWindowType);
     }
 }

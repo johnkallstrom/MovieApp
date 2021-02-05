@@ -26,7 +26,7 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, TimeWindowType timeWindowType)
+        public async Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, string timeWindowType)
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"trending/{mediaType}/{timeWindowType}?api_key={_config[API_KEY]}");
 

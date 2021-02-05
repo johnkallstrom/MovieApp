@@ -3,7 +3,7 @@ using MovieApp.Web.Enums;
 using MovieApp.Web.State;
 using System;
 
-namespace MovieApp.Web.Components
+namespace MovieApp.Web.Components.Search
 {
     public partial class SearchList : IDisposable
     {

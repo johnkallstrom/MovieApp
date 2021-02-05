@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.State;
 
-namespace MovieApp.Web.Components
+namespace MovieApp.Web.Components.Search
 {
     public partial class SearchFilter
     {
