@@ -75,3 +75,8 @@ body {
 #search-filter a:hover {
     color: var(--orange);
 }
+
+#popular-media {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

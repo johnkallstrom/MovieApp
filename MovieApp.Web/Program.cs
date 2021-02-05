@@ -24,8 +24,10 @@ namespace MovieApp.Web
             builder.Services.AddTransient<ITVService, TVService>();
             builder.Services.AddTransient<ISearchService, SearchService>();
             builder.Services.AddTransient<ITrendingService, TrendingService>();
+            builder.Services.AddTransient<IDiscoverService, DiscoverService>();
 
             builder.Services.AddSingleton<SearchState>();
+            builder.Services.AddSingleton<DiscoverState>();
 
             await builder.Build().RunAsync();
         }
