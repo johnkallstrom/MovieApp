@@ -18,3 +18,7 @@
     color: #212529;
     text-decoration: none;
 }
+
+#discover-filter input[type="radio"]:hover {
+    cursor: pointer;
+}
