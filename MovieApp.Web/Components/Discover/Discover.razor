@@ -5,55 +5,33 @@
     <hr />
     <div class="row">
         <div class="col-sm-3">
-            <div class="card">
-                <h5 class="card-header">Sort</h5>
-                <div class="p-3">
-                    <select class="form-select">
-                        <option>Title Ascending</option>
-                        <option>Title Descending</option>
-                        <option>Popularity Ascending</option>
-                        <option>Popularity Descending</option>
-                        <option>Release Ascending</option>
-                        <option>Release Descending</option>
-                        <option>Rating Ascending</option>
-                        <option>Rating Descending</option>
-                    </select>
-                </div>
-            </div>
+            <SortingDiscover OnSortSelection="HandleSortSelection" />
+            <FilterDiscover OnMediaSelection="HandleMediaSelection" />
+            <button class="btn btn-primary" @onclick="HandleClick">Search</button>
         </div>
         <div class="col-sm-9">
-            @foreach (var movie in MovieResults)
-            {
-                <DisplayMovie Movie="movie" />
-            }
-        </div>
-        <p>Page 1 of 500</p>
-        <nav>
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link">Next</a>
-                </li>
+            <ul class="list-group">
+                @if (ShowMovieResults)
+                {
+                    @foreach (var movie in MovieResults)
+                    {
+                        <DisplayMovieDiscover Movie="movie" />
+
+                    }
+                }
+                else
+                {
+                    @foreach (var tvShow in TVResults)
+                    {
+                        <DisplayTVDiscover TVShow="tvShow" />
+
+                    }
+                }
             </ul>
-        </nav>
-    </div>
-    <div class="row mt-3">
-        <div class="col-sm-3">
-            <div class="card">
-                <h5 class="card-header">Filter</h5>
-                <div class="p-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                        <label class="form-check-label" for="flexRadioDefault1">Movies</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">TV Shows</label>
-                    </div>
-                </div>
-            </div>
+            @if (TotalPages is not 0)
+            {
+                <PaginationDiscover Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+            }
         </div>
     </div>
 </div>

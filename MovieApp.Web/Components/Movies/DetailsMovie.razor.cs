@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

@@ -8,6 +8,7 @@ namespace MovieApp.Web.State
     {
         #region Properties
         public int Page { get; set; } = 1;
+        public string SortOrder { get; set; }
         public IEnumerable<Movie> MovieResults { get; set; } = new List<Movie>();
         public IEnumerable<TVShow> TVResults { get; set; } = new List<TVShow>();
         public int TotalPages { get; set; }
@@ -16,6 +17,7 @@ namespace MovieApp.Web.State
 
         #region Events
         public event Action OnPageChange;
+        public event Action OnSortOrderChange;
         public event Action OnMovieResultsChange;
         public event Action OnTVResultsChange;
         public event Action OnTotalPagesChange;
@@ -33,6 +35,18 @@ namespace MovieApp.Web.State
         {
             Page = 1;
             OnPageChange?.Invoke();
+        }
+
+        public void SetSortOrder(string sortOrder)
+        {
+            SortOrder = sortOrder;
+            OnSortOrderChange?.Invoke();
+        }
+
+        public void ClearSortOrder()
+        {
+            SortOrder = string.Empty;
+            OnSortOrderChange?.Invoke();
         }
 
         public void SetMovieResults(IEnumerable<Movie> results)

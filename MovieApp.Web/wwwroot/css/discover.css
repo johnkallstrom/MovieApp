@@ -1,0 +1,20 @@
+﻿#discover .image-wrapper {
+    max-width: 100px;
+}
+
+#discover-sorting {
+    margin-bottom: 1rem;
+}
+
+#discover-filter {
+    margin-bottom: 1rem;
+}
+
+#discover a:hover {
+    cursor: pointer;
+}
+
+#discover .list-group a {
+    color: #212529;
+    text-decoration: none;
+}

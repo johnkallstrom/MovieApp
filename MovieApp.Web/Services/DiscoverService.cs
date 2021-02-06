@@ -26,9 +26,9 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<MovieResults> GetMoviesAsync(DiscoverMovieParameters parameters)
+        public async Task<MovieResults> GetMoviesAsync(MovieParameters parameters)
         {
-            string url = $"discover/movie?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}";
+            string url = $"discover/movie?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}&include_adult=false&include_video=false";
 
             var data = await _httpClient.GetFromJsonAsync<MovieResults>(url);
 
@@ -42,9 +42,9 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<TVResults> GetTVAsync(DiscoverTVParameters parameters)
+        public async Task<TVResults> GetTVAsync(TVParameters parameters)
         {
-            string url = $"discover/tv?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}";
+            string url = $"discover/tv?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}&include_adult=false&include_video=false";
 
             var data = await _httpClient.GetFromJsonAsync<TVResults>(url);
 

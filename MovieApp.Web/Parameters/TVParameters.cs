@@ -1,6 +1,6 @@
 ﻿namespace MovieApp.Web.Parameters
 {
-    public class DiscoverMovieParameters
+    public class TVParameters
     {
         public int Page { get; set; }
         public string SortOrder { get; set; }

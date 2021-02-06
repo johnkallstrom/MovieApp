@@ -1,11 +1,32 @@
-﻿<p>Page 1 of 500</p>
-<nav>
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link">Previous</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link">Next</a>
-        </li>
-    </ul>
-</nav>
+﻿<div id="discover-pagination">
+    <p>Page @Page of @TotalPages</p>
+    <nav>
+        <ul class="pagination">
+            @if (Page > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" @onclick="@(async () => await OnPageChanged.InvokeAsync((Page - 1)))">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+            }
+
+            @if (Page < TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" @onclick="@(async () => await OnPageChanged.InvokeAsync((Page + 1)))">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

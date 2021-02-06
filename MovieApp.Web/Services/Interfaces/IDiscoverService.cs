@@ -6,7 +6,7 @@ namespace MovieApp.Web.Services
 {
     public interface IDiscoverService
     {
-        Task<MovieResults> GetMoviesAsync(DiscoverMovieParameters parameters);
-        Task<TVResults> GetTVAsync(DiscoverTVParameters parameters);
+        Task<MovieResults> GetMoviesAsync(MovieParameters parameters);
+        Task<TVResults> GetTVAsync(TVParameters parameters);
     }
 }
