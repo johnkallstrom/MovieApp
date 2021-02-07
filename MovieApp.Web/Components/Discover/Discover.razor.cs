@@ -14,8 +14,9 @@ namespace MovieApp.Web.Components.Discover
         public IDiscoverService DiscoverService { get; set; }
 
         public bool ShowMovieResults { get; set; } = true;
+        public bool ShowTVResults { get; set; } = false;
         public int Page { get; set; } = 1;
-        public string SortOrder { get; set; }
+        public string SortOrder { get; set; } = SortingType.TitleAscending;
         public string SelectedMedia { get; set; } = MediaType.Movie;
         public IEnumerable<Movie> MovieResults { get; set; } = new List<Movie>();
         public IEnumerable<TVShow> TVResults { get; set; } = new List<TVShow>();
@@ -54,10 +55,12 @@ namespace MovieApp.Web.Components.Discover
                 case MediaType.Movie:
                     movieData = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder });
                     ShowMovieResults = true;
+                    ShowTVResults = false;
                     break;
                 case MediaType.TV:
                     tvData = await DiscoverService.GetTVAsync(new TVParameters { Page = Page, SortOrder = SortOrder });
                     ShowMovieResults = false;
+                    ShowTVResults = true;
                     break;
                 default:
                     movieData = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder });

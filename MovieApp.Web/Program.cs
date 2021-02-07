@@ -27,7 +27,6 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IDiscoverService, DiscoverService>();
 
             builder.Services.AddSingleton<SearchState>();
-            builder.Services.AddSingleton<DiscoverState>();
 
             await builder.Build().RunAsync();
         }

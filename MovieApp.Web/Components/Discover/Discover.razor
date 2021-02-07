@@ -4,30 +4,73 @@
     <h1>Discover</h1>
     <hr />
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-md-3">
             <SortingDiscover OnSortSelection="HandleSortSelection" />
             <FilterDiscover OnMediaSelection="HandleMediaSelection" />
-            <button class="btn btn-primary" @onclick="HandleClick">Search</button>
+            <button class="btn btn-primary btn-lg" @onclick="HandleClick">Search</button>
         </div>
-        <div class="col-sm-9">
-            <ul class="list-group">
-                @if (ShowMovieResults)
-                {
-                    @foreach (var movie in MovieResults)
-                    {
-                        <DisplayMovieDiscover Movie="movie" />
-
-                    }
-                }
-                else
-                {
-                    @foreach (var tvShow in TVResults)
-                    {
-                        <DisplayTVDiscover TVShow="tvShow" />
-
-                    }
-                }
-            </ul>
+        <div class="col-md-9">
+            @if (ShowMovieResults && TotalResults is not 0)
+            {
+                <div id="discover-movie-table" class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Release Date</th>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Popularity</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        @foreach (var movie in MovieResults)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@movie.Title</td>
+                                    <td>@(!string.IsNullOrWhiteSpace(movie.Release_Date) ? movie.Release_Date : DateTime.MinValue.ToShortDateString())</td>
+                                    <td>@movie.Vote_Average</td>
+                                    <td>@(Math.Round(movie.Popularity, 2))</td>
+                                    <td>
+                                        <a href="@($"/movie/{movie.Id}")">Details</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            }
+            
+            @if (ShowTVResults && TotalResults is not 0)
+            {
+                <div id="discover-tv-table" class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">First Air Date</th>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Popularity</th>
+                                <th scope="col">Details</th>
+                            </tr>
+                        </thead>
+                        @foreach (var tvShow in TVResults)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@tvShow.Name</td>
+                                    <td>@(!string.IsNullOrWhiteSpace(tvShow.First_Air_Date) ? tvShow.First_Air_Date : DateTime.MinValue.ToShortDateString())</td>
+                                    <td>@tvShow.Vote_Average</td>
+                                    <td>@(Math.Round(tvShow.Popularity, 2))</td>
+                                    <td>
+                                        <a href="@($"/tv-shows/{tvShow.Id}")">Details</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            }
             @if (TotalPages is not 0)
             {
                 <PaginationDiscover Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
