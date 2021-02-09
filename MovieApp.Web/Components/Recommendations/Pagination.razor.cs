@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.State;
 
-namespace MovieApp.Web.Components.Discover
+namespace MovieApp.Web.Components.Recommendations
 {
-    public partial class PaginationDiscover
+    public partial class Pagination
     {
         [Parameter]
         public int Page { get; set; }

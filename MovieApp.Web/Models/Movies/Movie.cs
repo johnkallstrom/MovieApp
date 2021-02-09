@@ -6,7 +6,8 @@ namespace MovieApp.Web.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public IEnumerable<int> Genre_Ids { get; set; }
+        public IEnumerable<Genre> Genres { get; set; } = new List<Genre>();
+        public IEnumerable<int> Genre_Ids { get; set; } = new List<int>();
         public string Original_Language { get; set; }
         public string Original_Title { get; set; }
         public string Overview { get; set; }

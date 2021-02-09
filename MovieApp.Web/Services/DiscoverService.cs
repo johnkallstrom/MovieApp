@@ -5,6 +5,7 @@ using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
@@ -28,7 +29,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetMoviesAsync(MovieParameters parameters)
         {
-            string url = $"discover/movie?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}&include_adult=false&include_video=false";
+            string url = GenerateMovieApiUrl(parameters);
 
             var data = await _httpClient.GetFromJsonAsync<MovieResults>(url);
 
@@ -56,6 +57,30 @@ namespace MovieApp.Web.Services
             }
 
             return data;
+        }
+
+        private string GenerateMovieApiUrl(MovieParameters parameters)
+        {
+            var builder = new StringBuilder($"discover/movie?api_key={_config[API_KEY]}&page={parameters.Page}");
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                builder.AppendLine($"&sort_by={parameters.SortOrder}");
+            }
+
+            if (parameters.ReleaseYear is not 0)
+            {
+                builder.AppendLine($"&primary_release_year={parameters.ReleaseYear}");
+            }
+
+            if (parameters.GenreId is not 0)
+            {
+                builder.AppendLine($"&with_genres={parameters.GenreId}");
+            }
+
+            builder.AppendLine("&include_adult=false");
+
+            return builder.ToString();
         }
     }
 }

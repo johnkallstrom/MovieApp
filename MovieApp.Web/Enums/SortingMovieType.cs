@@ -1,6 +1,6 @@
 ﻿namespace MovieApp.Web.Enums
 {
-    public static class SortingType
+    public static class SortingMovieType
     {
         public const string TitleAscending = "original_title.asc";
         public const string TitleDescending = "original_title.desc";

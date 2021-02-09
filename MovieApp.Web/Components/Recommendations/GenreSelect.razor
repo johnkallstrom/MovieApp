@@ -1,0 +1,10 @@
+﻿<div id="recommendations-genre">
+    <p class="mb-1">Genre</p>
+    <select class="form-select form-select-sm" @onchange="@(async (e) => await OnGenreSelection.InvokeAsync(e.Value.ToString()))">
+        <option selected disabled>Choose genre</option>
+        @foreach (var option in MovieGenreOptions)
+        {
+            <option value="@option.Id">@option.Name</option>
+        }
+    </select>
+</div>

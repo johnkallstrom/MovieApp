@@ -25,6 +25,7 @@ namespace MovieApp.Web
             builder.Services.AddTransient<ISearchService, SearchService>();
             builder.Services.AddTransient<ITrendingService, TrendingService>();
             builder.Services.AddTransient<IDiscoverService, DiscoverService>();
+            builder.Services.AddTransient<IGenreService, GenreService>();
 
             builder.Services.AddSingleton<SearchState>();
 

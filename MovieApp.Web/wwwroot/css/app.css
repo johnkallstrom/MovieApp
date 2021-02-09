@@ -22,6 +22,10 @@ body {
     color: var(--white);
 }
 
+#nav .dropdown-menu a {
+    color: var(--dark);
+}
+
 #nav .nav-link:hover {
     color: var(--orange) !important;
 }
