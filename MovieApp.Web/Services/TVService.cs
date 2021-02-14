@@ -44,7 +44,7 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<IEnumerable<TVShow>> GetPopularTVAsync()
+        public async Task<TVResults> GetPopularTVAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/popular?api_key={_config[API_KEY]}");
 
@@ -55,10 +55,24 @@ namespace MovieApp.Web.Services
                 tvShow.Poster_Path = !string.IsNullOrEmpty(tvShow.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, tvShow.Poster_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
         }
 
-        public async Task<IEnumerable<TVShow>> GetTopRatedTVAsync()
+        public async Task<TVResults> GetPopularTVAsync(int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/popular?api_key={_config[API_KEY]}&page={page}");
+
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            foreach (var tvShow in data.Results)
+            {
+                tvShow.Poster_Path = !string.IsNullOrEmpty(tvShow.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, tvShow.Poster_Path)) : placeholderUrl;
+            }
+
+            return data;
+        }
+
+        public async Task<TVResults> GetTopRatedTVAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}");
 
@@ -69,7 +83,21 @@ namespace MovieApp.Web.Services
                 tvShow.Poster_Path = !string.IsNullOrEmpty(tvShow.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, tvShow.Poster_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
+        }
+
+        public async Task<TVResults> GetTopRatedTVAsync(int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}&page={page}");
+
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            foreach (var tvShow in data.Results)
+            {
+                tvShow.Poster_Path = !string.IsNullOrEmpty(tvShow.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, tvShow.Poster_Path)) : placeholderUrl;
+            }
+
+            return data;
         }
 
         public async Task<TVResults> GetOnTheAirTVAsync()

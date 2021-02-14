@@ -13,6 +13,9 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class MovieRecommendations
     {
         [Inject]
+        public IPeopleService PeopleService { get; set; }
+
+        [Inject]
         public IDiscoverService DiscoverService { get; set; }
 
         [Inject]
@@ -22,8 +25,8 @@ namespace MovieApp.Web.Components.Recommendations
         public string SortOrder { get; set; }
         public int GenreId { get; set; } = 0;
         public int ReleaseYear { get; set; } = 0;
-        public string SearchQuery { get; set; }
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
+        public IEnumerable<Person> SearchResults { get; set; } = new List<Person>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
 
@@ -55,9 +58,17 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected void HandleQueryChange(string value)
+        protected async Task HandleQueryChange(string query)
         {
-            SearchQuery = value;
+            var results = await FetchCastResults(query);
+
+            SearchResults = results.Where(person => person.Known_For_Department == "Acting").ToList();
+
+            foreach (var person in SearchResults)
+            {
+                Console.WriteLine($"Name: {person.Name}");
+                Console.WriteLine($"Known For Department: {person.Known_For_Department}");
+            }
         }
 
         protected async Task HandlePageChanged(int selectedPage)
@@ -101,6 +112,13 @@ namespace MovieApp.Web.Components.Recommendations
             var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear });
 
             return results;
+        }
+
+        private async Task<IEnumerable<Person>> FetchCastResults(string query)
+        {
+            var data = await PeopleService.GetPeopleBySearchAsync(query);
+
+            return data.Results;
         }
     }
 }

@@ -11,7 +11,9 @@ namespace MovieApp.Web.Services
         Task<TVShowDetails> GetTVDetailsAsync(int tvShowId);
         Task<TVResults> GetOnTheAirTVAsync();
         Task<TVResults> GetOnTheAirTVAsync(int page);
-        Task<IEnumerable<TVShow>> GetPopularTVAsync();
-        Task<IEnumerable<TVShow>> GetTopRatedTVAsync();
+        Task<TVResults> GetPopularTVAsync();
+        Task<TVResults> GetPopularTVAsync(int page);
+        Task<TVResults> GetTopRatedTVAsync();
+        Task<TVResults> GetTopRatedTVAsync(int page);
     }
 }

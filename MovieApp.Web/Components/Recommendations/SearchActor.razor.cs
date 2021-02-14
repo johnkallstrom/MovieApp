@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Models;
-using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Recommendations
 {
@@ -12,8 +8,6 @@ namespace MovieApp.Web.Components.Recommendations
         private Timer _timer;
 
         public string SearchQuery { get; set; }
-
-        public IEnumerable<Person> Results { get; set; } = new List<Person>();
 
         [Parameter]
         public EventCallback<string> OnQueryChange { get; set; }
