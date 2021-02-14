@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Data;
 using MovieApp.Web.Enums;
-using MovieApp.Web.Models;
-using MovieApp.Web.Parameters;
-using MovieApp.Web.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Recommendations
 {

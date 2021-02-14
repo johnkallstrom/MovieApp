@@ -66,7 +66,7 @@ namespace MovieApp.Web.Services
             return movie;
         }
 
-        public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
+        public async Task<MovieResults> GetPopularMoviesAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}");
 
@@ -77,7 +77,21 @@ namespace MovieApp.Web.Services
                 movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
+        }
+
+        public async Task<MovieResults> GetPopularMoviesAsync(int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}&page={page}");
+
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            foreach (var movie in data.Results)
+            {
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
+            }
+
+            return data;
         }
 
         public async Task<IEnumerable<Movie>> GetTopRatedMoviesAsync()
@@ -94,7 +108,7 @@ namespace MovieApp.Web.Services
             return data.Results;
         }
 
-        public async Task<IEnumerable<Movie>> GetUpcomingMoviesAsync()
+        public async Task<MovieResults> GetUpcomingMoviesAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}");
 
@@ -105,7 +119,21 @@ namespace MovieApp.Web.Services
                 movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
+        }
+
+        public async Task<MovieResults> GetUpcomingMoviesAsync(int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}&page={page}");
+
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            foreach (var movie in data.Results)
+            {
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
+            }
+
+            return data;
         }
         #endregion
     }

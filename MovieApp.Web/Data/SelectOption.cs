@@ -1,4 +1,4 @@
-﻿namespace MovieApp.Web.Models
+﻿namespace MovieApp.Web.Data
 {
     public class SelectOption
     {

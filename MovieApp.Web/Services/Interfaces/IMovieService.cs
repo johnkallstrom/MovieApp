@@ -9,8 +9,10 @@ namespace MovieApp.Web.Services
         Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId);
         Task<IEnumerable<Person>> GetMovieCastAsync(int movieId);
         Task<MovieDetails> GetMovieDetailsAsync(int movieId);
-        Task<IEnumerable<Movie>> GetPopularMoviesAsync();
+        Task<MovieResults> GetPopularMoviesAsync();
+        Task<MovieResults> GetPopularMoviesAsync(int page);
         Task<IEnumerable<Movie>> GetTopRatedMoviesAsync();
-        Task<IEnumerable<Movie>> GetUpcomingMoviesAsync();
+        Task<MovieResults> GetUpcomingMoviesAsync();
+        Task<MovieResults> GetUpcomingMoviesAsync(int page);
     }
 }

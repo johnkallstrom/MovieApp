@@ -1,0 +1,7 @@
+﻿#pagination {
+    margin-top: 1rem;
+}
+
+#pagination a:hover {
+    cursor: pointer;
+}

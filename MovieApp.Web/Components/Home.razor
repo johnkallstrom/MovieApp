@@ -3,7 +3,31 @@
 <div id="home">
     <h1>Home</h1>
     <hr />
-    <TrendingMedia />
-    <PopularMovies HeaderText="Popular Movies" />
-    <OnTheAirTV HeaderText="On The Air TV Shows" />
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/movies/popular")">Popular Movies</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var movie in PopularMovies)
+            {
+                <DisplayMovie Movie="@movie" ShowTitle="false" />
+            }
+        </div>
+    </div>
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/tv-shows/on-the-air")">On The Air TV Shows</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var tvShow in OnTheAirTVShows)
+            {
+                <DisplayTV TVShow="tvShow" />
+            }
+        </div>
+    </div>
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/movies/upcoming")">Upcoming Movies</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var movie in UpcomingMovies)
+            {
+                <DisplayMovie Movie="@movie" ShowTitle="false" />
+            }
+        </div>
+    </div>
 </div>

@@ -11,14 +11,37 @@ namespace MovieApp.Web.Components.TV
         [Inject]
         public ITVService TVService { get; set; }
 
-        [Parameter]
-        public string HeaderText { get; set; } = "On The Air";
+        public IEnumerable<TVShow> Results { get; set; } = new List<TVShow>();
 
-        public IEnumerable<TVShow> TVShows { get; set; } = new List<TVShow>();
+        public int Page { get; set; } = 1;
+        public int TotalPages { get; set; }
+        public int TotalResults { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            TVShows = await TVService.GetOnTheAirTVAsync();
+            var data = await TVService.GetOnTheAirTVAsync(Page);
+
+            SetTVData(data);
+        }
+
+        protected async Task HandlePageChanged(int selectedPage)
+        {
+            Page = selectedPage;
+
+            var data = await TVService.GetOnTheAirTVAsync(Page);
+
+            SetTVData(data);
+        }
+
+        private void SetTVData(TVResults data)
+        {
+            if (data is not null)
+            {
+                Results = data.Results;
+                Page = data.Page;
+                TotalPages = data.Total_Pages;
+                TotalResults = data.Total_Results;
+            }
         }
     }
 }

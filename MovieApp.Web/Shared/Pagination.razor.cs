@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace MovieApp.Web.Components.Recommendations
+namespace MovieApp.Web.Shared
 {
     public partial class Pagination
     {

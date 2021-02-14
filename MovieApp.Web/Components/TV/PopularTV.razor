@@ -1,5 +1,7 @@
-﻿<div id="tv-popular">
-    <h3 class="mb-3">@HeaderText</h3>
+﻿@page "/tv-shows/popular" 
+
+<div id="tv-popular">
+    <h3 class="mb-3">Popular TV Shows</h3>
     <div class="row flex-row flex-nowrap overflow-auto">
         @foreach (var tvShow in TVShows)
         {

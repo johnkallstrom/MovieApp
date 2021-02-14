@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Movies
 {
-    public partial class TopRatedMovies
+    public partial class Movies
     {
         [Inject]
         public IMovieService MovieService { get; set; }
 
-        public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+
+        public IEnumerable<Movie> PopularMovies { get; set; } = new List<Movie>();
+
 
         protected override async Task OnInitializedAsync()
         {
-            Movies = await MovieService.GetTopRatedMoviesAsync();
+            var data = await MovieService.GetPopularMoviesAsync();
+
+            if (data is not null)
+            {
+                PopularMovies = data.Results;
+            }
         }
     }
 }

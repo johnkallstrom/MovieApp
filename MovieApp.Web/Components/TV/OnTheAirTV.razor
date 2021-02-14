@@ -1,9 +1,13 @@
-﻿<div id="tv-on-the-air">
-    <h3 class="mb-3">@HeaderText</h3>
-    <div class="row flex-row flex-nowrap overflow-auto">
-        @foreach (var tvShow in TVShows)
+﻿@page "/tv-shows/on-the-air" 
+
+<div id="tv-on-the-air">
+    <h1>On The Air TV Shows</h1>
+    <hr />
+    <div class="row">
+        @foreach (var tvShow in Results)
         {
             <DisplayTV TVShow="tvShow" />
         }
     </div>
+    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
 </div>

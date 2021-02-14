@@ -11,9 +11,6 @@ namespace MovieApp.Web.Components.TV
         [Inject]
         public ITVService TVService { get; set; }
 
-        [Parameter]
-        public string HeaderText { get; set; } = "Top Rated";
-
         public IEnumerable<TVShow> TVShows { get; set; } = new List<TVShow>();
 
         protected override async Task OnInitializedAsync()
