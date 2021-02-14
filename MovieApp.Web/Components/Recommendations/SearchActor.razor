@@ -1,0 +1,13 @@
+﻿<div id="search-actor">
+    <p class="mb-1">Actor</p>
+    <div class="input-group input-group-sm">
+        <input @bind-value="SearchQuery"
+               @bind-value:event="oninput"
+               @onkeyup="@(() => SetQuery(SearchQuery))"
+               @onfocus="@(() => Placeholder = string.Empty)"
+               @onblur="@(() => Placeholder = "Search actor...")"
+               type="text" 
+               class="form-control" 
+               placeholder="Search actor...">
+    </div>
+</div>

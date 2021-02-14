@@ -17,11 +17,17 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-2">
+                <SearchActor OnQueryChange="HandleQueryChange" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-2">
                 <button class="btn btn-primary btn-sm" @onclick="HandleButtonClick">Recommend</button>
                 <button class="btn btn-danger btn-sm">Clear</button>
             </div>
         </div>
     </div>
+    <h1>Query: @SearchQuery</h1>
     @if (Results.Count() is not 0)
     {
         <table class="table table-bordered">

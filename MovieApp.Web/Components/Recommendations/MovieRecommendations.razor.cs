@@ -22,6 +22,7 @@ namespace MovieApp.Web.Components.Recommendations
         public string SortOrder { get; set; }
         public int GenreId { get; set; } = 0;
         public int ReleaseYear { get; set; } = 0;
+        public string SearchQuery { get; set; }
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
@@ -52,6 +53,11 @@ namespace MovieApp.Web.Components.Recommendations
                 TotalPages = results.Total_Pages;
                 TotalResults = results.Total_Results;
             }
+        }
+
+        protected void HandleQueryChange(string value)
+        {
+            SearchQuery = value;
         }
 
         protected async Task HandlePageChanged(int selectedPage)
