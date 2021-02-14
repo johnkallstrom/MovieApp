@@ -6,6 +6,7 @@ namespace MovieApp.Web.Parameters
     {
         public int Page { get; set; }
         public string SortOrder { get; set; }
-        public IEnumerable<int> GenreIds { get; set; }
+        public int GenreId { get; set; }
+        public int FirstAirYear { get; set; }
     }
 }

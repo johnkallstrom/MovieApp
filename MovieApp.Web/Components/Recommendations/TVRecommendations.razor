@@ -2,5 +2,53 @@
 
 <div id="recommendations-movie">
     <h1>TV Show Recommendations</h1>
-    <hr />
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <SortingSelect OnSortSelection="HandleSortSelection" ShowTVOptions="true" />
+                </div>
+                <div class="col-md-2">
+                    <GenreSelect OnGenreSelection="HandleGenreSelection" ShowTVOptions="true" />
+                </div>
+                <div class="col-md-2">
+                    <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-sm" @onclick="HandleButtonClick">Recommend</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Results.Count() is not 0)
+    {
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">First Air Date</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Popularity</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            @foreach (var tvShow in Results)
+            {
+                <tbody>
+                    <tr>
+                        <td>@tvShow.Name</td>
+                        <td>@(!string.IsNullOrWhiteSpace(tvShow.First_Air_Date) ? tvShow.First_Air_Date : DateTime.MinValue.ToShortDateString())</td>
+                        <td>@tvShow.Vote_Average</td>
+                        <td>@(Math.Round(tvShow.Popularity, 2))</td>
+                        <td>
+                            <a href="@($"/tv-shows/{tvShow.Id}")">Details</a>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    }
+    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
 </div> 

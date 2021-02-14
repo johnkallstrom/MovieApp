@@ -13,14 +13,24 @@ namespace MovieApp.Web.Components.Recommendations
         public IGenreService GenreService { get; set; }
 
         [Parameter]
+        public bool ShowMovieOptions { get; set; } = false;
+
+        [Parameter]
+        public bool ShowTVOptions { get; set; } = false;
+
+        [Parameter]
         public EventCallback<string> OnGenreSelection { get; set; }
 
         public IEnumerable<Genre> MovieGenreOptions { get; set; } = new List<Genre>();
+        public IEnumerable<Genre> TVGenreOptions { get; set; } = new List<Genre>();
 
         protected override async Task OnInitializedAsync()
         {
-            MovieGenreOptions = await GenreService.GetMovieGenresAsync();
-            await OnGenreSelection.InvokeAsync(MovieGenreOptions.First().Id.ToString());
+            if (ShowMovieOptions)
+                MovieGenreOptions = await GenreService.GetMovieGenresAsync();
+
+            if (ShowTVOptions)
+                TVGenreOptions = await GenreService.GetTVGenresAsync();
         }
     }
 }

@@ -1,8 +1,14 @@
 ﻿:root {
+    --orange-interact: rgb(212, 70, 19);
     --orange: rgb(255, 108, 55);
     --dark: rgb(28, 39, 43);
     --light-dark: rgb(36, 51, 56);
     --white: rgb(255, 255, 255);
+    --light-grey: rgb(201, 201, 201);
+}
+
+#recommendations-movie .table a {
+    color: var(--orange);
 }
 
 #recommendations-movie a:hover {
@@ -11,4 +17,14 @@
 
 #recommendations-sorting {
     margin-bottom: 1rem;
+}
+
+#recommendations-movie .btn {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+#recommendations-tv .btn {
+    background-color: var(--orange);
+    color: var(--white);
 }

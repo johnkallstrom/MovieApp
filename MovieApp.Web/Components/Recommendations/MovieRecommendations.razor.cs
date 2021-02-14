@@ -20,15 +20,15 @@ namespace MovieApp.Web.Components.Recommendations
 
         public int Page { get; set; } = 1;
         public string SortOrder { get; set; }
-        public int GenreId { get; set; }
-        public int ReleaseYear { get; set; }
+        public int GenreId { get; set; } = 0;
+        public int ReleaseYear { get; set; } = 0;
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear});
+            var results = await FetchMovieResults();
 
             if (results is not null)
             {
@@ -43,7 +43,7 @@ namespace MovieApp.Web.Components.Recommendations
         {
             Page = 1;
 
-            var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear });
+            var results = await FetchMovieResults();
 
             if (results is not null)
             {
@@ -58,7 +58,7 @@ namespace MovieApp.Web.Components.Recommendations
         {
             Page = selectedPage;
 
-            var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear });
+            var results = await FetchMovieResults();
 
             if (results is not null)
             {
@@ -88,6 +88,13 @@ namespace MovieApp.Web.Components.Recommendations
             {
                 ReleaseYear = parsedYear;
             }
+        }
+
+        private async Task<MovieResults> FetchMovieResults()
+        {
+            var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear });
+
+            return results;
         }
     }
 }

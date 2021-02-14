@@ -45,7 +45,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetTVAsync(TVParameters parameters)
         {
-            string url = $"discover/tv?api_key={_config[API_KEY]}&sort_by={parameters.SortOrder}&page={parameters.Page}&include_adult=false&include_video=false";
+            string url = GenerateTVApiUrl(parameters);
 
             var data = await _httpClient.GetFromJsonAsync<TVResults>(url);
 
@@ -71,6 +71,30 @@ namespace MovieApp.Web.Services
             if (parameters.ReleaseYear is not 0)
             {
                 builder.AppendLine($"&primary_release_year={parameters.ReleaseYear}");
+            }
+
+            if (parameters.GenreId is not 0)
+            {
+                builder.AppendLine($"&with_genres={parameters.GenreId}");
+            }
+
+            builder.AppendLine("&include_adult=false");
+
+            return builder.ToString();
+        }
+
+        private string GenerateTVApiUrl(TVParameters parameters)
+        {
+            var builder = new StringBuilder($"discover/tv?api_key={_config[API_KEY]}&page={parameters.Page}");
+
+            if (!string.IsNullOrEmpty(parameters.SortOrder))
+            {
+                builder.AppendLine($"&sort_by={parameters.SortOrder}");
+            }
+
+            if (parameters.FirstAirYear is not 0)
+            {
+                builder.AppendLine($"&first_air_date_year={parameters.FirstAirYear}");
             }
 
             if (parameters.GenreId is not 0)

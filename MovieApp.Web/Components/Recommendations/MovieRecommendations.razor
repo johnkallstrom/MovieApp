@@ -2,23 +2,22 @@
 
 <div id="recommendations-movie">
     <h1>Movie Recommendations</h1>
-    <hr />
     <div class="card mb-3">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <SortingSelect OnSortSelection="HandleSortSelection" />
+                    <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
                 </div>
                 <div class="col-md-2">
-                    <GenreSelect OnGenreSelection="HandleGenreSelection" />
+                    <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
                 </div>
                 <div class="col-md-2">
-                    <ReleaseYearSelect OnYearSelection="HandleYearSelection" StartReleaseYear="1900" YearCount="129" />
+                    <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <button class="btn btn-primary btn-sm" @onclick="HandleButtonClick">Recommend</button>
+                    <button class="btn btn-sm" @onclick="HandleButtonClick">Recommend</button>
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
-﻿<div id="recommendations-release-year">
+﻿<div id="recommendations-year">
     <p class="mb-1">Year</p>
     <select class="form-select form-select-sm" @onchange="@(async (e) => await OnYearSelection.InvokeAsync(e.Value.ToString()))">
-        <option selected disabled>Choose year</option>
-        @foreach (var option in ReleaseYearOptions)
+        <option value="0" selected>No year</option>
+        @foreach (var option in YearOptions)
         {
             <option value="@option">@option</option>
         }

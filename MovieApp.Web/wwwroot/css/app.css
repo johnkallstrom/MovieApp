@@ -18,12 +18,8 @@ body {
     color: var(--orange) !important;
 }
 
-#nav a {
+#nav a:not(.dropdown-item) {
     color: var(--white);
-}
-
-#nav .dropdown-menu a {
-    color: var(--dark);
 }
 
 #nav .nav-link:hover {
