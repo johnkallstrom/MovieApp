@@ -6,24 +6,19 @@
     --white: rgb(255, 255, 255);
 }
 
-#recommendations-movie .table a {
-    color: var(--orange);
+#recommendations-movie h1 {
+    margin-bottom: 1rem;
+}
+
+#recommendations-tv h1 {
+    margin-bottom: 1rem;
+}
+
+#recommendations-filter {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #recommendations-movie a:hover {
     cursor: pointer;
-}
-
-#recommendations-sorting {
-    margin-bottom: 1rem;
-}
-
-#recommendations-movie .btn {
-    background-color: var(--orange);
-    color: var(--white);
-}
-
-#recommendations-tv .btn {
-    background-color: var(--orange);
-    color: var(--white);
 }

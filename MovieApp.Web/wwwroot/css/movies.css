@@ -1,4 +1,18 @@
-﻿#movie-details {
+﻿#movies h1 {
+    margin-top: 1rem;
+}
+
+#movies a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#movies a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#movie-details {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
@@ -38,12 +52,11 @@
     margin-top: 1rem;
 }
 
-#movies-popular a:hover {
-    cursor: pointer;
+#movies-top-rated h1 {
+    margin-top: 1rem;
 }
 
-#movies-top-rated {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+#movies-popular a:hover {
+    cursor: pointer;
 }
 

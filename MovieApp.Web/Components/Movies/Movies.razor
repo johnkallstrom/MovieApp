@@ -3,4 +3,31 @@
 <div id="movies">
     <h1>Movies</h1>
     <hr />
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/movies/popular")">Popular Movies</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var movie in PopularMovies)
+            {
+                <DisplayMovie Movie="@movie" ShowTitle="false" />
+            }
+        </div>
+    </div>
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/movies/top-rated")">Top Rated Movies</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var movie in TopRatedMovies)
+            {
+                <DisplayMovie Movie="@movie" ShowTitle="false" />
+            }
+        </div>
+    </div>
+    <div class="media-wrapper">
+        <h3 class="mb-3"><a href="@($"/movies/upcoming")">Upcoming Movies</a></h3>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            @foreach (var movie in UpcomingMovies)
+            {
+                <DisplayMovie Movie="@movie" ShowTitle="false" />
+            }
+        </div>
+    </div>
 </div>

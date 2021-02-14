@@ -11,17 +11,21 @@ namespace MovieApp.Web.Components.Movies
         [Inject]
         public IMovieService MovieService { get; set; }
 
-
         public IEnumerable<Movie> PopularMovies { get; set; } = new List<Movie>();
-
+        public IEnumerable<Movie> TopRatedMovies { get; set; } = new List<Movie>();
+        public IEnumerable<Movie> UpcomingMovies { get; set; } = new List<Movie>();
 
         protected override async Task OnInitializedAsync()
         {
-            var data = await MovieService.GetPopularMoviesAsync();
+            var popularMovies = await MovieService.GetPopularMoviesAsync();
+            var topRatedMovies = await MovieService.GetTopRatedMoviesAsync();
+            var upcomingMovies = await MovieService.GetUpcomingMoviesAsync();
 
-            if (data is not null)
+            if (popularMovies is not null && TopRatedMovies is not null && upcomingMovies is not null)
             {
-                PopularMovies = data.Results;
+                PopularMovies = popularMovies.Results;
+                TopRatedMovies = topRatedMovies.Results;
+                UpcomingMovies = upcomingMovies.Results;
             }
         }
     }

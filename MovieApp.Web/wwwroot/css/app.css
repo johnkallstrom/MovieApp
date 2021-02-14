@@ -12,9 +12,9 @@ body {
     color: var(--dark) !important;
 }
 
-#genre-dropdown {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.media-wrapper {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 #nav {
@@ -34,7 +34,7 @@ body {
 }
 
 #footer {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 #footer {
@@ -54,11 +54,6 @@ body {
 #home a:hover {
     color: var(--orange);
     cursor: pointer;
-}
-
-#home .media-wrapper {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
 }
 
 .has-search .form-control {

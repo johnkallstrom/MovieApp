@@ -80,6 +80,7 @@ namespace MovieApp.Web.Services
             return data;
         }
 
+
         public async Task<MovieResults> GetPopularMoviesAsync(int page)
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}&page={page}");
@@ -94,7 +95,7 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        public async Task<IEnumerable<Movie>> GetTopRatedMoviesAsync()
+        public async Task<MovieResults> GetTopRatedMoviesAsync()
         {
             var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}");
 
@@ -105,7 +106,21 @@ namespace MovieApp.Web.Services
                 movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
-            return data.Results;
+            return data;
+        }
+
+        public async Task<MovieResults> GetTopRatedMoviesAsync(int page)
+        {
+            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}&page={page}");
+
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+
+            foreach (var movie in data.Results)
+            {
+                movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
+            }
+
+            return data;
         }
 
         public async Task<MovieResults> GetUpcomingMoviesAsync()

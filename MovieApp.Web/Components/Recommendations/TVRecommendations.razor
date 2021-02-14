@@ -1,24 +1,23 @@
-﻿@page "/recommendations/tv"
+﻿@page "/recommendations/tv-show"
 
 <div id="recommendations-movie">
     <h1>TV Show Recommendations</h1>
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-2">
-                    <SortingSelect OnSortSelection="HandleSortSelection" ShowTVOptions="true" />
-                </div>
-                <div class="col-md-2">
-                    <GenreSelect OnGenreSelection="HandleGenreSelection" ShowTVOptions="true" />
-                </div>
-                <div class="col-md-2">
-                    <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
-                </div>
+    <hr />
+    <div id="recommendations-filter">
+        <div class="row">
+            <div class="col-md-2">
+                <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
             </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <button class="btn btn-sm" @onclick="HandleButtonClick">Recommend</button>
-                </div>
+            <div class="col-md-2">
+                <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
+            </div>
+            <div class="col-md-2">
+                <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-sm" @onclick="HandleButtonClick">Recommend</button>
             </div>
         </div>
     </div>

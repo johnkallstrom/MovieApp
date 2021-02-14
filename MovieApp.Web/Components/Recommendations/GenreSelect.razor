@@ -1,7 +1,7 @@
 ﻿<div id="recommendations-genre">
     <p class="mb-1">Genre</p>
     <select class="form-select form-select-sm" @onchange="@(async (e) => await OnGenreSelection.InvokeAsync(e.Value.ToString()))">
-        <option value="0" selected>No genre</option>
+        <option value="0" selected disabled>Choose genre</option>
         @if (ShowMovieOptions)
         {
             @foreach (var option in MovieGenreOptions)
