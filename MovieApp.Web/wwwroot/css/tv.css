@@ -61,3 +61,33 @@
 #season-details-tables .image-wrapper {
     max-width: 100px;
 }
+
+#tv-popular a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#tv-popular a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#tv-on-the-air a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#tv-on-the-air a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#tv-top-rated a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#tv-top-rated a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}

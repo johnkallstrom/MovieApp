@@ -48,15 +48,40 @@
     margin-top: 1rem;
 }
 
-#movies-upcoming h1 {
-    margin-top: 1rem;
+#movies-popular a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#movies-popular a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#movies-upcoming a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#movies-upcoming a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+#movies-top-rated a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#movies-top-rated a:hover {
+    color: var(--orange);
+    cursor: pointer;
 }
 
 #movies-top-rated h1 {
     margin-top: 1rem;
 }
 
-#movies-popular a:hover {
-    cursor: pointer;
+#movies-top-rated h1 {
+    margin-top: 1rem;
 }
-

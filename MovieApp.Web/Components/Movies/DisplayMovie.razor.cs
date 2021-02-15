@@ -7,8 +7,5 @@ namespace MovieApp.Web.Components.Movies
     {
         [Parameter]
         public Movie Movie { get; set; }
-
-        [Parameter]
-        public bool ShowTitle { get; set; }
     }
 }

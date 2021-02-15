@@ -8,7 +8,7 @@
         <div class="row flex-row flex-nowrap overflow-auto">
             @foreach (var movie in PopularMovies)
             {
-                <DisplayMovie Movie="@movie" ShowTitle="false" />
+                <DisplayMovie Movie="@movie" />
             }
         </div>
     </div>
@@ -17,7 +17,7 @@
         <div class="row flex-row flex-nowrap overflow-auto">
             @foreach (var movie in TopRatedMovies)
             {
-                <DisplayMovie Movie="@movie" ShowTitle="false" />
+                <DisplayMovie Movie="@movie" />
             }
         </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="row flex-row flex-nowrap overflow-auto">
             @foreach (var movie in UpcomingMovies)
             {
-                <DisplayMovie Movie="@movie" ShowTitle="false" />
+                <DisplayMovie Movie="@movie" />
             }
         </div>
     </div>

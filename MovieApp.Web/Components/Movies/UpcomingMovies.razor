@@ -6,7 +6,7 @@
     <div class="row">
         @foreach (var movie in Results)
         {
-            <DisplayMovie Movie="@movie" ShowTitle="false" />
+            <DisplayMovie Movie="@movie" />
         }
     </div>
     <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
