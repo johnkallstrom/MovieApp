@@ -25,13 +25,15 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                @if (Results.Count() is not 0)
-                {
-                    @foreach (var movie in Results)
+                <div class="row flex-row">
+                    @if (Results.Count() is not 0)
                     {
-                        <DisplayMovie Movie="movie" />
+                        @foreach (var movie in Results)
+                        {
+                            <DisplayMovie Movie="movie" />
+                        }
                     }
-                }
+                </div>
                 <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
             </div>
         </div>
