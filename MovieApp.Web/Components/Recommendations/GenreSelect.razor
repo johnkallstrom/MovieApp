@@ -1,4 +1,4 @@
-﻿<div id="recommendations-genre">
+﻿<div id="recommendations-genre" class="mt-3">
     <p class="mb-1">Genre</p>
     <select class="form-select form-select-sm" @onchange="@(async (e) => await OnGenreSelection.InvokeAsync(e.Value.ToString()))">
         <option value="0" selected>Genre</option>

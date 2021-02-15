@@ -14,6 +14,16 @@
     margin-bottom: 1rem;
 }
 
+#recommendations-movie a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#recommendations-movie a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
 #recommendations-filter {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -23,11 +33,13 @@
     font-weight: normal;
     background-color: var(--dark) !important;
     padding: 0.6rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    margin-right: 0.4rem;
 }
 
 #recommendations-filter .badge:last-child {
-    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-right: 0rem;
 }
 
 #recommendations-filter .badge:hover {
@@ -36,4 +48,14 @@
 
 #recommendations-movie a:hover {
     cursor: pointer;
+}
+
+#recommendations-movie .btn {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+#recommendations-movie .btn:hover {
+    cursor: pointer;
+    background-color: var(--orange-interact);
 }

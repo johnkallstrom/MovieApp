@@ -5,65 +5,35 @@
     <hr />
     <div id="recommendations-filter">
         <div class="row">
-            <div class="col-md-2">
-                <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
-            </div>
-            <div class="col-md-2">
-                <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
-            </div>
-            <div class="col-md-2">
-                <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-2">
-                <SearchActor OnActorChanged="HandleActorChanged" />
-            </div>
-        </div>
-        @if (SelectedActors.Count() is not 0)
-        {
-            <div class="row mt-3">
-                <div class="col-md-1">
-                    @foreach (var actor in SelectedActors)
-                    {
-                        <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
-                    }
+            <div class="col-md-3">
+                <div class="card">
+                    <h5 class="card-header">Filter</h5>
+                    <div class="card-body">
+                        <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
+                        <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
+                        <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                        <SearchActor OnActorChanged="HandleActorChanged" />
+                        @if (SelectedActors.Count() is not 0)
+                        {
+                            @foreach (var actor in SelectedActors)
+                            {
+                                <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
+                            }
+                        }
+                        <button style="width: 100%" class="btn btn-lg mt-3" @onclick="HandleButtonClick">Recommend</button>
+                    </div>
                 </div>
             </div>
-        }
-        <div class="row mt-3">
-            <div class="col-md-2">
-                <button class="btn btn-primary btn-sm" @onclick="HandleButtonClick">Recommend</button>
+            <div class="col-sm-9">
+                @if (Results.Count() is not 0)
+                {
+                    @foreach (var movie in Results)
+                    {
+                        <DisplayMovie Movie="movie" />
+                    }
+                }
+                <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
             </div>
         </div>
     </div>
-    @if (Results.Count() is not 0)
-    {
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Release Date</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col">Popularity</th>
-                    <th scope="col">Details</th>
-                </tr>
-            </thead>
-            @foreach (var movie in Results)
-            {
-                <tbody>
-                    <tr>
-                        <td>@movie.Title</td>
-                        <td>@(!string.IsNullOrWhiteSpace(movie.Release_Date) ? movie.Release_Date : DateTime.MinValue.ToShortDateString())</td>
-                        <td>@movie.Vote_Average</td>
-                        <td>@(Math.Round(movie.Popularity, 2))</td>
-                        <td>
-                            <a href="@($"/movie/{movie.Id}")">Details</a>
-                        </td>
-                    </tr>
-                </tbody>
-            }
-        </table>
-    }
-    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
 </div> 
