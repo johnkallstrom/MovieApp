@@ -1,35 +1,33 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Threading;
+using MovieApp.Web.Models;
+using MovieApp.Web.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Recommendations
 {
     public partial class SearchActor
     {
-        private Timer _timer;
+        [Inject]
+        public IPeopleService PeopleService { get; set; }
 
-        public string SearchQuery { get; set; }
+        public Person SelectedActor { get; set; }
 
         [Parameter]
-        public EventCallback<string> OnQueryChange { get; set; }
+        public EventCallback<Person> OnActorChanged { get; set; }
 
-        public string Placeholder { get; set; } = "Search actor...";
-
-        public void SetQuery(string value)
+        private async Task<IEnumerable<Person>> SearchActors(string searchText)
         {
-            if (_timer != null)
-            {
-                _timer.Dispose();
-            }
+            var data = await PeopleService.GetPeopleBySearchAsync(searchText);
 
-            SearchQuery = value;
-
-            _timer = new Timer(OnElapsedTimer, null, 500, 0);
+            return data.Results.Where(x => x.Known_For_Department == "Acting").ToList();
         }
 
-        private void OnElapsedTimer(object state)
+        private async Task HandleActorSelection(Person result)
         {
-            OnQueryChange.InvokeAsync(SearchQuery);
-            _timer.Dispose();
+            SelectedActor = result;
+            await OnActorChanged.InvokeAsync(SelectedActor);
         }
     }
 }

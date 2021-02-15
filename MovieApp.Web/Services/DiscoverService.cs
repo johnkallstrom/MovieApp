@@ -3,6 +3,7 @@ using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
@@ -76,6 +77,23 @@ namespace MovieApp.Web.Services
             if (parameters.GenreId is not 0)
             {
                 builder.AppendLine($"&with_genres={parameters.GenreId}");
+            }
+
+            if (parameters.ActorIds.Count() is not 0)
+            {
+                builder.AppendLine("&with_cast=");
+
+                foreach (var actorId in parameters.ActorIds)
+                {
+                    if (actorId == parameters.ActorIds.Last())
+                    {
+                        builder.AppendLine($"{actorId}");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"{actorId},");
+                    }
+                }
             }
 
             builder.AppendLine("&include_adult=false");

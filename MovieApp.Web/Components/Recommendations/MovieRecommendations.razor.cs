@@ -26,9 +26,9 @@ namespace MovieApp.Web.Components.Recommendations
         public int GenreId { get; set; } = 0;
         public int ReleaseYear { get; set; } = 0;
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
-        public IEnumerable<Person> SearchResults { get; set; } = new List<Person>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
+        public List<Person> SelectedActors { get; set; } = new List<Person>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -58,17 +58,9 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected async Task HandleQueryChange(string query)
+        protected void HandleActorChanged(Person selectedActor)
         {
-            var results = await FetchCastResults(query);
-
-            SearchResults = results.Where(person => person.Known_For_Department == "Acting").ToList();
-
-            foreach (var person in SearchResults)
-            {
-                Console.WriteLine($"Name: {person.Name}");
-                Console.WriteLine($"Known For Department: {person.Known_For_Department}");
-            }
+            SelectedActors.Add(selectedActor);
         }
 
         protected async Task HandlePageChanged(int selectedPage)
@@ -109,16 +101,25 @@ namespace MovieApp.Web.Components.Recommendations
 
         private async Task<MovieResults> FetchMovieResults()
         {
-            var results = await DiscoverService.GetMoviesAsync(new MovieParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, ReleaseYear = ReleaseYear });
+            var parameters = new MovieParameters
+            {
+                Page = Page,
+                SortOrder = SortOrder,
+                GenreId = GenreId,
+                ReleaseYear = ReleaseYear,
+            };
+
+            if (SelectedActors.Count() is not 0)
+            {
+                foreach (var actor in SelectedActors)
+                {
+                    parameters.ActorIds.Add(actor.Id);
+                }
+            }
+
+            var results = await DiscoverService.GetMoviesAsync(parameters);
 
             return results;
-        }
-
-        private async Task<IEnumerable<Person>> FetchCastResults(string query)
-        {
-            var data = await PeopleService.GetPeopleBySearchAsync(query);
-
-            return data.Results;
         }
     }
 }

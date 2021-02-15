@@ -1,4 +1,6 @@
-﻿namespace MovieApp.Web.Parameters
+﻿using System.Collections.Generic;
+
+namespace MovieApp.Web.Parameters
 {
     public class MovieParameters
     {
@@ -6,5 +8,6 @@
         public string SortOrder { get; set; }
         public int GenreId { get; set; }
         public int ReleaseYear { get; set; }
+        public List<int> ActorIds { get; set; } = new List<int>();
     }
 }

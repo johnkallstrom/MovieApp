@@ -52,11 +52,6 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected void HandleQueryChange(string value)
-        {
-            SearchQuery = value;
-        }
-
         protected async Task HandlePageChanged(int selectedPage)
         {
             Page = selectedPage;

@@ -17,13 +17,23 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-2">
-                <SearchActor OnQueryChange="HandleQueryChange" />
+                <SearchActor OnActorChanged="HandleActorChanged" />
             </div>
         </div>
+        @if (SelectedActors.Count() is not 0)
+        {
+            <div class="row mt-3">
+                <div class="col-md-1">
+                    @foreach (var actor in SelectedActors)
+                    {
+                        <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
+                    }
+                </div>
+            </div>
+        }
         <div class="row mt-3">
             <div class="col-md-2">
                 <button class="btn btn-primary btn-sm" @onclick="HandleButtonClick">Recommend</button>
-                <button class="btn btn-danger btn-sm">Clear</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,23 @@
+﻿.blazored-typeahead__input {
+    height: calc(1.5em + .5rem + 2px) !important;
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+    padding-left: .5rem !important;
+    font-size: .875rem !important;
+}
+
+.blazored-typeahead__input-mask {
+    height: calc(1.5em + .5rem + 2px) !important;
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+    padding-left: .5rem !important;
+    font-size: .875rem !important;
+}
+
+/*.blazored-typeahead__input-mask-wrapper {
+    height: calc(1.5em + .5rem + 2px) !important;
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+    padding-left: .5rem !important;
+    font-size: .875rem !important;
+}*/

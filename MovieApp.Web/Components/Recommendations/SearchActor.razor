@@ -1,13 +1,22 @@
-﻿<div id="search-actor">
-    <p class="mb-1">Actor</p>
-    <div class="input-group input-group-sm">
-        <input @bind-value="SearchQuery"
-               @bind-value:event="oninput"
-               @onkeyup="@(() => SetQuery(SearchQuery))"
-               @onfocus="@(() => Placeholder = string.Empty)"
-               @onblur="@(() => Placeholder = "Search actor...")"
-               type="text" 
-               class="form-control" 
-               placeholder="Search actor...">
-    </div>
-</div>
+﻿@using MovieApp.Web.Models 
+
+<p class="mb-1">Actor</p>
+<BlazoredTypeahead SearchMethod="@SearchActors"
+                   TValue="Person"
+                   TItem="Person"
+                   Value="@SelectedActor"
+                   ValueChanged="HandleActorSelection"
+                   ValueExpression="@(() => SelectedActor)"
+                   Debounce="500"
+                   DisableClear="true"
+                   placeholder="Search actor...">
+    <SelectedTemplate>
+        @context.Name
+    </SelectedTemplate>
+    <ResultTemplate>
+        @context.Name
+    </ResultTemplate>
+    <NotFoundTemplate>
+        Sorry, there weren't any search results.
+    </NotFoundTemplate>
+</BlazoredTypeahead>

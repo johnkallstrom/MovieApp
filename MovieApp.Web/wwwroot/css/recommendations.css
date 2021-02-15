@@ -19,6 +19,21 @@
     margin-bottom: 1rem;
 }
 
+#recommendations-filter .badge {
+    font-weight: normal;
+    background-color: var(--dark) !important;
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+#recommendations-filter .badge:last-child {
+    margin-bottom: 0rem;
+}
+
+#recommendations-filter .badge:hover {
+    cursor: pointer;
+}
+
 #recommendations-movie a:hover {
     cursor: pointer;
 }
