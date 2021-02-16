@@ -1,0 +1,13 @@
+﻿#search-list {
+    margin-bottom: 1rem;
+}
+
+#search-list a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#search-list a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}

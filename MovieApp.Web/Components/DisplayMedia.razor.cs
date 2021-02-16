@@ -3,9 +3,9 @@ using MovieApp.Web.Enums;
 using MovieApp.Web.Models;
 using System;
 
-namespace MovieApp.Web.Components.Search
+namespace MovieApp.Web.Components
 {
-    public partial class DisplaySearchMedia
+    public partial class DisplayMedia
     {
 		[Parameter]
 		public Media Media { get; set; }

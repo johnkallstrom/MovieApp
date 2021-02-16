@@ -76,19 +76,12 @@ body {
     margin-bottom: 1rem;
 }
 
-#search-list .image-wrapper {
-    max-width: 100px;
-}
-
-#search-list .list-group a {
-    color: #212529;
+#search-list a {
+    color: var(--dark);
     text-decoration: none;
 }
 
 #search-list a:hover {
-    cursor: pointer;
-}
-
-#search-filter a:hover {
     color: var(--orange);
+    cursor: pointer;
 }

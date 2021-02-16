@@ -11,14 +11,14 @@
 }
 
 #pagination .page-item.disabled .page-link {
-    color: #6c757d;
+    color: #6c757d !important;
     pointer-events: none;
     background-color: #fff;
     border-color: #dee2e6;
 }
 
 #pagination a {
-    color: var(--orange);
+    color: var(--orange) !important;
 }
 
 #pagination a:hover {

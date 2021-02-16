@@ -2,6 +2,7 @@
 using MovieApp.Web.Enums;
 using MovieApp.Web.State;
 using System;
+using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Search
 {
@@ -27,6 +28,11 @@ namespace MovieApp.Web.Components.Search
             SearchState.OnResultsChange += StateHasChanged;
             SearchState.OnTotalResultsChange += StateHasChanged;
             SearchState.OnFilterChange += StateHasChanged;
+        }
+
+        protected async Task HandlePageChanged(int selectedPage)
+        {
+            SearchState.SetPage(selectedPage);
         }
 
         private void RedirectToHome()
