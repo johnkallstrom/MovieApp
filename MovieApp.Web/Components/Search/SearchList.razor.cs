@@ -30,7 +30,7 @@ namespace MovieApp.Web.Components.Search
             SearchState.OnFilterChange += StateHasChanged;
         }
 
-        protected async Task HandlePageChanged(int selectedPage)
+        protected void HandlePageChanged(int selectedPage)
         {
             SearchState.SetPage(selectedPage);
         }
