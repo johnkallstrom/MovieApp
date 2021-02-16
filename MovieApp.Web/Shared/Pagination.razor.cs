@@ -11,6 +11,9 @@ namespace MovieApp.Web.Shared
         public int TotalPages { get; set; }
 
         [Parameter]
+        public int MaximumPageNumbersToDisplay { get; set; }
+
+        [Parameter]
         public EventCallback<int> OnPageChanged { get; set; }
     }
 }

@@ -24,3 +24,10 @@
 #pagination a:hover {
     cursor: pointer;
 }
+
+#pagination .page-item.active .page-link {
+    z-index: 3;
+    color: var(--white) !important;
+    background-color: var(--orange);
+    border: 1px solid #dee2e6;
+}
