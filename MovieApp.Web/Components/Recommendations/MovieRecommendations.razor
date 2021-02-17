@@ -16,6 +16,7 @@
                     <h5 class="card-header">Filter</h5>
                     <div class="card-body">
                         <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                        <DatePicker OnDateSelection="HandleDateSelection" />
                         <GenreSwitch ShowMovieOptions="true" OnGenreSelection="HandleGenreSelection" />
                         <SearchActor OnActorSelected="HandleActorSelection" />
                         @if (SelectedActors.Count() is not 0)

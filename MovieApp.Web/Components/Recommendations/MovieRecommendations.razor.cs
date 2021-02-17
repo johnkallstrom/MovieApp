@@ -28,6 +28,7 @@ namespace MovieApp.Web.Components.Recommendations
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
+        public string FromDate { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
         public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
@@ -58,6 +59,12 @@ namespace MovieApp.Web.Components.Recommendations
                 TotalPages = results.Total_Pages;
                 TotalResults = results.Total_Results;
             }
+        }
+
+        protected void HandleDateSelection(DateSelectResult result)
+        {
+            Console.WriteLine($"Type: {result.Type}");
+            Console.WriteLine($"Date: {result.Value}");
         }
 
         protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
