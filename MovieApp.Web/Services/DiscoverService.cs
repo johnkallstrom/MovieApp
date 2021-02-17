@@ -144,9 +144,21 @@ namespace MovieApp.Web.Services
                 builder.AppendLine($"&first_air_date_year={parameters.FirstAirYear}");
             }
 
-            if (parameters.GenreId is not 0)
+            if (parameters.GenreIds.Count() is not 0)
             {
-                builder.AppendLine($"&with_genres={parameters.GenreId}");
+                builder.AppendLine("&with_genres=");
+
+                foreach (var genreId in parameters.GenreIds)
+                {
+                    if (genreId == parameters.GenreIds.Last())
+                    {
+                        builder.AppendLine($"{genreId}");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"{genreId},");
+                    }
+                }
             }
 
             builder.AppendLine("&include_adult=false");

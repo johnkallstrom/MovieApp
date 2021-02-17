@@ -5,7 +5,6 @@
     <hr />
     @if (!string.IsNullOrEmpty(SearchState.Query))
     {
-        <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults @DisplayFilter() match(es)</p>
         <div class="row">
             <div class="col-md-3">
                 <SearchFilter />

@@ -1,13 +1,29 @@
 ﻿<div id="recommendations-genre" class="mt-3">
     <p class="mb-1">Genre</p>
-    @foreach (var genre in MovieGenreOptions)
+    @if (ShowMovieOptions is true)
     {
-        <div class="form-check form-switch">
-            <input class="form-check-input" 
-                   type="checkbox" 
-                   id="genre-switch" 
-                   @onchange="@(async (e) => await HandleGenreSelection(e, genre.Id))" />
-            <label class="form-check-label" for="genre-switch">@genre.Name</label>
-        </div>
+        @foreach (var genre in MovieGenreOptions)
+        {
+            <div class="form-check form-switch">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="genre-switch"
+                       @onchange="@(async (e) => await HandleGenreSelection(e, genre.Id))" />
+                <label class="form-check-label" for="genre-switch">@genre.Name</label>
+            </div>
+        }
+    }
+    else if (ShowTVOptions is true)
+    {
+        @foreach (var genre in TVGenreOptions)
+        {
+            <div class="form-check form-switch">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="genre-switch"
+                       @onchange="@(async (e) => await HandleGenreSelection(e, genre.Id))" />
+                <label class="form-check-label" for="genre-switch">@genre.Name</label>
+            </div>
+        }
     }
 </div>

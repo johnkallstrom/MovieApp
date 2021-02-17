@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Data;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
 using MovieApp.Web.Services;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Recommendations
@@ -23,6 +25,7 @@ namespace MovieApp.Web.Components.Recommendations
         public IEnumerable<TVShow> Results { get; set; } = new List<TVShow>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
+        public List<int> SelectedGenreIds { get; set; } = new List<int>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -72,11 +75,19 @@ namespace MovieApp.Web.Components.Recommendations
             SortOrder = selectedSortOrder;
         }
 
-        protected void HandleGenreSelection(string selectedGenre)
+        protected void HandleGenreSelection(GenreSelectResult result)
         {
-            if (int.TryParse(selectedGenre, out int parsedGenreId))
+            if (result is not null)
             {
-                GenreId = parsedGenreId;
+                if (result.IsActive is true)
+                {
+                    SelectedGenreIds.Add(result.Id);
+                }
+
+                if (result.IsActive is not true)
+                {
+                    SelectedGenreIds.Remove(result.Id);
+                }
             }
         }
 
@@ -90,7 +101,19 @@ namespace MovieApp.Web.Components.Recommendations
 
         private async Task<TVResults> FetchTVResults()
         {
-            var results = await DiscoverService.GetTVAsync(new TVParameters { Page = Page, SortOrder = SortOrder, GenreId = GenreId, FirstAirYear = FirstAirYear });
+            var parameters = new TVParameters
+            {
+                Page = Page,
+                SortOrder = SortOrder,
+                FirstAirYear = FirstAirYear
+            };
+
+            if (SelectedGenreIds.Count() is not 0)
+            {
+                parameters.GenreIds = SelectedGenreIds;
+            }
+
+            var results = await DiscoverService.GetTVAsync(parameters);
 
             return results;
         }

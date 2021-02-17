@@ -1,4 +1,12 @@
-﻿#search-list {
+﻿:root {
+    --light-grey: #fafafa;
+    --orange: rgb(255, 108, 55);
+    --dark: rgb(28, 39, 43);
+    --light-dark: rgb(36, 51, 56);
+    --white: rgb(255, 255, 255);
+}
+
+#search-list {
     margin-bottom: 1rem;
 }
 
@@ -26,4 +34,26 @@
     text-align: center;
     pointer-events: none;
     color: #aaa;
+}
+
+#search-list .btn {
+    border: 1px solid var(--orange) !important;
+    color: var(--orange) !important;
+    display: block;
+    margin-top: 0.5rem;
+    outline: none !important;
+}
+
+#search-list .btn:hover {
+    color: var(--white) !important;
+    background-color: var(--orange);
+}
+
+#search-list .btn:first-child {
+    margin-top: 0rem;
+}
+
+#search-list .btn.active, .btn:active {
+    color: var(--white) !important;
+    background-color: var(--orange);
 }

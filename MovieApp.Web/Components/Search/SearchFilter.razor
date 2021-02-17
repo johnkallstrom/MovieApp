@@ -1,13 +1,18 @@
-﻿@using MovieApp.Web.Enums
-
-<div id="search-filter">
+﻿<div id="search-filter">
     <div class="card">
         <h5 class="card-header">Filter</h5>
-        <div class="p-3">
-            <p class="card-text"><a @onclick="@(() => SearchState.SetFilter(SearchFilterType.All))">All</a></p>
-            <p class="card-text"><a @onclick="@(() => SearchState.SetFilter(SearchFilterType.Movies))">Movies</a></p>
-            <p class="card-text"><a @onclick="@(() => SearchState.SetFilter(SearchFilterType.TV))">TV Shows</a></p>
-            <p class="card-text"><a @onclick="@(() => SearchState.SetFilter(SearchFilterType.People))">People</a></p>
+        <div class="card-body">
+            @foreach (var filter in FilterOptions)
+            {
+                @if (filter == SearchState.Filter)
+                {
+                    <button class="btn active" @onclick="@(() => SearchState.SetFilter(filter))">@filter.ToString()</button>
+                }
+                else
+                {
+                    <button class="btn" @onclick="@(() => SearchState.SetFilter(filter))">@filter.ToString()</button>
+                }
+            }
         </div>
     </div>
 </div>

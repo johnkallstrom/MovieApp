@@ -26,11 +26,15 @@ namespace MovieApp.Web.Components.Recommendations
 
         protected override async Task OnInitializedAsync()
         {
-            if (ShowMovieOptions)
+            if (ShowMovieOptions is true)
+            {
                 MovieGenreOptions = await GenreService.GetMovieGenresAsync();
+            }
 
-            if (ShowTVOptions)
+            if (ShowTVOptions is true)
+            {
                 TVGenreOptions = await GenreService.GetTVGenresAsync();
+            }
         }
 
         private async Task HandleGenreSelection(ChangeEventArgs e, int genreId)
