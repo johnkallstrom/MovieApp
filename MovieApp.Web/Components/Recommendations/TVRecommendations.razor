@@ -5,49 +5,35 @@
     <hr />
     <div id="recommendations-filter">
         <div class="row">
-            <div class="col-md-2">
-                <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
+            <div class="col-md-3">
+                <div class="card">
+                    <h5 class="card-header">Filter</h5>
+                    <div class="card-body">
+                        <SortingSelect OnSortSelection="HandleSortSelection" ShowTVOptions="true" />
+                        <GenreSelect OnGenreSelection="HandleGenreSelection" ShowTVOptions="true" />
+                        <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                        <button style="width: 100%" class="btn btn-lg mt-3" @onclick="HandleButtonClick">Recommend</button>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2">
-                <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
-            </div>
-            <div class="col-md-2">
-                <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-2">
-                <button class="btn btn-primary btn-sm" @onclick="HandleButtonClick">Recommend</button>
+            <div class="col-sm-9">
+                <div class="row flex-row">
+                    @if (Results.Count() is not 0)
+                    {
+                        @foreach (var tvShow in Results)
+                        {
+                            <DisplayTV TVShow="tvShow" />
+                        }
+                        <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <h5>No recommendations could be found, try again.</h5>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-    @if (Results.Count() is not 0)
-    {
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">First Air Date</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col">Popularity</th>
-                    <th scope="col">Details</th>
-                </tr>
-            </thead>
-            @foreach (var tvShow in Results)
-            {
-                <tbody>
-                    <tr>
-                        <td>@tvShow.Name</td>
-                        <td>@(!string.IsNullOrWhiteSpace(tvShow.First_Air_Date) ? tvShow.First_Air_Date : DateTime.MinValue.ToShortDateString())</td>
-                        <td>@tvShow.Vote_Average</td>
-                        <td>@(Math.Round(tvShow.Popularity, 2))</td>
-                        <td>
-                            <a href="@($"/tv-shows/{tvShow.Id}")">Details</a>
-                        </td>
-                    </tr>
-                </tbody>
-            }
-        </table>
-    }
-    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
-</div> 
+</div>

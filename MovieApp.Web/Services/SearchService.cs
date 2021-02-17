@@ -26,6 +26,13 @@ namespace MovieApp.Web.Services
         }
 
         #region Public Methods
+        public async Task<KeywordResults> GetKeywordSearchAsync(string query)
+        {
+            var data = await _httpClient.GetFromJsonAsync<KeywordResults>($"search/keyword?api_key={_config[API_KEY]}&query={query}");
+
+            return data;
+        }
+
         public async Task<MediaResults> GetPeopleSearchAsync(string query, int page)
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");

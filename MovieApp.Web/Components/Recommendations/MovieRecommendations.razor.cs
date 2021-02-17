@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Data;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
@@ -23,12 +24,13 @@ namespace MovieApp.Web.Components.Recommendations
 
         public int Page { get; set; } = 1;
         public string SortOrder { get; set; }
-        public int GenreId { get; set; } = 0;
         public int ReleaseYear { get; set; } = 0;
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
+        public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
+        public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -58,10 +60,8 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected void HandleActorChanged(Person selectedActor)
-        {
-            SelectedActors.Add(selectedActor);
-        }
+        protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
+        protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
 
         protected async Task HandlePageChanged(int selectedPage)
         {
@@ -83,11 +83,19 @@ namespace MovieApp.Web.Components.Recommendations
             SortOrder = selectedSortOrder;
         }
 
-        protected void HandleGenreSelection(string selectedGenre)
+        protected void HandleGenreSelection(GenreSelectResult result)
         {
-            if (int.TryParse(selectedGenre, out int parsedGenreId))
+            if (result is not null)
             {
-                GenreId = parsedGenreId;
+                if (result.IsActive is true)
+                {
+                    SelectedGenreIds.Add(result.Id);
+                }
+
+                if (result.IsActive is not true)
+                {
+                    SelectedGenreIds.Remove(result.Id);
+                }
             }
         }
 
@@ -105,15 +113,27 @@ namespace MovieApp.Web.Components.Recommendations
             {
                 Page = Page,
                 SortOrder = SortOrder,
-                GenreId = GenreId,
                 ReleaseYear = ReleaseYear,
             };
+
+            if (SelectedGenreIds.Count() is not 0)
+            {
+                parameters.GenreIds = SelectedGenreIds;
+            }
 
             if (SelectedActors.Count() is not 0)
             {
                 foreach (var actor in SelectedActors)
                 {
                     parameters.ActorIds.Add(actor.Id);
+                }
+            }
+
+            if (SelectedKeywords.Count() is not 0)
+            {
+                foreach (var keyword in SelectedKeywords)
+                {
+                    parameters.KeywordIds.Add(keyword.Id);
                 }
             }
 

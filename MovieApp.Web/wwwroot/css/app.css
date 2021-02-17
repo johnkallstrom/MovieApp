@@ -33,6 +33,12 @@ body {
     color: var(--orange) !important;
 }
 
+#nav .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: var(--orange);
+}
+
 #footer {
     margin-top: 2rem;
 }
@@ -52,36 +58,6 @@ body {
 }
 
 #home a:hover {
-    color: var(--orange);
-    cursor: pointer;
-}
-
-.has-search .form-control {
-    padding-left: 2.375rem;
-}
-
-.has-search .form-control-feedback {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: #aaa;
-}
-
-#search-list {
-    margin-bottom: 1rem;
-}
-
-#search-list a {
-    color: var(--dark);
-    text-decoration: none;
-}
-
-#search-list a:hover {
     color: var(--orange);
     cursor: pointer;
 }

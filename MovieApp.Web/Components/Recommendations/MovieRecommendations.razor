@@ -10,14 +10,22 @@
                     <h5 class="card-header">Filter</h5>
                     <div class="card-body">
                         <SortingSelect OnSortSelection="HandleSortSelection" ShowMovieOptions="true" />
-                        <GenreSelect OnGenreSelection="HandleGenreSelection" ShowMovieOptions="true" />
                         <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
-                        <SearchActor OnActorChanged="HandleActorChanged" />
+                        <GenreSwitch ShowMovieOptions="true" OnGenreSelection="HandleGenreSelection" />
+                        <SearchActor OnActorSelected="HandleActorSelection" />
                         @if (SelectedActors.Count() is not 0)
                         {
                             @foreach (var actor in SelectedActors)
                             {
                                 <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
+                            }
+                        }
+                        <SearchKeyword OnKeywordSelected="HandleKeywordSelection" />
+                        @if (SelectedKeywords.Count() is not 0)
+                        {
+                            @foreach (var keyword in SelectedKeywords)
+                            {
+                                <span class="badge" @onclick="@(() => SelectedKeywords.Remove(keyword))">@keyword.Name</span>
                             }
                         }
                         <button style="width: 100%" class="btn btn-lg mt-3" @onclick="HandleButtonClick">Recommend</button>
@@ -32,9 +40,15 @@
                         {
                             <DisplayMovie Movie="movie" />
                         }
+                        <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <h5>No recommendations could be found, try again.</h5>
+                        </div>
                     }
                 </div>
-                <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
             </div>
         </div>
     </div>

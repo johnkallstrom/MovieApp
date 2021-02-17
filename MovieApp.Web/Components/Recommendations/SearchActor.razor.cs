@@ -15,7 +15,7 @@ namespace MovieApp.Web.Components.Recommendations
         public Person SelectedActor { get; set; }
 
         [Parameter]
-        public EventCallback<Person> OnActorChanged { get; set; }
+        public EventCallback<Person> OnActorSelected { get; set; }
 
         private async Task<IEnumerable<Person>> SearchActors(string searchText)
         {
@@ -27,7 +27,7 @@ namespace MovieApp.Web.Components.Recommendations
         private async Task HandleActorSelection(Person result)
         {
             SelectedActor = result;
-            await OnActorChanged.InvokeAsync(SelectedActor);
+            await OnActorSelected.InvokeAsync(SelectedActor);
         }
     }
 }

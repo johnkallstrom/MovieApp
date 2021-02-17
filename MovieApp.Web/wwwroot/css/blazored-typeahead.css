@@ -1,4 +1,12 @@
-﻿.blazored-typeahead__input {
+﻿:root {
+    --light-grey: #fafafa;
+    --orange: rgb(255, 108, 55);
+    --dark: rgb(28, 39, 43);
+    --light-dark: rgb(36, 51, 56);
+    --white: rgb(255, 255, 255);
+}
+
+.blazored-typeahead__input {
     height: calc(1.5em + .5rem + 2px) !important;
     padding-top: .25rem !important;
     padding-bottom: .25rem !important;
@@ -14,10 +22,6 @@
     font-size: .875rem !important;
 }
 
-/*.blazored-typeahead__input-mask-wrapper {
-    height: calc(1.5em + .5rem + 2px) !important;
-    padding-top: .25rem !important;
-    padding-bottom: .25rem !important;
-    padding-left: .5rem !important;
-    font-size: .875rem !important;
-}*/
+.blazored-typeahead__result {
+    padding: .2rem !important;
+}

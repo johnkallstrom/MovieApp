@@ -5,6 +5,7 @@ namespace MovieApp.Web.Services
 {
     public interface ISearchService
     {
+        Task<KeywordResults> GetKeywordSearchAsync(string query);
         Task<MediaResults> GetPeopleSearchAsync(string query, int page);
         Task<MediaResults> GetTVSearchAsync(string query, int page);
         Task<MediaResults> GetMovieSearchAsync(string query, int page);

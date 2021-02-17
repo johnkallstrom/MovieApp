@@ -74,9 +74,21 @@ namespace MovieApp.Web.Services
                 builder.AppendLine($"&primary_release_year={parameters.ReleaseYear}");
             }
 
-            if (parameters.GenreId is not 0)
+            if (parameters.GenreIds.Count() is not 0)
             {
-                builder.AppendLine($"&with_genres={parameters.GenreId}");
+                builder.AppendLine("&with_genres=");
+
+                foreach (var genreId in parameters.GenreIds)
+                {
+                    if (genreId == parameters.GenreIds.Last())
+                    {
+                        builder.AppendLine($"{genreId}");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"{genreId},");
+                    }
+                }
             }
 
             if (parameters.ActorIds.Count() is not 0)
@@ -92,6 +104,23 @@ namespace MovieApp.Web.Services
                     else
                     {
                         builder.AppendLine($"{actorId},");
+                    }
+                }
+            }
+
+            if (parameters.KeywordIds.Count() is not 0)
+            {
+                builder.AppendLine("&with_keywords=");
+
+                foreach (var keywordId in parameters.KeywordIds)
+                {
+                    if (keywordId == parameters.KeywordIds.Last())
+                    {
+                        builder.AppendLine($"{keywordId}");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"{keywordId},");
                     }
                 }
             }
