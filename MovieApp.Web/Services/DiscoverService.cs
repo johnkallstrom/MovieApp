@@ -74,6 +74,16 @@ namespace MovieApp.Web.Services
                 builder.AppendLine($"&primary_release_year={parameters.ReleaseYear}");
             }
 
+            if (!string.IsNullOrEmpty(parameters.FromReleaseDate))
+            {
+                builder.AppendLine($"&primary_release_date.gte={parameters.FromReleaseDate}");
+            }
+
+            if (!string.IsNullOrEmpty(parameters.ToReleaseDate))
+            {
+                builder.AppendLine($"&primary_release_date.lte={parameters.ToReleaseDate}");
+            }
+
             if (parameters.GenreIds.Count() is not 0)
             {
                 builder.AppendLine("&with_genres=");

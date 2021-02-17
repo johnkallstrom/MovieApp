@@ -28,7 +28,8 @@ namespace MovieApp.Web.Components.Recommendations
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
-        public string FromDate { get; set; }
+        public string FromReleasedate { get; set; }
+        public string ToReleaseDate { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
         public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
@@ -63,8 +64,14 @@ namespace MovieApp.Web.Components.Recommendations
 
         protected void HandleDateSelection(DateSelectResult result)
         {
-            Console.WriteLine($"Type: {result.Type}");
-            Console.WriteLine($"Date: {result.Value}");
+            if (result is not null)
+            {
+                if (result.Type == "from")
+                    FromReleasedate = result.Value;
+
+                if (result.Type == "to")
+                    ToReleaseDate = result.Value;
+            }
         }
 
         protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
@@ -121,6 +128,8 @@ namespace MovieApp.Web.Components.Recommendations
                 Page = Page,
                 SortOrder = SortOrder,
                 ReleaseYear = ReleaseYear,
+                FromReleaseDate = FromReleasedate,
+                ToReleaseDate = ToReleaseDate
             };
 
             if (SelectedGenreIds.Count() is not 0)
