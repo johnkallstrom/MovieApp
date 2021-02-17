@@ -16,7 +16,7 @@
             }
 
             @{
-                for (int i = 1; i <= TotalPages; i++)
+                for (int i = Math.Max(1, Page - 4); i <= Math.Min(TotalPages, Page + 4); i++)
                 {
                     int pageNumber = i;
 
