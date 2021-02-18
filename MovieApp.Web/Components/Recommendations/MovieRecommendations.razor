@@ -1,6 +1,6 @@
 ﻿@page "/recommendations/movie"
 
-<div id="recommendations-movie">
+<div id="recommendations">
     <h1>Movie Recommendations</h1>
     <hr />
     <div id="recommendations-filter">
@@ -34,7 +34,7 @@
                                 <span class="badge" @onclick="@(() => SelectedKeywords.Remove(keyword))">@keyword.Name</span>
                             }
                         }
-                        <button style="width: 100%" class="btn btn-lg mt-3" @onclick="HandleButtonClick">Recommend</button>
+                        <button style="width: 100%" class="btn btn-lg mt-3" id="recommendations-button" @onclick="HandleButtonClick">Recommend</button>
                     </div>
                 </div>
             </div>

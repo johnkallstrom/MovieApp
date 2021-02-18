@@ -6,20 +6,16 @@
     --white: rgb(255, 255, 255);
 }
 
-#recommendations-movie h1 {
+#recommendations h1 {
     margin-bottom: 1rem;
 }
 
-#recommendations-tv h1 {
-    margin-bottom: 1rem;
-}
-
-#recommendations-movie a {
+#recommendations a {
     color: var(--dark);
     text-decoration: none;
 }
 
-#recommendations-movie a:hover {
+#recommendations a:hover {
     color: var(--orange);
     cursor: pointer;
 }
@@ -46,16 +42,18 @@
     cursor: pointer;
 }
 
-#recommendations-movie a:hover {
-    cursor: pointer;
+#recommendations-button {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
 }
 
-#recommendations-movie .btn {
-    background-color: var(--orange);
-    color: var(--white);
+#recommendations-button:hover {
+    cursor: pointer !important;
+    background-color: var(--orange-interact) !important;
 }
 
-#recommendations-movie .btn:hover {
-    cursor: pointer;
-    background-color: var(--orange-interact);
+#recommendations-date input[type="date"] {
+    border-radius: .25rem !important;
+    border: 1px solid #ced4da !important;
+    width: 100% !important;
 }

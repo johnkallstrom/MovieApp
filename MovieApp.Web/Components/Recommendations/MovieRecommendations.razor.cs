@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MovieApp.Web.Data;
-using MovieApp.Web.Enums;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
 using MovieApp.Web.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,29 +72,6 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
-        protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
-
-        protected async Task HandlePageChanged(int selectedPage)
-        {
-            Page = selectedPage;
-
-            var results = await FetchMovieResults();
-
-            if (results is not null)
-            {
-                Page = results.Page;
-                Results = results.Results;
-                TotalPages = results.Total_Pages;
-                TotalResults = results.Total_Results;
-            }
-        }
-
-        protected void HandleSortSelection(string selectedSortOrder)
-        {
-            SortOrder = selectedSortOrder;
-        }
-
         protected void HandleGenreSelection(GenreSelectResult result)
         {
             if (result is not null)
@@ -113,11 +88,30 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
+        protected void HandleSortSelection(string selectedSortOrder) => SortOrder = selectedSortOrder;
+        protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
+        protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
+
         protected void HandleYearSelection(string selectedYear)
         {
             if (int.TryParse(selectedYear, out int parsedYear))
             {
                 ReleaseYear = parsedYear;
+            }
+        }
+
+        protected async Task HandlePageChanged(int selectedPage)
+        {
+            Page = selectedPage;
+
+            var results = await FetchMovieResults();
+
+            if (results is not null)
+            {
+                Page = results.Page;
+                Results = results.Results;
+                TotalPages = results.Total_Pages;
+                TotalResults = results.Total_Results;
             }
         }
 
