@@ -18,6 +18,8 @@
                         <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
                         <DatePicker OnDateSelection="HandleDateSelection" />
                         <GenreSwitch ShowMovieOptions="true" OnGenreSelection="HandleGenreSelection" />
+                        <RuntimeSlider OnRuntimeChanged="HandleRuntimeChanged" />
+                        <p>@Runtime min</p>
                         <SearchActor OnActorSelected="HandleActorSelection" />
                         @if (SelectedActors.Count() is not 0)
                         {

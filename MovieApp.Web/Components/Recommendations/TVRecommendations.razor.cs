@@ -25,6 +25,9 @@ namespace MovieApp.Web.Components.Recommendations
         public IEnumerable<TVShow> Results { get; set; } = new List<TVShow>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
+        public string FromFirstAirDate { get; set; }
+        public string ToFirstAirDate { get; set; }
+        public int Runtime { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
 
         protected override async Task OnInitializedAsync()
@@ -55,6 +58,26 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
+        protected void HandleDateSelection(DateSelectResult result)
+        {
+            if (result is not null)
+            {
+                if (result.Type == "from")
+                    FromFirstAirDate = result.Value;
+
+                if (result.Type == "to")
+                    ToFirstAirDate = result.Value;
+            }
+        }
+
+        protected void HandleRuntimeChanged(string selectedRuntime)
+        {
+            if (int.TryParse(selectedRuntime, out int parsedRuntime))
+            {
+                Runtime = parsedRuntime;
+            }
+        }
+
         protected async Task HandlePageChanged(int selectedPage)
         {
             Page = selectedPage;
@@ -70,10 +93,7 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
-        protected void HandleSortSelection(string selectedSortOrder)
-        {
-            SortOrder = selectedSortOrder;
-        }
+        protected void HandleSortSelection(string selectedSortOrder) => SortOrder = selectedSortOrder;
 
         protected void HandleGenreSelection(GenreSelectResult result)
         {
@@ -105,7 +125,10 @@ namespace MovieApp.Web.Components.Recommendations
             {
                 Page = Page,
                 SortOrder = SortOrder,
-                FirstAirYear = FirstAirYear
+                FirstAirYear = FirstAirYear,
+                FromFirstAirDate = FromFirstAirDate,
+                ToFirstAirDate = ToFirstAirDate,
+                Runtime = Runtime
             };
 
             if (SelectedGenreIds.Count() is not 0)

@@ -20,11 +20,6 @@
     cursor: pointer;
 }
 
-#recommendations-filter {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
 #recommendations-filter .badge {
     font-weight: normal;
     background-color: var(--dark) !important;

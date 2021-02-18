@@ -16,8 +16,11 @@
                     <h5 class="card-header">Filter</h5>
                     <div class="card-body">
                         <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                        <DatePicker OnDateSelection="HandleDateSelection" />
                         <GenreSwitch ShowTVOptions="true" OnGenreSelection="HandleGenreSelection" />
-                        <button style="width: 100%" class="btn btn-lg mt-3" @onclick="HandleButtonClick">Recommend</button>
+                        <RuntimeSlider OnRuntimeChanged="HandleRuntimeChanged" />
+                        <p class="mb-0">@Runtime min</p>
+                        <button style="width: 100%" class="btn btn-lg mt-3" id="recommendations-button" @onclick="HandleButtonClick">Recommend</button>
                     </div>
                 </div>
             </div>

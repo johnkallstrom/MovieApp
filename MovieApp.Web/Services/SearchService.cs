@@ -37,7 +37,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
 
-            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
             foreach (var media in data.Results)
             {
@@ -53,7 +53,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
 
-            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
             foreach (var media in data.Results)
             {
@@ -69,7 +69,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
 
-            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
             foreach (var media in data.Results)
             {
@@ -85,7 +85,7 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
 
-            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 100, 150));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
             foreach (var media in data.Results)
             {

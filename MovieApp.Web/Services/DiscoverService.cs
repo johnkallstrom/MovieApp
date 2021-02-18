@@ -30,7 +30,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetMoviesAsync(MovieParameters parameters)
         {
-            string url = GenerateMovieApiUrl(parameters);
+            string url = GetMovieApiUrl(parameters);
 
             var data = await _httpClient.GetFromJsonAsync<MovieResults>(url);
 
@@ -46,7 +46,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetTVAsync(TVParameters parameters)
         {
-            string url = GenerateTVApiUrl(parameters);
+            string url = GetTVApiUrl(parameters);
 
             var data = await _httpClient.GetFromJsonAsync<TVResults>(url);
 
@@ -60,7 +60,7 @@ namespace MovieApp.Web.Services
             return data;
         }
 
-        private string GenerateMovieApiUrl(MovieParameters parameters)
+        private string GetMovieApiUrl(MovieParameters parameters)
         {
             var builder = new StringBuilder($"discover/movie?api_key={_config[API_KEY]}&page={parameters.Page}");
 
@@ -135,12 +135,17 @@ namespace MovieApp.Web.Services
                 }
             }
 
+            if (parameters.Runtime is not 0)
+            {
+                builder.AppendLine($"&with_runtime.gte={parameters.Runtime}");
+            }
+
             builder.AppendLine("&include_adult=false");
 
             return builder.ToString();
         }
 
-        private string GenerateTVApiUrl(TVParameters parameters)
+        private string GetTVApiUrl(TVParameters parameters)
         {
             var builder = new StringBuilder($"discover/tv?api_key={_config[API_KEY]}&page={parameters.Page}");
 
@@ -152,6 +157,17 @@ namespace MovieApp.Web.Services
             if (parameters.FirstAirYear is not 0)
             {
                 builder.AppendLine($"&first_air_date_year={parameters.FirstAirYear}");
+            }
+
+
+            if (!string.IsNullOrEmpty(parameters.FromFirstAirDate))
+            {
+                builder.AppendLine($"&first_air_date.gte={parameters.FromFirstAirDate}");
+            }
+
+            if (!string.IsNullOrEmpty(parameters.ToFirstAirDate))
+            {
+                builder.AppendLine($"&first_air_date.lte={parameters.ToFirstAirDate}");
             }
 
             if (parameters.GenreIds.Count() is not 0)
@@ -169,6 +185,11 @@ namespace MovieApp.Web.Services
                         builder.AppendLine($"{genreId},");
                     }
                 }
+            }
+
+            if (parameters.Runtime is not 0)
+            {
+                builder.AppendLine($"&with_runtime.gte={parameters.Runtime}");
             }
 
             builder.AppendLine("&include_adult=false");

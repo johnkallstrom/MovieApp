@@ -28,6 +28,7 @@ namespace MovieApp.Web.Components.Recommendations
         public int TotalResults { get; set; }
         public string FromReleasedate { get; set; }
         public string ToReleaseDate { get; set; }
+        public int Runtime { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
         public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
@@ -92,6 +93,14 @@ namespace MovieApp.Web.Components.Recommendations
         protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
         protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
 
+        protected void HandleRuntimeChanged(string selectedRuntime)
+        {
+            if (int.TryParse(selectedRuntime, out int parsedRuntime))
+            {
+                Runtime = parsedRuntime;
+            }
+        }
+
         protected void HandleYearSelection(string selectedYear)
         {
             if (int.TryParse(selectedYear, out int parsedYear))
@@ -122,6 +131,7 @@ namespace MovieApp.Web.Components.Recommendations
                 Page = Page,
                 SortOrder = SortOrder,
                 ReleaseYear = ReleaseYear,
+                Runtime = Runtime,
                 FromReleaseDate = FromReleasedate,
                 ToReleaseDate = ToReleaseDate
             };
