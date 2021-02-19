@@ -1,6 +1,7 @@
 ﻿:root {
     --orange-interact: rgb(212, 70, 19);
     --orange: rgb(255, 108, 55);
+    --dark-interact: rgb(15, 21, 23);
     --dark: rgb(28, 39, 43);
     --light-dark: rgb(36, 51, 56);
     --white: rgb(255, 255, 255);
@@ -21,6 +22,7 @@
 }
 
 #recommendations .badge {
+    font-size: 14px;
     font-weight: normal;
     background-color: var(--dark) !important;
     padding: 0.6rem;
@@ -34,6 +36,7 @@
 }
 
 #recommendations .badge:hover {
+    background-color: var(--dark-interact) !important;
     cursor: pointer;
 }
 

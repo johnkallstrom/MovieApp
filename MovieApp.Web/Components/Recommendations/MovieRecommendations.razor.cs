@@ -30,9 +30,11 @@ namespace MovieApp.Web.Components.Recommendations
         public string ToReleaseDate { get; set; }
         public int Runtime { get; set; }
         public SearchActor SearchActorComponent { get; set; }
+        public SearchDirector SearchDirectorComponent { get; set; }
         public SearchKeyword SearchKeywordComponent { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
+        public List<Person> SelectedDirectors { get; set; } = new List<Person>();
         public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
 
         protected override async Task OnInitializedAsync()
@@ -55,6 +57,7 @@ namespace MovieApp.Web.Components.Recommendations
             var results = await FetchMovieResults();
 
             SearchActorComponent.ClearActor();
+            SearchDirectorComponent.ClearDirector();
             SearchKeywordComponent.ClearKeyword();
 
             if (results is not null)
@@ -96,6 +99,7 @@ namespace MovieApp.Web.Components.Recommendations
 
         protected void HandleSortSelection(string selectedSortOrder) => SortOrder = selectedSortOrder;
         protected void HandleActorSelection(Person selectedActor) => SelectedActors.Add(selectedActor);
+        protected void HandleDirectorSelection(Person selectedDirector) => SelectedDirectors.Add(selectedDirector);
         protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
 
         protected void HandleRuntimeChanged(string selectedRuntime)
@@ -151,6 +155,14 @@ namespace MovieApp.Web.Components.Recommendations
                 foreach (var actor in SelectedActors)
                 {
                     parameters.ActorIds.Add(actor.Id);
+                }
+            }
+
+            if (SelectedDirectors.Count() is not 0)
+            {
+                foreach (var director in SelectedDirectors)
+                {
+                    parameters.DirectorIds.Add(director.Id);
                 }
             }
 

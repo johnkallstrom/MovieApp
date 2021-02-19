@@ -118,6 +118,23 @@ namespace MovieApp.Web.Services
                 }
             }
 
+            if (parameters.DirectorIds.Count() is not 0)
+            {
+                builder.AppendLine("&with_crew=");
+
+                foreach (var directorId in parameters.DirectorIds)
+                {
+                    if (directorId == parameters.DirectorIds.Last())
+                    {
+                        builder.AppendLine($"{directorId}");
+                    }
+                    else
+                    {
+                        builder.AppendLine($"{directorId},");
+                    }
+                }
+            }
+
             if (parameters.KeywordIds.Count() is not 0)
             {
                 builder.AppendLine("&with_keywords=");

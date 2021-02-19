@@ -11,6 +11,7 @@ namespace MovieApp.Web.Parameters
         public string ToReleaseDate { get; set; }
         public int Runtime { get; set; }
         public List<int> GenreIds { get; set; } = new List<int>();
+        public List<int> DirectorIds { get; set; } = new List<int>();
         public List<int> ActorIds { get; set; } = new List<int>();
         public List<int> KeywordIds { get; set; } = new List<int>();
     }

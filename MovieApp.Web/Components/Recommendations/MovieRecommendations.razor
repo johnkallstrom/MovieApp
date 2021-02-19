@@ -27,6 +27,14 @@
                             <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
                         }
                     }
+                    <SearchDirector OnDirectorSelected="HandleDirectorSelection" @ref="SearchDirectorComponent" />
+                    @if (SelectedDirectors.Count() is not 0)
+                    {
+                        @foreach (var director in SelectedDirectors)
+                        {
+                            <span class="badge" @onclick="@(() => SelectedDirectors.Remove(director))">@director.Name</span>
+                        }
+                    }
                     <SearchKeyword OnKeywordSelected="HandleKeywordSelection" @ref="SearchKeywordComponent" />
                     @if (SelectedKeywords.Count() is not 0)
                     {
