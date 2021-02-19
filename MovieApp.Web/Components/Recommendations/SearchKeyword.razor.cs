@@ -16,6 +16,8 @@ namespace MovieApp.Web.Components.Recommendations
         [Parameter]
         public EventCallback<Keyword> OnKeywordSelected { get; set; }
 
+        public void ClearKeyword() => SelectedKeyword = null;
+
         private async Task<IEnumerable<Keyword>> SearchKeywords(string searchText)
         {
             var data = await SearchService.GetKeywordSearchAsync(searchText);

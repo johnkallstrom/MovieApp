@@ -20,7 +20,7 @@
                         <GenreSwitch ShowMovieOptions="true" OnGenreSelection="HandleGenreSelection" />
                         <RuntimeSlider OnRuntimeChanged="HandleRuntimeChanged" />
                         <p>@Runtime min</p>
-                        <SearchActor OnActorSelected="HandleActorSelection" />
+                        <SearchActor OnActorSelected="HandleActorSelection" @ref="SearchActorComponent" />
                         @if (SelectedActors.Count() is not 0)
                         {
                             @foreach (var actor in SelectedActors)
@@ -28,7 +28,7 @@
                                 <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
                             }
                         }
-                        <SearchKeyword OnKeywordSelected="HandleKeywordSelection" />
+                        <SearchKeyword OnKeywordSelected="HandleKeywordSelection" @ref="SearchKeywordComponent" />
                         @if (SelectedKeywords.Count() is not 0)
                         {
                             @foreach (var keyword in SelectedKeywords)

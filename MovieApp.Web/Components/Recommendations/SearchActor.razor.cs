@@ -17,6 +17,8 @@ namespace MovieApp.Web.Components.Recommendations
         [Parameter]
         public EventCallback<Person> OnActorSelected { get; set; }
 
+        public void ClearActor() => SelectedActor = null;
+
         private async Task<IEnumerable<Person>> SearchActors(string searchText)
         {
             var data = await PeopleService.GetPeopleBySearchAsync(searchText);

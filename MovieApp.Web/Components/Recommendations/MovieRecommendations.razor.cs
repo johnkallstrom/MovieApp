@@ -29,6 +29,8 @@ namespace MovieApp.Web.Components.Recommendations
         public string FromReleasedate { get; set; }
         public string ToReleaseDate { get; set; }
         public int Runtime { get; set; }
+        public SearchActor SearchActorComponent { get; set; }
+        public SearchKeyword SearchKeywordComponent { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
         public List<Person> SelectedActors { get; set; } = new List<Person>();
         public List<Keyword> SelectedKeywords { get; set; } = new List<Keyword>();
@@ -51,6 +53,9 @@ namespace MovieApp.Web.Components.Recommendations
             Page = 1;
 
             var results = await FetchMovieResults();
+
+            SearchActorComponent.ClearActor();
+            SearchKeywordComponent.ClearKeyword();
 
             if (results is not null)
             {
