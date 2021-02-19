@@ -3,44 +3,42 @@
 <div id="recommendations">
     <h1>TV Show Recommendations</h1>
     <hr />
-    <div id="recommendations-filter">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <h5 class="card-header">Sort</h5>
-                    <div class="card-body">
-                        <SortingSelect OnSortSelection="HandleSortSelection" ShowTVOptions="true" />
-                    </div>
-                </div>
-                <div class="card mt-3">
-                    <h5 class="card-header">Filter</h5>
-                    <div class="card-body">
-                        <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
-                        <DatePicker OnDateSelection="HandleDateSelection" />
-                        <GenreSwitch ShowTVOptions="true" OnGenreSelection="HandleGenreSelection" />
-                        <RuntimeSlider OnRuntimeChanged="HandleRuntimeChanged" />
-                        <p class="mb-0">@Runtime min</p>
-                        <button style="width: 100%" class="btn btn-lg mt-3" id="recommendations-button" @onclick="HandleButtonClick">Recommend</button>
-                    </div>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <h5 class="card-header">Sort</h5>
+                <div class="card-body">
+                    <SortingSelect OnSortSelection="HandleSortSelection" ShowTVOptions="true" />
                 </div>
             </div>
-            <div class="col-sm-9">
-                <div class="row flex-row">
-                    @if (Results.Count() is not 0)
-                    {
-                        @foreach (var tvShow in Results)
-                        {
-                            <DisplayTV TVShow="tvShow" />
-                        }
-                        <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
-                    }
-                    else
-                    {
-                        <div class="text-center">
-                            <h5>No recommendations could be found, try again.</h5>
-                        </div>
-                    }
+            <div class="card mt-3">
+                <h5 class="card-header">Filter</h5>
+                <div class="card-body">
+                    <YearSelect OnYearSelection="HandleYearSelection" StartYear="1900" YearCount="129" />
+                    <DatePicker OnDateSelection="HandleDateSelection" />
+                    <GenreSwitch ShowTVOptions="true" OnGenreSelection="HandleGenreSelection" />
+                    <RuntimeSlider OnRuntimeChanged="HandleRuntimeChanged" />
+                    <p class="mb-0">@Runtime min</p>
+                    <button style="width: 100%" class="btn btn-lg mt-3" id="recommendations-button" @onclick="HandleButtonClick">Recommend</button>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row flex-row">
+                @if (Results.Count() is not 0)
+                {
+                    @foreach (var tvShow in Results)
+                    {
+                        <DisplayTV TVShow="tvShow" />
+                    }
+                    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+                }
+                else
+                {
+                    <div class="text-center">
+                        <h5>No recommendations could be found, try again.</h5>
+                    </div>
+                }
             </div>
         </div>
     </div>

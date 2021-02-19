@@ -20,7 +20,7 @@
     cursor: pointer;
 }
 
-#recommendations-filter .badge {
+#recommendations .badge {
     font-weight: normal;
     background-color: var(--dark) !important;
     padding: 0.6rem;
@@ -28,12 +28,12 @@
     margin-right: 0.4rem;
 }
 
-#recommendations-filter .badge:last-child {
+#recommendations .badge:last-child {
     margin-top: 0rem;
     margin-right: 0rem;
 }
 
-#recommendations-filter .badge:hover {
+#recommendations .badge:hover {
     cursor: pointer;
 }
 

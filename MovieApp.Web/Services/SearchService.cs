@@ -42,7 +42,7 @@ namespace MovieApp.Web.Services
             foreach (var media in data.Results)
             {
                 media.Media_Type = MediaType.Person;
-                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.W185, media.Profile_Path)) : placeholderUrl;
+                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, media.Profile_Path)) : placeholderUrl;
                 media.Url = GetMediaUrl(media.Media_Type, media.Id);
             }
 
@@ -58,7 +58,7 @@ namespace MovieApp.Web.Services
             foreach (var media in data.Results)
             {
                 media.Media_Type = MediaType.TV;
-                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W154, media.Poster_Path)) : placeholderUrl;
+                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, media.Poster_Path)) : placeholderUrl;
                 media.Url = GetMediaUrl(media.Media_Type, media.Id);
             }
 
@@ -74,7 +74,7 @@ namespace MovieApp.Web.Services
             foreach (var media in data.Results)
             {
                 media.Media_Type = MediaType.Movie;
-                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W154, media.Poster_Path)) : placeholderUrl;
+                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, media.Poster_Path)) : placeholderUrl;
                 media.Url = GetMediaUrl(media.Media_Type, media.Id);
             }
 
@@ -90,8 +90,8 @@ namespace MovieApp.Web.Services
             foreach (var media in data.Results)
             {
                 media.Url = GetMediaUrl(media.Media_Type, media.Id);
-                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W154, media.Poster_Path)) : placeholderUrl;
-                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.W185, media.Profile_Path)) : placeholderUrl;
+                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, media.Poster_Path)) : placeholderUrl;
+                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, media.Profile_Path)) : placeholderUrl;
             }
 
             return data;
