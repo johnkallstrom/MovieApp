@@ -5,6 +5,7 @@ using MovieApp.API.Entities;
 using MovieApp.API.Exceptions;
 using MovieApp.API.Models;
 using MovieApp.API.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,7 +26,22 @@ namespace MovieApp.API.Controllers
             _userService = userService;
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser(LoginRequest request)
+        {
+            try
+            {
+                var response = await _userService.LoginUserAsync(request);
+                return Ok(response);
+            }
+            catch (InvalidUserException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<ActionResult<RegisterResponse>> RegisterUser(RegisterRequest request)
         {
             try
