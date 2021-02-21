@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieApp.API.Entities;
+using MovieApp.API.Exceptions;
 using MovieApp.API.Models;
 using MovieApp.API.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
 {
@@ -23,13 +25,41 @@ namespace MovieApp.API.Controllers
             _userService = userService;
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<RegisterResponse>> RegisterUser(RegisterRequest request)
+        {
+            try
+            {
+                var response = await _userService.RegisterUserAsync(request);
+                return Ok(response);
+            }
+            catch (EmailExistsException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<IEnumerable<User>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var users = _userService.GetUsers();
+            var users = await _userService.GetUsersAsync();
 
-            return Ok(_mapper.Map<UserDto>(users));
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
+        }
+
+        [HttpGet("{userId}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<User>> GetUser(int userId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<UserDto>(user));
         }
     }
 }

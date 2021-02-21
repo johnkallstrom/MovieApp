@@ -7,6 +7,8 @@ namespace MovieApp.API.Profiles
         public UserProfile()
         {
             CreateMap<Entities.User, Models.UserDto>();
+            CreateMap<Models.RegisterRequest, Entities.User>();
+            CreateMap<Entities.User, Models.RegisterResponse>();
         }
     }
 }
