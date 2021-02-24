@@ -5,7 +5,6 @@ using MovieApp.API.Entities;
 using MovieApp.API.Exceptions;
 using MovieApp.API.Models;
 using MovieApp.API.Services;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -27,7 +26,8 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginUser(LoginRequest request)
+        [AllowAnonymous]
+        public async Task<ActionResult<LoginResponse>> LoginUser(LoginRequest request)
         {
             try
             {
