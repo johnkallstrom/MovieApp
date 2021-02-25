@@ -1,0 +1,28 @@
+﻿@page "/user/login"
+
+<div id="login-user">
+    <h1>Login User</h1>
+    <hr />
+    @if (ShowResultMessage)
+    {
+        <p class="my-3">@ResultMessage</p>
+    }
+    <div class="row">
+        <div class="col-md-6">
+            <EditForm Model="@LoginModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <div class="form-group">
+                    <label class="text-muted">Email</label>
+                    <InputText class="form-control" @bind-Value="@LoginModel.Email" />
+                    <ValidationMessage For="@(() => LoginModel.Email)" />
+                </div>
+                <div class="form-group">
+                    <label class="text-muted">Password</label>
+                    <InputText type="password" class="form-control" @bind-Value="@LoginModel.Password" />
+                    <ValidationMessage For="@(() => LoginModel.Password)" />
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
+            </EditForm>
+        </div>
+    </div>
+</div>

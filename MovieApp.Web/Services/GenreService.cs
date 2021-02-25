@@ -11,7 +11,7 @@ namespace MovieApp.Web.Services
 {
     public class GenreService : IGenreService
     {
-        private const string API_KEY = "ApiKey";
+        private const string API_KEY = "TMDB:ApiKey";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;

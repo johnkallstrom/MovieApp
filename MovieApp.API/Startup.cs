@@ -46,6 +46,15 @@ namespace MovieApp.API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:Key"]))
                 };
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,6 +68,8 @@ namespace MovieApp.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("DefaultPolicy");
 
             app.UseEndpoints(endpoints =>
             {

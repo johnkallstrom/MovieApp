@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MovieApp.API.Data;
-using MovieApp.API.Entities;
-using MovieApp.API.Exceptions;
-using MovieApp.API.Models;
+using MovieApp.Domain.Entities;
+using MovieApp.Domain.Exceptions;
+using MovieApp.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -43,6 +43,7 @@ namespace MovieApp.API.Services
 
                 var response = _mapper.Map<LoginResponse>(user);
                 response.Token = token;
+                response.Success = true;
 
                 return response;
             }
@@ -65,7 +66,10 @@ namespace MovieApp.API.Services
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<RegisterResponse>(user);
+            var response = _mapper.Map<RegisterResponse>(user);
+            response.Success = true;
+
+            return response;
         }
 
         public async Task<User> GetUserAsync(int userId)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MovieApp.API.Exceptions
+namespace MovieApp.Domain.Exceptions
 {
     public class InvalidUserException : Exception
     {

@@ -1,5 +1,5 @@
-﻿using MovieApp.API.Entities;
-using MovieApp.API.Models;
+﻿using MovieApp.Domain.Entities;
+using MovieApp.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

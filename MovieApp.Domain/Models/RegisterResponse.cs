@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace MovieApp.API.Models
+namespace MovieApp.Domain.Models
 {
-    public class UserDto
+    public class RegisterResponse
     {
-        public int Id { get; set; }
+        public bool Success { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

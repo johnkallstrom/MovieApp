@@ -10,14 +10,12 @@ namespace MovieApp.Web
 {
     public class Program
     {
-        private const string API_URL = "ApiBaseUrl";
-
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration[API_URL]) });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["TMDB:ApiBaseUrl"]) });
 
             builder.Services.AddTransient<IMovieService, MovieService>();
             builder.Services.AddTransient<IPeopleService, PeopleService>();
@@ -28,6 +26,12 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IGenreService, GenreService>();
 
             builder.Services.AddSingleton<SearchState>();
+
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddHttpClient<IUserService, UserService>(client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
+            });
 
             await builder.Build().RunAsync();
         }

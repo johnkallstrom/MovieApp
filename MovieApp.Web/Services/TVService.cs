@@ -11,9 +11,9 @@ namespace MovieApp.Web.Services
 {
     public class TVService : ITVService
     {
-        private const string API_KEY = "ApiKey";
-        private const string IMAGE_URL = "ImageBaseUrl";
-        private const string PLACEHOLDER_IMAGE_URL = "PlaceholderImageBaseUrl";
+        private const string API_KEY = "TMDB:ApiKey";
+        private const string IMAGE_URL = "TMDB:ImageBaseUrl";
+        private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;

@@ -1,0 +1,33 @@
+﻿:root {
+    --light-grey: #fafafa;
+    --orange: rgb(255, 108, 55);
+    --dark: rgb(28, 39, 43);
+    --light-dark: rgb(36, 51, 56);
+    --white: rgb(255, 255, 255);
+}
+
+#login-user .validation-message {
+    margin-top: 0.5rem;
+    font-size: 14px;
+}
+
+#registe-user .validation-message {
+    margin-top: 0.5rem;
+    font-size: 14px;
+}
+
+#register-user .form-group {
+    margin-bottom: 1rem;
+}
+
+#register-user .form-group:last-child {
+    margin-bottom: 0rem;
+}
+
+#login-user .form-group {
+    margin-bottom: 1rem;
+}
+
+#login-user .form-group:last-child {
+    margin-bottom: 0rem;
+}

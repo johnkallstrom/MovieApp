@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieApp.API.Models
+namespace MovieApp.Domain.Models
 {
     public class LoginRequest
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter your email.")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid password.")]
         public string Password { get; set; }
     }
 }

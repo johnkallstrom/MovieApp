@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MovieApp.API.Entities;
-using MovieApp.API.Exceptions;
-using MovieApp.API.Models;
+using MovieApp.Domain.Entities;
+using MovieApp.Domain.Exceptions;
+using MovieApp.Domain.Models;
 using MovieApp.API.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,6 +25,10 @@ namespace MovieApp.API.Controllers
             _userService = userService;
         }
 
+        [HttpGet("hello")]
+        [AllowAnonymous]
+        public IActionResult Hello() => Ok(new { Message = "Hello World!" });
+
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponse>> LoginUser(LoginRequest request)
@@ -32,7 +36,7 @@ namespace MovieApp.API.Controllers
             try
             {
                 var response = await _userService.LoginUserAsync(request);
-                return Ok(response);
+                return response;
             }
             catch (InvalidUserException e)
             {

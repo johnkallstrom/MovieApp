@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using MovieApp.API.Entities;
+using MovieApp.Domain.Entities;
 
 #nullable disable
 

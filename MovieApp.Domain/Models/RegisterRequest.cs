@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieApp.API.Models
+namespace MovieApp.Domain.Models
 {
     public class RegisterRequest
     {

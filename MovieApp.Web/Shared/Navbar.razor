@@ -19,6 +19,12 @@
                         <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.ClearQuery()">TV Shows</NavLink>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/user/register" @onclick="() => SearchState.ClearQuery()">Register</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/user/login" @onclick="() => SearchState.ClearQuery()">Login</NavLink>
+                </li>
             </ul>
             <Search />
         </div>
