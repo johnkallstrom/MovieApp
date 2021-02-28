@@ -33,14 +33,19 @@ namespace MovieApp.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponse>> LoginUser(LoginRequest request)
         {
+            var response = new LoginResponse();
+
             try
             {
-                var response = await _userService.LoginUserAsync(request);
-                return response;
+                response = await _userService.LoginUserAsync(request);
+                return Ok(response);
             }
             catch (InvalidUserException e)
             {
-                return BadRequest(e.Message);
+                response.Message = e.Message;
+                response.Success = false;
+
+                return BadRequest(response);
             }
         }
 

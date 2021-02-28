@@ -42,7 +42,9 @@ namespace MovieApp.API.Services
                 var token = GenerateJwtToken(user);
 
                 var response = _mapper.Map<LoginResponse>(user);
+
                 response.Token = token;
+                response.Message = "Login successful.";
                 response.Success = true;
 
                 return response;
@@ -106,15 +108,17 @@ namespace MovieApp.API.Services
 
             var claims = new List<Claim>
             {
-                new Claim("id", user.Id.ToString()),
-                new Claim("firstName", user.FirstName),
-                new Claim("lastName", user.LastName),
-                new Claim("email", user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
+                Issuer = _config["JwtSettings:Issuer"],
+                Audience = _config["JwtSettings:Audience"],
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = credentials
             };

@@ -8,7 +8,10 @@ namespace MovieApp.Web.Components.User
     public partial class RegisterUser
     {
         [Inject]
-        public IUserService UserService { get; set; }
+        public IAuthenticationService AuthenticationService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         public RegisterRequest RegisterModel { get; set; } = new RegisterRequest();
 
@@ -17,13 +20,14 @@ namespace MovieApp.Web.Components.User
 
         protected async Task HandleValidSubmit()
         {
-            var response = await UserService.RegisterUser(RegisterModel);
+            var response = await AuthenticationService.RegisterUser(RegisterModel);
 
             ShowResultMessage = true;
 
             if (response.Success)
             {
                 ResultMessage = "Registration successful.";
+                NavigationManager.NavigateTo("/user/login");
             }
             else
             {

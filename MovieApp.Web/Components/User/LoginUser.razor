@@ -3,12 +3,12 @@
 <div id="login-user">
     <h1>Login User</h1>
     <hr />
-    @if (ShowResultMessage)
+    @if (DisplayMessage)
     {
-        <p class="my-3">@ResultMessage</p>
+        <p class="mt-3 text-danger">@Message</p>
     }
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <EditForm Model="@LoginModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="form-group">
@@ -21,7 +21,13 @@
                     <InputText type="password" class="form-control" @bind-Value="@LoginModel.Password" />
                     <ValidationMessage For="@(() => LoginModel.Password)" />
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Login</button>
+                <button type="submit" class="btn btn-primary mt-3">
+                    @if (DisplayLoadingSpinner)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                    }
+                    Login
+                </button>
             </EditForm>
         </div>
     </div>

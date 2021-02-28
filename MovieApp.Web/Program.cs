@@ -1,3 +1,5 @@
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MovieApp.Web.Services;
@@ -27,11 +29,16 @@ namespace MovieApp.Web
 
             builder.Services.AddSingleton<SearchState>();
 
-            builder.Services.AddTransient<IUserService, UserService>();
-            builder.Services.AddHttpClient<IUserService, UserService>(client =>
+            builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(client =>
             {
                 client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
             });
+
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
         }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Models;
 using MovieApp.Web.State;
-using System.Collections.Generic;
 
 namespace MovieApp.Web.Shared
 {
