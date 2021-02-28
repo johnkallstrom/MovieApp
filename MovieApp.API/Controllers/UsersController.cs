@@ -53,13 +53,18 @@ namespace MovieApp.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<RegisterResponse>> RegisterUser(RegisterRequest request)
         {
+            var response = new RegisterResponse();
+
             try
             {
-                var response = await _userService.RegisterUserAsync(request);
+                response = await _userService.RegisterUserAsync(request);
                 return Ok(response);
             }
             catch (EmailExistsException e)
             {
+                response.Message = e.Message;
+                response.Success = false;
+
                 return BadRequest(e.Message);
             }
         }

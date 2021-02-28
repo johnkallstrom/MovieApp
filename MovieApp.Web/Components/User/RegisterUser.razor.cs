@@ -15,23 +15,26 @@ namespace MovieApp.Web.Components.User
 
         public RegisterRequest RegisterModel { get; set; } = new RegisterRequest();
 
-        public bool ShowResultMessage { get; set; }
-        public string ResultMessage { get; set; }
+        public bool DisplayLoadingSpinner { get; set; }
+        public bool DisplayMessage { get; set; }
+        public string Message { get; set; }
 
         protected async Task HandleValidSubmit()
         {
-            var response = await AuthenticationService.RegisterUser(RegisterModel);
+            DisplayLoadingSpinner = true;
 
-            ShowResultMessage = true;
+            var response = await AuthenticationService.RegisterUser(RegisterModel);
 
             if (response.Success)
             {
-                ResultMessage = "Registration successful.";
+                DisplayLoadingSpinner = false;
                 NavigationManager.NavigateTo("/user/login");
             }
             else
             {
-                ResultMessage = "Registration failed.";
+                DisplayMessage = true;
+                Message = response.Message;
+                DisplayLoadingSpinner = false;
             }
         }
     }

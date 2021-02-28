@@ -3,9 +3,9 @@
 <div id="register-user">
     <h1>Register User</h1>
     <hr />
-    @if (ShowResultMessage)
+    @if (DisplayMessage)
     {
-        <p class="my-3">@ResultMessage</p>
+        <p class="mt-3 text-danger">@Message</p>
     }
     <div class="row">
         <div class="col-md-4">
@@ -36,7 +36,13 @@
                     <InputText type="password" class="form-control" @bind-Value="@RegisterModel.ConfirmPassword" />
                     <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Register</button>
+                <button type="submit" class="btn btn-primary mt-3">
+                    @if (DisplayLoadingSpinner)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                    }
+                    Register
+                </button>
             </EditForm>
         </div>
     </div>

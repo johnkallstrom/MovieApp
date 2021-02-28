@@ -49,12 +49,7 @@ namespace MovieApp.Web.Services
         {
             HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("users/register", request);
 
-            var registerResponse = new RegisterResponse();
-
-            if (httpResponse.IsSuccessStatusCode)
-            {
-                registerResponse = await httpResponse.Content.ReadFromJsonAsync<RegisterResponse>();
-            }
+            var registerResponse = await httpResponse.Content.ReadFromJsonAsync<RegisterResponse>();
 
             return registerResponse;
         }
