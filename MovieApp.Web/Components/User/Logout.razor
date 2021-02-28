@@ -1,0 +1,14 @@
+﻿@page "/user/logout"
+
+@using MovieApp.Web.Services
+
+@inject IAuthenticationService AuthenticationService
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthenticationService.LogoutUser();
+        NavigationManager.NavigateTo("/");
+    }
+}

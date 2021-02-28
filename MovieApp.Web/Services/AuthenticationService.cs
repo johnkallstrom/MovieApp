@@ -37,8 +37,8 @@ namespace MovieApp.Web.Services
 
             if (loginResponse.Success)
             {
-                await _localStorage.SetItemAsync(_config["JwtSettings:LocalStorageKey"], loginResponse.Token);
-                ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.FirstName, loginResponse.LastName, loginResponse.Email);
+                await _localStorage.SetItemAsync(_config["JWT:LocalStorageKey"], loginResponse.Token);
+                ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.FirstName, loginResponse.LastName, loginResponse.Email);
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Token);
             }
 
@@ -56,7 +56,7 @@ namespace MovieApp.Web.Services
 
         public async Task LogoutUser()
         {
-            await _localStorage.RemoveItemAsync(_config["JwtSettings:LocalStorageKey"]);
+            await _localStorage.RemoveItemAsync(_config["JWT:LocalStorageKey"]);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAnonymous();
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }

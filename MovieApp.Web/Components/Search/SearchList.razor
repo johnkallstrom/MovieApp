@@ -6,11 +6,17 @@
     @if (!string.IsNullOrEmpty(SearchState.Query))
     {
         <div class="row">
-            <div class="col-md-3">
-                <SearchFilter />
-            </div>
-            @if (SearchState.Results.Count() is not 0)
+            @if (SearchState.Results.Count() is 0)
             {
+                <div class="mt-3 text-center">
+                    <h3>No search results could be found, try again.</h3>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3">
+                    <SearchFilter />
+                </div>
                 <div class="col-md-9">
                     <div class="row flex-row">
                         @foreach (var media in SearchState.Results)
@@ -21,12 +27,6 @@
                     <Pagination Page="@SearchState.Page" TotalPages="@SearchState.TotalPages" OnPageChanged="HandlePageChanged" />
                 </div>
             }
-        </div>
-    }
-    else
-    {
-        <div class="mt-4 text-center">
-            <h3>No search results could be found, try again.</h3>
         </div>
     }
 </div>

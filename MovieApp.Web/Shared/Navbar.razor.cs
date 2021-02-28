@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using MovieApp.Web.State;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Shared
@@ -9,18 +10,5 @@ namespace MovieApp.Web.Shared
     {
         [Inject]
         public SearchState SearchState { get; set; }
-
-        [Inject]
-        public IAuthenticationService AuthenticationService { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        protected async Task HandleLogout()
-        {
-            SearchState.ClearQuery();
-            await AuthenticationService.LogoutUser();
-            NavigationManager.NavigateTo("/user/login");
-        }
     }
 }

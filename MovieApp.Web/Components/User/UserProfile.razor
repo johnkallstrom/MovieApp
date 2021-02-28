@@ -1,0 +1,22 @@
+﻿@page "/user/profile/{userId}"
+
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<div id="user-profile">
+    <h1>User Profile</h1>
+    <hr />
+    <AuthorizeView>
+        <Authorized>
+            <p>Hello @context.User.FindFirst(ClaimTypes.GivenName).Value, welcome to your profile page.</p>
+            <ul class="mt-3">
+                <li>@context.User.FindFirst(ClaimTypes.NameIdentifier).Value</li>
+                <li>@context.User.FindFirst(ClaimTypes.GivenName).Value @context.User.FindFirst(ClaimTypes.Surname).Value</li>
+                <li>@context.User.FindFirst(ClaimTypes.Email).Value</li>
+            </ul>
+        </Authorized>
+        <NotAuthorized>
+            <p>The user is not authenticated.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>

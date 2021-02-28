@@ -23,7 +23,7 @@ namespace MovieApp.Web.State
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var storedToken = await _localStorage.GetItemAsync<string>(_config["JwtSettings:LocalStorageKey"]);
+            var storedToken = await _localStorage.GetItemAsync<string>(_config["JWT:LocalStorageKey"]);
 
             // not authenticated
             if (string.IsNullOrWhiteSpace(storedToken))
@@ -31,19 +31,23 @@ namespace MovieApp.Web.State
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwtToken(storedToken))));
+            var claims = ParseClaimsFromJwtToken(storedToken);
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, _config["AuthenticationType"]));
+
+            return new AuthenticationState(authenticatedUser);
         }
 
-        public void MarkUserAsAuthenticated(string firstName, string lastName, string email)
+        public void MarkUserAsAuthenticated(int id, string firstName, string lastName, string email)
         {
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim(ClaimTypes.GivenName, firstName),
                 new Claim(ClaimTypes.Surname, lastName),
                 new Claim(ClaimTypes.Email, email)
             };
 
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, "jwtauthentication"));
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, _config["AuthenticationType"]));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
 
             NotifyAuthenticationStateChanged(authState);

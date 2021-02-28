@@ -65,7 +65,7 @@ namespace MovieApp.API.Controllers
                 response.Message = e.Message;
                 response.Success = false;
 
-                return BadRequest(e.Message);
+                return BadRequest(response);
             }
         }
 
