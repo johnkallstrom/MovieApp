@@ -37,13 +37,8 @@ namespace MovieApp.Web.Services
 
             if (loginResponse.Success)
             {
-                // store jwt token in localStorage
                 await _localStorage.SetItemAsync(_config["JwtSettings:LocalStorageKey"], loginResponse.Token);
-
-                // update authentication state as authenticated
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.FirstName, loginResponse.LastName, loginResponse.Email);
-
-                // add jwt token to authorization header on http requests
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Token);
             }
 

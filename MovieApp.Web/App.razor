@@ -1,6 +1,13 @@
 <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout)" />
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout)">
+            <Authorizing>
+                <text>Please wait, we are authorizing the user.</text>
+            </Authorizing>
+            <NotAuthorized>
+                <text>You are not authorized to access this page.</text>
+            </NotAuthorized>
+        </AuthorizeRouteView>
     </Found>
     <NotFound>
         <CascadingAuthenticationState>
