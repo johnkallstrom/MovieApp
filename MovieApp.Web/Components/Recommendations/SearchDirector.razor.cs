@@ -28,6 +28,7 @@ namespace MovieApp.Web.Components.Recommendations
 
         private async Task HandleDirectorSelection(Person result)
         {
+            ClearDirector();
             SelectedDirector = result;
             await OnDirectorSelected.InvokeAsync(SelectedDirector);
         }

@@ -16,6 +16,10 @@
     font-size: 14px;
 }
 
+#register-user h1 {
+    margin-bottom: 1rem;
+}
+
 #register-user .form-group {
     margin-bottom: 1rem;
 }

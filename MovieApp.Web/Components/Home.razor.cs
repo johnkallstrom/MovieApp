@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
-using MovieApp.Web.State;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components

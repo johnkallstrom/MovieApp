@@ -28,6 +28,7 @@ namespace MovieApp.Web.Components.Recommendations
 
         private async Task HandleActorSelection(Person result)
         {
+            ClearActor();
             SelectedActor = result;
             await OnActorSelected.InvokeAsync(SelectedActor);
         }

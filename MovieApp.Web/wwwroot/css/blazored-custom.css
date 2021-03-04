@@ -6,6 +6,10 @@
     --white: rgb(255, 255, 255);
 }
 
+.blazored-modal-content {
+    width: 350px;
+}
+
 .blazored-typeahead__input {
     height: calc(1.5em + .5rem + 2px) !important;
     padding-top: .25rem !important;
@@ -24,4 +28,12 @@
 
 .blazored-typeahead__result {
     padding: .2rem !important;
+}
+
+.blazored-modal-close {
+    outline: none !important;
+}
+
+.blazored-modal-close span:hover {
+    cursor: pointer;
 }

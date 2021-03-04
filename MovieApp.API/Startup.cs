@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MovieApp.API.Data;
+using MovieApp.API.Helpers;
 using MovieApp.API.Services;
 using System.Text;
 
@@ -47,14 +48,9 @@ namespace MovieApp.API
                 };
             });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("DefaultPolicy", builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
-                });
-            });
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -69,7 +65,10 @@ namespace MovieApp.API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("DefaultPolicy");
+            app.UseCors(x => x
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {

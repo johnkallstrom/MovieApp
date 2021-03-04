@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieApp.API.Data;
+using MovieApp.API.Helpers;
 using MovieApp.Domain.Entities;
 using MovieApp.Domain.Exceptions;
 using MovieApp.Domain.Models;
@@ -19,16 +20,16 @@ namespace MovieApp.API.Services
 {
     public class UserService : IUserService
     {
-        private readonly IConfiguration _config;
+        private readonly IOptions<JwtSettings> _jwtSettings;
         private readonly IMapper _mapper;
         private readonly MovieAppDatabaseContext _context;
 
         public UserService(
-            IConfiguration config,
+            IOptions<JwtSettings> jwtSettings,
             IMapper mapper,
             MovieAppDatabaseContext context)
         {
-            _config = config;
+            _jwtSettings = jwtSettings;
             _mapper = mapper;
             _context = context;
         }
@@ -103,7 +104,7 @@ namespace MovieApp.API.Services
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Value.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
@@ -117,8 +118,8 @@ namespace MovieApp.API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Issuer = _config["JwtSettings:Issuer"],
-                Audience = _config["JwtSettings:Audience"],
+                Issuer = _jwtSettings.Value.Issuer,
+                Audience = _jwtSettings.Value.Audience,
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = credentials
             };

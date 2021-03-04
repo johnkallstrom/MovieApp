@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
+﻿using Blazored.Modal.Services;
+using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Components.User;
 using MovieApp.Web.State;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MovieApp.Web.Shared
 {
@@ -10,5 +9,13 @@ namespace MovieApp.Web.Shared
     {
         [Inject]
         public SearchState SearchState { get; set; }
+
+        [CascadingParameter]
+        public IModalService Modal { get; set; }
+
+        protected void ShowLoginModal()
+        {
+            Modal.Show<LoginUser>("Login User");
+        }
     }
 }

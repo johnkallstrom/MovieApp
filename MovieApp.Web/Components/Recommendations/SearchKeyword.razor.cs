@@ -27,6 +27,7 @@ namespace MovieApp.Web.Components.Recommendations
 
         private async Task HandleKeywordSelection(Keyword result)
         {
+            ClearKeyword();
             SelectedKeyword = result;
             await OnKeywordSelected.InvokeAsync(SelectedKeyword);
         }

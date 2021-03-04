@@ -28,7 +28,7 @@ namespace MovieApp.Web.Components.User
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo("/user/login");
+                NavigationManager.NavigateTo("/user/register/confirmation");
             }
             else
             {
