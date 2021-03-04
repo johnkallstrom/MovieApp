@@ -69,6 +69,23 @@ namespace MovieApp.Web.Components.Recommendations
             }
         }
 
+        protected void RemoveSelectedActor(Person actor)
+        {
+            SearchActorComponent.ClearActor();
+            SelectedActors.Remove(actor);
+        }
+        protected void RemoveSelectedDirector(Person director)
+        {
+            SearchDirectorComponent.ClearDirector();
+            SelectedDirectors.Remove(director);
+        }
+
+        protected void RemoveSelectedKeyword(Keyword keyword)
+        {
+            SearchKeywordComponent.ClearKeyword();
+            SelectedKeywords.Remove(keyword);
+        }
+
         protected void HandleDateSelection(DateSelectResult result)
         {
             if (result is not null)

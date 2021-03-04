@@ -23,7 +23,7 @@
                     {
                         @foreach (var actor in SelectedActors)
                         {
-                            <span class="badge" @onclick="@(() => SelectedActors.Remove(actor))">@actor.Name</span>
+                            <span class="badge" @onclick="@(() => RemoveSelectedActor(actor))">@actor.Name</span>
                         }
                     }
                     <SearchDirector OnDirectorSelected="HandleDirectorSelection" @ref="SearchDirectorComponent" />
@@ -31,7 +31,7 @@
                     {
                         @foreach (var director in SelectedDirectors)
                         {
-                            <span class="badge" @onclick="@(() => SelectedDirectors.Remove(director))">@director.Name</span>
+                            <span class="badge" @onclick="@(() => RemoveSelectedDirector(director))">@director.Name</span>
                         }
                     }
                     <SearchKeyword OnKeywordSelected="HandleKeywordSelection" @ref="SearchKeywordComponent" />
@@ -39,7 +39,7 @@
                     {
                         @foreach (var keyword in SelectedKeywords)
                         {
-                            <span class="badge" @onclick="@(() => SelectedKeywords.Remove(keyword))">@keyword.Name</span>
+                            <span class="badge" @onclick="@(() => RemoveSelectedKeyword(keyword))">@keyword.Name</span>
                         }
                     }
                     <button style="width: 100%" class="btn btn-lg mt-3" id="recommendations-button" @onclick="HandleButtonClick">Recommend</button>
