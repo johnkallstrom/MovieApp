@@ -4,7 +4,7 @@
     @if (!string.IsNullOrEmpty(SearchState.Query) && SearchState.Results.Count() is not 0)
     {
         <h3 class="mb-3">Search</h3>
-        <p>Your search on '@SearchState.Query' resulted in hit(s)</p>
+        <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults hit(s)</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="row flex-row">

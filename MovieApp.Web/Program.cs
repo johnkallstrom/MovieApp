@@ -36,6 +36,12 @@ namespace MovieApp.Web
                 client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
             });
 
+            builder.Services.AddTransient<INewsletterService, NewsletterService>();
+            builder.Services.AddHttpClient<INewsletterService, NewsletterService>(client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
+            });
+
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 

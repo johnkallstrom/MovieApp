@@ -30,13 +30,13 @@ namespace MovieApp.Web.Services
         {
             var data = await _httpClient.GetFromJsonAsync<MediaResults>($"trending/{mediaType}/{timeWindowType}?api_key={_config[API_KEY]}");
 
-            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
+            string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 1366, 768));
 
             foreach (var media in data.Results)
             {
                 media.Url = GetMediaUrl(media.Media_Type, media.Id);
-                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W154, media.Poster_Path)) : placeholderUrl;
-                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.W185, media.Profile_Path)) : placeholderUrl;
+                media.Poster_Path = !string.IsNullOrEmpty(media.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W780, media.Poster_Path)) : placeholderUrl;
+                media.Profile_Path = !string.IsNullOrEmpty(media.Profile_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], ProfileSizeType.H632, media.Profile_Path)) : placeholderUrl;
             }
 
             return data.Results;

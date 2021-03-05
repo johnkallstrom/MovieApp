@@ -12,6 +12,16 @@ body {
     color: var(--dark) !important;
 }
 
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.validation-message {
+    margin-top: 0.5rem;
+    font-size: 14px;
+}
+
 .media-wrapper:first-child {
     margin-top: 0rem;
 }

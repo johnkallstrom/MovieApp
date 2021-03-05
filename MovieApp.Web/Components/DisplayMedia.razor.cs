@@ -10,26 +10,6 @@ namespace MovieApp.Web.Components
 		[Parameter]
 		public Media Media { get; set; }
 
-		protected string GetImagePath()
-		{
-			string path = "";
-
-			switch (Media.Media_Type)
-			{
-				case MediaType.Movie:
-					path = Media.Poster_Path;
-					break;
-				case MediaType.TV:
-					path = Media.Poster_Path;
-					break;
-				case MediaType.Person:
-					path = Media.Profile_Path;
-					break;
-			}
-
-			return path;
-		}
-
 		protected string DisplayFirstAirOrReleaseYear()
 		{
 			string year = "";
