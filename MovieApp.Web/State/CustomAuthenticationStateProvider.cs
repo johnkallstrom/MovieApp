@@ -37,13 +37,11 @@ namespace MovieApp.Web.State
             return await Task.FromResult(new AuthenticationState(authenticatedUser));
         }
 
-        public void MarkUserAsAuthenticated(int id, string firstName, string lastName, string email)
+        public void MarkUserAsAuthenticated(int id, string email)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, id.ToString()),
-                new Claim(ClaimTypes.GivenName, firstName),
-                new Claim(ClaimTypes.Surname, lastName),
                 new Claim(ClaimTypes.Email, email)
             };
 

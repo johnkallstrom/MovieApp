@@ -25,10 +25,6 @@ namespace MovieApp.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet("hello")]
-        [AllowAnonymous]
-        public IActionResult Hello() => Ok(new { Message = "Hello World!" });
-
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponse>> LoginUser(LoginRequest request)
