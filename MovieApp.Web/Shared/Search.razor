@@ -1,6 +1,16 @@
-﻿<div id="search">
-    <div class="form-group has-search">
-        <span class="fa fa-search form-control-feedback"></span>
+﻿@using MovieApp.Web.Enums 
+
+<div id="search">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">@DisplayFilter()</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" @onclick="() => SearchState.SetFilter(SearchFilterType.All)">All</a></li>
+                <li><a class="dropdown-item" @onclick="() => SearchState.SetFilter(SearchFilterType.Movies)">Movies</a></li>
+                <li><a class="dropdown-item" @onclick="() => SearchState.SetFilter(SearchFilterType.TV)">TV Shows</a></li>
+                <li><a class="dropdown-item" @onclick="() => SearchState.SetFilter(SearchFilterType.People)">People</a></li>
+            </ul>
+        </div>
         <input @bind-value="SearchState.Query"
                @bind-value:event="oninput"
                @onkeyup="@(() => SearchState.SetQuery(SearchState.Query))"

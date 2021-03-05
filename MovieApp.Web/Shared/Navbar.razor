@@ -1,22 +1,22 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" id="nav">
     <div class="container">
-        <NavLink class="navbar-brand" href="/" @onclick="() => SearchState.ClearQuery()"><span class="brand">Movie</span> App</NavLink>
+        <NavLink class="navbar-brand" href="/" @onclick="() => SearchState.Clear()"><span class="brand">Movie</span> App</NavLink>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/movies" @onclick="() => SearchState.ClearQuery()">Movies</NavLink>
+                    <NavLink class="nav-link" href="/movies" @onclick="() => SearchState.Clear()">Movies</NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/tv-shows" @onclick="() => SearchState.ClearQuery()">TV Shows</NavLink>
+                    <NavLink class="nav-link" href="/tv-shows" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recommendations</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <NavLink class="dropdown-item" href="/recommendations/movie" @onclick="() => SearchState.ClearQuery()">Movies</NavLink>
-                        <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.ClearQuery()">TV Shows</NavLink>
+                        <NavLink class="dropdown-item" href="/recommendations/movie" @onclick="() => SearchState.Clear()">Movies</NavLink>
+                        <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
                     </div>
                 </li>
                 <AuthorizeView>
@@ -24,20 +24,20 @@
                         <li class="nav-item">
                             <NavLink class="nav-link" 
                                      href="@($"/user/profile/{UserId}")" 
-                                     @onclick="() => SearchState.ClearQuery()">
+                                     @onclick="() => SearchState.Clear()">
                                 @UserEmail
                             </NavLink>
                         </li>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="/user/logout" @onclick="() => SearchState.ClearQuery()">Logout</NavLink>
+                            <NavLink class="nav-link" href="/user/logout" @onclick="() => SearchState.Clear()">Logout</NavLink>
                         </li>
                     </Authorized>
                     <NotAuthorized>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="/user/register" @onclick="() => SearchState.ClearQuery()">Register</NavLink>
+                            <NavLink class="nav-link" href="/user/register" @onclick="() => SearchState.Clear()">Register</NavLink>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/login" @onclick="() => SearchState.ClearQuery()">Login</a>
+                            <a class="nav-link" href="/user/login" @onclick="() => SearchState.Clear()">Login</a>
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>

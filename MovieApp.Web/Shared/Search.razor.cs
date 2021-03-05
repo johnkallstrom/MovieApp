@@ -23,13 +23,12 @@ namespace MovieApp.Web.Shared
 
         protected override void OnInitialized()
         {
+            SearchState.OnFilterChange += StateHasChanged;
             SearchState.OnQueryClear += StateHasChanged;
             SearchState.OnQueryChange += ResetPage;
             SearchState.OnFilterChange += ResetPage;
-            SearchState.OnQueryChange += ResetFilter;
             SearchState.OnQueryChange += GetSearchResults;
             SearchState.OnPageChange += GetSearchResults;
-            SearchState.OnFilterChange += GetSearchResults;
         }
 
         public void Dispose()
@@ -91,5 +90,28 @@ namespace MovieApp.Web.Shared
         private void ResetFilter() => SearchState.ResetFilter();
 
         private void ResetPage() => SearchState.ResetPage();
+
+        private string DisplayFilter()
+        {
+            string output = "";
+
+            switch (SearchState.Filter)
+            {
+                case SearchFilterType.All:
+                    output = "All";
+                    break;
+                case SearchFilterType.Movies:
+                    output = "Movies";
+                    break;
+                case SearchFilterType.TV:
+                    output = "TV Shows";
+                    break;
+                case SearchFilterType.People:
+                    output = "People";
+                    break;
+            }
+
+            return output;
+        }
     }
 }

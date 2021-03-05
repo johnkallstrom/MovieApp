@@ -53,13 +53,13 @@ namespace MovieApp.Web.Components.Search
                     output = string.Empty;
                     break;
                 case SearchFilterType.Movies:
-                    output = "movie";
+                    output = "Movies";
                     break;
                 case SearchFilterType.TV:
-                    output = "TV";
+                    output = "TV Shows";
                     break;
                 case SearchFilterType.People:
-                    output = "people";
+                    output = "People";
                     break;
             }
 

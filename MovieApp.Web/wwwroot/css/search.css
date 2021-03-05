@@ -6,8 +6,23 @@
     --white: rgb(255, 255, 255);
 }
 
+#search .btn {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+#search {
+    outline: none !important;
+}
+
 #search-list {
     margin-bottom: 1rem;
+}
+
+#search-list .search-list-error {
+    margin-top: 2rem;
 }
 
 #search-list a {
@@ -18,22 +33,6 @@
 #search-list a:hover {
     color: var(--orange);
     cursor: pointer;
-}
-
-.has-search .form-control {
-    padding-left: 2.375rem;
-}
-
-.has-search .form-control-feedback {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: #aaa;
 }
 
 #search-list .btn {

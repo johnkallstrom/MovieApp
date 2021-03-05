@@ -72,6 +72,12 @@ namespace MovieApp.Web.State
             OnResultsChange?.Invoke();
         }
 
+        public void Clear()
+        {
+            ClearQuery();
+            ResetFilter();
+        }
+
         public void ClearQuery()
         {
             Query = string.Empty;
