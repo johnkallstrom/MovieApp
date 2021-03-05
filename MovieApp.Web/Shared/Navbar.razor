@@ -23,9 +23,9 @@
                     <Authorized>
                         <li class="nav-item">
                             <NavLink class="nav-link" 
-                                     href="@($"/user/profile/{context.User.FindFirst(ClaimTypes.NameIdentifier).Value}")" 
+                                     href="@($"/user/profile/{UserId}")" 
                                      @onclick="() => SearchState.ClearQuery()">
-                                @context.User.FindFirst(ClaimTypes.Email).Value
+                                @UserEmail
                             </NavLink>
                         </li>
                         <li class="nav-item">
@@ -37,7 +37,7 @@
                             <NavLink class="nav-link" href="/user/register" @onclick="() => SearchState.ClearQuery()">Register</NavLink>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" @onclick="ShowLoginModal">Login</a>
+                            <a class="nav-link" href="/user/login" @onclick="() => SearchState.ClearQuery()">Login</a>
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>

@@ -6,6 +6,19 @@
     --white: rgb(255, 255, 255);
 }
 
+.blazored-modal {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+}
+
+.blazored-modal-overlay {
+    background-color: var(--white) !important;
+}
+
+.blazored-modal-header {
+    padding: 0 0 1rem 0 !important;
+}
+
 .blazored-modal-content {
     width: 350px;
 }

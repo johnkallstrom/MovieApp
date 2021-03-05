@@ -25,16 +25,16 @@ namespace MovieApp.Web.State
         {
             var storedToken = await _localStorage.GetItemAsync<string>(_config["JWT:LocalStorageKey"]);
 
-            // not authenticated
-            if (string.IsNullOrWhiteSpace(storedToken))
+            if (string.IsNullOrEmpty(storedToken))
             {
-                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+                var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
+                return await Task.FromResult(new AuthenticationState(anonymousUser));
             }
 
             var claims = ParseClaimsFromJwtToken(storedToken);
             var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, _config["AuthenticationType"]));
 
-            return new AuthenticationState(authenticatedUser);
+            return await Task.FromResult(new AuthenticationState(authenticatedUser));
         }
 
         public void MarkUserAsAuthenticated(int id, string firstName, string lastName, string email)

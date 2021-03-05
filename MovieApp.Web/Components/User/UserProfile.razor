@@ -6,12 +6,7 @@
 <div id="user-profile">
     <AuthorizeView>
         <Authorized>
-            <h3>Hello @context.User.FindFirst(ClaimTypes.GivenName).Value, welcome to your profile page.</h3>
-            <ul class="mt-3">
-                <li>@context.User.FindFirst(ClaimTypes.NameIdentifier).Value</li>
-                <li>@context.User.FindFirst(ClaimTypes.GivenName).Value @context.User.FindFirst(ClaimTypes.Surname).Value</li>
-                <li>@context.User.FindFirst(ClaimTypes.Email).Value</li>
-            </ul>
+            <p>The user is authenticated.</p>
         </Authorized>
         <NotAuthorized>
             <p>The user is not authenticated.</p>

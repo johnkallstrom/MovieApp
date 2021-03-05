@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal;
+using Microsoft.AspNetCore.Components;
 using MovieApp.Domain.Models;
 using MovieApp.Web.Services;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.User
 {
-    public partial class RegisterUser
+    public partial class RegisterModal
     {
         [Inject]
         public IAuthenticationService AuthenticationService { get; set; }
+
+        [CascadingParameter]
+        public BlazoredModalInstance ModalInstance { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -36,6 +40,12 @@ namespace MovieApp.Web.Components.User
                 Message = response.Message;
                 DisplayLoadingSpinner = false;
             }
+        }
+
+        protected async Task HandleCancelModal()
+        {
+            await ModalInstance.CloseAsync();
+            NavigationManager.NavigateTo("/");
         }
     }
 }

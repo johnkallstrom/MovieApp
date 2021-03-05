@@ -15,13 +15,14 @@
             <InputText type="password" class="form-control" @bind-Value="@LoginModel.Password" />
             <ValidationMessage For="@(() => LoginModel.Password)" />
         </div>
-        <button type="submit" class="btn btn-primary mt-3">
+        <button type="submit" class="btn btn-primary">
             @if (DisplayLoadingSpinner)
             {
                 <span class="spinner-border spinner-border-sm" role="status"></span>
             }
             Login
         </button>
+        <button class="btn btn-danger" @onclick="HandleCancelModal">Cancel</button>
     </EditForm>
     <p class="text-muted mt-3 mb-0">Don't have an account? <a href="/user/register">Register</a></p>
 </div>
