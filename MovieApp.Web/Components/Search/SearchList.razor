@@ -1,32 +1,27 @@
 ﻿@page "/search"
 
 <div id="search-list">
-    <h1>Search</h1>
-    <hr />
-    @if (!string.IsNullOrEmpty(SearchState.Query))
+    @if (!string.IsNullOrEmpty(SearchState.Query) && SearchState.Results.Count() is not 0)
     {
         <div class="row">
-            @if (SearchState.Results.Count() is 0)
-            {
-                <div class="mt-3 text-center">
-                    <h3>No search results could be found, try again.</h3>
+            <div class="col-md-3">
+                <SearchFilter />
+            </div>
+            <div class="col-md-9">
+                <div class="row flex-row">
+                    @foreach (var media in SearchState.Results)
+                    {
+                        <DisplayMedia Media="media" />
+                    }
                 </div>
-            }
-            else
-            {
-                <div class="col-md-3">
-                    <SearchFilter />
-                </div>
-                <div class="col-md-9">
-                    <div class="row flex-row">
-                        @foreach (var media in SearchState.Results)
-                        {
-                            <DisplayMedia Media="media" />
-                        }
-                    </div>
-                    <Pagination Page="@SearchState.Page" TotalPages="@SearchState.TotalPages" OnPageChanged="HandlePageChanged" />
-                </div>
-            }
+                <Pagination Page="@SearchState.Page" TotalPages="@SearchState.TotalPages" OnPageChanged="HandlePageChanged" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h3 class="mt-0">No search results could be found, try again.</h3>
         </div>
     }
 </div>

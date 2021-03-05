@@ -12,6 +12,10 @@ body {
     color: var(--dark) !important;
 }
 
+.media-wrapper:first-child {
+    margin-top: 0rem;
+}
+
 .media-wrapper {
     margin-top: 2rem;
     margin-bottom: 2rem;

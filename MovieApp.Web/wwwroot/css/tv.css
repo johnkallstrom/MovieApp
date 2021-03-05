@@ -1,16 +1,4 @@
-﻿#tv-on-the-air h1 {
-    margin-top: 1rem;
-}
-
-#tv-popular h1 {
-    margin-top: 1rem;
-}
-
-#tv-top-rated h1 {
-    margin-top: 1rem;
-}
-
-#tv a {
+﻿#tv a {
     color: var(--dark);
     text-decoration: none;
 }
