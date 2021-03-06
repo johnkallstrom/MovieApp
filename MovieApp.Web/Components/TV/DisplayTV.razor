@@ -3,7 +3,7 @@
         <div class="card card-block h-100">
             <img class="card-img-top img-fluid" src="@TVShow.Poster_Path" />
             <div class="card-body">
-                <p class="card-text text-center">@TVShow.Name (@(!string.IsNullOrEmpty(TVShow.First_Air_Date) ? DateTime.Parse(TVShow.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</p>
+                <p class="card-text text-center">@TVShow.Name <span class="text-muted">(@(!string.IsNullOrEmpty(TVShow.First_Air_Date) ? DateTime.Parse(TVShow.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</span></p>
             </div>
         </div>
     </a>
