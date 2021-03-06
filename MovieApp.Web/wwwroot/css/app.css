@@ -48,6 +48,14 @@ body {
     margin-bottom: 0rem;
 }
 
+#trending-carousel {
+    padding-top: 1rem;
+}
+
+#trending-carousel .carousel-inner {
+    border-radius: .25rem !important;
+}
+
 #newsletter-form {
     margin-top: 2rem;
     margin-bottom: 1rem;
