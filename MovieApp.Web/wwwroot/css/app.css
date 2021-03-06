@@ -14,8 +14,11 @@ body {
 }
 
 .container {
-    padding-right: 0rem !important;
-    padding-left: 0rem !important;
+    padding-bottom: 1rem;
+}
+
+#nav .container {
+    padding-bottom: 0rem;
 }
 
 .col-centered {
@@ -37,10 +40,17 @@ body {
 }
 
 .media-wrapper {
-    padding-right: 1rem;
-    padding-left: 1rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.media-wrapper:last-child {
+    margin-bottom: 0rem;
+}
+
+#newsletter-form {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 #newsletter-form .btn {
@@ -97,8 +107,4 @@ body {
 #home a:hover {
     color: var(--orange);
     cursor: pointer;
-}
-
-#newsletter-form {
-    margin-bottom: 2rem;
 }

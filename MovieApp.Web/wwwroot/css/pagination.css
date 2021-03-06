@@ -10,6 +10,10 @@
     margin-top: 1rem;
 }
 
+#pagination .pagination {
+    margin-bottom: 0rem;
+}
+
 #pagination .page-item.disabled .page-link {
     color: #6c757d !important;
     pointer-events: none;
