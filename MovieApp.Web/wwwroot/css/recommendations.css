@@ -7,8 +7,8 @@
     --white: rgb(255, 255, 255);
 }
 
-#recommendations h1 {
-    margin-bottom: 1rem;
+#recommendations {
+    padding-top: 1rem;
 }
 
 #recommendations a {

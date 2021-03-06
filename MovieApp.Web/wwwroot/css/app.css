@@ -1,5 +1,6 @@
 ﻿:root {
-    --light-grey: #fafafa;
+    --orange-interact: rgb(212, 70, 19);
+    --light-grey: #f3f3f3;
     --orange: rgb(255, 108, 55);
     --dark: rgb(28, 39, 43);
     --light-dark: rgb(36, 51, 56);
@@ -12,9 +13,18 @@ body {
     color: var(--dark) !important;
 }
 
+.container {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;
+}
+
+#trending-column .card {
+    margin-bottom: 1rem;
 }
 
 .validation-message {
@@ -27,11 +37,24 @@ body {
 }
 
 .media-wrapper {
+    padding-right: 1rem;
+    padding-left: 1rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
+#newsletter-form .btn {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+#newsletter-form .btn:hover {
+    background-color: var(--orange-interact) !important;
+    color: var(--white) !important;
+}
+
 #nav {
+    border-bottom: 3px solid var(--orange);
     background-color: var(--dark) !important;
 }
 
@@ -58,10 +81,6 @@ body {
 }
 
 #footer {
-    margin-top: 2rem;
-}
-
-#footer {
     background-color: var(--dark) !important;
     color: var(--white);
 }
@@ -78,4 +97,8 @@ body {
 #home a:hover {
     color: var(--orange);
     cursor: pointer;
+}
+
+#newsletter-form {
+    margin-bottom: 2rem;
 }

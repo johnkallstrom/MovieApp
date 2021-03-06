@@ -1,5 +1,5 @@
 ﻿:root {
-    --light-grey: #fafafa;
+    --light-grey: #f3f3f3;
     --orange: rgb(255, 108, 55);
     --dark: rgb(28, 39, 43);
     --light-dark: rgb(36, 51, 56);
@@ -12,7 +12,7 @@
 }
 
 .blazored-modal-overlay {
-    background-color: var(--white) !important;
+    background-color: var(--light-grey) !important;
 }
 
 .blazored-modal-header {

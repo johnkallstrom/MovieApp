@@ -1,9 +1,19 @@
 ﻿:root {
-    --light-grey: #fafafa;
+    --light-grey: #f3f3f3;
     --orange: rgb(255, 108, 55);
     --dark: rgb(28, 39, 43);
     --light-dark: rgb(36, 51, 56);
     --white: rgb(255, 255, 255);
+}
+
+#login-user .btn-login {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+#login-user .btn-cancel {
+    background-color: var(--dark) !important;
+    color: var(--white) !important;
 }
 
 #login-user .validation-message {
@@ -14,6 +24,16 @@
 #register-user .validation-message {
     margin-top: 0.5rem;
     font-size: 14px;
+}
+
+#register-user .btn-register {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+#register-user .btn-cancel {
+    background-color: var(--dark) !important;
+    color: var(--white) !important;
 }
 
 #register-user h1 {

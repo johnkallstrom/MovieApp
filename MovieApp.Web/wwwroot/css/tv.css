@@ -1,4 +1,8 @@
-﻿#tv a {
+﻿#tv {
+    padding-top: 1rem;
+}
+
+#tv a {
     color: var(--dark);
     text-decoration: none;
 }
