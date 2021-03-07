@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
@@ -15,27 +14,27 @@ namespace MovieApp.Web.Services
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
+        private readonly ITMDBClient _tmdbClient;
 
         public SearchHttpService(
             IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient)
         {
             _config = config;
-            _httpClient = httpClient;
+            _tmdbClient = tmdbClient;
         }
 
         #region Public Methods
         public async Task<KeywordResults> GetKeywordSearchAsync(string query)
         {
-            var data = await _httpClient.GetFromJsonAsync<KeywordResults>($"search/keyword?api_key={_config[API_KEY]}&query={query}");
+            var data = await _tmdbClient.GetData<KeywordResults>($"search/keyword?api_key={_config[API_KEY]}&query={query}");
 
             return data;
         }
 
         public async Task<MediaResults> GetPeopleSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _tmdbClient.GetData<MediaResults>($"search/person?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
@@ -51,7 +50,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MediaResults> GetTVSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _tmdbClient.GetData<MediaResults>($"search/tv?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
@@ -67,7 +66,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MediaResults> GetMovieSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _tmdbClient.GetData<MediaResults>($"search/movie?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 
@@ -83,7 +82,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MediaResults> GetMultiSearchAsync(string query, int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
+            var data = await _tmdbClient.GetData<MediaResults>($"search/multi?api_key={_config[API_KEY]}&query={query}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 200, 250));
 

@@ -40,10 +40,6 @@ namespace MovieApp.Web.Services
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.Email);
             }
 
-            var baseUri = _httpClient.BaseAddress.AbsoluteUri;
-
-            System.Console.WriteLine("AuthService HttpClient Base Uri: " + baseUri);
-
             return loginResponse;
         }
 

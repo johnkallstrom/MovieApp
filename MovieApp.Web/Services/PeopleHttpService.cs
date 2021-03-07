@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
@@ -16,20 +15,20 @@ namespace MovieApp.Web.Services
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
+        private readonly ITMDBClient _tmdbClient;
 
         public PeopleHttpService(
             IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient)
         {
             _config = config;
-            _httpClient = httpClient;
+            _tmdbClient = tmdbClient;
         }
 
         #region Public Methods
         public async Task<PeopleResults> GetPeopleBySearchAsync(string query)
         {
-            var data = await _httpClient.GetFromJsonAsync<PeopleResults>($"search/person?api_key={_config[API_KEY]}&query={query}");
+            var data = await _tmdbClient.GetData<PeopleResults>($"search/person?api_key={_config[API_KEY]}&query={query}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -43,7 +42,7 @@ namespace MovieApp.Web.Services
 
         public async Task<PersonDetails> GetPersonAsync(int personId)
         {
-            var data = await _httpClient.GetFromJsonAsync<PersonDetails>($"person/{personId}?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<PersonDetails>($"person/{personId}?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -54,7 +53,7 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Movie>> GetPersonMoviesAsync(int personId)
         {
-            var data = await _httpClient.GetFromJsonAsync<PersonCredits>($"person/{personId}/movie_credits?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<PersonCredits>($"person/{personId}/movie_credits?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 

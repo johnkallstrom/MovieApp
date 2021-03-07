@@ -3,6 +3,7 @@ using Blazored.Modal;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Services;
 using MovieApp.Web.State;
 using System;
@@ -18,7 +19,16 @@ namespace MovieApp.Web
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["TMDB:BaseUrl"]) });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]) });
+
+            builder.Services.AddTransient<IAuthenticationHttpService, AuthenticationHttpService>();
+            builder.Services.AddTransient<INewsletterHttpService, NewsletterHttpService>();
+            builder.Services.AddTransient<IUserHttpService, UserHttpService>();
+
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            builder.Services.AddHttpClient<ITMDBClient, TMDBClient>(client => client.BaseAddress = new Uri(builder.Configuration["TMDB:BaseUrl"]));
 
             builder.Services.AddTransient<IMovieHttpService, MovieHttpService>();
             builder.Services.AddTransient<IPeopleHttpService, PeopleHttpService>();
@@ -29,14 +39,6 @@ namespace MovieApp.Web
             builder.Services.AddTransient<IGenreHttpService, GenreHttpService>();
 
             builder.Services.AddSingleton<SearchState>();
-
-            builder.Services.AddAuthorizationCore();
-            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
-            builder.Services.AddTransient<IAuthenticationHttpService, AuthenticationHttpService>();
-            builder.Services.AddHttpClient<IAuthenticationHttpService, AuthenticationHttpService>(client => client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]));
-            builder.Services.AddTransient<INewsletterHttpService, NewsletterHttpService>();
-            builder.Services.AddHttpClient<INewsletterHttpService, NewsletterHttpService>(client => client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]));
 
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredModal();

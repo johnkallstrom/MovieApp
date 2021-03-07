@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,22 +16,22 @@ namespace MovieApp.Web.Services
         private const string IMAGE_URL = "TMDB:ImageBaseUrl";
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
+        private readonly ITMDBClient _tmdbClient;
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
 
         public DiscoverHttpService(
-            IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient,
+            IConfiguration config)
         {
+            _tmdbClient = tmdbClient;
             _config = config;
-            _httpClient = httpClient;
         }
 
         public async Task<MovieResults> GetMoviesAsync(MovieParameters parameters)
         {
             string url = GetMovieApiUrl(parameters);
 
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>(url);
+            var data = await _tmdbClient.GetData<MovieResults>(url);
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -48,7 +47,7 @@ namespace MovieApp.Web.Services
         {
             string url = GetTVApiUrl(parameters);
 
-            var data = await _httpClient.GetFromJsonAsync<TVResults>(url);
+            var data = await _tmdbClient.GetData<TVResults>(url);
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 

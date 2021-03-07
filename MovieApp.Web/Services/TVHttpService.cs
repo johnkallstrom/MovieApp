@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
@@ -16,20 +17,20 @@ namespace MovieApp.Web.Services
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
+        private readonly ITMDBClient _tmdbClient;
 
         public TVHttpService(
             IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient)
         {
             _config = config;
-            _httpClient = httpClient;
+            _tmdbClient = tmdbClient;
         }
 
         #region Public Methods
         public async Task<TVShowDetails> GetTVDetailsAsync(int tvShowId)
         {
-            var data = await _httpClient.GetFromJsonAsync<TVShowDetails>($"tv/{tvShowId}?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<TVShowDetails>($"tv/{tvShowId}?api_key={_config[API_KEY]}");
 
             string tvPlaceholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 1000, 1500));
             string seasonPlaceholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
@@ -46,7 +47,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetPopularTVAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/popular?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/popular?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -60,7 +61,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetPopularTVAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/popular?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/popular?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -74,7 +75,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetTopRatedTVAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -88,7 +89,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetTopRatedTVAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/top_rated?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -102,7 +103,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetOnTheAirTVAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/on_the_air?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/on_the_air?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -116,7 +117,7 @@ namespace MovieApp.Web.Services
 
         public async Task<TVResults> GetOnTheAirTVAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<TVResults>($"tv/on_the_air?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<TVResults>($"tv/on_the_air?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -130,7 +131,7 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Person>> GetTVCastAsync(int tvShowId)
         {
-            var data = await _httpClient.GetFromJsonAsync<TVCredits>($"tv/{tvShowId}/credits?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<TVCredits>($"tv/{tvShowId}/credits?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -144,7 +145,7 @@ namespace MovieApp.Web.Services
 
         public async Task<SeasonDetails> GetTVSeasonDetailsAsync(int tvShowId, int seasonNumber)
         {
-            var data = await _httpClient.GetFromJsonAsync<SeasonDetails>($"tv/{tvShowId}/season/{seasonNumber}?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<SeasonDetails>($"tv/{tvShowId}/season/{seasonNumber}?api_key={_config[API_KEY]}");
 
             string seasonPlaceholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
             string episodePlaceholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 300, 170));

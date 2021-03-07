@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
@@ -16,19 +15,19 @@ namespace MovieApp.Web.Services
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
+        private readonly ITMDBClient _tmdbClient;
 
         public TrendingHttpService(
             IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient)
         {
             _config = config;
-            _httpClient = httpClient;
+            _tmdbClient = tmdbClient;
         }
 
         public async Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, string timeWindowType)
         {
-            var data = await _httpClient.GetFromJsonAsync<MediaResults>($"trending/{mediaType}/{timeWindowType}?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MediaResults>($"trending/{mediaType}/{timeWindowType}?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 

@@ -30,7 +30,11 @@
                     {
                         <DisplayTV TVShow="tvShow" />
                     }
-                    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+
+                    @if (TotalPages > 1)
+                    {
+                        <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+                    }
                 }
                 else
                 {

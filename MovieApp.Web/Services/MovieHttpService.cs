@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MovieApp.Web.Clients;
 using MovieApp.Web.Enums;
 using MovieApp.Web.Helpers;
 using MovieApp.Web.Models;
@@ -16,20 +17,20 @@ namespace MovieApp.Web.Services
         private const string PLACEHOLDER_IMAGE_URL = "TMDB:PlaceholderImageBaseUrl";
 
         private readonly IConfiguration _config;
-        private readonly HttpClient _httpClient;
+        private readonly ITMDBClient _tmdbClient;
 
         public MovieHttpService(
             IConfiguration config,
-            HttpClient httpClient)
+            ITMDBClient tmdbClient)
         {
             _config = config;
-            _httpClient = httpClient;
+            _tmdbClient = tmdbClient;
         }
 
         #region Public Methods
         public async Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/{movieId}/similar?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/{movieId}/similar?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -43,7 +44,7 @@ namespace MovieApp.Web.Services
 
         public async Task<IEnumerable<Person>> GetMovieCastAsync(int movieId)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieCredits>($"movie/{movieId}/credits?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MovieCredits>($"movie/{movieId}/credits?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -57,7 +58,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieDetails> GetMovieDetailsAsync(int movieId)
         {
-            var movie = await _httpClient.GetFromJsonAsync<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
+            var movie = await _tmdbClient.GetData<MovieDetails>($"movie/{movieId}?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 1000, 1500));
 
@@ -68,7 +69,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetPopularMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/popular?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -77,16 +78,13 @@ namespace MovieApp.Web.Services
                 movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
 
-            var baseUri = _httpClient.BaseAddress.AbsoluteUri;
-            System.Console.WriteLine("MovieService HttpClient BaseUri: " + baseUri);
-
             return data;
         }
 
 
         public async Task<MovieResults> GetPopularMoviesAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/popular?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/popular?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -100,7 +98,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetTopRatedMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -114,7 +112,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetTopRatedMoviesAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/top_rated?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -128,7 +126,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetUpcomingMoviesAsync()
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
@@ -142,7 +140,7 @@ namespace MovieApp.Web.Services
 
         public async Task<MovieResults> GetUpcomingMoviesAsync(int page)
         {
-            var data = await _httpClient.GetFromJsonAsync<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}&page={page}");
+            var data = await _tmdbClient.GetData<MovieResults>($"movie/upcoming?api_key={_config[API_KEY]}&page={page}");
 
             string placeholderUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(_config[PLACEHOLDER_IMAGE_URL], 500, 750));
 
