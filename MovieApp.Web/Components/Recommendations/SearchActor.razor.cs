@@ -10,7 +10,7 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class SearchActor
     {
         [Inject]
-        public IPeopleService PeopleService { get; set; }
+        public IPeopleHttpService PeopleService { get; set; }
 
         public Person SelectedActor { get; set; }
 

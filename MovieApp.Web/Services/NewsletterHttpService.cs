@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class NewsletterService : INewsletterService
+    public class NewsletterHttpService : INewsletterHttpService
     {
         private readonly HttpClient _httpClient;
 
-        public NewsletterService(HttpClient httpClient)
+        public NewsletterHttpService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

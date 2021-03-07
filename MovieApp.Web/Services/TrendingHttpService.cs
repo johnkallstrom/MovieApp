@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class TrendingService : ITrendingService
+    public class TrendingHttpService : ITrendingHttpService
     {
         private const string API_KEY = "TMDB:ApiKey";
         private const string IMAGE_URL = "TMDB:ImageBaseUrl";
@@ -18,7 +18,7 @@ namespace MovieApp.Web.Services
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
-        public TrendingService(
+        public TrendingHttpService(
             IConfiguration config,
             HttpClient httpClient)
         {

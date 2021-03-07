@@ -17,7 +17,7 @@ namespace MovieApp.Web.Shared
         public SearchState SearchState { get; set; }
 
         [Inject]
-        public ISearchService SearchService { get; set; }
+        public ISearchHttpService SearchService { get; set; }
 
         public string Placeholder { get; set; } = "Search...";
 

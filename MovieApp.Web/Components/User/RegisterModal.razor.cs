@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.User
     public partial class RegisterModal
     {
         [Inject]
-        public IAuthenticationService AuthenticationService { get; set; }
+        public IAuthenticationHttpService AuthenticationService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }

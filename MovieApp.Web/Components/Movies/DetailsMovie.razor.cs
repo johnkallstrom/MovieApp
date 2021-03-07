@@ -10,7 +10,7 @@ namespace MovieApp.Web.Components.Movies
     public partial class DetailsMovie
     {
         [Inject]
-        public IMovieService MovieService { get; set; }
+        public IMovieHttpService MovieService { get; set; }
 
         [Parameter]
         public string Id { get; set; }

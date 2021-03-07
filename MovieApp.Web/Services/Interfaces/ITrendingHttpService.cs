@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface ITrendingService
+    public interface ITrendingHttpService
     {
         Task<IEnumerable<Media>> GetTrendingItemsAsync(string mediaType, string timeWindowType);
     }

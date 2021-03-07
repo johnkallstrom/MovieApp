@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface INewsletterService
+    public interface INewsletterHttpService
     {
         Task<NewsletterSubscribeResponse> SubscribeToNewsletter(NewsletterSubscribeRequest request);
     }

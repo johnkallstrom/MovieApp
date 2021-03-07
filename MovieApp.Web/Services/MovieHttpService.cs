@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class MovieService : IMovieService
+    public class MovieHttpService : IMovieHttpService
     {
         private const string API_KEY = "TMDB:ApiKey";
         private const string IMAGE_URL = "TMDB:ImageBaseUrl";
@@ -18,7 +18,7 @@ namespace MovieApp.Web.Services
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
-        public MovieService(
+        public MovieHttpService(
             IConfiguration config,
             HttpClient httpClient)
         {
@@ -76,6 +76,9 @@ namespace MovieApp.Web.Services
             {
                 movie.Poster_Path = !string.IsNullOrEmpty(movie.Poster_Path) ? ImageHelper.GetImageUrl(new ImageSettings(_config[IMAGE_URL], PosterSizeType.W500, movie.Poster_Path)) : placeholderUrl;
             }
+
+            var baseUri = _httpClient.BaseAddress.AbsoluteUri;
+            System.Console.WriteLine("MovieService HttpClient BaseUri: " + baseUri);
 
             return data;
         }

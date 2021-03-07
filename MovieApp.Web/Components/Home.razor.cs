@@ -9,10 +9,10 @@ namespace MovieApp.Web.Components
     public partial class Home
     {
         [Inject]
-        public IMovieService MovieService { get; set; }
+        public IMovieHttpService MovieService { get; set; }
 
         [Inject]
-        public ITVService TVService { get; set; }
+        public ITVHttpService TVService { get; set; }
 
         public IEnumerable<Movie> UpcomingMovies { get; set; } = new List<Movie>();
         public IEnumerable<TVShow> PopularTVShows { get; set; } = new List<TVShow>();

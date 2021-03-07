@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface ITVService
+    public interface ITVHttpService
     {
         Task<SeasonDetails> GetTVSeasonDetailsAsync(int tvShowId, int seasonNumber);
         Task<IEnumerable<Person>> GetTVCastAsync(int tvShowId);

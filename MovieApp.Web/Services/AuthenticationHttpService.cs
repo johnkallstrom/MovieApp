@@ -4,20 +4,19 @@ using Microsoft.Extensions.Configuration;
 using MovieApp.Domain.Models;
 using MovieApp.Web.State;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationHttpService : IAuthenticationHttpService
     {
         private readonly AuthenticationStateProvider _authenticationStateProvider;
         private readonly ILocalStorageService _localStorage;
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
-        public AuthenticationService(
+        public AuthenticationHttpService(
             AuthenticationStateProvider authenticationStateProvider,
             ILocalStorageService localStorage,
             IConfiguration config,
@@ -39,8 +38,11 @@ namespace MovieApp.Web.Services
             {
                 await _localStorage.SetItemAsync(_config["JWT:LocalStorageKey"], loginResponse.Token);
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.Email);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResponse.Token);
             }
+
+            var baseUri = _httpClient.BaseAddress.AbsoluteUri;
+
+            System.Console.WriteLine("AuthService HttpClient Base Uri: " + baseUri);
 
             return loginResponse;
         }
@@ -58,7 +60,6 @@ namespace MovieApp.Web.Services
         {
             await _localStorage.RemoveItemAsync(_config["JWT:LocalStorageKey"]);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAnonymous();
-            _httpClient.DefaultRequestHeaders.Authorization = null;
         }
     }
 }

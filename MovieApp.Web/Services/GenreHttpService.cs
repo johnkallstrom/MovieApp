@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class GenreService : IGenreService
+    public class GenreHttpService : IGenreHttpService
     {
         private const string API_KEY = "TMDB:ApiKey";
 
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
-        public GenreService(
+        public GenreHttpService(
             IConfiguration config,
             HttpClient httpClient)
         {

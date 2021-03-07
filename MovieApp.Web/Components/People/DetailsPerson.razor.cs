@@ -14,7 +14,7 @@ namespace MovieApp.Web.Components.People
         public bool DisplayShortBiography { get; set; } = true;
 
         [Inject]
-        public IPeopleService PeopleService { get; set; }
+        public IPeopleHttpService PeopleService { get; set; }
 
         [Parameter]
         public string Id { get; set; }

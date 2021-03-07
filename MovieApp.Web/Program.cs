@@ -18,32 +18,25 @@ namespace MovieApp.Web
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["TMDB:ApiBaseUrl"]) });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["TMDB:BaseUrl"]) });
 
-            builder.Services.AddTransient<IMovieService, MovieService>();
-            builder.Services.AddTransient<IPeopleService, PeopleService>();
-            builder.Services.AddTransient<ITVService, TVService>();
-            builder.Services.AddTransient<ISearchService, SearchService>();
-            builder.Services.AddTransient<ITrendingService, TrendingService>();
-            builder.Services.AddTransient<IDiscoverService, DiscoverService>();
-            builder.Services.AddTransient<IGenreService, GenreService>();
+            builder.Services.AddTransient<IMovieHttpService, MovieHttpService>();
+            builder.Services.AddTransient<IPeopleHttpService, PeopleHttpService>();
+            builder.Services.AddTransient<ITVHttpService, TVHttpService>();
+            builder.Services.AddTransient<ISearchHttpService, SearchHttpService>();
+            builder.Services.AddTransient<ITrendingHttpService, TrendingHttpService>();
+            builder.Services.AddTransient<IDiscoverHttpService, DiscoverHttpService>();
+            builder.Services.AddTransient<IGenreHttpService, GenreHttpService>();
 
             builder.Services.AddSingleton<SearchState>();
 
-            builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
-            builder.Services.AddHttpClient<IAuthenticationService, AuthenticationService>(client =>
-            {
-                client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
-            });
-
-            builder.Services.AddTransient<INewsletterService, NewsletterService>();
-            builder.Services.AddHttpClient<INewsletterService, NewsletterService>(client =>
-            {
-                client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]);
-            });
-
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            builder.Services.AddTransient<IAuthenticationHttpService, AuthenticationHttpService>();
+            builder.Services.AddHttpClient<IAuthenticationHttpService, AuthenticationHttpService>(client => client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]));
+            builder.Services.AddTransient<INewsletterHttpService, NewsletterHttpService>();
+            builder.Services.AddHttpClient<INewsletterHttpService, NewsletterHttpService>(client => client.BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]));
 
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredModal();

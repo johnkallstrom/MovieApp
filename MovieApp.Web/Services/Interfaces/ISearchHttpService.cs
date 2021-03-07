@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface ISearchService
+    public interface ISearchHttpService
     {
         Task<KeywordResults> GetKeywordSearchAsync(string query);
         Task<MediaResults> GetPeopleSearchAsync(string query, int page);

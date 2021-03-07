@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface IGenreService
+    public interface IGenreHttpService
     {
         Task<IEnumerable<Genre>> GetMovieGenresAsync();
         Task<IEnumerable<Genre>> GetTVGenresAsync();

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationHttpService
     {
         Task LogoutUser();
         Task<LoginResponse> LoginUser(LoginRequest request);

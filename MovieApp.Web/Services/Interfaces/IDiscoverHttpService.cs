@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface IDiscoverService
+    public interface IDiscoverHttpService
     {
         Task<MovieResults> GetMoviesAsync(MovieParameters parameters);
         Task<TVResults> GetTVAsync(TVParameters parameters);

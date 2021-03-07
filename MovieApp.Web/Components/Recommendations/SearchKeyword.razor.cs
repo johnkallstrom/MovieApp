@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class SearchKeyword
     {
         [Inject]
-        public ISearchService SearchService { get; set; }
+        public ISearchHttpService SearchService { get; set; }
 
         public Keyword SelectedKeyword { get; set; }
 

@@ -8,7 +8,7 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class YearSelect
     {
         [Inject]
-        public IDiscoverService DiscoverService { get; set; }
+        public IDiscoverHttpService DiscoverService { get; set; }
 
         [Parameter]
         public EventCallback<string> OnYearSelection { get; set; }

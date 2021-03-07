@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public interface IMovieService
+    public interface IMovieHttpService
     {
         Task<IEnumerable<Movie>> GetSimilarMoviesAsync(int movieId);
         Task<IEnumerable<Person>> GetMovieCastAsync(int movieId);

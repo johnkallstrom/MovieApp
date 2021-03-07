@@ -8,7 +8,7 @@ namespace MovieApp.Web.Components
     public partial class NewsletterForm
     {
         [Inject]
-        public INewsletterService NewsletterService { get; set; }
+        public INewsletterHttpService NewsletterService { get; set; }
 
         public NewsletterSubscribeRequest NewsletterSubscribeModel { get; set; } = new NewsletterSubscribeRequest();
 

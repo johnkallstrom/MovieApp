@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Services
 {
-    public class TVService : ITVService
+    public class TVHttpService : ITVHttpService
     {
         private const string API_KEY = "TMDB:ApiKey";
         private const string IMAGE_URL = "TMDB:ImageBaseUrl";
@@ -18,7 +18,7 @@ namespace MovieApp.Web.Services
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
 
-        public TVService(
+        public TVHttpService(
             IConfiguration config,
             HttpClient httpClient)
         {

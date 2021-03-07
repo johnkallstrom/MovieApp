@@ -10,7 +10,7 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class GenreSwitch
     {
         [Inject]
-        public IGenreService GenreService { get; set; }
+        public IGenreHttpService GenreService { get; set; }
 
         [Parameter]
         public bool ShowMovieOptions { get; set; } = false;

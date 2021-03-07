@@ -8,7 +8,7 @@ namespace MovieApp.Web.Components.TV
     public partial class DetailsSeason
     {
         [Inject]
-        public ITVService TVService { get; set; }
+        public ITVHttpService TVService { get; set; }
 
         [Parameter]
         public string Id { get; set; }

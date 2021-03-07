@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components
     public partial class TrendingMediaCarousel
     {
         [Inject]
-        public ITrendingService TrendingService { get; set; }
+        public ITrendingHttpService TrendingService { get; set; }
 
         public IEnumerable<Media> Results { get; set; } = new List<Media>();
 

@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.Movies
     public partial class PopularMovies
     {
         [Inject]
-        public IMovieService MovieService { get; set; }
+        public IMovieHttpService MovieService { get; set; }
 
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
 

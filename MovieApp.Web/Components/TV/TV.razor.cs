@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.TV
     public partial class TV
     {
         [Inject]
-        public ITVService TVService { get; set; }
+        public ITVHttpService TVService { get; set; }
 
         public IEnumerable<TVShow> PopularTVShows { get; set; } = new List<TVShow>();
         public IEnumerable<TVShow> TopRatedTVShows { get; set; } = new List<TVShow>();

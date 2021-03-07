@@ -12,10 +12,10 @@ namespace MovieApp.Web.Components.Recommendations
     public partial class TVRecommendations
     {
         [Inject]
-        public IDiscoverService DiscoverService { get; set; }
+        public IDiscoverHttpService DiscoverService { get; set; }
 
         [Inject]
-        public IGenreService GenreService { get; set; }
+        public IGenreHttpService GenreService { get; set; }
 
         public int Page { get; set; } = 1;
         public string SortOrder { get; set; }
