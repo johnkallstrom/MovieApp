@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using MovieApp.Domain.Entities;
 
 #nullable disable
@@ -16,8 +18,7 @@ namespace MovieApp.API.Data
         {
         }
 
-        public virtual DbSet<List> Lists { get; set; }
-        public virtual DbSet<MediaType> MediaTypes { get; set; }
+        public virtual DbSet<MediaList> MediaLists { get; set; }
         public virtual DbSet<Media> Media { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -34,15 +35,13 @@ namespace MovieApp.API.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<List>(entity =>
+            modelBuilder.Entity<MediaList>(entity =>
             {
-                entity.ToTable("List");
+                entity.ToTable("MediaList");
 
                 entity.Property(e => e.Created).HasColumnType("date");
 
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -51,46 +50,29 @@ namespace MovieApp.API.Data
                 entity.Property(e => e.Updated).HasColumnType("date");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Lists)
+                    .WithMany(p => p.MediaLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("User_List");
-            });
-
-            modelBuilder.Entity<MediaType>(entity =>
-            {
-                entity.ToTable("MediaType");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                    .HasConstraintName("User_MediaList");
             });
 
             modelBuilder.Entity<Media>(entity =>
             {
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Overview).IsRequired();
+
+                entity.Property(e => e.Title).HasMaxLength(50);
+
+                entity.Property(e => e.Type)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Overview)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.List)
+                entity.HasOne(d => d.MediaList)
                     .WithMany(p => p.Media)
-                    .HasForeignKey(d => d.ListId)
+                    .HasForeignKey(d => d.MediaListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("List_Media");
-
-                entity.HasOne(d => d.MediaType)
-                    .WithMany(p => p.Media)
-                    .HasForeignKey(d => d.MediaTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("MediaType_Media");
+                    .HasConstraintName("MediaList_Media");
             });
 
             modelBuilder.Entity<User>(entity =>

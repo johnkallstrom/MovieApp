@@ -91,6 +91,11 @@ namespace MovieApp.API.Services
             return await users.ToListAsync();
         }
 
+        public Task<bool> UserExists(int userId)
+        {
+            return _context.Users.AnyAsync(u => u.Id == userId);
+        }
+
         private async Task<User> AuthenticateUser(string email, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);

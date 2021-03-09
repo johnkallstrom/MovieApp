@@ -7,6 +7,7 @@ namespace MovieApp.API.Services
 {
     public interface IUserService
     {
+        public Task<bool> UserExists(int userId);
         public Task<LoginResponse> LoginUserAsync(LoginRequest request);
         public Task<RegisterResponse> RegisterUserAsync(RegisterRequest request);
         public Task<IEnumerable<User>> GetUsersAsync();
