@@ -22,12 +22,12 @@ namespace MovieApp.API.Services
     {
         private readonly IOptions<JwtSettings> _jwtSettings;
         private readonly IMapper _mapper;
-        private readonly MovieAppDatabaseContext _context;
+        private readonly MovieAppContext _context;
 
         public UserService(
             IOptions<JwtSettings> jwtSettings,
             IMapper mapper,
-            MovieAppDatabaseContext context)
+            MovieAppContext context)
         {
             _jwtSettings = jwtSettings;
             _mapper = mapper;

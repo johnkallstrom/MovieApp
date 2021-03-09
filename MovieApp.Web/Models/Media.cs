@@ -26,21 +26,13 @@ namespace MovieApp.Web.Models
 
         public string DisplayNameOrTitle()
         {
-            string output = "";
+            string output = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(Title))
-            {
                 output = Title;
 
-                return output;
-            }
-
             if (!string.IsNullOrWhiteSpace(Name))
-            {
                 output = Name;
-
-                return output;
-            }
 
             return output;
         }

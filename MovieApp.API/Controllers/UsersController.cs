@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MovieApp.Domain.Entities;
+using MovieApp.API.Services;
 using MovieApp.Domain.Exceptions;
 using MovieApp.Domain.Models;
-using MovieApp.API.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,6 +23,12 @@ namespace MovieApp.API.Controllers
         {
             _mapper = mapper;
             _userService = userService;
+        }
+
+        [HttpPost("{userId}/list")]
+        public async Task CreateList(CreateListDto model)
+        {
+            throw new NotImplementedException();
         }
 
         [HttpPost("login")]

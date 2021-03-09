@@ -27,7 +27,7 @@ namespace MovieApp.API
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<MovieAppDatabaseContext>(options =>
+            services.AddDbContext<MovieAppContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });

@@ -1,20 +1,5 @@
 ﻿#person-details {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-#people-popular {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-#people-popular .row a {
-    color: #212529;
-    text-decoration: none;
-}
-
-#people-popular a:hover {
-    cursor: pointer;
+    padding-top: 1rem;
 }
 
 #person-details #person-movies {

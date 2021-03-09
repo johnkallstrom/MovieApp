@@ -17,6 +17,10 @@ body {
     padding-bottom: 1rem;
 }
 
+#recently-viewed {
+    margin-top: 2rem;
+}
+
 #nav .container {
     padding-bottom: 0rem;
 }
