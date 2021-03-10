@@ -4,10 +4,9 @@ namespace MovieApp.Domain.Models
 {
     public class RegisterRequest
     {
-        [Required(ErrorMessage = "Please enter your first name.")]
-        public string FirstName { get; set; }
-        [Required(ErrorMessage = "Please enter your last name.")]
-        public string LastName { get; set; }
+        [Required(ErrorMessage = "Please enter a username.")]
+        public string Username { get; set; }
+
         [Required(ErrorMessage = "Please enter your email.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter a valid password.")]

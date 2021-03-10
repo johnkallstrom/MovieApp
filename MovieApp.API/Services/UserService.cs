@@ -34,7 +34,7 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
-        public async Task<LoginResponse> LoginUserAsync(LoginRequest request)
+        public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
             var user = await AuthenticateUser(request.Email, request.Password);
 
@@ -54,7 +54,7 @@ namespace MovieApp.API.Services
             return null;
         }
 
-        public async Task<RegisterResponse> RegisterUserAsync(RegisterRequest request)
+        public async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
         {
             if (_context.Users.Any(u => u.Email == request.Email))
             {
@@ -70,19 +70,20 @@ namespace MovieApp.API.Services
             await _context.SaveChangesAsync();
 
             var response = _mapper.Map<RegisterResponse>(user);
+            response.Message = "Registration successful.";
             response.Success = true;
 
             return response;
         }
 
-        public async Task<User> GetUserAsync(int userId)
+        public async Task<User> GetAsync(int userId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             var users = _context.Users;
 
@@ -91,11 +92,12 @@ namespace MovieApp.API.Services
             return await users.ToListAsync();
         }
 
-        public Task<bool> UserExists(int userId)
+        public async Task<bool> UserExistsAsync(int userId)
         {
-            return _context.Users.AnyAsync(u => u.Id == userId);
+            return await _context.Users.AnyAsync(u => u.Id == userId);
         }
 
+        #region Private Methods
         private async Task<User> AuthenticateUser(string email, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -130,5 +132,6 @@ namespace MovieApp.API.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+#endregion
     }
 }

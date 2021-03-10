@@ -2,12 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieApp.API.Services;
-using MovieApp.Domain.Entities;
 using MovieApp.Domain.Exceptions;
 using MovieApp.Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
@@ -16,68 +13,15 @@ namespace MovieApp.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IMediaService _mediaListService;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
         public UsersController(
-            IMediaService mediaListService,
             IMapper mapper,
             IUserService userService)
         {
-            _mediaListService = mediaListService;
             _mapper = mapper;
             _userService = userService;
-        }
-
-        [HttpGet("{userId}/lists", Name = nameof(GetMediaLists))]
-        public async Task<ActionResult> GetMediaLists(int userId)
-        {
-            bool userExists = await _userService.UserExists(userId);
-
-            if (!userExists)
-            {
-                return NotFound(new { Message = $"There is no user in our database with the provided ID: {userId}" });
-            }
-
-            var mediaListEntities = await _mediaListService.GetMediaListsAsync(userId);
-
-            var mediaListDtos = new List<MediaListDto>();
-
-            foreach (var mediaListEntity in mediaListEntities)
-            {
-                mediaListDtos.Add(_mapper.Map<MediaListDto>(mediaListEntity));
-            }
-
-            return Ok(mediaListDtos);
-        }
-
-        [HttpPost("{userId}/list")]
-        [AllowAnonymous]
-        public async Task<IActionResult> CreateMediaList(int userId, CreateMediaListDto model)
-        {
-            bool userExists = await _userService.UserExists(userId);
-
-            if (!userExists)
-            {
-                return NotFound(new { Message = $"There is no user in our database with the provided ID: {userId}" });
-            }
-            
-            try
-            {
-                var mediaListEntity = _mapper.Map<MediaList>(model);
-                mediaListEntity.UserId = userId;
-
-                await _mediaListService.CreateMediaListAsync(mediaListEntity);
-
-                var mediaListDto = _mapper.Map<MediaListDto>(mediaListEntity);
-
-                return CreatedAtRoute(nameof(GetMediaLists), new { userId = userId }, mediaListDto);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
         }
 
         [HttpPost("login")]
@@ -88,7 +32,7 @@ namespace MovieApp.API.Controllers
 
             try
             {
-                response = await _userService.LoginUserAsync(request);
+                response = await _userService.LoginAsync(request);
                 return Ok(response);
             }
             catch (InvalidUserException e)
@@ -108,7 +52,7 @@ namespace MovieApp.API.Controllers
 
             try
             {
-                response = await _userService.RegisterUserAsync(request);
+                response = await _userService.RegisterAsync(request);
                 return Ok(response);
             }
             catch (EmailExistsException e)
@@ -124,7 +68,7 @@ namespace MovieApp.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            var users = await _userService.GetUsersAsync();
+            var users = await _userService.GetAllAsync();
 
             return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
@@ -133,7 +77,7 @@ namespace MovieApp.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<UserDto>> GetUser(int userId)
         {
-            var user = await _userService.GetUserAsync(userId);
+            var user = await _userService.GetAsync(userId);
 
             if (user is null)
             {

@@ -5,16 +5,14 @@ using System.Collections.Generic;
 
 namespace MovieApp.Domain.Entities
 {
-    public partial class Media
+    public partial class Movie
     {
         public int Id { get; set; }
         public int TmdbId { get; set; }
-        public string Name { get; set; }
         public string Title { get; set; }
         public string Overview { get; set; }
-        public string Type { get; set; }
-        public int MediaListId { get; set; }
+        public int ListId { get; set; }
 
-        public virtual MediaList MediaList { get; set; }
+        public virtual List List { get; set; }
     }
 }

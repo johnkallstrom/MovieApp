@@ -18,8 +18,8 @@ namespace MovieApp.API.Data
         {
         }
 
-        public virtual DbSet<MediaList> MediaLists { get; set; }
-        public virtual DbSet<Media> Media { get; set; }
+        public virtual DbSet<List> Lists { get; set; }
+        public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,13 +35,11 @@ namespace MovieApp.API.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<MediaList>(entity =>
+            modelBuilder.Entity<List>(entity =>
             {
-                entity.ToTable("MediaList");
+                entity.ToTable("List");
 
                 entity.Property(e => e.Created).HasColumnType("date");
-
-                entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -50,29 +48,25 @@ namespace MovieApp.API.Data
                 entity.Property(e => e.Updated).HasColumnType("date");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.MediaLists)
+                    .WithMany(p => p.Lists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("User_MediaList");
+                    .HasConstraintName("User_List");
             });
 
-            modelBuilder.Entity<Media>(entity =>
+            modelBuilder.Entity<Movie>(entity =>
             {
-                entity.Property(e => e.Name).HasMaxLength(50);
+                entity.ToTable("Movie");
 
-                entity.Property(e => e.Overview).IsRequired();
-
-                entity.Property(e => e.Title).HasMaxLength(50);
-
-                entity.Property(e => e.Type)
+                entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.HasOne(d => d.MediaList)
-                    .WithMany(p => p.Media)
-                    .HasForeignKey(d => d.MediaListId)
+                entity.HasOne(d => d.List)
+                    .WithMany(p => p.Movies)
+                    .HasForeignKey(d => d.ListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("MediaList_Media");
+                    .HasConstraintName("FK_Movie_List");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -85,15 +79,19 @@ namespace MovieApp.API.Data
                     .IsRequired()
                     .HasMaxLength(256);
 
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.FirstName).HasMaxLength(50);
 
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.Location).HasMaxLength(50);
 
                 entity.Property(e => e.PasswordHash).IsRequired();
+
+                entity.Property(e => e.Updated).HasColumnType("date");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);

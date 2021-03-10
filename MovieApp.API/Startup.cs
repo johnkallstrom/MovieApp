@@ -33,7 +33,7 @@ namespace MovieApp.API
             });
 
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IMediaService, MediaService>();
+            services.AddTransient<IListService, ListService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
