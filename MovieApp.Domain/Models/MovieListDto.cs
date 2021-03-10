@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieApp.Domain.Models
 {
-    public class ListDto
+    public class MovieListDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

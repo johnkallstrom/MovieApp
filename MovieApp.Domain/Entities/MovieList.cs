@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace MovieApp.Domain.Entities
 {
-    public partial class List
+    public partial class MovieList
     {
-        public List()
+        public MovieList()
         {
             Movies = new HashSet<Movie>();
         }

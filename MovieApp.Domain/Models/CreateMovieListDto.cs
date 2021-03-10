@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MovieApp.Domain.Models
 {
-    public class CreateListDto
+    public class CreateMovieListDto
     {
         [Required(ErrorMessage = "Please enter a name.")]
         public string Name { get; set; }
@@ -11,5 +12,6 @@ namespace MovieApp.Domain.Models
         public string Description { get; set; }
         [Required(ErrorMessage = "Please enter a created date.")]
         public DateTime Created { get; set; }
+        public IEnumerable<MovieDto> Movies { get; set; }
     }
 }

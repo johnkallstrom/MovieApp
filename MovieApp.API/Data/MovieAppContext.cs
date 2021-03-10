@@ -18,8 +18,8 @@ namespace MovieApp.API.Data
         {
         }
 
-        public virtual DbSet<List> Lists { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
+        public virtual DbSet<MovieList> MovieLists { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,9 +35,24 @@ namespace MovieApp.API.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<List>(entity =>
+            modelBuilder.Entity<Movie>(entity =>
             {
-                entity.ToTable("List");
+                entity.ToTable("Movie");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.MovieList)
+                    .WithMany(p => p.Movies)
+                    .HasForeignKey(d => d.MovieListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Movie_MovieList");
+            });
+
+            modelBuilder.Entity<MovieList>(entity =>
+            {
+                entity.ToTable("MovieList");
 
                 entity.Property(e => e.Created).HasColumnType("date");
 
@@ -48,25 +63,10 @@ namespace MovieApp.API.Data
                 entity.Property(e => e.Updated).HasColumnType("date");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Lists)
+                    .WithMany(p => p.MovieLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("User_List");
-            });
-
-            modelBuilder.Entity<Movie>(entity =>
-            {
-                entity.ToTable("Movie");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.List)
-                    .WithMany(p => p.Movies)
-                    .HasForeignKey(d => d.ListId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Movie_List");
+                    .HasConstraintName("User_MovieList");
             });
 
             modelBuilder.Entity<User>(entity =>

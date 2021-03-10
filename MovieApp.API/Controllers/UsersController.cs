@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
 {
-    [Route("api/users")]
+    [Route("/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {

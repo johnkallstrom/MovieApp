@@ -9,7 +9,7 @@ namespace MovieApp.Domain.Entities
     {
         public User()
         {
-            Lists = new HashSet<List>();
+            MovieLists = new HashSet<MovieList>();
         }
 
         public int Id { get; set; }
@@ -23,6 +23,6 @@ namespace MovieApp.Domain.Entities
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
 
-        public virtual ICollection<List> Lists { get; set; }
+        public virtual ICollection<MovieList> MovieLists { get; set; }
     }
 }
