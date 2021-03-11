@@ -55,3 +55,17 @@
 #login-user .form-group:last-child {
     margin-bottom: 0rem;
 }
+
+#user-profile {
+    padding-top: 1rem;
+}
+
+#user-profile .btn {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+#user-profile .user-profile-btn-delete {
+    background-color: var(--dark) !important;
+    color: var(--white) !important;
+}

@@ -39,12 +39,11 @@ body {
     font-size: 14px;
 }
 
-.media-wrapper:first-child {
-    margin-top: 0rem;
+#home .media-wrapper:first-child {
+    margin-top: 2rem;
 }
 
 .media-wrapper {
-    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 

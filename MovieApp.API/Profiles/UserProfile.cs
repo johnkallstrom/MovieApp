@@ -8,8 +8,7 @@ namespace MovieApp.API.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserSlimDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
+            CreateMap<UpdateUserDto, User>();
             CreateMap<User, UserDto>();
             CreateMap<RegisterRequest, User>();
             CreateMap<User, RegisterResponse>();

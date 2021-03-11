@@ -15,7 +15,7 @@ namespace MovieApp.Web.Shared
         [CascadingParameter]
         public Task<AuthenticationState> authenticationStateTask { get; set; }
 
-        public string UserEmail { get; set; }
+        public string Username { get; set; }
         public int UserId { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -25,8 +25,8 @@ namespace MovieApp.Web.Shared
 
             if (authState.User.Identity.IsAuthenticated)
             {
-                UserEmail = user.Claims.FirstOrDefault(claim => claim.Type == "email" || claim.Type == ClaimTypes.Email).Value;
                 UserId = int.Parse(user.Claims.FirstOrDefault(claim => claim.Type == "nameid" || claim.Type == ClaimTypes.NameIdentifier).Value);
+                Username = user.Claims.FirstOrDefault(claim => claim.Type == "name" || claim.Type == ClaimTypes.Name).Value;
             }
         }
     }

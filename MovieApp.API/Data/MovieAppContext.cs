@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieApp.Domain.Entities;
 
 #nullable disable
@@ -18,8 +16,6 @@ namespace MovieApp.API.Data
         {
         }
 
-        public virtual DbSet<Movie> Movies { get; set; }
-        public virtual DbSet<MovieList> MovieLists { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,40 +30,6 @@ namespace MovieApp.API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
-            modelBuilder.Entity<Movie>(entity =>
-            {
-                entity.ToTable("Movie");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.MovieList)
-                    .WithMany(p => p.Movies)
-                    .HasForeignKey(d => d.MovieListId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Movie_MovieList");
-            });
-
-            modelBuilder.Entity<MovieList>(entity =>
-            {
-                entity.ToTable("MovieList");
-
-                entity.Property(e => e.Created).HasColumnType("date");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Updated).HasColumnType("date");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.MovieLists)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("User_MovieList");
-            });
 
             modelBuilder.Entity<User>(entity =>
             {

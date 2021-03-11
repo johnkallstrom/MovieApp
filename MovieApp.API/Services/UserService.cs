@@ -34,6 +34,24 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
+        public void UpdateUser(User user)
+        {
+            if (user is null) throw new ArgumentNullException(nameof(user));
+
+            user.Updated = DateTime.Now;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+        public void DeleteUser(User user)
+        {
+            if (user is null) throw new ArgumentNullException(nameof(user));
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
+
         public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
             var user = await AuthenticateUser(request.Email, request.Password);
@@ -76,14 +94,14 @@ namespace MovieApp.API.Services
             return response;
         }
 
-        public async Task<User> GetAsync(int userId)
+        public async Task<User> GetUserAsync(int userId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
             var users = _context.Users;
 
@@ -117,6 +135,7 @@ namespace MovieApp.API.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Email, user.Email)
             };
 
@@ -132,6 +151,6 @@ namespace MovieApp.API.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
-#endregion
+        #endregion
     }
 }

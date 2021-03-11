@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
 {
-    [Route("/users")]
+    [Route("/api/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -22,6 +22,32 @@ namespace MovieApp.API.Controllers
         {
             _mapper = mapper;
             _userService = userService;
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<ActionResult<UserDto>> UpdateUser(int userId, UpdateUserDto model)
+        {
+            var user = await _userService.GetUserAsync(userId);
+
+            if (user is null) return NotFound();
+
+            _mapper.Map(model, user);
+            _userService.UpdateUser(user);
+
+            return Ok(_mapper.Map<UserDto>(user));
+        }
+
+        [HttpDelete("{userId}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> DeleteUser(int userId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+
+            if (user is null) return NotFound();
+
+            _userService.DeleteUser(user);
+
+            return NoContent();
         }
 
         [HttpPost("login")]
@@ -64,20 +90,11 @@ namespace MovieApp.API.Controllers
             }
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
-        {
-            var users = await _userService.GetAllAsync();
-
-            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
-        }
-
         [HttpGet("{userId}")]
         [AllowAnonymous]
         public async Task<ActionResult<UserDto>> GetUser(int userId)
         {
-            var user = await _userService.GetAsync(userId);
+            var user = await _userService.GetUserAsync(userId);
 
             if (user is null)
             {
@@ -85,6 +102,15 @@ namespace MovieApp.API.Controllers
             }
 
             return Ok(_mapper.Map<UserDto>(user));
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
+        {
+            var users = await _userService.GetUsersAsync();
+
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
     }
 }

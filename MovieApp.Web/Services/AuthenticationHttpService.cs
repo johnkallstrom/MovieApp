@@ -37,7 +37,7 @@ namespace MovieApp.Web.Services
             if (loginResponse.Success)
             {
                 await _localStorage.SetItemAsync(_config["JWT:LocalStorageKey"], loginResponse.Token);
-                ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.Email);
+                ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.Username, loginResponse.Email);
             }
 
             return loginResponse;

@@ -8,6 +8,7 @@ namespace MovieApp.Domain.Models
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please enter your email.")]
+        [EmailAddress(ErrorMessage = "The email you entered is invalid.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter a valid password.")]
         public string Password { get; set; }
