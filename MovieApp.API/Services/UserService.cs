@@ -74,6 +74,11 @@ namespace MovieApp.API.Services
 
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
         {
+            if (_context.Users.Any(u => u.Username == request.Username))
+            {
+                throw new UsernameExistsException("The username you entered already exists.");
+            }
+
             if (_context.Users.Any(u => u.Email == request.Email))
             {
                 throw new EmailExistsException("The email you entered already exists.");
@@ -89,6 +94,7 @@ namespace MovieApp.API.Services
 
             var response = _mapper.Map<RegisterResponse>(user);
             response.Message = "Registration successful.";
+            response.Password = request.Password;
             response.Success = true;
 
             return response;

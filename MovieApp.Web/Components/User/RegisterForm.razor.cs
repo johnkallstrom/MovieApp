@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.User
 {
-    public partial class RegisterModal
+    public partial class RegisterForm
     {
         [Inject]
         public IAuthenticationHttpService AuthenticationService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
 
         public RegisterRequest RegisterModel { get; set; } = new RegisterRequest();
 
@@ -32,7 +29,13 @@ namespace MovieApp.Web.Components.User
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo("/user/register/confirmation");
+
+                var loginResponse = await AuthenticationService.LoginUser(new LoginRequest { Email = response.Email, Password = response.Password });
+
+                if (loginResponse.Success)
+                {
+                    await ModalInstance.CloseAsync();
+                }
             }
             else
             {
@@ -44,8 +47,7 @@ namespace MovieApp.Web.Components.User
 
         protected async Task HandleCancelModal()
         {
-            await ModalInstance.CloseAsync();
-            NavigationManager.NavigateTo("/");
+            await ModalInstance.CancelAsync();
         }
     }
 }

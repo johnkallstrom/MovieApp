@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MovieApp.API.Services;
 using MovieApp.Domain.Exceptions;
 using MovieApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -61,7 +62,7 @@ namespace MovieApp.API.Controllers
                 response = await _userService.LoginAsync(request);
                 return Ok(response);
             }
-            catch (InvalidUserException e)
+            catch (Exception e)
             {
                 response.Message = e.Message;
                 response.Success = false;
@@ -81,7 +82,7 @@ namespace MovieApp.API.Controllers
                 response = await _userService.RegisterAsync(request);
                 return Ok(response);
             }
-            catch (EmailExistsException e)
+            catch (Exception e)
             {
                 response.Message = e.Message;
                 response.Success = false;

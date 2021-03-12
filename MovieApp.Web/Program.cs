@@ -22,7 +22,6 @@ namespace MovieApp.Web
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["API:BaseUrl"]) });
 
             builder.Services.AddTransient<IAuthenticationHttpService, AuthenticationHttpService>();
-            builder.Services.AddTransient<INewsletterHttpService, NewsletterHttpService>();
             builder.Services.AddTransient<IUserHttpService, UserHttpService>();
 
             builder.Services.AddAuthorizationCore();

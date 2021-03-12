@@ -14,6 +14,20 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<bool> DeleteUserAsync(int userId)
+        {
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"users/{userId}");
+
+            bool succeeded = false;
+
+            if (response.IsSuccessStatusCode)
+            {
+                succeeded = true;
+            }
+
+            return succeeded;
+        }
+
         public async Task<UserDto> GetUserAsync(int userId)
         {
             var user = await _httpClient.GetFromJsonAsync<UserDto>($"users/{userId}");

@@ -24,7 +24,7 @@
                 <AuthorizeView>
                     <Authorized>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="@($"/user/profile/{UserId}")" @onclick="() => SearchState.Clear()">@Username</NavLink>
+                            <NavLink class="nav-link" href="@($"/user/profile/{UserId}")" @onclick="() => SearchState.Clear()">@UserEmail</NavLink>
                         </li>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/user/logout" @onclick="() => SearchState.Clear()">Logout</NavLink>
@@ -32,10 +32,10 @@
                     </Authorized>
                     <NotAuthorized>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="/user/register" @onclick="() => SearchState.Clear()">Register</NavLink>
+                            <NavLink class="nav-link" @onclick="HandleRegisterClick">Register</NavLink>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/login" @onclick="() => SearchState.Clear()">Login</a>
+                            <a class="nav-link" @onclick="HandleLoginClick">Login</a>
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>

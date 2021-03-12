@@ -1,21 +1,23 @@
 ﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MovieApp.Domain.Models;
 using MovieApp.Web.Services;
+using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.User
 {
-    public partial class LoginModal
+    public partial class LoginForm
     {
         [Inject]
         public IAuthenticationHttpService AuthenticationService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
 
         public LoginRequest LoginModel { get; set; } = new LoginRequest();
 
@@ -32,7 +34,7 @@ namespace MovieApp.Web.Components.User
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo("/");
+                await ModalInstance.CloseAsync();
             }
             else
             {
@@ -44,8 +46,7 @@ namespace MovieApp.Web.Components.User
 
         protected async Task HandleCancelModal()
         {
-            await ModalInstance.CloseAsync();
-            NavigationManager.NavigateTo("/");
+            await ModalInstance.CancelAsync();
         }
     }
 }

@@ -11,7 +11,7 @@
     color: var(--white) !important;
 }
 
-#login-user .btn-cancel {
+.btn-cancel {
     background-color: var(--dark) !important;
     color: var(--white) !important;
 }
