@@ -26,15 +26,51 @@ namespace MovieApp.Web.Components.User
 
         public UserDto User { get; set; } = new UserDto();
 
+        public bool DisplayLoadingSpinner { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
+            DisplayLoadingSpinner = true;
+
             if (int.TryParse(UserId, out int parsedId))
             {
-                User = await UserService.GetUserAsync(parsedId);
+                var user = await UserService.GetUserAsync(parsedId);
+
+                if (user is not null)
+                {
+                    User = user;
+                    DisplayLoadingSpinner = false;
+                }
             }
             else
             {
                 User = null;
+            }
+        }
+
+        protected async Task HandleEditBtnClick()
+        {
+            var options = new ModalOptions()
+            {
+                DisableBackgroundCancel = true,
+                HideCloseButton = true
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(User), User);
+            
+            var modal = Modal.Show<EditUserForm>("Edit User", parameters, options);
+            var result = await modal.Result;
+
+            if (!result.Cancelled && User != null)
+            {
+                if (int.TryParse(UserId, out int parsedId))
+                {
+                    var user = await UserService.GetUserAsync(parsedId);
+                    User = user;
+                }
+
+                StateHasChanged();
             }
         }
 

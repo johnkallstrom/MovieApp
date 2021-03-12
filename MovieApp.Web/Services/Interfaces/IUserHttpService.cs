@@ -5,7 +5,8 @@ namespace MovieApp.Web.Services
 {
     public interface IUserHttpService
     {
-        Task<bool> DeleteUserAsync(int userId);
+        Task<UpdateUserResponse> UpdateUserAsync(int userId, UpdateUserDto model);
         Task<UserDto> GetUserAsync(int userId);
+        Task<bool> DeleteUserAsync(int userId);
     }
 }

@@ -65,8 +65,6 @@ namespace MovieApp.Web.Shared
 
             if (!result.Cancelled)
             {
-
-
                 await GetAuthenticatedUserClaims();
             }
         }

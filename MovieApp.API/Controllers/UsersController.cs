@@ -26,16 +26,28 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpPut("{userId}")]
-        public async Task<ActionResult<UserDto>> UpdateUser(int userId, UpdateUserDto model)
+        public async Task<ActionResult<UpdateUserResponse>> UpdateUser(int userId, UpdateUserDto model)
         {
+            var response = new UpdateUserResponse();
+
             var user = await _userService.GetUserAsync(userId);
 
             if (user is null) return NotFound();
 
-            _mapper.Map(model, user);
-            _userService.UpdateUser(user);
+            try
+            {
+                _mapper.Map(model, user);
+                response = _userService.UpdateUser(user);
 
-            return Ok(_mapper.Map<UserDto>(user));
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.Message = e.Message;
+                response.Success = false;
+
+                return BadRequest(response);
+            }
         }
 
         [HttpDelete("{userId}")]

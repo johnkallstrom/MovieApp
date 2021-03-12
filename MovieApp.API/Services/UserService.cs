@@ -34,7 +34,7 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
-        public void UpdateUser(User user)
+        public UpdateUserResponse UpdateUser(User user)
         {
             if (user is null) throw new ArgumentNullException(nameof(user));
 
@@ -42,6 +42,12 @@ namespace MovieApp.API.Services
 
             _context.Users.Update(user);
             _context.SaveChanges();
+
+            var response = _mapper.Map<UpdateUserResponse>(user);
+            response.Message = "Update successful.";
+            response.Success = true;
+
+            return response;
         }
 
         public void DeleteUser(User user)

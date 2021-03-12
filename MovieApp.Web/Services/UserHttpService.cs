@@ -14,6 +14,15 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<UpdateUserResponse> UpdateUserAsync(int userId, UpdateUserDto model)
+        {
+            HttpResponseMessage httpResponse = await _httpClient.PutAsJsonAsync($"users/{userId}", model);
+
+            var response = await httpResponse.Content.ReadFromJsonAsync<UpdateUserResponse>();
+
+            return response;
+        }
+
         public async Task<bool> DeleteUserAsync(int userId)
         {
             HttpResponseMessage response = await _httpClient.DeleteAsync($"users/{userId}");
