@@ -11,7 +11,7 @@ namespace MovieApp.Web.Components.TV
         [Inject]
         public ITVHttpService TVService { get; set; }
 
-        public IEnumerable<TVShow> Results { get; set; } = new List<TVShow>();
+        public IEnumerable<TVShowDetails> Results { get; set; } = new List<TVShowDetails>();
 
         public int Page { get; set; } = 1;
         public int TotalPages { get; set; }

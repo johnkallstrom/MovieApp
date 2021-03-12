@@ -15,7 +15,7 @@ namespace MovieApp.Web.Components
         public ITVHttpService TVService { get; set; }
 
         public IEnumerable<Movie> UpcomingMovies { get; set; } = new List<Movie>();
-        public IEnumerable<TVShow> PopularTVShows { get; set; } = new List<TVShow>();
+        public IEnumerable<TVShowDetails> PopularTVShows { get; set; } = new List<TVShowDetails>();
 
         protected override async Task OnInitializedAsync()
         {

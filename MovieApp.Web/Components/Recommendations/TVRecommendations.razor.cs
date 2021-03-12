@@ -22,7 +22,7 @@ namespace MovieApp.Web.Components.Recommendations
         public int GenreId { get; set; }
         public int FirstAirYear { get; set; } = 0;
         public string SearchQuery { get; set; }
-        public IEnumerable<TVShow> Results { get; set; } = new List<TVShow>();
+        public IEnumerable<TVShowDetails> Results { get; set; } = new List<TVShowDetails>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
         public string FromFirstAirDate { get; set; }

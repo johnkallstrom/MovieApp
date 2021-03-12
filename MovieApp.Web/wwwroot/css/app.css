@@ -13,6 +13,16 @@ body {
     color: var(--dark) !important;
 }
 
+.btn-orange {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+.btn-dark {
+    background-color: var(--dark) !important;
+    color: var(--white) !important;
+}
+
 .container {
     padding-bottom: 1rem;
 }

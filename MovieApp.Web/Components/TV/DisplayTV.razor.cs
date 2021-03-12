@@ -6,6 +6,6 @@ namespace MovieApp.Web.Components.TV
     public partial class DisplayTV
     {
         [Parameter]
-        public TVShow TVShow { get; set; }
+        public TVShowDetails TVShow { get; set; }
     }
 }

@@ -7,7 +7,7 @@
             <div class="card card-block h-100">
                 <img class="card-img-top img-fluid" src="@ImageHelper.GetMediaImagePath(Media)" />
                 <div class="card-body">
-                    <p class="card-text text-center">@Media.DisplayNameOrTitle() <span class="text-muted">(@(!string.IsNullOrEmpty(Media.Release_Date) ? DateTime.Parse(Media.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</span></p>
+                    <p class="card-text text-center">@Media.DisplayNameOrTitle() (@(!string.IsNullOrEmpty(Media.Release_Date) ? DateTime.Parse(Media.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</p>
                 </div>
             </div>
         </a>
@@ -21,7 +21,7 @@
             <div class="card card-block h-100">
                 <img class="card-img-top img-fluid" src="@ImageHelper.GetMediaImagePath(Media)" />
                 <div class="card-body">
-                    <p class="card-text text-center">@Media.DisplayNameOrTitle() <span class="text-muted">(@(!string.IsNullOrEmpty(Media.First_Air_Date) ? DateTime.Parse(Media.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</span></p>
+                    <p class="card-text text-center">@Media.DisplayNameOrTitle() (@(!string.IsNullOrEmpty(Media.First_Air_Date) ? DateTime.Parse(Media.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</p>
                 </div>
             </div>
         </a>

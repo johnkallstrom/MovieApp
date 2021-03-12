@@ -11,9 +11,9 @@ namespace MovieApp.Web.Components.TV
         [Inject]
         public ITVHttpService TVService { get; set; }
 
-        public IEnumerable<TVShow> PopularTVShows { get; set; } = new List<TVShow>();
-        public IEnumerable<TVShow> TopRatedTVShows { get; set; } = new List<TVShow>();
-        public IEnumerable<TVShow> OnTheAirTVShows { get; set; } = new List<TVShow>();
+        public IEnumerable<TVShowDetails> PopularTVShows { get; set; } = new List<TVShowDetails>();
+        public IEnumerable<TVShowDetails> TopRatedTVShows { get; set; } = new List<TVShowDetails>();
+        public IEnumerable<TVShowDetails> OnTheAirTVShows { get; set; } = new List<TVShowDetails>();
 
         protected override async Task OnInitializedAsync()
         {

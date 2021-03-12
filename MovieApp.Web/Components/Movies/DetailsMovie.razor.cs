@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
 using System.Collections.Generic;
@@ -21,6 +23,12 @@ namespace MovieApp.Web.Components.Movies
 
         public IEnumerable<Movie> SimilarMovies { get; set; } = new List<Movie>();
 
+        [Inject]
+        public ILocalStorageService LocalStorage { get; set; }
+
+        [Inject]
+        public IConfiguration Config { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             var similarMovies = Enumerable.Empty<Movie>();
@@ -35,6 +43,8 @@ namespace MovieApp.Web.Components.Movies
 
             Cast = actors.Where(x => x.Known_For_Department == "Acting").Take(10);
             SimilarMovies = similarMovies.Take(10);
+            
+            await SetMovieInLocalStorage();
         }
 
         protected override async Task OnParametersSetAsync()
@@ -51,6 +61,16 @@ namespace MovieApp.Web.Components.Movies
 
             Cast = actors.Where(x => x.Known_For_Department == "Acting").Take(10);
             SimilarMovies = similarMovies.Take(10);
+        }
+
+        private async Task SetMovieInLocalStorage()
+        {
+            var movie = await LocalStorage.GetItemAsync<MovieDetails>($"{Config["RecentlyViewed:MovieKey"]}{Movie.Id}");
+
+            if (movie is null)
+            {
+                await LocalStorage.SetItemAsync($"{Config["RecentlyViewed:MovieKey"]}{Movie.Id}", Movie);
+            }
         }
     }
 }

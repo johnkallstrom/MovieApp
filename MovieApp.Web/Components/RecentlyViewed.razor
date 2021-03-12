@@ -1,0 +1,21 @@
+﻿<div id="recently-viewed">
+    <h3 class="mb-3">Recently Viewed</h3>
+    @if (DisplayMessage)
+    {
+        <p>@Message</p>
+    }
+    else
+    {
+        <button class="btn btn-orange mb-3" @onclick="HandleClearBtnClick">Clear</button>
+        <div class="list-group">
+            @foreach (var movie in Movies)
+            {
+                <a href="@($"/movie/{movie.Id}")" class="list-group-item list-group-item-action">@movie.Title (@(!string.IsNullOrEmpty(movie.Release_Date) ? DateTime.Parse(movie.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</a>
+            }
+            @foreach (var tvShow in TVShows)
+            {
+                <a href="@($"/tv-shows/{tvShow.Id}")" class="list-group-item list-group-item-action">@tvShow.Name (@(!string.IsNullOrEmpty(tvShow.First_Air_Date) ? DateTime.Parse(tvShow.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</a>
+            }
+        </div>
+    }
+</div>
