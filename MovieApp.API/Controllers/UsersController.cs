@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieApp.API.Services;
-using MovieApp.Domain.Exceptions;
 using MovieApp.Domain.Models;
 using System;
 using System.Collections.Generic;

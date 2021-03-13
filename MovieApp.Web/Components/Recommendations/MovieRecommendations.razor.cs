@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MovieApp.Web.Data;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
@@ -11,6 +12,9 @@ namespace MovieApp.Web.Components.Recommendations
 {
     public partial class MovieRecommendations
     {
+        [Inject]
+        public IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         public IPeopleHttpService PeopleService { get; set; }
 
@@ -67,6 +71,8 @@ namespace MovieApp.Web.Components.Recommendations
                 TotalPages = results.Total_Pages;
                 TotalResults = results.Total_Results;
             }
+
+            ScrollTop();
         }
 
         protected void RemoveSelectedActor(Person actor)
@@ -149,6 +155,8 @@ namespace MovieApp.Web.Components.Recommendations
                 TotalResults = results.Total_Results;
             }
         }
+
+        private void ScrollTop() => ((IJSInProcessRuntime)JSRuntime).InvokeVoid("scrollTop");
 
         private async Task<MovieResults> FetchMovieResults()
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MovieApp.Web.Data;
 using MovieApp.Web.Models;
 using MovieApp.Web.Parameters;
@@ -11,6 +12,9 @@ namespace MovieApp.Web.Components.Recommendations
 {
     public partial class TVRecommendations
     {
+        [Inject]
+        public IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         public IDiscoverHttpService DiscoverService { get; set; }
 
@@ -56,6 +60,8 @@ namespace MovieApp.Web.Components.Recommendations
                 TotalPages = results.Total_Pages;
                 TotalResults = results.Total_Results;
             }
+
+            ScrollTop();
         }
 
         protected void HandleDateSelection(DateSelectResult result)
@@ -118,6 +124,8 @@ namespace MovieApp.Web.Components.Recommendations
                 FirstAirYear = parsedYear;
             }
         }
+
+        private void ScrollTop() => ((IJSInProcessRuntime)JSRuntime).InvokeVoid("scrollTop");
 
         private async Task<TVResults> FetchTVResults()
         {
