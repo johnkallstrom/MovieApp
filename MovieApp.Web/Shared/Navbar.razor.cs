@@ -3,7 +3,6 @@ using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MovieApp.Web.Components.User;
-using MovieApp.Web.Services;
 using MovieApp.Web.State;
 using System.Linq;
 using System.Security.Claims;

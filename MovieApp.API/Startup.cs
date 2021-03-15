@@ -51,6 +51,17 @@ namespace MovieApp.API
             services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
             services.AddCors();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowSpecificOrigins", builder =>
+            //    {
+            //        builder.WithOrigins("https://localhost:44317/")
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials();
+            //    });
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,6 +75,8 @@ namespace MovieApp.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //app.UseCors("AllowSpecificOrigins");
 
             app.UseCors(x => x
                     .AllowAnyOrigin()

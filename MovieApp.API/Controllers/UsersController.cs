@@ -25,6 +25,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpPut("{userId}")]
+        [Authorize]
         public async Task<ActionResult<UpdateUserResponse>> UpdateUser(int userId, UpdateUserDto model)
         {
             var response = new UpdateUserResponse();
@@ -50,7 +51,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpDelete("{userId}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult> DeleteUser(int userId)
         {
             var user = await _userService.GetUserAsync(userId);
@@ -103,7 +104,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<UserDto>> GetUser(int userId)
         {
             var user = await _userService.GetUserAsync(userId);
@@ -117,7 +118,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             var users = await _userService.GetUsersAsync();

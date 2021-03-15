@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using MovieApp.Domain.Models;
 using MovieApp.Web.State;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -38,6 +39,9 @@ namespace MovieApp.Web.Services
             {
                 await _localStorage.SetItemAsync(_config["JWT:LocalStorageKey"], loginResponse.Token);
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResponse.Id, loginResponse.Username, loginResponse.Email);
+
+                // add jwt token to authorization request header
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse.Token);
             }
 
             return loginResponse;
@@ -56,6 +60,9 @@ namespace MovieApp.Web.Services
         {
             await _localStorage.RemoveItemAsync(_config["JWT:LocalStorageKey"]);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAnonymous();
+
+            // remove jwt token from authorization header
+            _httpClient.DefaultRequestHeaders.Authorization = null;
         }
     }
 }

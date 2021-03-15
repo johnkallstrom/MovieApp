@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -10,13 +12,16 @@ namespace MovieApp.Web.State
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
+        private readonly HttpClient _httpClient;
         private readonly IConfiguration _config;
         private readonly ILocalStorageService _localStorage;
 
         public CustomAuthenticationStateProvider(
+            HttpClient httpClient,
             IConfiguration config,
             ILocalStorageService localStorage)
         {
+            _httpClient = httpClient;
             _config = config;
             _localStorage = localStorage;
         }
@@ -33,6 +38,8 @@ namespace MovieApp.Web.State
 
             var claims = ParseClaimsFromJwtToken(storedToken);
             var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, _config["AuthenticationType"]));
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", storedToken);
 
             return await Task.FromResult(new AuthenticationState(authenticatedUser));
         }
