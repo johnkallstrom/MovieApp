@@ -22,6 +22,16 @@
     margin-bottom: 1rem;
 }
 
+#tv-details .badge {
+    font-weight: normal !important;
+    padding: 0.7rem;
+}
+
+#tv-details .card-img-top {
+    border-bottom-left-radius: calc(.25rem - 1px);
+    border-bottom-right-radius: calc(.25rem - 1px);
+}
+
 #tv-details #cast a {
     color: #212529;
     text-decoration: none;

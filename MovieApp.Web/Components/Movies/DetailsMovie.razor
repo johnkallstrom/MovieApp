@@ -2,32 +2,41 @@
 
 <div id="movie-details">
     <div class="row">
-        <div class="col-md-6">
-        <div class="card card-block h-100">
+        <div class="col-md-4">
+        <div class="card card-block">
             <img class="card-img-top img-fluid" src="@Movie.Poster_Path">
         </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card card-block h-100">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Title</h5>
-                    <p class="card-text">@Movie.Title</p>
+                    <h3 class="card-title mb-3">@Movie.Title</h3>
                     <h5 class="card-title">Tagline</h5>
                     <p class="card-text">@Movie.Tagline</p>
                     <h5 class="card-title">Overview</h5>
                     <p class="card-text">@Movie.Overview</p>
-                    <h5 class="card-title">Runtime</h5>
-                    <p class="card-text">@Movie.Runtime min</p>
-                    <h5 class="card-title">Release</h5>
-                    <p class="card-text">@Movie.Release_Date</p>
-                    <h5 class="card-title">Language</h5>
-                    <p class="card-text">@Movie.Original_Language</p>
-                    <h5 class="card-title">Rating</h5>
-                    <p class="card-text">@Movie.Vote_Average</p>
-                    <h5 class="card-title">Genres</h5>
+                    <div class="d-inline-block mr-5">
+                        <h5 class="card-title">Rating</h5>
+                        <p class="card-text">@Movie.Vote_Average / 10</p>
+                    </div>
+                    <div class="d-inline-block mr-5">
+                        <h5 class="card-title">Runtime</h5>
+                        <p class="card-text">@Movie.Runtime min</p>
+                    </div>
+                    <div class="d-inline-block mr-5">
+                        <h5 class="card-title">Release</h5>
+                        <p class="card-text">@Movie.Release_Date</p>
+                    </div>
+                    <div class="d-inline-block">
+                        <h5 class="card-title">Language</h5>
+                        <p class="card-text">@Movie.Original_Language</p>
+                    </div>
+                    <h5 class="card-title mt-3">Genres</h5>
                     @foreach (var genre in Movie.Genres)
                     {
-                        <p class="card-text">@genre.Name</p>
+                        <div class="d-inline-block">
+                            <span class="badge badge-dark mr-3">@genre.Name</span>
+                        </div>
                     }
                 </div>
             </div>

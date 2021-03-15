@@ -1,51 +1,49 @@
 ﻿@page "/person/{id}"
 
 <div id="person-details">
-    @if (Person == null)
-    {
-        <h3>Sorry, we could not find what you're looking for.</h3>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-block h-100">
-                    <img class="card-img-top img-fluid" src="@Person.Profile_Path">
-                </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-block h-100">
+                <img class="card-img-top img-fluid" src="@Person.Profile_Path">
             </div>
-            <div class="col-md-6">
-                <div class="card card-block h-100">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">Name</h5>
-                        <p class="card-text">@Person.Name</p>
-                        <h5 class="card-title mb-3">Known for</h5>
+        </div>
+        <div class="col-md-8">
+            <div class="card card-block h-100">
+                <div class="card-body">
+                    <h3 class="card-title mb-3">@Person.Name</h3>
+                    <h5 class="card-title">Biography</h5>
+                    <p class="card-text">@Person.Biography</p>
+                    <div class="d-inline-block mr-5">
+                        <h5 class="card-title">Known for</h5>
                         <p class="card-text">@Person.Known_For_Department</p>
-                        <h5 class="card-title">Biography</h5>
-                        <p class="card-text">@Person.Biography</p>
-                        <h5 class="card-title mt-3">Birthday</h5>
+                    </div>
+                    <div class="d-inline-block mr-5">
+                        <h5 class="card-title">Birthday</h5>
                         <p class="card-text">@Person.Birthday</p>
+                    </div>
+                    <div class="d-inline-block mr-5">
                         <h5 class="card-title">Born</h5>
                         <p class="card-text">@Person.Place_Of_Birth</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="person-movies">
-            <h3 class="mt-3">Movies</h3>
-            <hr />
-            @if (Movies == null || !Movies.Any())
-            {
-                <p>Sorry, we could not find any movies.</p>
-            }
-            else
-            {
-                <div class="row flex-row flex-nowrap overflow-auto">
-                    @foreach (var movie in Movies)
-                    {
-                        <DisplayMovie Movie="movie" />
-                    }
-                </div>
-            }
-        </div>
-    }
+    </div>
+    <div id="person-movies">
+        <h3 class="mt-3">Movies</h3>
+        <hr />
+        @if (Movies == null || !Movies.Any())
+        {
+            <p>Sorry, we could not find any movies.</p>
+        }
+        else
+        {
+            <div class="row flex-row flex-nowrap overflow-auto">
+                @foreach (var movie in Movies)
+                {
+                    <DisplayMovie Movie="movie" />
+                }
+            </div>
+        }
+    </div>
 </div>

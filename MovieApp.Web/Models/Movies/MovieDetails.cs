@@ -12,6 +12,7 @@ namespace MovieApp.Web.Models
         public string Original_Title { get; set; }
         public string Overview { get; set; }
         public decimal Popularity { get; set; }
+        public string Backdrop_Path { get; set; }
         public string Poster_Path { get; set; }
         public string Release_Date { get; set; }
         public int Runtime { get; set; }

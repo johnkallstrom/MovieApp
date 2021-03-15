@@ -17,6 +17,16 @@
     margin-bottom: 1rem;
 }
 
+#movie-details .badge {
+    font-weight: normal !important;
+    padding: 0.7rem;
+}
+
+#movie-details .card-img-top {
+    border-bottom-left-radius: calc(.25rem - 1px);
+    border-bottom-right-radius: calc(.25rem - 1px);
+}
+
 #movie-details #cast {
     margin-top: 2rem;
 }
