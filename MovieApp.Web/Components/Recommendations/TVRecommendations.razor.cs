@@ -24,13 +24,14 @@ namespace MovieApp.Web.Components.Recommendations
         public int Page { get; set; } = 1;
         public string SortOrder { get; set; }
         public int GenreId { get; set; }
-        public int FirstAirYear { get; set; } = 0;
+        public int FirstAirYear { get; set; }
         public string SearchQuery { get; set; }
         public IEnumerable<TVShowDetails> Results { get; set; } = new List<TVShowDetails>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
         public string FromFirstAirDate { get; set; }
         public string ToFirstAirDate { get; set; }
+        public int Rating { get; set; } = 0;
         public int Runtime { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
 
@@ -73,6 +74,14 @@ namespace MovieApp.Web.Components.Recommendations
 
                 if (result.Type == "to")
                     ToFirstAirDate = result.Value;
+            }
+        }
+
+        protected void HandleRatingChanged(string selectedRating)
+        {
+            if (int.TryParse(selectedRating, out int parsedRating))
+            {
+                Rating = parsedRating;
             }
         }
 
@@ -136,6 +145,7 @@ namespace MovieApp.Web.Components.Recommendations
                 FirstAirYear = FirstAirYear,
                 FromFirstAirDate = FromFirstAirDate,
                 ToFirstAirDate = ToFirstAirDate,
+                Rating = Rating,
                 Runtime = Runtime
             };
 

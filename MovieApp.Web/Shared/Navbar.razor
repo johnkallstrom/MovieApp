@@ -27,7 +27,7 @@
                             <NavLink class="nav-link" href="@($"/user/profile/{UserId}")" @onclick="() => SearchState.Clear()">@UserEmail</NavLink>
                         </li>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="/user/logout" @onclick="() => SearchState.Clear()">Logout</NavLink>
+                            <NavLink class="nav-link" href="/user/logout" @onclick="HandleLogoutClick">Logout</NavLink>
                         </li>
                     </Authorized>
                     <NotAuthorized>

@@ -1,0 +1,11 @@
+﻿<div id="recommendations-rating" class="mt-3">
+    <p class="mb-1">Rating</p>
+    <div class="range">
+        <input type="range"
+               class="form-range"
+               min="0"
+               max="10"
+               value="0"
+               @oninput="@(async (e) => await OnRatingChanged.InvokeAsync(e.Value.ToString()))" />
+    </div>
+</div>

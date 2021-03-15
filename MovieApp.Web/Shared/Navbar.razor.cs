@@ -30,10 +30,13 @@ namespace MovieApp.Web.Shared
             await GetAuthenticatedUserClaims();
         }
 
-        protected async Task HandleLoginClick()
+        protected void HandleLogoutClick()
         {
             SearchState.Clear();
+        }
 
+        protected async Task HandleLoginClick()
+        {
             var options = new ModalOptions()
             {
                 DisableBackgroundCancel = true,
@@ -52,8 +55,6 @@ namespace MovieApp.Web.Shared
 
         protected async Task HandleRegisterClick()
         {
-            SearchState.Clear();
-
             var options = new ModalOptions()
             {
                 DisableBackgroundCancel = true,

@@ -7,6 +7,7 @@ namespace MovieApp.Web.Parameters
         public int Page { get; set; }
         public string SortOrder { get; set; }
         public int FirstAirYear { get; set; }
+        public int Rating { get; set; }
         public int Runtime { get; set; }
         public string FromFirstAirDate { get; set; }
         public string ToFirstAirDate { get; set; }

@@ -151,7 +151,12 @@ namespace MovieApp.Web.Services
                 }
             }
 
-            if (parameters.Runtime is not 0)
+            if (parameters.Rating > 0)
+            {
+                builder.AppendLine($"&vote_average.gte={parameters.Rating}");
+            }
+
+            if (parameters.Runtime > 0)
             {
                 builder.AppendLine($"&with_runtime.gte={parameters.Runtime}");
             }
@@ -203,7 +208,12 @@ namespace MovieApp.Web.Services
                 }
             }
 
-            if (parameters.Runtime is not 0)
+            if (parameters.Rating > 0)
+            {
+                builder.AppendLine($"&vote_average.gte={parameters.Rating}");
+            }
+
+            if (parameters.Runtime > 0)
             {
                 builder.AppendLine($"&with_runtime.gte={parameters.Runtime}");
             }

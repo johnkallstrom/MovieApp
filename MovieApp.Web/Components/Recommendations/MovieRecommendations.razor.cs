@@ -26,12 +26,13 @@ namespace MovieApp.Web.Components.Recommendations
 
         public int Page { get; set; } = 1;
         public string SortOrder { get; set; }
-        public int ReleaseYear { get; set; } = 0;
+        public int ReleaseYear { get; set; }
         public IEnumerable<Movie> Results { get; set; } = new List<Movie>();
         public int TotalPages { get; set; }
         public int TotalResults { get; set; }
         public string FromReleasedate { get; set; }
         public string ToReleaseDate { get; set; }
+        public int Rating { get; set; } = 0;
         public int Runtime { get; set; }
         public SearchActor SearchActorComponent { get; set; }
         public SearchDirector SearchDirectorComponent { get; set; }
@@ -125,6 +126,14 @@ namespace MovieApp.Web.Components.Recommendations
         protected void HandleDirectorSelection(Person selectedDirector) => SelectedDirectors.Add(selectedDirector);
         protected void HandleKeywordSelection(Keyword selectedKeyword) => SelectedKeywords.Add(selectedKeyword);
 
+        protected void HandleRatingChanged(string selectedRating)
+        {
+            if (int.TryParse(selectedRating, out int parsedRating))
+            {
+                Rating = parsedRating;
+            }
+        }
+
         protected void HandleRuntimeChanged(string selectedRuntime)
         {
             if (int.TryParse(selectedRuntime, out int parsedRuntime))
@@ -165,6 +174,7 @@ namespace MovieApp.Web.Components.Recommendations
                 Page = Page,
                 SortOrder = SortOrder,
                 ReleaseYear = ReleaseYear,
+                Rating = Rating,
                 Runtime = Runtime,
                 FromReleaseDate = FromReleasedate,
                 ToReleaseDate = ToReleaseDate
