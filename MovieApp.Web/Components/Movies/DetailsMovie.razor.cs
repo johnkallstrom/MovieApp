@@ -1,4 +1,6 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.Modal;
+using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Models;
@@ -47,9 +49,8 @@ namespace MovieApp.Web.Components.Movies
             await SetMovieInLocalStorage();
         }
 
-        protected async Task HandleFavoriteBtnClick()
+        protected async Task HandleAddToFavBtnClick()
         {
-
         }
 
         protected override async Task OnParametersSetAsync()

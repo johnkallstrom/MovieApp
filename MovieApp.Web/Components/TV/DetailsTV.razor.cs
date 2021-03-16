@@ -37,9 +37,8 @@ namespace MovieApp.Web.Components.TV
             await SetTVShowInLocalStorage();
         }
 
-        protected async Task HandleFavoriteBtnClick()
+        protected async Task HandleAddToFavBtnClick()
         {
-
         }
 
         private async Task SetTVShowInLocalStorage()
