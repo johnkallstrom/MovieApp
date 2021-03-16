@@ -28,6 +28,11 @@ body {
     color: var(--white) !important;
 }
 
+.btn-orange:hover {
+    background-color: var(--orange-interact) !important;
+    color: var(--white) !important;
+}
+
 .btn-dark {
     background-color: var(--dark) !important;
     color: var(--white) !important;

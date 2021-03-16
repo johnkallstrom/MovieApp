@@ -1,7 +1,9 @@
-﻿using Blazored.Modal;
+﻿using Blazored.LocalStorage;
+using Blazored.Modal;
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Components.User;
 using MovieApp.Web.State;
 using System.Linq;
@@ -12,6 +14,12 @@ namespace MovieApp.Web.Shared
 {
     public partial class Navbar
     {
+        [Inject]
+        public IConfiguration Config { get; set; }
+
+        [Inject]
+        public ILocalStorageService LocalStorage { get; set; }
+
         [Inject]
         public SearchState SearchState { get; set; }
 
@@ -29,9 +37,23 @@ namespace MovieApp.Web.Shared
             await GetAuthenticatedUserClaims();
         }
 
-        protected void HandleLogoutClick()
+        protected async Task HandleLogoutClick()
         {
             SearchState.Clear();
+
+            int storageLength = await LocalStorage.LengthAsync();
+
+            if (storageLength >= 1)
+            {
+                for (int index = 0; index < storageLength; index++)
+                {
+                    string key = await LocalStorage.KeyAsync(index);
+                    if (key.Contains(Config["RecentlyViewed:MovieKey"]) || key.Contains(Config["RecentlyViewed:TVKey"]))
+                    {
+                        await LocalStorage.RemoveItemAsync(key);
+                    }
+                }
+            }
         }
 
         protected async Task HandleLoginClick()
@@ -42,7 +64,6 @@ namespace MovieApp.Web.Shared
                 HideCloseButton = true
             };
 
-            
             var modal = Modal.Show<LoginForm>("Login User", options);
             var result = await modal.Result;
 

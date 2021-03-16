@@ -23,20 +23,25 @@
                         <h5 class="card-title">First Air Date</h5>
                         <p class="card-text">@TVShow.First_Air_Date</p>
                     </div>
+                    <div class="d-block">
+                        <h5 class="card-title mt-3">Genres</h5>
+                        @foreach (var genre in TVShow.Genres)
+                        {
+                            <div class="d-inline-block">
+                                <span class="badge badge-orange mr-3">@genre.Name</span>
+                            </div>
+                        }
+                    </div>
                     <h5 class="card-title mt-3">Created By</h5>
                     @foreach (var person in TVShow.Created_By)
                     {
                         <div class="d-inline-block">
-                            <p class="card-text">@person.Name</p>
+                            <p class="card-text">@person.Name </p>
                         </div>
                     }
-                    <h5 class="card-title mt-3">Genres</h5>
-                    @foreach (var genre in TVShow.Genres)
-                    {
-                        <div class="d-inline-block">
-                            <span class="badge badge-dark mr-3">@genre.Name</span>
-                        </div>
-                    }
+                    <div class="d-block mt-3">
+                        <button class="btn btn-dark">Add to favorites</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -37,6 +37,11 @@ namespace MovieApp.Web.Components.TV
             await SetTVShowInLocalStorage();
         }
 
+        protected async Task HandleFavoriteBtnClick()
+        {
+
+        }
+
         private async Task SetTVShowInLocalStorage()
         {
             var tvShow = await LocalStorage.GetItemAsync<TVShowDetails>($"{Config["RecentlyViewed:TVKey"]}{TVShow.Id}");

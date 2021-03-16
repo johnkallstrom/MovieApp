@@ -39,6 +39,7 @@ namespace MovieApp.Web.State
             var claims = ParseClaimsFromJwtToken(storedToken);
             var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, _config["AuthenticationType"]));
 
+            // add jwt token to http authorization request header
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", storedToken);
 
             return await Task.FromResult(new AuthenticationState(authenticatedUser));

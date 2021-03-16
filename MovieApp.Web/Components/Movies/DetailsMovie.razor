@@ -15,6 +15,15 @@
                     <p class="card-text">@Movie.Tagline</p>
                     <h5 class="card-title">Overview</h5>
                     <p class="card-text">@Movie.Overview</p>
+                    <div class="d-block my-3">
+                        <h5 class="card-title">Genres</h5>
+                        @foreach (var genre in Movie.Genres)
+                        {
+                            <div class="d-inline-block">
+                                <span class="badge badge-orange mr-3">@genre.Name</span>
+                            </div>
+                        }
+                    </div>
                     <div class="d-inline-block mr-5">
                         <h5 class="card-title">Rating</h5>
                         <p class="card-text">@Movie.Vote_Average / 10</p>
@@ -31,13 +40,9 @@
                         <h5 class="card-title">Language</h5>
                         <p class="card-text">@Movie.Original_Language</p>
                     </div>
-                    <h5 class="card-title mt-3">Genres</h5>
-                    @foreach (var genre in Movie.Genres)
-                    {
-                        <div class="d-inline-block">
-                            <span class="badge badge-dark mr-3">@genre.Name</span>
-                        </div>
-                    }
+                    <div class="d-block mt-3">
+                        <button class="btn btn-dark">Add to favorites</button>
+                    </div>
                 </div>
             </div>
         </div>

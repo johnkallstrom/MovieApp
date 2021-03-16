@@ -47,6 +47,11 @@ namespace MovieApp.Web.Components.Movies
             await SetMovieInLocalStorage();
         }
 
+        protected async Task HandleFavoriteBtnClick()
+        {
+
+        }
+
         protected override async Task OnParametersSetAsync()
         {
             var similarMovies = Enumerable.Empty<Movie>();
