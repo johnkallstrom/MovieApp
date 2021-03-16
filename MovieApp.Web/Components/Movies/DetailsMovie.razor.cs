@@ -1,6 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.Modal;
-using Blazored.Modal.Services;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Models;
@@ -13,6 +12,9 @@ namespace MovieApp.Web.Components.Movies
 {
     public partial class DetailsMovie
     {
+        [Inject]
+        public IToastService ToastService { get; set; }
+
         [Inject]
         public IMovieHttpService MovieService { get; set; }
 
@@ -49,8 +51,14 @@ namespace MovieApp.Web.Components.Movies
             await SetMovieInLocalStorage();
         }
 
-        protected async Task HandleAddToFavBtnClick()
+        protected void HandleAddToFavBtnClick()
         {
+            ToastService.ShowSuccess($"{Movie.Title} has been added to your favorites list.");
+        }
+
+        protected void HandleRemoveFromFavBtnClick()
+        {
+            ToastService.ShowError($"{Movie.Title} has been removed from your favorites list.");
         }
 
         protected override async Task OnParametersSetAsync()

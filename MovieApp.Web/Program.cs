@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
 using Blazored.Modal;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,7 @@ namespace MovieApp.Web
 
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredModal();
+            builder.Services.AddBlazoredToast();
 
             await builder.Build().RunAsync();
         }
