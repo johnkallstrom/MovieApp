@@ -9,7 +9,7 @@ namespace MovieApp.API.Profiles
         public UserProfile()
         {
             CreateMap<User, UpdateUserResponse>();
-            CreateMap<UpdateUserDto, User>();
+            CreateMap<UpdateUserRequest, User>();
             CreateMap<User, UserDto>();
             CreateMap<RegisterRequest, User>();
             CreateMap<User, RegisterResponse>();

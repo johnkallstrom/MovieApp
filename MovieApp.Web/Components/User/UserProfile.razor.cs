@@ -26,12 +26,8 @@ namespace MovieApp.Web.Components.User
 
         public UserDto User { get; set; } = new UserDto();
 
-        public bool DisplayLoadingSpinner { get; set; }
-
         protected override async Task OnInitializedAsync()
         {
-            DisplayLoadingSpinner = true;
-
             if (int.TryParse(UserId, out int parsedId))
             {
                 var user = await UserService.GetUserAsync(parsedId);
@@ -39,7 +35,6 @@ namespace MovieApp.Web.Components.User
                 if (user is not null)
                 {
                     User = user;
-                    DisplayLoadingSpinner = false;
                 }
             }
             else
@@ -82,7 +77,7 @@ namespace MovieApp.Web.Components.User
                 HideCloseButton = true
             };
 
-            var modal = Modal.Show<DeleteUserConfirmationModal>("Delete User", options);
+            var modal = Modal.Show<DeleteUserConfirmation>("Delete User", options);
             var result = await modal.Result;
 
             if (!result.Cancelled && User != null)

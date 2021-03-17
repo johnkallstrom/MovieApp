@@ -113,24 +113,6 @@ namespace MovieApp.API.Services
             return user;
         }
 
-        public async Task<User> GetUserWithFavoriteMovies(int userId)
-        {
-            var user = await _context.Users
-                .Include(x => x.FavoriteMovies)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            return user;
-        }
-
-        public async Task<User> GetUserWithFavoriteTVShows(int userId)
-        {
-            var user = await _context.Users
-                .Include(x => x.FavoriteTVShows)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            return user;
-        }
-
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             var users = _context.Users;

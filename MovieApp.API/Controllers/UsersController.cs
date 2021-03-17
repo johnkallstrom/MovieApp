@@ -26,7 +26,7 @@ namespace MovieApp.API.Controllers
 
         [HttpPut("{userId}")]
         [Authorize]
-        public async Task<ActionResult<UpdateUserResponse>> UpdateUser(int userId, UpdateUserDto model)
+        public async Task<ActionResult<UpdateUserResponse>> UpdateUser(int userId, UpdateUserRequest request)
         {
             var response = new UpdateUserResponse();
 
@@ -36,7 +36,7 @@ namespace MovieApp.API.Controllers
 
             try
             {
-                _mapper.Map(model, user);
+                _mapper.Map(request, user);
                 response = _userService.UpdateUser(user);
 
                 return Ok(response);

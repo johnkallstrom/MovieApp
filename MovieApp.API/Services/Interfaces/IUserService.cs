@@ -11,8 +11,6 @@ namespace MovieApp.API.Services
         public Task<LoginResponse> LoginAsync(LoginRequest request);
         public Task<RegisterResponse> RegisterAsync(RegisterRequest request);
         public Task<User> GetUserAsync(int userId);
-        public Task<User> GetUserWithFavoriteMovies(int userId);
-        public Task<User> GetUserWithFavoriteTVShows(int userId);
         public Task<IEnumerable<User>> GetUsersAsync();
         public void DeleteUser(User user);
     }

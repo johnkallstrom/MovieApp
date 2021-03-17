@@ -19,12 +19,19 @@
                         <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
                     </div>
                 </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="@($"/user/lists/{UserId}")" @onclick="() => SearchState.Clear()">Lists</NavLink>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
             </ul>
             <ul class="navbar-nav mr-3">
                 <AuthorizeView>
                     <Authorized>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="@($"/user/profile/{UserId}")" @onclick="() => SearchState.Clear()">@UserEmail</NavLink>
+                            <NavLink class="nav-link" href="@($"/user/profile/{UserId}")" @onclick="() => SearchState.Clear()">@Username</NavLink>
                         </li>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/user/logout" @onclick="() => SearchState.Clear()">Logout</NavLink>

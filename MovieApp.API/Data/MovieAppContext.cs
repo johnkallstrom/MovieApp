@@ -18,8 +18,8 @@ namespace MovieApp.API.Data
         {
         }
 
-        public virtual DbSet<FavoriteMovie> FavoriteMovies { get; set; }
-        public virtual DbSet<FavoriteTV> FavoriteTVShows { get; set; }
+        public virtual DbSet<MovieList> MovieLists { get; set; }
+        public virtual DbSet<MovieListItem> MovieListItems { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,38 +35,38 @@ namespace MovieApp.API.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<FavoriteMovie>(entity =>
+            modelBuilder.Entity<MovieList>(entity =>
             {
-                entity.ToTable("FavoriteMovie");
+                entity.ToTable("MovieList");
 
                 entity.Property(e => e.Created).HasColumnType("date");
 
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.FavoriteMovies)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FavoriteMovie_User");
-            });
-
-            modelBuilder.Entity<FavoriteTV>(entity =>
-            {
-                entity.ToTable("FavoriteTV");
-
-                entity.Property(e => e.Created).HasColumnType("date");
+                entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.FavoriteTVShows)
+                    .WithMany(p => p.MovieLists)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FavoriteTV_User");
+                    .HasConstraintName("FK_MovieList_User");
+            });
+
+            modelBuilder.Entity<MovieListItem>(entity =>
+            {
+                entity.ToTable("MovieListItem");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.MovieList)
+                    .WithMany(p => p.MovieListItems)
+                    .HasForeignKey(d => d.MovieListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MovieListItem_MovieList");
             });
 
             modelBuilder.Entity<User>(entity =>

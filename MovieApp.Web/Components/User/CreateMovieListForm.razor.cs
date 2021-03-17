@@ -6,36 +6,28 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.User
 {
-    public partial class EditUserForm
+    public partial class CreateMovieListForm
     {
         [Inject]
-        public IUserHttpService UserService { get; set; }
+        public IMovieListHttpService MovieListService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }
 
-        public UpdateUserRequest EditModel { get; set; } = new UpdateUserRequest();
-
         [Parameter]
         public UserDto User { get; set; } = new UserDto();
+
+        public CreateMovieListRequest CreateListModel { get; set; } = new CreateMovieListRequest();
 
         public bool DisplayLoadingSpinner { get; set; }
         public bool DisplayMessage { get; set; }
         public string Message { get; set; }
 
-        protected override void OnInitialized()
-        {
-            EditModel.FirstName = User.FirstName;
-            EditModel.LastName = User.LastName;
-            EditModel.Location = User.Location;
-            EditModel.Bio = User.Bio;
-        }
-
         protected async Task HandleValidSubmit()
         {
             DisplayLoadingSpinner = true;
 
-            var response = await UserService.UpdateUserAsync(User.Id, EditModel);
+            var response = await MovieListService.CreateMovieListAsync(User.Id, CreateListModel);
 
             if (response.Success)
             {
@@ -44,7 +36,7 @@ namespace MovieApp.Web.Components.User
             }
             else
             {
-                DisplayLoadingSpinner = true;
+                DisplayLoadingSpinner = false;
                 Message = response.Message;
                 DisplayMessage = true;
             }

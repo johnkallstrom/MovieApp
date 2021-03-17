@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using MovieApp.Web.Models;
@@ -11,9 +10,6 @@ namespace MovieApp.Web.Components.TV
 {
     public partial class DetailsTV
     {
-        [Inject]
-        public IToastService ToastService { get; set; }
-
         [Inject]
         public ITVHttpService TVService { get; set; }
 
@@ -39,16 +35,6 @@ namespace MovieApp.Web.Components.TV
             }
 
             await SetTVShowInLocalStorage();
-        }
-
-        protected void HandleAddToFavBtnClick()
-        {
-            ToastService.ShowSuccess($"{TVShow.Name} has been added to your favorites list.");
-        }
-
-        protected void HandleDeleteFromFavBtnClick()
-        {
-            ToastService.ShowError($"{TVShow.Name} has been deleted from your favorites list.");
         }
 
         private async Task SetTVShowInLocalStorage()

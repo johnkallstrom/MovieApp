@@ -5,14 +5,20 @@ using System.Collections.Generic;
 
 namespace MovieApp.Domain.Entities
 {
-    public partial class FavoriteTV
+    public partial class MovieList
     {
+        public MovieList()
+        {
+            MovieListItems = new HashSet<MovieListItem>();
+        }
+
         public int Id { get; set; }
-        public int TmdbId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public DateTime Created { get; set; }
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
+        public virtual ICollection<MovieListItem> MovieListItems { get; set; }
     }
 }

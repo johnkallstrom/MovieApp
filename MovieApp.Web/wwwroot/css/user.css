@@ -6,6 +6,18 @@
     --white: rgb(255, 255, 255);
 }
 
+#user-lists {
+    padding-top: 1rem;
+}
+
+#user-lists .list-group {
+    margin-bottom: 1rem;
+}
+
+#user-lists .list-group:last-child {
+    margin-bottom: 1rem;
+}
+
 #user-profile {
     padding-top: 1rem;
 }
@@ -17,6 +29,11 @@
 
 #user-profile .user-profile-btn-delete {
     background-color: var(--dark) !important;
+    color: var(--white) !important;
+}
+
+#create-user-list .btn-create {
+    background-color: var(--orange) !important;
     color: var(--white) !important;
 }
 
@@ -42,19 +59,22 @@
 
 #login-user .validation-message,
 #register-user .validation-message
-#edit-user .validation-message {
+#edit-user .validation-message, 
+#create-user-list .validation-message {
     margin-top: 0.5rem;
     font-size: 14px;
 }
 
-#login-user .form-group, 
+#login-user .form-group,
 #register-user .form-group,
-#edit-user .form-group {
+#edit-user .form-group,
+#create-user-list .form-group {
     margin-bottom: 1rem;
 }
 
-#login-user .form-group:last-child, 
+#login-user .form-group:last-child,
 #register-user .form-group:last-child,
-#edit-user .form-group:last-child {
+#edit-user .form-group:last-child,
+#create-user-list .form-group:last-child {
     margin-bottom: 0rem;
 }

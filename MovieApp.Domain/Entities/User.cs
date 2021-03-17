@@ -9,8 +9,7 @@ namespace MovieApp.Domain.Entities
     {
         public User()
         {
-            FavoriteMovies = new HashSet<FavoriteMovie>();
-            FavoriteTVShows = new HashSet<FavoriteTV>();
+            MovieLists = new HashSet<MovieList>();
         }
 
         public int Id { get; set; }
@@ -24,7 +23,6 @@ namespace MovieApp.Domain.Entities
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
 
-        public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
-        public virtual ICollection<FavoriteTV> FavoriteTVShows { get; set; }
+        public virtual ICollection<MovieList> MovieLists { get; set; }
     }
 }

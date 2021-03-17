@@ -1,0 +1,30 @@
+﻿@page "/user/lists/{userId}" 
+
+<div id="user-lists">
+    <h3 class="mb-3">Your lists</h3>
+    <button class="btn btn-orange mb-3" @onclick="HandleCreateListBtnClick">New List</button>
+    @if (MovieLists.Count() is not 0)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                @foreach (var movieList in MovieLists)
+                {
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@movieList.Name</h5>
+                                <small>@movieList.Created.ToShortDateString()</small>
+                            </div>
+                            <p class="mb-1">@movieList.Description</p>
+                            <small>Created by @User.FirstName @User.LastName</small>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="mt-3">You have not created any lists yet.</p>
+    }
+</div>

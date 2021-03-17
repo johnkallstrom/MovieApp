@@ -29,7 +29,7 @@ namespace MovieApp.Web.Shared
         [CascadingParameter]
         public IModalService Modal { get; set; }
 
-        public string UserEmail { get; set; }
+        public string Username { get; set; }
         public int UserId { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -79,7 +79,7 @@ namespace MovieApp.Web.Shared
             if (authState.User.Identity.IsAuthenticated)
             {
                 UserId = int.Parse(user.Claims.FirstOrDefault(claim => claim.Type == "nameid" || claim.Type == ClaimTypes.NameIdentifier).Value);
-                UserEmail = user.Claims.FirstOrDefault(claim => claim.Type == "email" || claim.Type == ClaimTypes.Email).Value;
+                Username = user.Claims.FirstOrDefault(claim => claim.Type == "unique_name" || claim.Type == ClaimTypes.Name).Value;
 
                 StateHasChanged();
             }

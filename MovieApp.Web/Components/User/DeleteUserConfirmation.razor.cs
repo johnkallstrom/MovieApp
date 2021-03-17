@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.User
 {
-    public partial class DeleteUserConfirmationModal
+    public partial class DeleteUserConfirmation
     {
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }
