@@ -37,25 +37,6 @@ namespace MovieApp.Web.Shared
             await GetAuthenticatedUserClaims();
         }
 
-        protected async Task HandleLogoutClick()
-        {
-            SearchState.Clear();
-
-            int storageLength = await LocalStorage.LengthAsync();
-
-            if (storageLength >= 1)
-            {
-                for (int index = 0; index < storageLength; index++)
-                {
-                    string key = await LocalStorage.KeyAsync(index);
-                    if (key.Contains(Config["RecentlyViewed:MovieKey"]) || key.Contains(Config["RecentlyViewed:TVKey"]))
-                    {
-                        await LocalStorage.RemoveItemAsync(key);
-                    }
-                }
-            }
-        }
-
         protected async Task HandleLoginClick()
         {
             var options = new ModalOptions()

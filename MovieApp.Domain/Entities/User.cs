@@ -7,6 +7,12 @@ namespace MovieApp.Domain.Entities
 {
     public partial class User
     {
+        public User()
+        {
+            FavoriteMovies = new HashSet<FavoriteMovie>();
+            FavoriteTVShows = new HashSet<FavoriteTV>();
+        }
+
         public int Id { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
@@ -17,5 +23,8 @@ namespace MovieApp.Domain.Entities
         public string PasswordHash { get; set; }
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
+
+        public virtual ICollection<FavoriteMovie> FavoriteMovies { get; set; }
+        public virtual ICollection<FavoriteTV> FavoriteTVShows { get; set; }
     }
 }

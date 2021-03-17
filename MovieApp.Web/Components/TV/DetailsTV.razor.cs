@@ -46,9 +46,9 @@ namespace MovieApp.Web.Components.TV
             ToastService.ShowSuccess($"{TVShow.Name} has been added to your favorites list.");
         }
 
-        protected void HandleRemoveFromFavBtnClick()
+        protected void HandleDeleteFromFavBtnClick()
         {
-            ToastService.ShowError($"{TVShow.Name} has been removed from your favorites list.");
+            ToastService.ShowError($"{TVShow.Name} has been deleted from your favorites list.");
         }
 
         private async Task SetTVShowInLocalStorage()

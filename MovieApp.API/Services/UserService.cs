@@ -113,6 +113,24 @@ namespace MovieApp.API.Services
             return user;
         }
 
+        public async Task<User> GetUserWithFavoriteMovies(int userId)
+        {
+            var user = await _context.Users
+                .Include(x => x.FavoriteMovies)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user;
+        }
+
+        public async Task<User> GetUserWithFavoriteTVShows(int userId)
+        {
+            var user = await _context.Users
+                .Include(x => x.FavoriteTVShows)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user;
+        }
+
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             var users = _context.Users;
@@ -120,11 +138,6 @@ namespace MovieApp.API.Services
             if (users is null) throw new ArgumentNullException(nameof(users));
 
             return await users.ToListAsync();
-        }
-
-        public async Task<bool> UserExistsAsync(int userId)
-        {
-            return await _context.Users.AnyAsync(u => u.Id == userId);
         }
 
         #region Private Methods

@@ -1,85 +1,98 @@
 ﻿@page "/movie/{id}" 
 
 <div id="movie-details">
-    <div class="row">
-        <div class="col-md-4">
-        <div class="card card-block">
-            <img class="card-img-top img-fluid" src="@Movie.Poster_Path">
-        </div>
-        </div>
-        <div class="col-md-8">
-            <div class="card card-block h-100">
-                <div class="card-body">
-                    <h3 class="card-title mb-3">@Movie.Title</h3>
-                    <h5 class="card-title">Tagline</h5>
-                    <p class="card-text">@Movie.Tagline</p>
-                    <h5 class="card-title">Overview</h5>
-                    <p class="card-text">@Movie.Overview</p>
-                    <div class="d-block my-3">
-                        <h5 class="card-title">Genres</h5>
-                        @foreach (var genre in Movie.Genres)
-                        {
-                            <div class="d-inline-block">
-                                <span class="badge badge-orange mr-3">@genre.Name</span>
-                            </div>
-                        }
-                    </div>
-                    <div class="d-inline-block mr-5">
-                        <h5 class="card-title">Rating</h5>
-                        <p class="card-text">@Movie.Vote_Average / 10</p>
-                    </div>
-                    <div class="d-inline-block mr-5">
-                        <h5 class="card-title">Runtime</h5>
-                        <p class="card-text">@Movie.Runtime min</p>
-                    </div>
-                    <div class="d-inline-block mr-5">
-                        <h5 class="card-title">Release</h5>
-                        <p class="card-text">@Movie.Release_Date</p>
-                    </div>
-                    <div class="d-inline-block">
-                        <h5 class="card-title">Language</h5>
-                        <p class="card-text">@Movie.Original_Language</p>
-                    </div>
-                    <div class="d-block mt-3">
-                        <button class="btn btn-dark" @onclick="HandleAddToFavBtnClick">Add to favorites</button>
-                        <button class="btn btn-danger" @onclick="HandleRemoveFromFavBtnClick">Remove from favorites</button>
+    @if (DisplayLoading)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-block">
+                    <img class="card-img-top img-fluid" src="@Movie.Poster_Path">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-block h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-3">@Movie.Title</h3>
+                        <h5 class="card-title">Tagline</h5>
+                        <p class="card-text">@Movie.Tagline</p>
+                        <h5 class="card-title">Overview</h5>
+                        <p class="card-text">@Movie.Overview</p>
+                        <div class="d-block my-3">
+                            <h5 class="card-title">Genres</h5>
+                            @foreach (var genre in Movie.Genres)
+                            {
+                                <div class="d-inline-block">
+                                    <span class="badge badge-orange mr-3">@genre.Name</span>
+                                </div>
+                            }
+                        </div>
+                        <div class="d-inline-block mr-5">
+                            <h5 class="card-title">Rating</h5>
+                            <p class="card-text">@Movie.Vote_Average / 10</p>
+                        </div>
+                        <div class="d-inline-block mr-5">
+                            <h5 class="card-title">Runtime</h5>
+                            <p class="card-text">@Movie.Runtime min</p>
+                        </div>
+                        <div class="d-inline-block mr-5">
+                            <h5 class="card-title">Release</h5>
+                            <p class="card-text">@Movie.Release_Date</p>
+                        </div>
+                        <div class="d-inline-block">
+                            <h5 class="card-title">Language</h5>
+                            <p class="card-text">@Movie.Original_Language</p>
+                        </div>
+                        <div class="d-block mt-3">
+                            @if (!MovieExistsAsFavorite)
+                            {
+                                <button class="btn btn-dark" @onclick="HandleAddToFavBtnClick">Add to favorites</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" @onclick="HandleDeleteFromFavBtnClick">Delete from favorites</button>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="cast">
-        <h3 class="mt-3">Cast</h3>
-        <hr />
-        @if (Cast == null || !Cast.Any())
-        {
-            <p>Sorry, we could not find any cast.</p>
-        }
-        else
-        {
-            <div class="row flex-row flex-nowrap overflow-auto">
-                @foreach (var person in Cast)
-                {
-                    <DisplayPerson Person="@person" ShowCharacter="true" />
-                }
-            </div>
-        }
-    </div>
-    <div id="similar">
-        <h3 class="mt-3">Similar</h3>
-        <hr />
-        @if (SimilarMovies == null || !SimilarMovies.Any())
-        {
-            <p>Sorry, we could not find any similar movies.</p>
-        }
-        else
-        {
-            <div class="row flex-row flex-nowrap overflow-auto">
-                @foreach (var movie in SimilarMovies)
-                {
-                    <DisplayMovie Movie="@movie" />
-                }
-            </div>
-        }
-    </div>
+        <div id="cast">
+            <h3 class="mt-3">Cast</h3>
+            <hr />
+            @if (Cast == null || !Cast.Any())
+            {
+                <p>Sorry, we could not find any cast.</p>
+            }
+            else
+            {
+                <div class="row flex-row flex-nowrap overflow-auto">
+                    @foreach (var person in Cast)
+                    {
+                        <DisplayPerson Person="@person" ShowCharacter="true" />
+                    }
+                </div>
+            }
+        </div>
+        <div id="similar">
+            <h3 class="mt-3">Similar</h3>
+            <hr />
+            @if (SimilarMovies == null || !SimilarMovies.Any())
+            {
+                <p>Sorry, we could not find any similar movies.</p>
+            }
+            else
+            {
+                <div class="row flex-row flex-nowrap overflow-auto">
+                    @foreach (var movie in SimilarMovies)
+                    {
+                        <DisplayMovie Movie="@movie" />
+                    }
+                </div>
+            }
+        </div>
+    }
 </div>

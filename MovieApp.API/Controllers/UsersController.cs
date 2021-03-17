@@ -111,7 +111,7 @@ namespace MovieApp.API.Controllers
 
             if (user is null)
             {
-                return NotFound();
+                return NotFound( new { Message = "The user does not exist in our database." });
             }
 
             return Ok(_mapper.Map<UserDto>(user));
