@@ -14,104 +14,28 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="row flex-row">
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
+            @if (Movies.Count() is not 0)
+            {
+                <div class="row flex-row">
+                    @foreach (var movie in Movies)
+                    {
+                        <div class="col-sm-2 mb-3">
+                            <a href="@($"/movie/{movie.Id}")">
+                                <div class="card card-block h-100">
+                                    <img class="card-img-top img-fluid" src="@movie.Poster_Path" />
+                                    <div class="card-body">
+                                        <p class="card-text text-center">@movie.Title (@(!string.IsNullOrEmpty(movie.Release_Date) ? DateTime.Parse(movie.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</p>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
+                    }
                 </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 mb-3">
-                    <div class="card card-block h-100">
-                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
-                        <div class="card-body">
-                            <p class="card-text text-center">Sample Title (2021)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+            else
+            {
+                <p>There is no movies in this list.</p>
+            }
         </div>
     </div>
 </div>

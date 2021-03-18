@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using MovieApp.Domain.Models;
 using MovieApp.Web.Helpers;
+using MovieApp.Web.Models;
 using MovieApp.Web.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Lists
@@ -18,13 +20,13 @@ namespace MovieApp.Web.Components.Lists
         public IModalService Modal { get; set; }
 
         [Inject]
-        public IConfiguration Config { get; set; }
-
-        [Inject]
         public IUserHttpService UserService { get; set; }
 
         [Inject]
-        public IListHttpService MovieListService { get; set; }
+        public IMovieHttpService MovieService { get; set; }
+
+        [Inject]
+        public IListHttpService ListService { get; set; }
 
         [Parameter]
         public string UserId { get; set; }
@@ -33,19 +35,23 @@ namespace MovieApp.Web.Components.Lists
         public string MovieListId { get; set; }
 
         public UserDto User { get; set; } = new UserDto();
-        public MovieListDto List { get; set; } = new MovieListDto();
+        public MovieListDetailsDto List { get; set; } = new MovieListDetailsDto();
+        public List<MovieDetails> Movies { get; set; } = new List<MovieDetails>();
 
-        public string PlaceholderImageUrl { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             var user = await UserService.GetUserAsync(int.Parse(UserId));
-            var movieList = await MovieListService.GetMovieListAsync(int.Parse(MovieListId));
+            var movieList = await ListService.GetMovieListAsync(int.Parse(MovieListId));
 
             User = user;
             List = movieList;
 
-            PlaceholderImageUrl = ImageHelper.GetPlaceholderImageUrl(new ImageSettings(Config["TMDB:PlaceholderImageBaseUrl"], 500, 750));
+            foreach (var item in List.Items)
+            {
+                var movie = await MovieService.GetMovieDetailsAsync(item.MovieId);
+                Movies.Add(movie);
+            }
         }
 
         protected async Task HandleEditBtnClick()
@@ -65,7 +71,7 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var movieList = await MovieListService.GetMovieListAsync(int.Parse(MovieListId));
+                var movieList = await ListService.GetMovieListAsync(int.Parse(MovieListId));
                 List = movieList;
 
                 StateHasChanged();
@@ -85,7 +91,7 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var succeeded = await MovieListService.DeleteMovieListAsync(List.Id);
+                var succeeded = await ListService.DeleteMovieListAsync(List.Id);
 
                 if (succeeded)
                 {

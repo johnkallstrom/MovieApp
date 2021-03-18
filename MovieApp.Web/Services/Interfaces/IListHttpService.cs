@@ -8,7 +8,7 @@ namespace MovieApp.Web.Services
     {
         Task<bool> DeleteMovieListAsync(int movieListId);
         Task<UpdateMovieListResponse> UpdateMovieListAsync(int movieListId, UpdateMovieListRequest request);
-        Task<MovieListDto> GetMovieListAsync(int movieListId);
+        Task<MovieListDetailsDto> GetMovieListAsync(int movieListId);
         Task<CreateMovieListResponse> CreateMovieListAsync(int userId, CreateMovieListRequest request);
     }
 }

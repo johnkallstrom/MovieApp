@@ -104,7 +104,6 @@ namespace MovieApp.API.Services
         {
             var movieLists = await _context.MovieLists
                 .Where(x => x.UserId == userId)
-                .OrderBy(x => x.Created)
                 .ToListAsync();
 
             return movieLists;

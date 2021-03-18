@@ -19,6 +19,16 @@
     padding-top: 1rem;
 }
 
+#list-details a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+#list-details a:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
 #edit-list .btn-edit {
     background-color: var(--orange) !important;
     color: var(--white) !important;

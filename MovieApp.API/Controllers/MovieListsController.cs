@@ -50,12 +50,12 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet("{movieListId}")]
-        public async Task<ActionResult<MovieListDto>> GetMovieList(int movieListId)
+        public async Task<ActionResult<MovieListDetailsDto>> GetMovieList(int movieListId)
         {
             var movieList = await _movieListService.GetMovieListAsync(movieListId);
             if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
-            return Ok(_mapper.Map<MovieListDto>(movieList));
+            return Ok(_mapper.Map<MovieListDetailsDto>(movieList));
         }
 
         [HttpPost("{userId}")]

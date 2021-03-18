@@ -20,7 +20,7 @@
                         @foreach (var genre in Movie.Genres)
                         {
                             <div class="d-inline-block">
-                                <span class="badge badge-orange mr-3">@genre.Name</span>
+                                <span class="badge badge-dark mr-3">@genre.Name</span>
                             </div>
                         }
                     </div>
@@ -40,6 +40,11 @@
                         <h5 class="card-title">Language</h5>
                         <p class="card-text">@Movie.Original_Language</p>
                     </div>
+                    <AuthorizeView>
+                        <Authorized>
+                            <MovieListSelect />
+                        </Authorized>
+                    </AuthorizeView>
                 </div>
             </div>
         </div>

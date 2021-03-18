@@ -34,9 +34,9 @@ namespace MovieApp.Web.Services
             return response;
         }
 
-        public async Task<MovieListDto> GetMovieListAsync(int movieListId)
+        public async Task<MovieListDetailsDto> GetMovieListAsync(int movieListId)
         {
-            var movieList = await _httpClient.GetFromJsonAsync<MovieListDto>($"lists/{movieListId}");
+            var movieList = await _httpClient.GetFromJsonAsync<MovieListDetailsDto>($"lists/{movieListId}");
 
             return movieList;
         }
