@@ -1,0 +1,16 @@
+﻿#lists {
+    padding-top: 1rem;
+}
+
+#lists .list-group {
+    margin-bottom: 1rem;
+}
+
+#lists .list-group:last-child {
+    margin-bottom: 1rem;
+}
+
+#create-list .btn-create {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}

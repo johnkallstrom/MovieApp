@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
 {
-    [Route("api/lists/{userId}")]
+    [Route("api/lists")]
     [ApiController]
     public class MovieListsController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace MovieApp.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("create")]
+        [HttpPost("{userId}/create")]
         public async Task<ActionResult<CreateMovieListResponse>> CreateMovieList(int userId, CreateMovieListRequest request)
         {
             var response = new CreateMovieListResponse();
@@ -56,7 +56,19 @@ namespace MovieApp.API.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("{userId}/{movieListId}")]
+        public async Task<ActionResult<MovieListDto>> GetMovieList(int userId, int movieListId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+            if (user is null) return NotFound("The user does not exist in our database.");
+
+            var movieList = await _movieListService.GetMovieListAsync(userId, movieListId);
+            if (movieList is null) return NotFound("The list you are requesting does not exist.");
+
+            return Ok(_mapper.Map<MovieListDto>(movieList));
+        }
+
+        [HttpGet("{userId}")]
         public async Task<ActionResult<IEnumerable<MovieListDto>>> GetMovieLists(int userId)
         {
             var user = await _userService.GetUserAsync(userId);

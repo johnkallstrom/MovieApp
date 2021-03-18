@@ -22,7 +22,7 @@
                 <AuthorizeView>
                     <Authorized>
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="@($"/user/lists/{UserId}")" @onclick="() => SearchState.Clear()">Lists</NavLink>
+                            <NavLink class="nav-link" href="@($"/lists/{UserId}")" @onclick="() => SearchState.Clear()">Lists</NavLink>
                         </li>
                     </Authorized>
                 </AuthorizeView>

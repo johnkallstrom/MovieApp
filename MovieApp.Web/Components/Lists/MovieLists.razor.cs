@@ -2,13 +2,14 @@
 using Blazored.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using MovieApp.Domain.Models;
+using MovieApp.Web.Components.Lists;
 using MovieApp.Web.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MovieApp.Web.Components.User
+namespace MovieApp.Web.Components.Lists
 {
-    public partial class UserLists
+    public partial class MovieLists
     {
         [Inject]
         public IMovieListHttpService MovieListService { get; set; }
@@ -24,7 +25,7 @@ namespace MovieApp.Web.Components.User
 
         public UserDto User { get; set; } = new UserDto();
 
-        public IEnumerable<MovieListDto> MovieLists { get; set; } = new List<MovieListDto>();
+        public IEnumerable<MovieListDto> Lists { get; set; } = new List<MovieListDto>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,8 +37,8 @@ namespace MovieApp.Web.Components.User
                 {
                     User = user;
                 }
-                
-                MovieLists = await MovieListService.GetMovieListsAsync(parsedId);
+
+                Lists = await MovieListService.GetMovieListsAsync(parsedId);
             }
             else
             {
@@ -58,6 +59,13 @@ namespace MovieApp.Web.Components.User
 
             var modal = Modal.Show<CreateMovieListForm>("New List", parameters, options);
             var result = await modal.Result;
+
+            if (!result.Cancelled && User != null)
+            {
+                Lists = await MovieListService.GetMovieListsAsync(User.Id);
+
+                StateHasChanged();
+            }
         }
     }
 }

@@ -46,9 +46,21 @@ namespace MovieApp.API.Services
             return response;
         }
 
+        public async Task<MovieList> GetMovieListAsync(int userId, int movieListId)
+        {
+            var movieList = await _context.MovieLists
+                .Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync(x => x.Id == movieListId);
+
+            return movieList;
+        }
+
         public async Task<IEnumerable<MovieList>> GetMovieListsAsync(int userId)
         {
-            var movieLists = await _context.MovieLists.Where(x => x.UserId == userId).ToListAsync();
+            var movieLists = await _context.MovieLists
+                .Where(x => x.UserId == userId)
+                .OrderBy(x => x.Created)
+                .ToListAsync();
 
             return movieLists;
         }

@@ -1,4 +1,4 @@
-﻿<div id="create-user-list">
+﻿<div id="create-list">
     @if (DisplayMessage)
     {
         <p class="text-danger">@Message</p>
@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label class="text-muted">Description</label>
-            <InputText type="text" class="form-control" @bind-Value="@CreateListModel.Description" />
+            <InputTextArea type="text" class="form-control" @bind-Value="@CreateListModel.Description" rows="7" cols="50" />
             <ValidationMessage For="@(() => CreateListModel.Description)" />
         </div>
         <button type="submit" class="btn btn-create">

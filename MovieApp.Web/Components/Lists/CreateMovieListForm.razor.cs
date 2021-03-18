@@ -4,7 +4,7 @@ using MovieApp.Domain.Models;
 using MovieApp.Web.Services;
 using System.Threading.Tasks;
 
-namespace MovieApp.Web.Components.User
+namespace MovieApp.Web.Components.Lists
 {
     public partial class CreateMovieListForm
     {

@@ -6,18 +6,6 @@
     --white: rgb(255, 255, 255);
 }
 
-#user-lists {
-    padding-top: 1rem;
-}
-
-#user-lists .list-group {
-    margin-bottom: 1rem;
-}
-
-#user-lists .list-group:last-child {
-    margin-bottom: 1rem;
-}
-
 #user-profile {
     padding-top: 1rem;
 }
@@ -29,11 +17,6 @@
 
 #user-profile .user-profile-btn-delete {
     background-color: var(--dark) !important;
-    color: var(--white) !important;
-}
-
-#create-user-list .btn-create {
-    background-color: var(--orange) !important;
     color: var(--white) !important;
 }
 
