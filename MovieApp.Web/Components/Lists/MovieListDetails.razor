@@ -1,5 +1,117 @@
 ﻿@page "/lists/{userId}/{movieListId}"
 
 <div id="list-details">
-    <h3 class="mb-3">Movie List Details</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <small>Created by @User.FirstName @User.LastName</small>
+                    <h3 class="mb-3 mt-2">@List.Name</h3>
+                    <p class="my-3">@List.Description</p>
+                    <button class="btn btn-orange" @onclick="HandleEditBtnClick">Edit</button>
+                    <button class="btn btn-dark" @onclick="HandleDeleteBtnClick">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row flex-row">
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <div class="card card-block h-100">
+                        <img class="card-img-top img-fluid" src="@PlaceholderImageUrl" />
+                        <div class="card-body">
+                            <p class="card-text text-center">Sample Title (2021)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
