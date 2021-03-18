@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using MovieApp.Domain.Models;
 using MovieApp.Web.Helpers;
@@ -9,6 +11,9 @@ namespace MovieApp.Web.Components.Lists
 {
     public partial class MovieListDetails
     {
+        [CascadingParameter]
+        public IModalService Modal { get; set; }
+
         [Inject]
         public IConfiguration Config { get; set; }
 
@@ -42,12 +47,26 @@ namespace MovieApp.Web.Components.Lists
 
         protected async Task HandleEditBtnClick()
         {
-
         }
 
         protected async Task HandleDeleteBtnClick()
         {
+            var options = new ModalOptions()
+            {
+                DisableBackgroundCancel = true,
+                HideCloseButton = true
+            };
 
+            var modal = Modal.Show<DeleteListConfirmation>("Delete List", options);
+            var result = await modal.Result;
+
+            if (!result.Cancelled && User != null)
+            {
+                var movieList = await MovieListService.GetMovieListAsync(int.Parse(UserId), int.Parse(MovieListId));
+                List = movieList;
+
+                StateHasChanged();
+            }
         }
     }
 }
