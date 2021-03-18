@@ -46,6 +46,14 @@ namespace MovieApp.API.Services
             return response;
         }
 
+        public void DeleteMovieList(MovieList movieList)
+        {
+            if (movieList is null) throw new ArgumentNullException(nameof(movieList));
+
+            _context.MovieLists.Remove(movieList);
+            _context.SaveChanges();
+        }
+
         public async Task<MovieList> GetMovieListAsync(int userId, int movieListId)
         {
             var movieList = await _context.MovieLists

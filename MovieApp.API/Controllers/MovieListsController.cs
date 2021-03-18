@@ -26,6 +26,20 @@ namespace MovieApp.API.Controllers
             _mapper = mapper;
         }
 
+        [HttpDelete("{userId}/{movieListId}")]
+        public async Task<ActionResult> DeleteMovieList(int userId, int movieListId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+            if (user is null) return NotFound("The user does not exist in our database.");
+
+            var movieList = await _movieListService.GetMovieListAsync(userId, movieListId);
+            if (movieList is null) return NotFound("The list you are requesting does not exist.");
+
+            _movieListService.DeleteMovieList(movieList);
+
+            return NoContent();
+        }
+
         [HttpPost("{userId}/create")]
         public async Task<ActionResult<CreateMovieListResponse>> CreateMovieList(int userId, CreateMovieListRequest request)
         {

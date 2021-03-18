@@ -11,6 +11,9 @@ namespace MovieApp.Web.Components.Lists
 {
     public partial class MovieListDetails
     {
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [CascadingParameter]
         public IModalService Modal { get; set; }
 
@@ -47,6 +50,26 @@ namespace MovieApp.Web.Components.Lists
 
         protected async Task HandleEditBtnClick()
         {
+            var options = new ModalOptions()
+            {
+                DisableBackgroundCancel = true,
+                HideCloseButton = true
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(User), User);
+            parameters.Add(nameof(List), List);
+
+            var modal = Modal.Show<EditMovieListForm>("Edit List", parameters, options);
+            var result = await modal.Result;
+
+            if (!result.Cancelled && User != null)
+            {
+                var movieList = await MovieListService.GetMovieListAsync(int.Parse(UserId), int.Parse(MovieListId));
+                List = movieList;
+
+                StateHasChanged();
+            }
         }
 
         protected async Task HandleDeleteBtnClick()
@@ -62,10 +85,12 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var movieList = await MovieListService.GetMovieListAsync(int.Parse(UserId), int.Parse(MovieListId));
-                List = movieList;
+                var succeeded = await MovieListService.DeleteMovieListAsync(User.Id, List.Id);
 
-                StateHasChanged();
+                if (succeeded)
+                {
+                    NavigationManager.NavigateTo($"/lists/{User.Id}");
+                }
             }
         }
     }

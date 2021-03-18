@@ -19,15 +19,23 @@
     padding-top: 1rem;
 }
 
-#create-list .validation-message {
+#edit-list .btn-edit {
+    background-color: var(--orange) !important;
+    color: var(--white) !important;
+}
+
+#create-list .validation-message,
+#edit-list .validation-message {
     margin-top: 0.5rem;
     font-size: 14px;
 }
 
-#create-list .form-group {
+#create-list .form-group,
+#edit-list .form-group {
     margin-bottom: 1rem;
 }
 
-#create-list .form-group:last-child {
+#create-list .form-group:last-child,
+#edit-list .form-group:last-child {
     margin-bottom: 0rem;
 }
