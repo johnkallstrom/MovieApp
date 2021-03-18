@@ -19,7 +19,7 @@ namespace MovieApp.API.Data
         }
 
         public virtual DbSet<MovieList> MovieLists { get; set; }
-        public virtual DbSet<MovieListItem> MovieListItems { get; set; }
+        public virtual DbSet<MovieListItem> Items { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,7 +63,7 @@ namespace MovieApp.API.Data
                     .HasMaxLength(50);
 
                 entity.HasOne(d => d.MovieList)
-                    .WithMany(p => p.MovieListItems)
+                    .WithMany(p => p.Items)
                     .HasForeignKey(d => d.MovieListId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_MovieListItem_MovieList");

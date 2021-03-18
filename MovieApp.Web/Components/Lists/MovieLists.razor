@@ -1,7 +1,14 @@
 ﻿@page "/lists/{userId}"
 
 <div id="lists">
-    <h3 class="mb-3">Your lists</h3>
+    @if (!string.IsNullOrEmpty(User.FirstName))
+    {
+        <h3 class="mb-3">@User.FirstName's lists</h3>
+    }
+    else
+    {
+        <h3 class="mb-3">Your lists</h3>
+    }
     <button class="btn btn-orange mb-3" @onclick="HandleCreateListBtnClick">New List</button>
     @if (Lists.Count() is not 0)
     {

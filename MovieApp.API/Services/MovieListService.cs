@@ -24,6 +24,29 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
+        public async Task<AddMovieResponse> AddMovieAsync(int movieListId, AddMovieRequest request)
+        {
+            var movieList = await _context.MovieLists.FirstOrDefaultAsync(list => list.Id == movieListId);
+            if (movieList.Items.Any(item => item.MovieId == request.MovieId))
+            {
+                throw new MovieExistsException("The movie you're trying to add already exists in the selected list.");
+            }
+
+            var movie = _mapper.Map<MovieListItem>(request);
+            movie.MovieListId = movieListId;
+
+            movieList.Items.Add(movie);
+
+            _context.MovieLists.Update(movieList);
+            _context.SaveChanges();
+
+            var response = _mapper.Map<AddMovieResponse>(movie);
+            response.Success = true;
+            response.Message = $"Successfully added {response.Name} to the list.";
+
+            return response;
+        }
+
         public UpdateMovieListResponse UpdateMovieList(MovieList movieList)
         {
             if (movieList is null) throw new ArgumentNullException(nameof(movieList));
@@ -68,10 +91,10 @@ namespace MovieApp.API.Services
             _context.SaveChanges();
         }
 
-        public async Task<MovieList> GetMovieListAsync(int userId, int movieListId)
+        public async Task<MovieList> GetMovieListAsync(int movieListId)
         {
             var movieList = await _context.MovieLists
-                .Where(x => x.UserId == userId)
+                .Include(x => x.Items)
                 .FirstOrDefaultAsync(x => x.Id == movieListId);
 
             return movieList;

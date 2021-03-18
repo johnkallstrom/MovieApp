@@ -26,60 +26,39 @@ namespace MovieApp.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPut("{userId}/{movieListId}")]
-        public async Task<ActionResult<UpdateMovieListResponse>> UpdateMovieList(int userId, int movieListId, UpdateMovieListRequest request)
+        [HttpPost("{movieListId}/add")]
+        public async Task<ActionResult<AddMovieResponse>> AddMovieListItem(int movieListId, AddMovieRequest request)
         {
-            var response = new UpdateMovieListResponse();
+            var response = new AddMovieResponse();
 
-            var user = await _userService.GetUserAsync(userId);
-            if (user is null)
-            {
-                response.Success = false;
-                response.Message = "The user does not exist in our database.";
-
-                return NotFound(response);
-            }
-
-            var movieList = await _movieListService.GetMovieListAsync(userId, movieListId);
-            if (movieList is null)
-            {
-                response.Success = false;
-                response.Message = "The list you are requesting does not exist.";
-
-                return NotFound(response);
-            }
+            var movieList = await _movieListService.GetMovieListAsync(movieListId);
+            if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
             try
             {
-                _mapper.Map(request, movieList);
-                response = _movieListService.UpdateMovieList(movieList);
+                response = await _movieListService.AddMovieAsync(movieListId, request);
 
                 return Ok(response);
             }
             catch (Exception e)
             {
-                response.Message = e.Message;
                 response.Success = false;
+                response.Message = e.Message;
 
                 return BadRequest(response);
             }
         }
 
-        [HttpDelete("{userId}/{movieListId}")]
-        public async Task<ActionResult> DeleteMovieList(int userId, int movieListId)
+        [HttpGet("{movieListId}")]
+        public async Task<ActionResult<MovieListDto>> GetMovieList(int movieListId)
         {
-            var user = await _userService.GetUserAsync(userId);
-            if (user is null) return NotFound("The user does not exist in our database.");
+            var movieList = await _movieListService.GetMovieListAsync(movieListId);
+            if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
-            var movieList = await _movieListService.GetMovieListAsync(userId, movieListId);
-            if (movieList is null) return NotFound("The list you are requesting does not exist.");
-
-            _movieListService.DeleteMovieList(movieList);
-
-            return NoContent();
+            return Ok(_mapper.Map<MovieListDto>(movieList));
         }
 
-        [HttpPost("{userId}/create")]
+        [HttpPost("{userId}")]
         public async Task<ActionResult<CreateMovieListResponse>> CreateMovieList(int userId, CreateMovieListRequest request)
         {
             var response = new CreateMovieListResponse();
@@ -109,28 +88,45 @@ namespace MovieApp.API.Controllers
             }
         }
 
-        [HttpGet("{userId}/{movieListId}")]
-        public async Task<ActionResult<MovieListDto>> GetMovieList(int userId, int movieListId)
+        [HttpPut("{movieListId}")]
+        public async Task<ActionResult<UpdateMovieListResponse>> UpdateMovieList(int movieListId, UpdateMovieListRequest request)
         {
-            var user = await _userService.GetUserAsync(userId);
-            if (user is null) return NotFound("The user does not exist in our database.");
+            var response = new UpdateMovieListResponse();
 
-            var movieList = await _movieListService.GetMovieListAsync(userId, movieListId);
-            if (movieList is null) return NotFound("The list you are requesting does not exist.");
+            var movieList = await _movieListService.GetMovieListAsync(movieListId);
+            if (movieList is null)
+            {
+                response.Success = false;
+                response.Message = "The list you are requesting does not exist.";
 
-            return Ok(_mapper.Map<MovieListDto>(movieList));
+                return NotFound(response);
+            }
+
+            try
+            {
+                _mapper.Map(request, movieList);
+                response = _movieListService.UpdateMovieList(movieList);
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.Message = e.Message;
+                response.Success = false;
+
+                return BadRequest(response);
+            }
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<MovieListDto>>> GetMovieLists(int userId)
+        [HttpDelete("{movieListId}")]
+        public async Task<ActionResult> DeleteMovieList(int movieListId)
         {
-            var user = await _userService.GetUserAsync(userId);
+            var movieList = await _movieListService.GetMovieListAsync(movieListId);
+            if (movieList is null) return NotFound("The list you are requesting does not exist.");
 
-            if (user is null) return NotFound("The user does not exist in our database");
+            _movieListService.DeleteMovieList(movieList);
 
-            var movieLists = await _movieListService.GetMovieListsAsync(userId);
-
-            return Ok(_mapper.Map<IEnumerable<MovieListDto>>(movieLists));
+            return NoContent();
         }
     }
 }

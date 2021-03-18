@@ -24,7 +24,7 @@ namespace MovieApp.Web
 
             builder.Services.AddTransient<IAuthenticationHttpService, AuthenticationHttpService>();
             builder.Services.AddTransient<IUserHttpService, UserHttpService>();
-            builder.Services.AddTransient<IMovieListHttpService, MovieListHttpService>();
+            builder.Services.AddTransient<IListHttpService, ListHttpService>();
 
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();

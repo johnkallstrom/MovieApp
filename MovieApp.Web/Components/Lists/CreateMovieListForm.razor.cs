@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.Lists
     public partial class CreateMovieListForm
     {
         [Inject]
-        public IMovieListHttpService MovieListService { get; set; }
+        public IListHttpService MovieListService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }

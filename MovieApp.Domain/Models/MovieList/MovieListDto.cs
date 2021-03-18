@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MovieApp.Domain.Models
 {
@@ -9,5 +10,6 @@ namespace MovieApp.Domain.Models
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public int UserId { get; set; }
+        public IEnumerable<MovieListItemDto> Items { get; set; }
     }
 }

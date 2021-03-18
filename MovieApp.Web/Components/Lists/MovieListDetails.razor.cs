@@ -24,7 +24,7 @@ namespace MovieApp.Web.Components.Lists
         public IUserHttpService UserService { get; set; }
 
         [Inject]
-        public IMovieListHttpService MovieListService { get; set; }
+        public IListHttpService MovieListService { get; set; }
 
         [Parameter]
         public string UserId { get; set; }
@@ -40,7 +40,7 @@ namespace MovieApp.Web.Components.Lists
         protected override async Task OnInitializedAsync()
         {
             var user = await UserService.GetUserAsync(int.Parse(UserId));
-            var movieList = await MovieListService.GetMovieListAsync(int.Parse(UserId), int.Parse(MovieListId));
+            var movieList = await MovieListService.GetMovieListAsync(int.Parse(MovieListId));
 
             User = user;
             List = movieList;
@@ -65,7 +65,7 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var movieList = await MovieListService.GetMovieListAsync(int.Parse(UserId), int.Parse(MovieListId));
+                var movieList = await MovieListService.GetMovieListAsync(int.Parse(MovieListId));
                 List = movieList;
 
                 StateHasChanged();
@@ -85,7 +85,7 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var succeeded = await MovieListService.DeleteMovieListAsync(User.Id, List.Id);
+                var succeeded = await MovieListService.DeleteMovieListAsync(List.Id);
 
                 if (succeeded)
                 {

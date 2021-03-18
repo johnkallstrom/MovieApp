@@ -1,4 +1,5 @@
 ﻿using MovieApp.Domain.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -42,6 +43,13 @@ namespace MovieApp.Web.Services
             var user = await _httpClient.GetFromJsonAsync<UserDto>($"users/{userId}");
 
             return user;
+        }
+
+        public async Task<IEnumerable<MovieListDto>> GetUserMovieListsAsync(int userId)
+        {
+            var movieLists = await _httpClient.GetFromJsonAsync<IEnumerable<MovieListDto>>($"users/{userId}/lists");
+
+            return movieLists;
         }
     }
 }

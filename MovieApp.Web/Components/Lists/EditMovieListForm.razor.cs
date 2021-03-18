@@ -9,7 +9,7 @@ namespace MovieApp.Web.Components.Lists
     public partial class EditMovieListForm
     {
         [Inject]
-        public IMovieListHttpService MovieListService { get; set; }
+        public IListHttpService MovieListService { get; set; }
 
         [CascadingParameter]
         public BlazoredModalInstance ModalInstance { get; set; }
@@ -36,7 +36,7 @@ namespace MovieApp.Web.Components.Lists
         {
             DisplayLoadingSpinner = true;
 
-            var response = await MovieListService.UpdateMovieListAsync(User.Id, List.Id, EditListModel);
+            var response = await MovieListService.UpdateMovieListAsync(List.Id, EditListModel);
 
             if (response.Success)
             {

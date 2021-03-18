@@ -13,19 +13,22 @@ namespace MovieApp.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IMovieListService _movieListService;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
         public UsersController(
+            IMovieListService movieListService,
             IMapper mapper,
             IUserService userService)
         {
+            _movieListService = movieListService;
             _mapper = mapper;
             _userService = userService;
         }
 
         [HttpPut("{userId}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<UpdateUserResponse>> UpdateUser(int userId, UpdateUserRequest request)
         {
             var response = new UpdateUserResponse();
@@ -50,8 +53,20 @@ namespace MovieApp.API.Controllers
             }
         }
 
+        [HttpGet("{userId}/lists")]
+        public async Task<ActionResult<IEnumerable<MovieListDto>>> GetUserMovieLists(int userId)
+        {
+            var user = await _userService.GetUserAsync(userId);
+
+            if (user is null) return NotFound("The user does not exist in our database");
+
+            var movieLists = await _movieListService.GetMovieListsAsync(userId);
+
+            return Ok(_mapper.Map<IEnumerable<MovieListDto>>(movieLists));
+        }
+
         [HttpDelete("{userId}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult> DeleteUser(int userId)
         {
             var user = await _userService.GetUserAsync(userId);

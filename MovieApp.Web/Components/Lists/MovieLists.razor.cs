@@ -12,7 +12,7 @@ namespace MovieApp.Web.Components.Lists
     public partial class MovieLists
     {
         [Inject]
-        public IMovieListHttpService MovieListService { get; set; }
+        public IListHttpService MovieListService { get; set; }
 
         [Inject]
         public IUserHttpService UserService { get; set; }
@@ -38,7 +38,7 @@ namespace MovieApp.Web.Components.Lists
                     User = user;
                 }
 
-                Lists = await MovieListService.GetMovieListsAsync(parsedId);
+                Lists = await UserService.GetUserMovieListsAsync(parsedId);
             }
             else
             {
@@ -62,7 +62,7 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                Lists = await MovieListService.GetMovieListsAsync(User.Id);
+                Lists = await UserService.GetUserMovieListsAsync(User.Id);
 
                 StateHasChanged();
             }
