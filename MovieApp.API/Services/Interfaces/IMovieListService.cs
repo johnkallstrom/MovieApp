@@ -7,6 +7,7 @@ namespace MovieApp.API.Services
 {
     public interface IMovieListService
     {
+        UpdateMovieListResponse UpdateMovieList(MovieList movieList);
         void DeleteMovieList(MovieList movieList);
         Task<MovieList> GetMovieListAsync(int userId, int movieListId);
         Task<IEnumerable<MovieList>> GetMovieListsAsync(int userId);

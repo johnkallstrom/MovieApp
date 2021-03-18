@@ -24,6 +24,20 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
+        public UpdateMovieListResponse UpdateMovieList(MovieList movieList)
+        {
+            if (movieList is null) throw new ArgumentNullException(nameof(movieList));
+
+            _context.MovieLists.Update(movieList);
+            _context.SaveChanges();
+
+            var response = _mapper.Map<UpdateMovieListResponse>(movieList);
+            response.Success = true;
+            response.Message = "Update successful.";
+
+            return response;
+        }
+
         public async Task<CreateMovieListResponse> CreateMovieListAsync(int userId, CreateMovieListRequest request)
         {
             if (_context.MovieLists.Where(x => x.UserId == userId).Any(x => x.Name == request.Name))

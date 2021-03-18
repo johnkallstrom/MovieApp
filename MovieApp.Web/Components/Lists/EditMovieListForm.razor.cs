@@ -26,6 +26,12 @@ namespace MovieApp.Web.Components.Lists
         public bool DisplayMessage { get; set; }
         public string Message { get; set; }
 
+        protected override void OnInitialized()
+        {
+            EditListModel.Name = List.Name;
+            EditListModel.Description = List.Description;
+        }
+
         protected async Task HandleValidSubmit()
         {
             DisplayLoadingSpinner = true;
