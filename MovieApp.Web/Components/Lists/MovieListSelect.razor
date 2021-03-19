@@ -1,18 +1,32 @@
-﻿<div class="d-block mt-3 w-50">
-    <h5 class="card-title">Add to list</h5>
-    @if (UserLists.Count() is 0)
-    {
-        <p class="mt-1">You have not created any lists yet.</p>
-    }
-    else
-    {
-        <select class="form-select form-select-sm">
-            <option selected disabled>Choose list</option>
-            @foreach (var list in UserLists)
+﻿<AuthorizeView>
+    <Authorized>
+        <div class="d-block mt-3 w-50">
+            <h5 class="card-title">Add to list</h5>
+            @if (UserLists.Count() is 0)
             {
-                <option value="@list.Id">@list.Name</option>
+                <p class="mt-1">You have not created any lists yet.</p>
             }
-        </select>
-        <button class="btn btn-orange mt-3">Add</button>
-    }
-</div>
+            else
+            {
+                <select class="form-select form-select-sm" @onchange="@((e) => SelectedListId = int.Parse(e.Value.ToString()))">
+                    <option selected disabled>Choose list</option>
+                    @foreach (var list in UserLists)
+                    {
+                        <option value="@list.Id">@list.Name</option>
+                    }
+                </select>
+                <button class="btn btn-orange mt-3" @onclick="HandleAddButtonClick">
+                    @if (DisplayLoadingSpinner)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                    }
+                    Add
+                </button>
+            }
+            @if (DisplayMessage)
+            {
+                <p class="text-danger mt-2">@Message</p>
+            }
+        </div>
+    </Authorized>
+</AuthorizeView>

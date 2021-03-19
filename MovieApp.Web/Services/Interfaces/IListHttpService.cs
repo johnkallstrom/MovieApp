@@ -6,6 +6,7 @@ namespace MovieApp.Web.Services
 {
     public interface IListHttpService
     {
+        Task<AddMovieResponse> AddMovieToListAsync(int movieListId, AddMovieRequest request);
         Task<bool> DeleteMovieListAsync(int movieListId);
         Task<UpdateMovieListResponse> UpdateMovieListAsync(int movieListId, UpdateMovieListRequest request);
         Task<MovieListDetailsDto> GetMovieListAsync(int movieListId);

@@ -40,11 +40,7 @@
                         <h5 class="card-title">Language</h5>
                         <p class="card-text">@Movie.Original_Language</p>
                     </div>
-                    <AuthorizeView>
-                        <Authorized>
-                            <MovieListSelect />
-                        </Authorized>
-                    </AuthorizeView>
+                    <MovieListSelect Movie="@Movie" />
                 </div>
             </div>
         </div>

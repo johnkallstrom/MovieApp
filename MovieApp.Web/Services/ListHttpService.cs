@@ -16,6 +16,15 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<AddMovieResponse> AddMovieToListAsync(int movieListId, AddMovieRequest request)
+        {
+            var httpResponse = await _httpClient.PostAsJsonAsync($"lists/{movieListId}/add", request);
+
+            var response = await httpResponse.Content.ReadFromJsonAsync<AddMovieResponse>();
+
+            return response;
+        }
+
         public async Task<UpdateMovieListResponse> UpdateMovieListAsync(int movieListId, UpdateMovieListRequest request)
         {
             var httpResponse = await _httpClient.PutAsJsonAsync($"lists/{movieListId}", request);
