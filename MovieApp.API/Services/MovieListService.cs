@@ -87,6 +87,13 @@ namespace MovieApp.API.Services
         {
             if (movieList is null) throw new ArgumentNullException(nameof(movieList));
 
+            var items = _context.Items.Where(x => x.MovieListId == movieList.Id);
+
+            foreach (var item in items)
+            {
+                _context.Items.Remove(item);
+            }
+
             _context.MovieLists.Remove(movieList);
             _context.SaveChanges();
         }
