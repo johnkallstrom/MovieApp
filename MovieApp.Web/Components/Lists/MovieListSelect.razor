@@ -1,7 +1,7 @@
 ﻿<AuthorizeView>
     <Authorized>
         <div class="d-block mt-3 w-50">
-            <h5 class="card-title">Add to list</h5>
+            <h5 class="card-title">Your lists</h5>
             @if (UserLists.Count() is 0)
             {
                 <p class="mt-1">You have not created any lists yet.</p>
@@ -22,10 +22,6 @@
                     }
                     Add
                 </button>
-            }
-            @if (DisplayMessage)
-            {
-                <p class="text-danger mt-2">@Message</p>
             }
         </div>
     </Authorized>

@@ -32,8 +32,6 @@ namespace MovieApp.Web.Components.Lists
 
         public int SelectedListId { get; set; } = 0;
         public bool DisplayLoadingSpinner { get; set; }
-        public bool DisplayMessage { get; set; }
-        public string Message { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -70,8 +68,7 @@ namespace MovieApp.Web.Components.Lists
                 else
                 {
                     DisplayLoadingSpinner = false;
-                    Message = response.Message;
-                    DisplayMessage = true;
+                    ToastService.ShowError(response.Message);
                 }
             }
         }
