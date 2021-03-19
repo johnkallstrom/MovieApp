@@ -18,7 +18,7 @@ namespace MovieApp.Web.Components.Lists
         public UserDto User { get; set; } = new UserDto();
 
         [Parameter]
-        public MovieListDto List { get; set; } = new MovieListDto();
+        public MovieListDetailsDto List { get; set; } = new MovieListDetailsDto();
 
         public UpdateMovieListRequest EditListModel { get; set; } = new UpdateMovieListRequest();
 

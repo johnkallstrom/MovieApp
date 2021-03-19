@@ -12,12 +12,8 @@
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/tv-shows" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recommendations</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <NavLink class="dropdown-item" href="/recommendations/movie" @onclick="() => SearchState.Clear()">Movies</NavLink>
-                        <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
-                    </div>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/recommendations" @onclick="() => SearchState.Clear()">Recommendations</NavLink>
                 </li>
                 <AuthorizeView>
                     <Authorized>
@@ -39,6 +35,13 @@
                         </li>
                     </NotAuthorized>
                 </AuthorizeView>
+                @*<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recommendations</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <NavLink class="dropdown-item" href="/recommendations" @onclick="() => SearchState.Clear()">Recommendations</NavLink>
+                        <NavLink class="dropdown-item" href="/recommendations/tv-show" @onclick="() => SearchState.Clear()">TV Shows</NavLink>
+                    </div>
+                </li>*@
             </ul>
             <Search />
         </div>

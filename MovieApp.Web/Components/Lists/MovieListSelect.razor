@@ -1,10 +1,18 @@
 ﻿<div class="d-block mt-3 w-50">
     <h5 class="card-title">Add to list</h5>
-    <select class="form-select form-select-sm">
-        <option selected disabled>Choose list</option>
-        <option>Top Thriller Movies List</option>
-        <option>Best Oscar Nominations List</option>
-        <option>Autumn Halloween Horror List</option>
-    </select>
-    <button class="btn btn-orange mt-3">Add</button>
+    @if (UserLists.Count() is 0)
+    {
+        <p class="mt-1">You have not created any lists yet.</p>
+    }
+    else
+    {
+        <select class="form-select form-select-sm">
+            <option selected disabled>Choose list</option>
+            @foreach (var list in UserLists)
+            {
+                <option value="@list.Id">@list.Name</option>
+            }
+        </select>
+        <button class="btn btn-orange mt-3">Add</button>
+    }
 </div>
