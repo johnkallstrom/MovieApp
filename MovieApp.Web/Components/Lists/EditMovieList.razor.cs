@@ -45,11 +45,16 @@ namespace MovieApp.Web.Components.Lists
             }
         }
 
-        protected async Task HandleDeleteItemButton(int itemId)
+        protected async Task HandleDeleteItemButton(int movieId)
         {
-            var succeeded = await MovieListService.DeleteMovieFromListAsync(itemId);
+            var request = new DeleteMovieRequest()
+            {
+                MovieId = movieId
+            };
 
-            if (succeeded)
+            var response = await MovieListService.DeleteMovieFromListAsync(int.Parse(MovieListId), request);
+
+            if (response.Success)
             {
                 var movieList = await MovieListService.GetMovieListAsync(int.Parse(MovieListId));
 

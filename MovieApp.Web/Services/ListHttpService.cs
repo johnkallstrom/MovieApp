@@ -16,6 +16,15 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<DeleteMovieResponse> DeleteMovieFromListAsync(int movieListId, DeleteMovieRequest request)
+        {
+            var httpResponse = await _httpClient.PostAsJsonAsync($"lists/{movieListId}/remove", request);
+
+            var response = await httpResponse.Content.ReadFromJsonAsync<DeleteMovieResponse>();
+
+            return response;
+        }
+
         public async Task<AddMovieResponse> AddMovieToListAsync(int movieListId, AddMovieRequest request)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync($"lists/{movieListId}/add", request);
@@ -56,19 +65,6 @@ namespace MovieApp.Web.Services
 
             bool succeeded = false;
 
-            if (httpResponse.IsSuccessStatusCode)
-            {
-                succeeded = true;
-            }
-
-            return succeeded;
-        }
-
-        public async Task<bool> DeleteMovieFromListAsync(int movieListItemId)
-        {
-            var httpResponse = await _httpClient.DeleteAsync($"lists/{movieListItemId}/delete");
-
-            bool succeeded = false;
             if (httpResponse.IsSuccessStatusCode)
             {
                 succeeded = true;
