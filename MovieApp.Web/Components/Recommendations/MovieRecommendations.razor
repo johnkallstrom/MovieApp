@@ -3,7 +3,7 @@
 <div id="recommendations">
     <h3 class="mb-3">Recommendations</h3>
     <div class="row">
-        <div class="col-md-3 mb-3">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <h5 class="card-header">Sort</h5>
                 <div class="card-body">
@@ -48,18 +48,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="row flex-row">
                 @if (Results.Count() is not 0)
                 {
                     @foreach (var movie in Results)
                     {
                         <DisplayMovie Movie="movie" />
-                    }
-
-                    @if (TotalPages > 1)
-                    {
-                        <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
                     }
                 }
                 else
@@ -70,5 +67,9 @@
                 }
             </div>
         </div>
+        @if (TotalPages > 1)
+        {
+            <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
+        }
     </div>
 </div> 

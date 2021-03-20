@@ -1,0 +1,39 @@
+﻿@page "/lists/edit/{userId}/{movieListId}"
+
+<div id="edit-list">
+    <h3 class="mb-3">Edit List</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <EditForm Model="@EditListModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <div class="form-group">
+                    <label class="text-muted">Name</label>
+                    <InputText type="text" class="form-control" @bind-Value="@EditListModel.Name" />
+                    <ValidationMessage For="@(() => EditListModel.Name)" />
+                </div>
+                <div class="form-group">
+                    <label class="text-muted">Description</label>
+                    <InputTextArea type="text" class="form-control" @bind-Value="@EditListModel.Description" rows="7" cols="50" />
+                    <ValidationMessage For="@(() => EditListModel.Description)" />
+                </div>
+                <div class="form-group">
+                    <label class="text-muted">Movies</label>
+                    <ul class="list-group">
+                        @foreach (var item in EditListModel.Items)
+                        {
+                            <li class="list-group-item">@item.Name <span class="float-right" @onclick="async () => await HandleDeleteItemButton(item.Id)"><i class="fas fa-trash-alt"></i></span></li>
+                        }
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn-edit">
+                    @if (DisplayLoadingSpinner)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                    }
+                    Save
+                </button>
+                <a class="btn btn-cancel" href="@($"/lists/{UserId}/{MovieListId}")">Cancel</a>
+            </EditForm>
+        </div>
+    </div>
+</div>

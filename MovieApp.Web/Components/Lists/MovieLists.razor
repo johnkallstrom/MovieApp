@@ -1,22 +1,15 @@
 ﻿@page "/lists/{userId}"
 
 <div id="lists">
-    @if (!string.IsNullOrEmpty(User.FirstName))
-    {
-        <h3 class="mb-3">@User.FirstName's lists</h3>
-    }
-    else
-    {
-        <h3 class="mb-3">Your lists</h3>
-    }
-    <button class="btn btn-orange mb-3" @onclick="HandleCreateListBtnClick">New List</button>
-    @if (Lists.Count() is not 0)
+    <h3 class="mb-3">All lists</h3>
+    <a href="@($"/lists/create/{User.Id}")" class="btn btn-orange mb-3">New List</a>
+    @if (User.MovieLists.Count() is not 0)
     {
         <div class="row">
             <div class="col-md-8">
-                @foreach (var list in Lists)
-                {
-                    <div class="list-group">
+                <div class="list-group">
+                    @foreach (var list in User.MovieLists)
+                    {
                         <a href="@($"/lists/{User.Id}/{list.Id}")" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">@list.Name</h5>
@@ -25,8 +18,8 @@
                             <p class="mb-1">@list.Description</p>
                             <small>Created by @User.FirstName @User.LastName</small>
                         </a>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     }

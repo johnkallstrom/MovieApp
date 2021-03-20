@@ -6,16 +6,28 @@
     }
     else
     {
-        <button class="btn btn-orange mb-3" @onclick="HandleClearBtnClick">Clear</button>
-        <div class="list-group">
+        <div class="row flex-row flex-nowrap overflow-auto">
             @foreach (var movie in Movies)
             {
-                <a href="@($"/movie/{movie.Id}")" class="list-group-item list-group-item-action">@movie.Title (@(!string.IsNullOrEmpty(movie.Release_Date) ? DateTime.Parse(movie.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</a>
+                <div class="col-sm-2 mb-3">
+                    <a href="@($"/movie/{movie.Id}")">
+                        <div class="card card-block h-100">
+                            <img class="card-img-top img-fluid" src="@movie.Poster_Path" />
+                        </div>
+                    </a>
+                </div>
             }
             @foreach (var tvShow in TVShows)
             {
-                <a href="@($"/tv-shows/{tvShow.Id}")" class="list-group-item list-group-item-action">@tvShow.Name (@(!string.IsNullOrEmpty(tvShow.First_Air_Date) ? DateTime.Parse(tvShow.First_Air_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</a>
+                <div class="col-sm-2 mb-3">
+                    <a href="@($"/tv-shows/{tvShow.Id}")">
+                        <div class="card card-block h-100">
+                            <img class="card-img-top img-fluid" src="@tvShow.Poster_Path" />
+                        </div>
+                    </a>
+                </div>
             }
         </div>
+        <button class="btn btn-orange" @onclick="HandleClearBtnClick">Clear</button>
     }
 </div>

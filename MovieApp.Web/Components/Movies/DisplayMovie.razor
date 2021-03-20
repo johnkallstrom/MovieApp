@@ -2,9 +2,6 @@
     <a href="@($"/movie/{Movie.Id}")">
         <div class="card card-block h-100">
             <img class="card-img-top img-fluid" src="@Movie.Poster_Path" />
-            <div class="card-body">
-                <p class="card-text text-center">@Movie.Title (@(!string.IsNullOrEmpty(Movie.Release_Date) ? DateTime.Parse(Movie.Release_Date).Year.ToString() : DateTime.MinValue.ToShortDateString()))</p>
-            </div>
         </div>
     </a>
 </div>  

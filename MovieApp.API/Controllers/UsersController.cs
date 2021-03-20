@@ -119,7 +119,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet("{userId}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<UserDto>> GetUser(int userId)
         {
             var user = await _userService.GetUserAsync(userId);
@@ -133,7 +133,7 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             var users = await _userService.GetUsersAsync();

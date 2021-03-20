@@ -6,6 +6,10 @@
     --white: rgb(255, 255, 255);
 }
 
+#edit-user {
+    padding-top: 1rem;
+}
+
 #user-profile {
     padding-top: 1rem;
 }
@@ -15,7 +19,7 @@
     color: var(--white) !important;
 }
 
-#user-profile .user-profile-btn-delete {
+#user-profile .btn-delete {
     background-color: var(--dark) !important;
     color: var(--white) !important;
 }

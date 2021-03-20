@@ -65,7 +65,7 @@ namespace MovieApp.API.Data
                 entity.HasOne(d => d.MovieList)
                     .WithMany(p => p.Items)
                     .HasForeignKey(d => d.MovieListId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_MovieListItem_MovieList");
             });
 

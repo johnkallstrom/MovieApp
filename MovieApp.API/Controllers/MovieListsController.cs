@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MovieApp.API.Services;
 using MovieApp.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieApp.API.Controllers
@@ -24,6 +23,29 @@ namespace MovieApp.API.Controllers
             _userService = userService;
             _movieListService = movieListService;
             _mapper = mapper;
+        }
+
+        [HttpPost("{movieListId}/remove")]
+        public async Task<ActionResult> DeleteMovieListItem(int movieListId, DeleteMovieRequest request)
+        {
+            var response = new DeleteMovieResponse();
+
+            var movieList = await _movieListService.GetMovieListAsync(movieListId);
+            if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
+
+            try
+            {
+                response = await _movieListService.DeleteMovieAsync(movieListId, request);
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = e.Message;
+
+                return BadRequest(response);
+            }
         }
 
         [HttpPost("{movieListId}/add")]

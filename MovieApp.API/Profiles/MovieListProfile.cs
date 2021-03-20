@@ -17,6 +17,7 @@ namespace MovieApp.API.Profiles
             CreateMap<MovieList, CreateMovieListResponse>();
 
             // Movie List Items
+            CreateMap<MovieListItem, DeleteMovieResponse>();
             CreateMap<MovieListItem, MovieListItemDto>();
             CreateMap<MovieListItem, AddMovieResponse>();
             CreateMap<AddMovieRequest, MovieListItem>();

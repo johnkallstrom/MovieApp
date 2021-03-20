@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Lists
 {
-    public partial class MovieListSelect
+    public partial class SelectMovieList
     {
         [Inject]
         public IToastService ToastService { get; set; }

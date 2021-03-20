@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MovieApp.Domain.Models
 {
@@ -13,5 +14,7 @@ namespace MovieApp.Domain.Models
         public string Email { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
+
+        public IEnumerable<MovieListDto> MovieLists { get; set; } = new List<MovieListDto>();
     }
 }

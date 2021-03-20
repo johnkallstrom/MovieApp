@@ -2,12 +2,25 @@
     padding-top: 1rem;
 }
 
+#lists .list-group-item {
+    margin-bottom: 1rem;
+    border-top-width: thin;
+}
+
+#lists .list-group-item:last-child {
+    margin-bottom: 0rem;
+}
+
 #lists .list-group {
     margin-bottom: 1rem;
 }
 
 #lists .list-group:last-child {
     margin-bottom: 1rem;
+}
+
+#create-list {
+    padding-top: 1rem;
 }
 
 #create-list .btn-create {
@@ -29,9 +42,17 @@
     cursor: pointer;
 }
 
+#edit-list {
+    padding-top: 1rem;
+}
+
 #edit-list .btn-edit {
     background-color: var(--orange) !important;
     color: var(--white) !important;
+}
+
+#edit-list .fa-trash-alt:hover {
+    cursor: pointer;
 }
 
 #create-list .validation-message,

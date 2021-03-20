@@ -63,5 +63,18 @@ namespace MovieApp.Web.Services
 
             return succeeded;
         }
+
+        public async Task<bool> DeleteMovieFromListAsync(int movieListItemId)
+        {
+            var httpResponse = await _httpClient.DeleteAsync($"lists/{movieListItemId}/delete");
+
+            bool succeeded = false;
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                succeeded = true;
+            }
+
+            return succeeded;
+        }
     }
 }

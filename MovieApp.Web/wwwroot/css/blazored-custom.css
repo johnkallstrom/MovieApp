@@ -6,6 +6,10 @@
     --white: rgb(255, 255, 255);
 }
 
+.blazored-toast:last-child {
+    margin-bottom: 2.5rem !important;
+}
+
 .blazored-toast-header {
     display: none !important;
 }

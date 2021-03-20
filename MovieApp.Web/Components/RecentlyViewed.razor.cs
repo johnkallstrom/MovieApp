@@ -12,7 +12,7 @@ namespace MovieApp.Web.Components
         [Inject]
         public ILocalStorageService LocalStorage { get; set; }
 
-        public List<Movie> Movies { get; set; } = new List<Movie>();
+        public List<MovieDetails> Movies { get; set; } = new List<MovieDetails>();
 
         public List<TVShowDetails> TVShows { get; set; } = new List<TVShowDetails>();
 
@@ -29,7 +29,7 @@ namespace MovieApp.Web.Components
                 {
                     if (key.Contains("movie"))
                     {
-                        var movie = await LocalStorage.GetItemAsync<Movie>(key);
+                        var movie = await LocalStorage.GetItemAsync<MovieDetails>(key);
                         Movies.Add(movie);
                     }
 

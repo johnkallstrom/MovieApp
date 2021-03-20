@@ -11,6 +11,7 @@ body {
     background-color: var(--light-grey) !important;
     font-family: 'Roboto', sans-serif !important;
     color: var(--dark) !important;
+    padding-bottom: 70px;
 }
 
 .badge-orange {

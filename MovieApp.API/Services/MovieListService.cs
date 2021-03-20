@@ -24,12 +24,34 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
+        public async Task<DeleteMovieResponse> DeleteMovieAsync(int movieListId, DeleteMovieRequest request)
+        {
+            var movieList = await _context.MovieLists.FirstOrDefaultAsync(list => list.Id == movieListId);
+
+            var movieToRemove = movieList.Items.FirstOrDefault(item => item.MovieId == request.MovieId);
+            if (movieToRemove is null)
+            {
+                throw new MovieExistsException($"The movie with ID: {request.MovieId} does not exist in this list.");
+            }
+
+            movieList.Items.Remove(movieToRemove);
+
+            _context.MovieLists.Update(movieList);
+            _context.SaveChanges();
+
+            var response = _mapper.Map<DeleteMovieResponse>(movieToRemove);
+            response.Success = true;
+            response.Message = $"Successfully removed {response.Name} from the list.";
+
+            return response;
+        }
+
         public async Task<AddMovieResponse> AddMovieAsync(int movieListId, AddMovieRequest request)
         {
             var movieList = await _context.MovieLists.FirstOrDefaultAsync(list => list.Id == movieListId);
             if (movieList.Items.Any(item => item.MovieId == request.MovieId))
             {
-                throw new MovieExistsException("The movie you're trying to add already exists in the selected list.");
+                throw new MovieExistsException($"{request.Name} has already been added to this list.");
             }
 
             var movie = _mapper.Map<MovieListItem>(request);

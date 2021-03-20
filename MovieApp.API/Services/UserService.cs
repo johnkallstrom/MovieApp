@@ -108,7 +108,9 @@ namespace MovieApp.API.Services
 
         public async Task<User> GetUserAsync(int userId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users
+                .Include(u => u.MovieLists)
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             return user;
         }
@@ -151,7 +153,7 @@ namespace MovieApp.API.Services
                 Subject = new ClaimsIdentity(claims),
                 Issuer = _jwtSettings.Value.Issuer,
                 Audience = _jwtSettings.Value.Audience,
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = credentials
             };
 
