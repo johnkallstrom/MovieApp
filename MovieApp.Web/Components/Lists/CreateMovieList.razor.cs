@@ -29,7 +29,7 @@ namespace MovieApp.Web.Components.Lists
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo($"/lists/{UserId}");
+                NavigationManager.NavigateTo($"/user/profile/{UserId}");
             }
             else
             {

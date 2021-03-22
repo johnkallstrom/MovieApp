@@ -33,7 +33,7 @@ namespace MovieApp.Web.Components.Lists
         public string MovieListId { get; set; }
 
         public UserDto User { get; set; } = new UserDto();
-        public MovieListDetailsDto List { get; set; } = new MovieListDetailsDto();
+        public MovieListDto MovieList { get; set; } = new MovieListDto();
         public List<MovieDetails> Movies { get; set; } = new List<MovieDetails>();
 
         protected override async Task OnInitializedAsync()
@@ -42,11 +42,11 @@ namespace MovieApp.Web.Components.Lists
             var movieList = await ListService.GetMovieListAsync(int.Parse(MovieListId));
 
             User = user;
-            List = movieList;
+            MovieList = movieList;
 
-            foreach (var item in List.Items)
+            foreach (var movieItem in MovieList.Movies)
             {
-                var movie = await MovieService.GetMovieDetailsAsync(item.MovieId);
+                var movie = await MovieService.GetMovieDetailsAsync(movieItem.TmdbId);
                 Movies.Add(movie);
             }
         }
@@ -64,11 +64,11 @@ namespace MovieApp.Web.Components.Lists
 
             if (!result.Cancelled && User != null)
             {
-                var succeeded = await ListService.DeleteMovieListAsync(List.Id);
+                var succeeded = await ListService.DeleteMovieListAsync(MovieList.Id);
 
                 if (succeeded)
                 {
-                    NavigationManager.NavigateTo($"/lists/{User.Id}");
+                    NavigationManager.NavigateTo($"/user/profile/{User.Id}");
                 }
             }
         }

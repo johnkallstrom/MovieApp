@@ -16,18 +16,6 @@
                     <InputTextArea type="text" class="form-control" @bind-Value="@EditListModel.Description" rows="7" cols="50" />
                     <ValidationMessage For="@(() => EditListModel.Description)" />
                 </div>
-                @if (EditListModel.Items.Count() is not 0)
-                {
-                    <div class="form-group">
-                        <label class="text-muted">Movies</label>
-                        <ul class="list-group">
-                            @foreach (var item in EditListModel.Items)
-                            {
-                                <li class="list-group-item">@item.Name <span class="float-right" @onclick="async () => await HandleDeleteItemButton(item.MovieId)"><i class="fas fa-trash-alt"></i></span></li>
-                            }
-                        </ul>
-                    </div>
-                }
                 <button type="submit" class="btn btn-edit">
                     @if (DisplayLoadingSpinner)
                     {

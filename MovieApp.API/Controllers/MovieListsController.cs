@@ -26,16 +26,16 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpPost("{movieListId}/remove")]
-        public async Task<ActionResult> DeleteMovieListItem(int movieListId, DeleteMovieRequest request)
+        public async Task<ActionResult> DeleteMovieItem(int movieListId, DeleteMovieItemRequest request)
         {
-            var response = new DeleteMovieResponse();
+            var response = new DeleteMovieItemResponse();
 
             var movieList = await _movieListService.GetMovieListAsync(movieListId);
             if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
             try
             {
-                response = await _movieListService.DeleteMovieAsync(movieListId, request);
+                response = await _movieListService.DeleteMovieItemAsync(movieListId, request);
 
                 return Ok(response);
             }
@@ -49,16 +49,16 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpPost("{movieListId}/add")]
-        public async Task<ActionResult<AddMovieResponse>> AddMovieListItem(int movieListId, AddMovieRequest request)
+        public async Task<ActionResult<AddMovieItemResponse>> AddMovieItem(int movieListId, AddMovieItemRequest request)
         {
-            var response = new AddMovieResponse();
+            var response = new AddMovieItemResponse();
 
             var movieList = await _movieListService.GetMovieListAsync(movieListId);
             if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
             try
             {
-                response = await _movieListService.AddMovieAsync(movieListId, request);
+                response = await _movieListService.AddMovieItemAsync(movieListId, request);
 
                 return Ok(response);
             }
@@ -72,12 +72,12 @@ namespace MovieApp.API.Controllers
         }
 
         [HttpGet("{movieListId}")]
-        public async Task<ActionResult<MovieListDetailsDto>> GetMovieList(int movieListId)
+        public async Task<ActionResult<MovieListDto>> GetMovieList(int movieListId)
         {
             var movieList = await _movieListService.GetMovieListAsync(movieListId);
             if (movieList is null) return NotFound(new { Message = "The list you are requesting does not exist." });
 
-            return Ok(_mapper.Map<MovieListDetailsDto>(movieList));
+            return Ok(_mapper.Map<MovieListDto>(movieList));
         }
 
         [HttpPost("{userId}")]

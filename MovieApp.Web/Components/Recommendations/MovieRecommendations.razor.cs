@@ -32,7 +32,7 @@ namespace MovieApp.Web.Components.Recommendations
         public int TotalResults { get; set; }
         public string FromReleasedate { get; set; }
         public string ToReleaseDate { get; set; }
-        public int Rating { get; set; } = 0;
+        public int Rating { get; set; } = 1;
         public int Runtime { get; set; }
         public SearchActor SearchActorComponent { get; set; }
         public SearchDirector SearchDirectorComponent { get; set; }

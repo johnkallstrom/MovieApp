@@ -3,9 +3,9 @@
     <div class="range">
         <input type="range"
                class="form-range"
-               min="0"
+               min="1"
                max="10"
-               value="0"
+               value="1"
                @oninput="@(async (e) => await OnRatingChanged.InvokeAsync(e.Value.ToString()))" />
     </div>
 </div>

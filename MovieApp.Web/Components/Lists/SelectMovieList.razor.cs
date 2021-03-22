@@ -52,10 +52,10 @@ namespace MovieApp.Web.Components.Lists
             {
                 DisplayLoadingSpinner = true;
 
-                var request = new AddMovieRequest
+                var request = new AddMovieItemRequest
                 {
-                    MovieId = Movie.Id,
-                    Name = Movie.Title
+                    TmdbId = Movie.Id,
+                    Title = Movie.Title
                 };
 
                 var response = await ListService.AddMovieToListAsync(SelectedListId, request);

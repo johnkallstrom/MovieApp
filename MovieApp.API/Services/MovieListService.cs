@@ -24,47 +24,47 @@ namespace MovieApp.API.Services
             _context = context;
         }
 
-        public async Task<DeleteMovieResponse> DeleteMovieAsync(int movieListId, DeleteMovieRequest request)
+        public async Task<DeleteMovieItemResponse> DeleteMovieItemAsync(int movieListId, DeleteMovieItemRequest request)
         {
             var movieList = await _context.MovieLists.FirstOrDefaultAsync(list => list.Id == movieListId);
 
-            var movieToRemove = movieList.Items.FirstOrDefault(item => item.MovieId == request.MovieId);
+            var movieToRemove = movieList.Movies.FirstOrDefault(item => item.TmdbId == request.TmdbId);
             if (movieToRemove is null)
             {
-                throw new MovieExistsException($"The movie with ID: {request.MovieId} does not exist in this list.");
+                throw new MovieExistsException($"The movie with ID: {request.TmdbId} does not exist in this list.");
             }
 
-            movieList.Items.Remove(movieToRemove);
+            movieList.Movies.Remove(movieToRemove);
 
             _context.MovieLists.Update(movieList);
             _context.SaveChanges();
 
-            var response = _mapper.Map<DeleteMovieResponse>(movieToRemove);
+            var response = new DeleteMovieItemResponse();
             response.Success = true;
-            response.Message = $"Successfully removed {response.Name} from the list.";
+            response.Message = $"Successfully removed {movieToRemove.Title} from the list.";
 
             return response;
         }
 
-        public async Task<AddMovieResponse> AddMovieAsync(int movieListId, AddMovieRequest request)
+        public async Task<AddMovieItemResponse> AddMovieItemAsync(int movieListId, AddMovieItemRequest request)
         {
             var movieList = await _context.MovieLists.FirstOrDefaultAsync(list => list.Id == movieListId);
-            if (movieList.Items.Any(item => item.MovieId == request.MovieId))
+            if (movieList.Movies.Any(item => item.TmdbId == request.TmdbId))
             {
-                throw new MovieExistsException($"{request.Name} has already been added to this list.");
+                throw new MovieExistsException($"{request.Title} has already been added to this list.");
             }
 
-            var movie = _mapper.Map<MovieListItem>(request);
+            var movie = _mapper.Map<MovieItem>(request);
             movie.MovieListId = movieListId;
 
-            movieList.Items.Add(movie);
+            movieList.Movies.Add(movie);
 
             _context.MovieLists.Update(movieList);
             _context.SaveChanges();
 
-            var response = _mapper.Map<AddMovieResponse>(movie);
+            var response = _mapper.Map<AddMovieItemResponse>(movie);
             response.Success = true;
-            response.Message = $"Successfully added {response.Name} to the list.";
+            response.Message = $"Successfully added {response.Title} to the list.";
 
             return response;
         }
@@ -109,11 +109,11 @@ namespace MovieApp.API.Services
         {
             if (movieList is null) throw new ArgumentNullException(nameof(movieList));
 
-            var items = _context.Items.Where(x => x.MovieListId == movieList.Id);
+            var items = _context.MovieItems.Where(x => x.MovieListId == movieList.Id);
 
             foreach (var item in items)
             {
-                _context.Items.Remove(item);
+                _context.MovieItems.Remove(item);
             }
 
             _context.MovieLists.Remove(movieList);
@@ -123,7 +123,7 @@ namespace MovieApp.API.Services
         public async Task<MovieList> GetMovieListAsync(int movieListId)
         {
             var movieList = await _context.MovieLists
-                .Include(x => x.Items)
+                .Include(x => x.Movies)
                 .FirstOrDefaultAsync(x => x.Id == movieListId);
 
             return movieList;

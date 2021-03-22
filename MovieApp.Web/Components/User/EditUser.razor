@@ -7,6 +7,16 @@
             <EditForm Model="@EditModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="form-group">
+                    <label class="text-muted">Username</label>
+                    <InputText type="text" class="form-control" @bind-Value="@EditModel.Username" />
+                    <ValidationMessage For="@(() => EditModel.Username)" />
+                </div>
+                <div class="form-group">
+                    <label class="text-muted">Email</label>
+                    <InputText type="text" class="form-control" @bind-Value="@EditModel.Email" />
+                    <ValidationMessage For="@(() => EditModel.Email)" />
+                </div>
+                <div class="form-group">
                     <label class="text-muted">First Name</label>
                     <InputText type="text" class="form-control" @bind-Value="@EditModel.FirstName" />
                     <ValidationMessage For="@(() => EditModel.FirstName)" />
@@ -20,11 +30,6 @@
                     <label class="text-muted">Location</label>
                     <InputText type="text" class="form-control" @bind-Value="@EditModel.Location" />
                     <ValidationMessage For="@(() => EditModel.Location)" />
-                </div>
-                <div class="form-group">
-                    <label class="text-muted">Bio</label>
-                    <InputTextArea type="text" class="form-control" @bind-Value="@EditModel.Bio" rows="7" cols="50" />
-                    <ValidationMessage For="@(() => EditModel.Bio)" />
                 </div>
                 <button type="submit" class="btn btn-edit">
                     @if (DisplayLoadingSpinner)

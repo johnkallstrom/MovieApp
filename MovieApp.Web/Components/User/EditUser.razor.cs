@@ -26,7 +26,6 @@ namespace MovieApp.Web.Components.User
             EditModel.FirstName = user.FirstName;
             EditModel.LastName = user.LastName;
             EditModel.Location = user.Location;
-            EditModel.Bio = user.Bio;
         }
 
         protected async Task HandleValidSubmit()

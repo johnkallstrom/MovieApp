@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieApp.Domain.Entities;
 
 #nullable disable
@@ -18,22 +16,28 @@ namespace MovieApp.API.Data
         {
         }
 
+        public virtual DbSet<MovieItem> MovieItems { get; set; }
         public virtual DbSet<MovieList> MovieLists { get; set; }
-        public virtual DbSet<MovieListItem> Items { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-9QNEPOD\\SQLEXPRESS;Database=MovieAppDatabase;Trusted_Connection=True;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<MovieItem>(entity =>
+            {
+                entity.ToTable("MovieItem");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.MovieList)
+                    .WithMany(p => p.Movies)
+                    .HasForeignKey(d => d.MovieListId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_MovieItem_MovieList");
+            });
 
             modelBuilder.Entity<MovieList>(entity =>
             {
@@ -54,21 +58,6 @@ namespace MovieApp.API.Data
                     .HasConstraintName("FK_MovieList_User");
             });
 
-            modelBuilder.Entity<MovieListItem>(entity =>
-            {
-                entity.ToTable("MovieListItem");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.MovieList)
-                    .WithMany(p => p.Items)
-                    .HasForeignKey(d => d.MovieListId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_MovieListItem_MovieList");
-            });
-
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
@@ -77,7 +66,7 @@ namespace MovieApp.API.Data
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(256);
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 

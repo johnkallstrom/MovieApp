@@ -29,7 +29,6 @@ namespace MovieApp.Web.Components.Lists
 
             EditListModel.Name = movieList.Name;
             EditListModel.Description = movieList.Description;
-            EditListModel.Items = movieList.Items;
         }
 
         protected async Task HandleValidSubmit()
@@ -41,15 +40,15 @@ namespace MovieApp.Web.Components.Lists
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo($"/lists/{UserId}");
+                NavigationManager.NavigateTo($"/user/profile/{UserId}");
             }
         }
 
-        protected async Task HandleDeleteItemButton(int movieId)
+        protected async Task HandleDeleteItemButton(int tmdbId)
         {
-            var request = new DeleteMovieRequest()
+            var request = new DeleteMovieItemRequest()
             {
-                MovieId = movieId
+                TmdbId = tmdbId
             };
 
             var response = await MovieListService.DeleteMovieFromListAsync(int.Parse(MovieListId), request);
@@ -60,7 +59,6 @@ namespace MovieApp.Web.Components.Lists
 
                 EditListModel.Name = movieList.Name;
                 EditListModel.Description = movieList.Description;
-                EditListModel.Items = movieList.Items;
 
                 StateHasChanged();
             }

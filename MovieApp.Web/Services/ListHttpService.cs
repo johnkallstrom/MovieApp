@@ -16,20 +16,20 @@ namespace MovieApp.Web.Services
             _httpClient = httpClient;
         }
 
-        public async Task<DeleteMovieResponse> DeleteMovieFromListAsync(int movieListId, DeleteMovieRequest request)
+        public async Task<DeleteMovieItemResponse> DeleteMovieFromListAsync(int movieListId, DeleteMovieItemRequest request)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync($"lists/{movieListId}/remove", request);
 
-            var response = await httpResponse.Content.ReadFromJsonAsync<DeleteMovieResponse>();
+            var response = await httpResponse.Content.ReadFromJsonAsync<DeleteMovieItemResponse>();
 
             return response;
         }
 
-        public async Task<AddMovieResponse> AddMovieToListAsync(int movieListId, AddMovieRequest request)
+        public async Task<AddMovieItemResponse> AddMovieToListAsync(int movieListId, AddMovieItemRequest request)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync($"lists/{movieListId}/add", request);
 
-            var response = await httpResponse.Content.ReadFromJsonAsync<AddMovieResponse>();
+            var response = await httpResponse.Content.ReadFromJsonAsync<AddMovieItemResponse>();
 
             return response;
         }
@@ -52,9 +52,9 @@ namespace MovieApp.Web.Services
             return response;
         }
 
-        public async Task<MovieListDetailsDto> GetMovieListAsync(int movieListId)
+        public async Task<MovieListDto> GetMovieListAsync(int movieListId)
         {
-            var movieList = await _httpClient.GetFromJsonAsync<MovieListDetailsDto>($"lists/{movieListId}");
+            var movieList = await _httpClient.GetFromJsonAsync<MovieListDto>($"lists/{movieListId}");
 
             return movieList;
         }

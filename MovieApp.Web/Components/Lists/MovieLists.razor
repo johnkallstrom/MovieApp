@@ -1,7 +1,5 @@
-﻿@page "/lists/{userId}"
-
-<div id="lists">
-    <h3 class="mb-3">All lists</h3>
+﻿<div id="lists">
+    <h3 class="mb-3">Your lists</h3>
     <a href="@($"/lists/create/{User.Id}")" class="btn btn-orange mb-3">New List</a>
     @if (User.MovieLists.Count() is not 0)
     {

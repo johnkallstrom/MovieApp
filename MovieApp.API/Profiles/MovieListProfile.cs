@@ -8,19 +8,11 @@ namespace MovieApp.API.Profiles
     {
         public MovieListProfile()
         {
-            // Movie List
-            CreateMap<MovieList, MovieListDetailsDto>();
             CreateMap<UpdateMovieListRequest, MovieList>();
             CreateMap<MovieList, UpdateMovieListResponse>();
             CreateMap<MovieList, MovieListDto>();
             CreateMap<CreateMovieListRequest, MovieList>();
             CreateMap<MovieList, CreateMovieListResponse>();
-
-            // Movie List Items
-            CreateMap<MovieListItem, DeleteMovieResponse>();
-            CreateMap<MovieListItem, MovieListItemDto>();
-            CreateMap<MovieListItem, AddMovieResponse>();
-            CreateMap<AddMovieRequest, MovieListItem>();
         }
     }
 }

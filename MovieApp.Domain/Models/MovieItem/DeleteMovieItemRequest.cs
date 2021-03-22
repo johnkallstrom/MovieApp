@@ -2,9 +2,9 @@
 
 namespace MovieApp.Domain.Models
 {
-    public class DeleteMovieRequest
+    public class DeleteMovieItemRequest
     {
         [Required(ErrorMessage = "Please provide a valid Movie ID.")]
-        public int MovieId { get; set; }
+        public int TmdbId { get; set; }
     }
 }
