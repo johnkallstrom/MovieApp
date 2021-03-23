@@ -43,7 +43,30 @@ namespace MovieApp.Web.Components.User
             }
         }
 
-        protected async Task HandleDeleteBtnClick()
+        protected async Task HandleEditButton()
+        {
+            var options = new ModalOptions()
+            {
+                DisableBackgroundCancel = true,
+                HideCloseButton = true
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(User), User);
+
+            var modal = Modal.Show<EditUserForm>("Edit User", parameters, options);
+            var result = await modal.Result;
+
+            if (!result.Cancelled && User != null)
+            {
+                var user = await UserService.GetUserAsync(int.Parse(UserId));
+
+                User = user;
+                StateHasChanged();
+            }
+        }
+
+        protected async Task HandleDeleteButton()
         {
             var options = new ModalOptions()
             {

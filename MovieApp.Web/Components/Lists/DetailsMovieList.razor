@@ -3,8 +3,8 @@
 <div id="list-details">
     <h3 class="mb-3">@MovieList.Name</h3>
     <p class="my-3">@MovieList.Description</p>
-    <a class="btn btn-orange" href="@($"/lists/edit/{User.Id}/{MovieList.Id}")">Edit</a>
-    <button class="btn btn-dark" @onclick="HandleDeleteBtnClick">Delete</button>
+    <button class="btn btn-orange" @onclick="HandleEditListButton">Edit</button>
+    <button class="btn btn-dark" @onclick="HandleDeleteListButton">Delete</button>
     <div class="row mt-3">
         <div class="col-md-12">
             @if (Movies.Count() is not 0)

@@ -51,7 +51,31 @@ namespace MovieApp.Web.Components.Lists
             }
         }
 
-        protected async Task HandleDeleteBtnClick()
+        protected async Task HandleEditListButton()
+        {
+            var options = new ModalOptions()
+            {
+                DisableBackgroundCancel = true,
+                HideCloseButton = true
+            };
+
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(User), User);
+            parameters.Add(nameof(MovieList), MovieList);
+
+            var modal = Modal.Show<EditMovieListForm>("Edit List", parameters, options);
+            var result = await modal.Result;
+
+            if (!result.Cancelled && MovieList != null)
+            {
+                var movieList = await ListService.GetMovieListAsync(MovieList.Id);
+                MovieList = movieList;
+
+                StateHasChanged();
+            }
+        }
+
+        protected async Task HandleDeleteListButton()
         {
             var options = new ModalOptions()
             {

@@ -37,6 +37,8 @@ namespace MovieApp.Web.Components.Lists
                 var user = await UserService.GetUserAsync(User.Id);
 
                 User = user;
+
+                StateHasChanged();
             }
         }
     }

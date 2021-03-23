@@ -1,0 +1,28 @@
+﻿<div id="edit-user">
+    <EditForm Model="@EditModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label class="text-muted">First Name</label>
+            <InputText type="text" class="form-control" @bind-Value="@EditModel.FirstName" />
+            <ValidationMessage For="@(() => EditModel.FirstName)" />
+        </div>
+        <div class="form-group">
+            <label class="text-muted">Last Name</label>
+            <InputText type="text" class="form-control" @bind-Value="@EditModel.LastName" />
+            <ValidationMessage For="@(() => EditModel.LastName)" />
+        </div>
+        <div class="form-group">
+            <label class="text-muted">Location</label>
+            <InputText type="text" class="form-control" @bind-Value="@EditModel.Location" />
+            <ValidationMessage For="@(() => EditModel.Location)" />
+        </div>
+        <button type="submit" class="btn btn-edit">
+            @if (DisplayLoadingSpinner)
+            {
+                <span class="spinner-border spinner-border-sm" role="status"></span>
+            }
+            Save
+        </button>
+        <button class="btn btn-cancel" @onclick="HandleCancelAsync">Cancel</button>
+    </EditForm>
+</div>
