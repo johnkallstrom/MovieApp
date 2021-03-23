@@ -1,11 +1,12 @@
 ﻿<div id="recently-viewed">
-    <h3 class="mb-3">Recently Viewed</h3>
+    <h3>Recently Viewed</h3>
     @if (DisplayMessage)
     {
         <p>@Message</p>
     }
     else
     {
+        <button class="btn btn-orange rv-clear" @onclick="HandleClearBtnClick">Clear</button>
         <div class="row flex-row flex-nowrap overflow-auto">
             @foreach (var movie in Movies)
             {
@@ -28,6 +29,5 @@
                 </div>
             }
         </div>
-        <button class="btn btn-orange" @onclick="HandleClearBtnClick">Clear</button>
     }
 </div>

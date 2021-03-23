@@ -25,9 +25,12 @@ namespace MovieApp.Web.Components.User
         public IModalService Modal { get; set; }
 
         public UserDto User { get; set; } = new UserDto();
+        public bool DisplayLoadingSpinner { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
+            DisplayLoadingSpinner = true;
+
             if (int.TryParse(UserId, out int parsedId))
             {
                 var user = await UserService.GetUserAsync(parsedId);
@@ -35,11 +38,8 @@ namespace MovieApp.Web.Components.User
                 if (user is not null)
                 {
                     User = user;
+                    DisplayLoadingSpinner = false;
                 }
-            }
-            else
-            {
-                User = null;
             }
         }
 

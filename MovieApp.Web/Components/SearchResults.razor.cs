@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MovieApp.Web.Enums;
 using MovieApp.Web.State;
 using System;
-using System.Threading.Tasks;
 
-namespace MovieApp.Web.Components.Search
+namespace MovieApp.Web.Components
 {
-    public partial class SearchList : IDisposable
+    public partial class SearchResults
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -41,29 +39,6 @@ namespace MovieApp.Web.Components.Search
             {
                 NavigationManager.NavigateTo("/");
             }
-        }
-
-        private string DisplayFilter()
-        {
-            string output = "";
-
-            switch (SearchState.Filter)
-            {
-                case SearchFilterType.All:
-                    output = string.Empty;
-                    break;
-                case SearchFilterType.Movies:
-                    output = "Movies";
-                    break;
-                case SearchFilterType.TV:
-                    output = "TV Shows";
-                    break;
-                case SearchFilterType.People:
-                    output = "People";
-                    break;
-            }
-
-            return output;
         }
     }
 }

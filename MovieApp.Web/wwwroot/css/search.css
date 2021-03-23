@@ -21,6 +21,14 @@
     padding-top: 1rem;
 }
 
+#search-list .list-group {
+    margin-bottom: 1rem;
+}
+
+#search-list .list-group:last-child {
+    margin-bottom: 0rem;
+}
+
 #search-list a {
     color: var(--dark);
     text-decoration: none;

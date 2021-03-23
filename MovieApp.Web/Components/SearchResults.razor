@@ -1,0 +1,32 @@
+﻿@page "/search"
+
+<div id="search-list">
+    <h3 class="mb-3">Search</h3>
+    @if (!string.IsNullOrEmpty(SearchState.Query) && SearchState.Results.Count() is not 0)
+    {
+        <p>Your search on '@SearchState.Query' resulted in @SearchState.TotalResults hit(s)</p>
+        <div class="row">
+            <div class="col-md-9">
+                @foreach (var media in SearchState.Results)
+                {
+                    <div class="list-group">
+                        <a href="@media.Url" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            <span>@(!string.IsNullOrEmpty(media.Title) ? media.Title : "No Title")</span>
+                            <div class="image-wrapper">
+                                <img class="img-fluid" src="@ImageHelper.GetMediaImagePath(media)" />
+                            </div>
+                        </a>
+                    </div>
+                }
+                @if (SearchState.TotalPages > 1)
+                {
+                    <Pagination Page="@SearchState.Page" TotalPages="@SearchState.TotalPages" OnPageChanged="HandlePageChanged" />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No search results could be found, try again.</p>
+    }
+</div>

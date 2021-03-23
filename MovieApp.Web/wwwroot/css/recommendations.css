@@ -11,6 +11,14 @@
     padding-top: 1rem;
 }
 
+#recommendations .list-group {
+    margin-bottom: 1rem;
+}
+
+#recommendations .list-group:last-child {
+    margin-bottom: 0rem;
+}
+
 #recommendations a {
     color: var(--dark);
     text-decoration: none;
