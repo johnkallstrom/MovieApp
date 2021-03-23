@@ -19,10 +19,6 @@
     margin-bottom: 1rem;
 }
 
-#create-list {
-    padding-top: 1rem;
-}
-
 #create-list .btn-create {
     background-color: var(--orange) !important;
     color: var(--white) !important;

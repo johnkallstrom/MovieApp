@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Modal;
+using Microsoft.AspNetCore.Components;
 using MovieApp.Domain.Models;
 using MovieApp.Web.Services;
 using System.Threading.Tasks;
 
 namespace MovieApp.Web.Components.Lists
 {
-    public partial class CreateMovieList
+    public partial class CreateMovieListForm
     {
         [Inject]
         public IListHttpService MovieListService { get; set; }
 
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        [CascadingParameter]
+        public BlazoredModalInstance ModalInstance { get; set; }
 
         [Parameter]
-        public string UserId { get; set; }
+        public UserDto User { get; set; }
 
         public CreateMovieListRequest CreateListModel { get; set; } = new CreateMovieListRequest();
 
@@ -24,17 +25,18 @@ namespace MovieApp.Web.Components.Lists
         {
             DisplayLoadingSpinner = true;
 
-            var response = await MovieListService.CreateMovieListAsync(int.Parse(UserId), CreateListModel);
+            var response = await MovieListService.CreateMovieListAsync(User.Id, CreateListModel);
 
             if (response.Success)
             {
                 DisplayLoadingSpinner = false;
-                NavigationManager.NavigateTo($"/user/profile/{UserId}");
+                await ModalInstance.CloseAsync();
             }
-            else
-            {
-                DisplayLoadingSpinner = false;
-            }
+        }
+
+        protected async Task HandleCancelAsync()
+        {
+            await ModalInstance.CancelAsync();
         }
     }
 }
