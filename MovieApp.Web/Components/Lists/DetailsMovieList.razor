@@ -1,31 +1,37 @@
 ﻿@page "/lists/{userId}/{movieListId}"
 
 <div id="list-details">
-    <h3 class="mb-3">@MovieList.Name</h3>
-    <p class="my-3">@MovieList.Description</p>
-    <button class="btn btn-orange" @onclick="HandleEditListButton">Edit</button>
-    <button class="btn btn-dark" @onclick="HandleDeleteListButton">Delete</button>
-    <div class="row mt-3">
-        <div class="col-md-12">
-            @if (Movies.Count() is not 0)
-            {
-                <div class="row flex-row">
-                    @foreach (var movie in Movies)
-                    {
-                        <div class="col-sm-2 mb-3">
-                            <a href="@($"/movie/{movie.Id}")">
-                                <div class="card card-block h-100">
-                                    <img class="card-img-top img-fluid" src="@movie.Poster_Path" />
-                                </div>
-                            </a>
-                        </div>
-                    }
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-3">@MovieList.Name</h3>
+                    <p class="my-3">@MovieList.Description</p>
+                    <button class="btn btn-orange" @onclick="HandleEditListButton">Edit</button>
+                    <button class="btn btn-dark" @onclick="HandleDeleteListButton">Delete</button>
                 </div>
-            }
-            else
-            {
-                <p>There is no movies in this list.</p>
-            }
+            </div>
         </div>
+    </div>
+    <div class="mt-3">
+        @if (Movies.Count() is not 0)
+        {
+            <div class="row flex-row">
+                @foreach (var movie in Movies)
+                {
+                    <div class="col-sm-2 mb-3">
+                        <a href="@($"/movie/{movie.Id}")">
+                            <div class="card card-block h-100">
+                                <img class="card-img-top img-fluid" src="@movie.Poster_Path" />
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>There is no movies in this list.</p>
+        }
     </div>
 </div>
