@@ -11,7 +11,18 @@
                 {
                     <div class="list-group">
                         <a href="@media.Url" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            <span>@(!string.IsNullOrEmpty(media.Title) ? media.Title : "No Title")</span>
+                            @if (media.Media_Type == MovieApp.Web.Enums.MediaType.Movie)
+                            {
+                                <span>@(!string.IsNullOrEmpty(media.Title) ? media.Title : "No Title")</span>
+                            }
+                            @if (media.Media_Type == MovieApp.Web.Enums.MediaType.TV)
+                            {
+                                <span>@(!string.IsNullOrEmpty(media.Name) ? media.Name : "No Name")</span>
+                            }
+                            @if (media.Media_Type == MovieApp.Web.Enums.MediaType.Person)
+                            {
+                                <span>@(!string.IsNullOrEmpty(media.Name) ? media.Name : "No Name")</span>
+                            }
                             <div class="image-wrapper">
                                 <img class="img-fluid" src="@ImageHelper.GetMediaImagePath(media)" />
                             </div>

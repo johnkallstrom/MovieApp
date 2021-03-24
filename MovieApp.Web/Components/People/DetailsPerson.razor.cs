@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MovieApp.Web.Extensions;
 using MovieApp.Web.Models;
 using MovieApp.Web.Services;
 using System.Collections.Generic;
@@ -9,10 +10,6 @@ namespace MovieApp.Web.Components.People
 {
     public partial class DetailsPerson
     {
-        private const int BIO_COUNT = 500;
-
-        public bool DisplayShortBiography { get; set; } = true;
-
         [Inject]
         public IPeopleHttpService PeopleService { get; set; }
 
@@ -34,6 +31,8 @@ namespace MovieApp.Web.Components.People
             }
 
             Movies = movies.Take(10);
+
+            Person.Biography = Person.Biography.Truncate(500).EnsureEndsWithDot();
         }
     }
 }

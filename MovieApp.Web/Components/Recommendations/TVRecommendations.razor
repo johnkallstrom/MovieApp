@@ -25,30 +25,24 @@
             </div>
         </div>
         <div class="col-md-9">
-            @if (Results.Count() is not 0)
-            {
-                @foreach (var tvShow in Results)
+            <div class="row flex-row">
+                @if (Results.Count() is not 0)
                 {
-                    <div class="list-group">
-                        <a href="@($"/tv-shows/{tvShow.Id}")" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            <span>@(!string.IsNullOrEmpty(tvShow.Name) ? tvShow.Name : "No Name")</span>
-                            <div class="image-wrapper">
-                                <img class="img-fluid" src="@tvShow.Poster_Path" />
-                            </div>
-                        </a>
+                    @foreach (var tvShow in Results)
+                    {
+                        <DisplayTV TVShow="tvShow" />
+                    }
+                }
+                else
+                {
+                    <div class="text-center">
+                        <h5>No recommendations could be found, try again.</h5>
                     </div>
                 }
-
-                @if (TotalPages > 1)
-                {
-                    <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
-                }
-            }
-            else
+            </div>
+            @if (TotalPages > 1)
             {
-                <div class="text-center">
-                    <h5>No recommendations could be found, try again.</h5>
-                </div>
+                <Pagination Page="@Page" TotalPages="@TotalPages" OnPageChanged="HandlePageChanged" />
             }
         </div>
     </div>

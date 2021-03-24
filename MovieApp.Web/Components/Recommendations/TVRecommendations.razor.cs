@@ -31,7 +31,7 @@ namespace MovieApp.Web.Components.Recommendations
         public int TotalResults { get; set; }
         public string FromFirstAirDate { get; set; }
         public string ToFirstAirDate { get; set; }
-        public int Rating { get; set; } = 0;
+        public int Rating { get; set; } = 1;
         public int Runtime { get; set; }
         public List<int> SelectedGenreIds { get; set; } = new List<int>();
 
