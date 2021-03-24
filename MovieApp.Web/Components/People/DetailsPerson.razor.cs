@@ -19,6 +19,8 @@ namespace MovieApp.Web.Components.People
         public PersonDetails Person { get; set; } = new PersonDetails();
 
         public IEnumerable<Movie> Movies { get; set; } = new List<Movie>();
+        public bool DisplayTruncatedBio { get; set; }
+        public string TruncatedBiography { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -31,8 +33,12 @@ namespace MovieApp.Web.Components.People
             }
 
             Movies = movies.Take(10);
-
-            Person.Biography = Person.Biography.Truncate(500).EnsureEndsWithDot();
+            
+            if (Person.Biography.Length >= 500)
+            {
+                DisplayTruncatedBio = true;
+                Person.TruncatedBiography = Person.Biography.Truncate(500).EnsureEndsWithDot();
+            }
         }
     }
 }
